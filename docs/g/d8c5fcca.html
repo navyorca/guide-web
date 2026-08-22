@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>상담자료 총집합</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --paper:#F7F9FC; --white:#FFFFFF;
+  --ink:#0B1220; --ink-2:#4B5468; --ink-3:#626B7E;
+  --line:#D7DCE6; --line-soft:#F1F3F8;
+  --brand:#2F6BFF; --brand-ink:#1642C4; --brand-soft:#E8EFFF;
+  --brand-deep:#122A5E; --ink-deep:#0A1128;
+  --sh-sm:0 2px 8px rgba(10,17,40,.06);
+  --sh-md:0 12px 32px rgba(10,17,40,.10);
+  --font:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI','Malgun Gothic',sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-weight:400;line-height:1.6;
+  -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+@media(max-width:720px){.wrap{padding:0 20px}}
+
+header{background:var(--ink-deep);color:#fff;padding:40px 0 32px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8FB0FF;margin:0 0 10px}
+header h1{font-size:clamp(1.5rem,4vw,2.1rem);font-weight:800;letter-spacing:-.03em;margin:0 0 10px;line-height:1.3}
+header p{color:#C3CBDC;font-weight:300;margin:0;max-width:720px;font-size:.95rem}
+.stat{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.stat span{border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:6px 14px;font-size:.78rem;color:#DDE3F0}
+
+.bar{position:sticky;top:0;z-index:9;background:rgba(247,249,252,.95);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);padding:12px 0}
+.barin{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#q{flex:1 1 220px;min-width:180px;min-height:44px;padding:11px 16px;border:1px solid var(--line);border-radius:999px;
+  background:var(--white);font:inherit;font-size:.9rem;color:var(--ink)}
+#q:focus{outline:2px solid var(--brand-ink);outline-offset:1px;border-color:transparent}
+#q::placeholder{color:var(--ink-3)}
+.tabs{display:flex;gap:8px;overflow-x:auto}
+.tab{white-space:nowrap;padding:11px 20px;border-radius:999px;font-size:.85rem;font-weight:700;cursor:pointer;
+  color:var(--ink-2);border:1px solid var(--line);background:var(--white);min-height:44px}
+.tab:hover{border-color:var(--brand-ink);color:var(--brand-ink)}
+.tab.on{background:var(--ink-deep);border-color:var(--ink-deep);color:#fff}
+
+main{padding:32px 0 64px}
+.sec{margin-bottom:36px}
+.sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.sec-head h2{font-size:1.15rem;font-weight:800;letter-spacing:-.02em;margin:0}
+.cnt{font-size:.75rem;font-weight:700;color:var(--brand-ink);background:var(--brand-soft);border-radius:999px;padding:3px 10px}
+.sec-desc{color:var(--ink-3);font-size:.85rem;font-weight:300;margin:0 0 14px}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}
+@media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+
+.row{display:flex;gap:12px;align-items:flex-start;background:var(--white);border:1px solid var(--line);
+  border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);box-shadow:var(--sh-sm);min-height:44px}
+.row:hover{border-color:var(--brand-ink);box-shadow:var(--sh-md)}
+.row .bd{flex:1;min-width:0}
+.nm{display:block;font-size:.9rem;font-weight:700;letter-spacing:-.01em;line-height:1.4}
+.ds{display:block;font-size:.78rem;color:var(--ink-3);font-weight:300;margin-top:3px;line-height:1.45}
+.tg{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.06em;border-radius:6px;padding:2px 6px;
+  margin-left:6px;vertical-align:2px}
+.tg.web{background:var(--brand);color:#fff}
+.tg.vault{background:var(--line-soft);color:var(--ink-2)}
+.tg.out{background:var(--brand-soft);color:var(--brand-ink)}
+.go{color:var(--ink-3);font-size:.9rem;flex:0 0 auto;align-self:center}
+.row:hover .go{color:var(--brand-ink)}
+
+.note{background:var(--white);border:1px solid var(--line);border-left:none;border-radius:12px;padding:16px 18px;
+  font-size:.83rem;color:var(--ink-2);font-weight:300;margin-bottom:28px;box-shadow:var(--sh-sm)}
+.note b{color:var(--ink);font-weight:700}
+.empty{color:var(--ink-3);font-size:.9rem;padding:32px 0}
+footer{background:var(--ink-deep);color:#8E99B0;padding:28px 0;font-size:.8rem}
+footer b{color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">SBS 아카데미 AIX · 강남지점</p>
+    <h1>상담자료 총집합</h1>
+    <p>상담 중 찾는 자료를 한 곳에 모았습니다. 검색창에 과정명이나 키워드를 넣으면 전 항목에서 걸러집니다.</p>
+    <div class="stat">
+      <span id="s1">전체 -건</span>
+      <span>WEB 표시 = 폰에서도 열림</span>
+      <span>볼트 표시 = 내 PC 옵시디언에서 열림</span>
+    </div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap barin">
+    <input id="q" type="search" placeholder="검색 (예: 수강료, 피그마, 환불, 컴활)" autocomplete="off">
+    <div class="tabs" id="tabs"></div>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="note">
+    <b>WEB</b> 표시는 인터넷 주소라 상담 중 폰으로 바로 열리고, 학생에게 링크로 보낼 수도 있습니다.
+    <b>볼트</b> 표시는 클릭하면 옵시디언이 열리며 내 PC에서만 동작합니다.
+    수강료 정가표·결제·사내 자료는 학원 정책상 인터넷에 올리지 않고 볼트 링크로만 연결했습니다.
+  </div>
+  <div id="out"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0"><b>SBS 아카데미 AIX 강남지점</b> · 담당 멘토 오영선 · 02-530-8555</p>
+    <p style="margin:6px 0 0">상담용 자료 허브 · 2026-08-21 기준 · OYS</p>
+  </div>
+</footer>
+
+<script>
+var VAULT = "ADELIE_WORK";
+var G = "https://navyorca.github.io/guide-web/g/";
+
+// [이름, 설명, 경로(http면 외부·g/면 배포본·나머지는 볼트 상대경로)]
+var DATA = {
+ t1: ["커리큘럼", "학과별 과목 순서와 과정 소개 페이지", [
+  ["전체 커리큘럼 로드맵", "학과별 전 과목 순서 · 100% 대면 과목 표시", "http://serjin.dothome.co.kr/web/sbs/full_roadmap.html"],
+  ["커리큘럼 노선도", "과정 흐름을 노선도로 정리한 자체 제작본", G+"59989582.html"],
+  ["AIX 모듈화 통합로드맵", "모듈 개편 후 전체 편성 설명자료", G+"15466125.html"],
+  ["AIX 모듈개편 암기카드", "개편 내용 빠르게 훑는 카드", G+"7030c811.html"],
+  ["AI 에이전트 커리큘럼", "3단계 로드맵 · 기초 8회 · 심화 8회", "https://hw5511.github.io/ai-agent-class/consultation/"],
+  ["웹에이전트 커리큘럼", "웹 학과 AI 에이전트 트랙", "http://serjin.dothome.co.kr/web/sbs/agent_curriculum.html"],
+  ["AI 피그마 스튜디오", "90시간 12주 디자인 워크플로우", "https://charming-daifuku-34debc.netlify.app/"],
+  ["웹툰 과정 커리큘럼", "웹툰 1~4 구성", "https://cajincrsm.github.io/webtoon-sbs/"],
+  ["영상모션 커리큘럼", "모션 · 시포디 · 포폴 구성", "https://cajincrsm.github.io/motion/"],
+  ["CG 커리큘럼", "CG 전 트랙 안내 (Canva)", "https://www.canva.com/design/DAG7iq31Jvc/QoXnYloFC3kaM1jc9EfwsA/view"],
+  ["AI 비주얼디자인", "과정 소개 (Notion)", "https://www.notion.so/Ai-35020ccb9321809a8fefed96c5d09292"],
+  ["방학특강 안내", "방학 집중 과정 소개", "https://cajincrsm.github.io/Summer-Information-Session/"],
+  ["AI 가이드", "여름 집중 과정 AI 가이드", "https://cajincrsm.github.io/Summer-Intensive-Course/"],
+  ["커리큘럼 전체 요약", "과목별 한 줄 설명 · 학과별 정리", "01_안내용자료/커리큘럼_전체.md"],
+  ["커리큘럼 링크모음", "이 탭의 원본 링크 정본", "01_안내용자료/커리큘럼 링크모음.md"],
+  ["AIX 모듈개편 정본", "개편 데이터 정본 · 확정 전 기존 편성 유지", "99_시스템/03_학과지식/AIX_모듈개편_정본.md"]
+ ]],
+
+ t2: ["상담자료", "과정·자격증 설명자료와 영업 상담 스크립트", [
+  ["AI에이전트 × AI피그마 통합안내", "두 과정 비교 · 접점 · 추천 대상", G+"3bfe8c99.html"],
+  ["바이브코딩 90시간", "과정 상담자료 (강남)", G+"abcc31b2.html"],
+  ["전통 툴 교육의 가치", "AI 시대에 툴 교육이 왜 필요한가", G+"ddb93ffd.html"],
+  ["금융권 취업 자격증 가이드", "전산회계 · 세무 · 재경관리사 경로", G+"50169cde.html"],
+  ["BIM 전문가 자격증 안내", "2026 기준 응시 · 준비 안내", G+"37f6089d.html"],
+  ["새싹 AI숏폼 영상콘텐츠", "생성형 AI 숏폼 실무과정 안내", G+"ad9ed1fc.html"],
+  ["제품디자인 상담 참고", "외부 정보 정리본", G+"85137b41.html"],
+  ["국비 멀티미디어콘텐츠제작", "사내 1차 상담자료 v1.3", "01_안내용자료/2026_06_멀티미디어콘텐츠제작_상담자료_v1.3_sidebar.html"],
+  ["상담플레이북 스피치뱅크", "상황별 스피치 모음", "99_시스템/04_상담영업자료/상담플레이북_스피치뱅크_260717.md"],
+  ["컨텍 대처법 스크립트", "전화 응대 상황별 대응", "99_시스템/04_상담영업자료/스크립트 - 컨텍 대처법.md"],
+  ["신입멘토링 키트", "기본기 정리본", "99_시스템/04_상담영업자료/신입멘토링_키트_260714.md"],
+  ["오영선 상담 프로파일 분석", "학과 분포 · 유형 5형 · 갭 분석", "99_시스템/04_상담영업자료/오영선_상담프로파일_분석_260716.md"],
+  ["인테리어 스피치 참고", "인테리어 학과 상담 화법", "01_안내용자료/인테리어 관련 스피치 참고.md"],
+  ["컴활 출제기준 개편", "개편 내용 상담용 정리", "01_안내용자료/컴활_출제기준개편_상담자료.md"],
+  ["AIX 개편 문의응대", "개편 관련 질문 대응", "01_안내용자료/AIX개편_문의응대.md"],
+  ["결재권자 설득자료 템플릿", "회사 지원 받는 수강생용", "01_안내용자료/결재권자_설득자료_템플릿.md"],
+  ["AI마케팅영상 영업가이드", "과정별 상담 가이드 v2", "99_시스템/04_상담영업자료/AI마케팅영상제작과정_영업상담가이드_v2.docx"],
+  ["AI비주얼디자인 영업가이드", "과정별 상담 가이드 v2", "99_시스템/04_상담영업자료/AI비주얼디자인_영업상담가이드_v2.docx"],
+  ["AI프롬프트 영업가이드", "리뉴얼 과정 상담 가이드 v2", "99_시스템/04_상담영업자료/AI프롬프트엔지니어링_리뉴얼_영업상담가이드_v2.docx"],
+  ["AI프롬프트 2단계 영업가이드", "2단계 리뉴얼 상담 가이드 v2", "99_시스템/04_상담영업자료/AI프롬프트엔지니어링_2단계_리뉴얼_영업상담가이드_v2.docx"],
+  ["바이브코딩 상담자료 (과정)", "과정 소개 PDF", "99_시스템/04_상담영업자료/바이브코딩(VibeCoding) 상담자료_과정.pdf"],
+  ["사무OA 상담자료", "김범수 자료", "99_시스템/04_상담영업자료/사무OA 상담자료_김범수.pdf"],
+  ["재경관리사 상담자료", "PPT", "99_시스템/04_상담영업자료/재경관리사 상담자료 PPT.pdf"],
+  ["캐드 자격증 상담자료", "자격증 경로 안내", "99_시스템/04_상담영업자료/캐드 자격증 상담자료.pdf"],
+  ["포토샵·일러스트 필요이유", "원장 자료 · 상세버전", "99_시스템/04_상담영업자료/포토샵,일러스트 필요이유 상세버전_엄진용원장_260331.pdf"],
+  ["웹 학과 채용동향", "시장 자료", "99_시스템/04_상담영업자료/[웹 학과] 채용동향_250307.pdf"],
+  ["영상·모션 시장 심층 분석", "시장 자료", "99_시스템/04_상담영업자료/영상·모션그래픽 시장 심층 분석.pdf"],
+  ["AI 홍보자료 학과별 연계", "학과 연계 요약본", "99_시스템/04_상담영업자료/AI홍보자료학과별연계요약본.pdf"],
+  ["웹툰 과정 설명", "과정 설명 PDF", "99_시스템/04_상담영업자료/웬툰과정 설명11.pdf"],
+  ["아트웍학과 정규 (웹툰)", "정규 과정 PDF", "99_시스템/04_상담영업자료/9. [웹툰]_아트웍학과 정규(8).pdf"],
+  ["AI 시니어", "시니어 대상 과정 자료", "99_시스템/04_상담영업자료/ai 시니어의 사본.pdf"],
+  ["학과 브로셔", "AI 콘텐츠디자인 · 게임콘텐츠", "01_안내용자료/AI 콘텐츠디자인학과 게임콘텐츠학과 브로셔.pdf"],
+  ["유튜브 성장 과정", "과정 소개 PDF", "01_안내용자료/유튜브 성장 과정.pdf"],
+  ["유튜브 시니어", "과정 소개 PDF", "01_안내용자료/유튜브 시니어.pdf"],
+  ["AI크리에이터 유튜브", "과정 소개 PDF", "01_안내용자료/AI크리에이터-유튜브.pdf"],
+  ["고객응대 매너 메모", "응대 기본", "99_시스템/04_상담영업자료/_고객응대매너_MEMO.pdf"]
+ ]],
+
+ t3: ["학생 발송", "수강생에게 바로 보내는 링크와 문구 양식", [
+  ["수강생 필수정보 링크모음", "카톡 고정공지 정본 · 공지 1·2", "01_안내용자료/수강생_필수정보_링크모음.md"],
+  ["비대면 강의장 줌링크", "강의장별 ZOOM 정본", "01_안내용자료/비대면 강의장 줌링크.md"],
+  ["교재몰", "온라인 교재 주문 · 현장 구매 불가", "https://kedustore.com"],
+  ["웹하드 예제파일", "kegstore01 · kegstore02 / 0000", "http://www.webhard.co.kr"],
+  ["따즈아 온라인강의", "결석 보충 · 쿠폰 등록", "https://www.ddazua.com/"],
+  ["따즈아 과목링크 매핑", "과목별 인강 링크 대응표", "01_안내용자료/따즈아_과목링크매핑.md"],
+  ["따즈아 홍보멘트", "안내 문구", "01_안내용자료/따즈아 홍보멘트.md"],
+  ["따즈아 수강방법", "PDF 안내서", "01_안내용자료/온라인인강(따즈아) 수강방법.pdf"],
+  ["컴활·모스 녹화본 카페", "기존 자료 공유 네이버 카페", "https://m.cafe.naver.com/answard.cafe"],
+  ["카톡 메시지 양식", "상황별 발송 문구", "01_안내용자료/카톡메시지양식.md"],
+  ["상담예약 일정안내", "예약 확정 카톡 기본양식", "01_안내용자료/★ 상담예약 일정안내.md"],
+  ["부재중 카톡 양식", "연결 실패 시 발송", "01_안내용자료/★ 부재중 카톡 양식.md"],
+  ["컨텍 메모 양식", "통화 기록 양식", "01_안내용자료/★ 컨텍 메모 양식.md"],
+  ["면담예약 일정안내", "등록생 면담 예약 문구", "01_안내용자료/면담예약 일정안내.md"],
+  ["개강안내 기본 양식", "개강 문자 뼈대", "01_안내용자료/개강안내.md"],
+  ["교재 및 준비물 안내", "과목별 준비물", "01_안내용자료/교재 및 준비물 안내.md"],
+  ["안내문 SBS아카데미", "학원 소개 안내문", "01_안내용자료/안내문_SBS아카데미.md"],
+  ["네이버리뷰 안내", "리뷰 요청 문구", "01_안내용자료/네이버리뷰 안내.md"],
+  ["친구추천 할인 안내", "추천 할인 조건", "01_안내용자료/친구추천할인안내.md"],
+  ["재원증명서 발급방법", "발급 절차 안내", "01_안내용자료/재원증명서 발급방법.md"],
+  ["스마트러닝 앱 안내", "설치 안내 이미지", "01_안내용자료/스마트러닝 안내.png"],
+  ["비대면 수업 안내", "비대면 안내 이미지", "01_안내용자료/비대면 안내.png"],
+  ["교재몰 안내 이미지", "주문 방법 이미지", "01_안내용자료/교재몰안내3.jpg"],
+  ["학원 약도", "방문 안내용", "01_안내용자료/_학원-약도2.png"],
+  ["명함", "카톡 발송용", "01_안내용자료/_명함.jpg"]
+ ]],
+
+ t4: ["상담 실무", "수강료 · 결제 · 환불 · 자격증 일정 · 체크리스트", [
+  ["수강료 정본", "과정별 정가 · 회당시간 · 시수 정본", "01_안내용자료/수강료_안내.md"],
+  ["환불규정", "규정 이미지", "01_안내용자료/환불규정 (2).png"],
+  ["환불 공제금 스크립트", "환불 안내 화법", "01_안내용자료/환불안내 공제금 안내 스크립트.md"],
+  ["결제안내 + 안내멘트", "결제 수단별 안내", "01_안내용자료/결제안내+안내멘트.md"],
+  ["결제변경 순서", "수단 변경 절차", "01_안내용자료/결제변경 순서.md"],
+  ["계좌이체번호", "이체 계좌 정보", "01_안내용자료/계좌이체번호.md"],
+  ["결제선생 소개서", "결제 서비스 안내", "01_안내용자료/결제선생 소개서.pdf"],
+  ["KEG ONE PASS 바우처", "바우처 안내", "01_안내용자료/KEG ONE PASS - 바우처 안내.md"],
+  ["Microsoft 365 할인", "수강생 할인 안내", "01_안내용자료/★Microsoft 365 수강생 할인 안내.pdf"],
+  ["기초자 등록 전 체크리스트", "등록 전 확인 · 인포 제출", "01_안내용자료/기초자 등록 전 체크리스트.pdf"],
+  ["컴퓨터 기초자 체크리스트", "기초 수준 확인", "01_안내용자료/컴퓨터 기초자 체크리스트.pdf"],
+  ["레벨체크 디일러", "수준 확인 이미지", "01_안내용자료/레벨체크 디일러.jpg"],
+  ["레벨체크 포토웍스", "수준 확인 이미지", "01_안내용자료/레벨체크 포토웍스.jpg"],
+  ["용어집", "과정명 · 자격증명 표준 표기", "01_안내용자료/용어집.md"],
+  ["MOS 시험 접수 안내", "접수 절차", "01_안내용자료/MOS 시험 접수 안내문.pdf"],
+  ["ACP 시험 접수 안내", "접수 절차", "01_안내용자료/ACP 시험 접수 안내문.pdf"],
+  ["ACP 응시료 안내", "비용 안내", "01_안내용자료/ACP응시료 안내.pdf"],
+  ["ACP 추가 자격증", "취득 가능 목록", "01_안내용자료/★ACP 추가 자격증★.png"],
+  ["8월 MOS·ACP 시험 일정", "월별 일정", "01_안내용자료/2026년 8월 MOS ACP 시험 일정.png"],
+  ["2026 CAT 시험일정", "연간 일정", "01_안내용자료/2026 CAT 시험일정.PNG"],
+  ["2026 AI-POT 시험일정", "연간 일정", "01_안내용자료/2026 AI-POT 시험일정.PNG"],
+  ["AI-POT 1급 대비책", "준비 방향", "01_안내용자료/AIPOT_1급_대비책.md"],
+  ["공군 가산점 자격증", "군 지원 가산점 목록", "01_안내용자료/공군 일반병 지원시 가산점 있는 자격증.jpg"],
+  ["AI 릴레이특강 일정", "특강 운영 일정", "01_안내용자료/AI릴레이특강_일정.md"],
+  ["신규과정 교육", "신설 과정 정리", "01_안내용자료/신규과정 교육.md"],
+  ["국비 지원 신청서", "국기과정 개인정보동의서", "01_안내용자료/국비과정 지원 신청서 및 개인정보동의서(국기과정)_02.pdf"],
+  ["국비 선발 동의서", "훈련생 선발 동의서 (모션)", "01_안내용자료/국비 훈련생 선발에 관한 동의서_모션_02.pdf"],
+  ["국비 NCS 면접 질문지", "9월 모션 국기과정", "01_안내용자료/국비_NCS 선발면접평가_질문지_26년 9월 모션(국기)_02.pdf"],
+  ["신입 영업업무매뉴얼", "인트라넷 사용법 rev3", "01_안내용자료/신입 영업업무매뉴얼(인트라넷 사용법)_rev3.pdf"]
+ ]]
+};
+
+function href(p){
+  if (/^https?:/.test(p)) return p;
+  return "obsidian://open?vault=" + encodeURIComponent(VAULT) + "&file=" + encodeURIComponent(p);
+}
+function kind(p){
+  if (p.indexOf(G) === 0) return "web";
+  if (/^https?:/.test(p)) return "out";
+  return "vault";
+}
+var LABEL = {web:"WEB", out:"외부", vault:"볼트"};
+
+function rowHTML(it){
+  var k = kind(it[2]), ext = /^https?:/.test(it[2]);
+  return '<a class="row" href="' + href(it[2]) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>'
+    + '<span class="bd"><span class="nm">' + it[0] + '<span class="tg ' + k + '">' + LABEL[k] + '</span></span>'
+    + '<span class="ds">' + it[1] + '</span></span><span class="go">→</span></a>';
+}
+
+var KEYS = Object.keys(DATA), cur = "all", total = 0;
+KEYS.forEach(function(k){ total += DATA[k][2].length; });
+document.getElementById("s1").textContent = "전체 " + total + "건";
+
+var tabs = document.getElementById("tabs");
+tabs.innerHTML = '<button class="tab on" data-k="all">전체</button>'
+  + KEYS.map(function(k){ return '<button class="tab" data-k="' + k + '">' + DATA[k][0] + '</button>'; }).join('');
+tabs.addEventListener("click", function(e){
+  var b = e.target.closest(".tab"); if (!b) return;
+  cur = b.dataset.k;
+  [].forEach.call(tabs.children, function(x){ x.classList.toggle("on", x === b); });
+  render();
+});
+
+var q = document.getElementById("q");
+q.addEventListener("input", render);
+
+function render(){
+  var term = q.value.trim().toLowerCase();
+  var out = "", hits = 0;
+  KEYS.forEach(function(k){
+    if (cur !== "all" && cur !== k) return;
+    var d = DATA[k];
+    var items = d[2].filter(function(it){
+      return !term || (it[0] + " " + it[1] + " " + d[0]).toLowerCase().indexOf(term) >= 0;
+    });
+    if (!items.length) return;
+    hits += items.length;
+    out += '<section class="sec"><div class="sec-head"><h2>' + d[0] + '</h2>'
+      + '<span class="cnt">' + items.length + '</span></div>'
+      + '<p class="sec-desc">' + d[1] + '</p>'
+      + '<div class="grid">' + items.map(rowHTML).join('') + '</div></section>';
+  });
+  document.getElementById("out").innerHTML = out ||
+    '<p class="empty">"' + q.value + '"에 해당하는 자료가 없습니다. 다른 낱말로 찾아보세요.</p>';
+}
+render();
+</script>
+
+</body>
+</html>
