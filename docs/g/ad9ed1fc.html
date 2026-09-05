@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>생성형 AI 기반 숏폼 영상콘텐츠 제작 실무과정</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+      background: #eef2ee;
+      color: #1a1a1a;
+      line-height: 1.8;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 32px auto;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    }
+
+    /* ── HERO ─────────────────────────────── */
+    .hero {
+      background: #FFFFFF;
+      color: #0B1220;
+      padding: 48px 44px 40px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 2px solid #0B1220;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .badge {
+      display: inline-block;
+      background: #E8EFFF;
+      border: 1px solid #C3CAD8;
+      color: #1642C4;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    .hero h1 {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      font-size: 16px;
+      color: #2C3444;
+    }
+    .hero-meta span { white-space: nowrap; }
+
+    /* ── STAT STRIP ───────────────────────── */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid #e8ede8;
+    }
+    .stat {
+      padding: 22px 16px;
+      text-align: center;
+      border-right: 1px solid #e8ede8;
+    }
+    .stat:last-child { border-right: none; }
+    .stat-label {
+      font-size: 16px;
+      color: #2C3444;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .stat-value {
+      font-size: 19px;
+      font-weight: 800;
+      color: #2d6a4f;
+    }
+    .stat-sub {
+      font-size: 16px;
+      color: #2C3444;
+      margin-top: 3px;
+    }
+
+    /* ── SECTION ──────────────────────────── */
+    .section {
+      padding: 36px 44px;
+      border-bottom: 1px solid #eef0ee;
+    }
+    .section:last-child { border-bottom: none; }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0B1220;
+      padding-left: 12px;
+      border-left: 3px solid #52b788;
+      margin-bottom: 22px;
+    }
+
+    /* ── HIGHLIGHTS ───────────────────────── */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .hl-card {
+      background: #f2faf5;
+      border: 1px solid #d8f0e0;
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+    .hl-icon { font-size: 22px; margin-bottom: 8px; }
+    .hl-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0B1220;
+      margin-bottom: 7px;
+    }
+    .hl-desc { font-size: 16px; color: #444; line-height: 1.65; }
+
+    /* ── ELIGIBILITY ──────────────────────── */
+    .elig-block {
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+    .elig-block:last-child { margin-bottom: 0; }
+    .elig-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .elig-block.basic   { background: #f2faf5; border: 1px solid #c8e8d4; }
+    .elig-block.basic   .elig-title { color: #2d6a4f; }
+    .elig-block.prefer  { background: #E8EFFF; border: 1px solid #C3CAD8; }
+    .elig-block.prefer  .elig-title { color: #8a6000; }
+    .elig-block.except  { background: #f0f4ff; border: 1px solid #c4cef5; }
+    .elig-block.except  .elig-title { color: #3040a0; }
+    .elig-block.caution { background: #fff5f5; border: 1px solid #fac8c8; }
+    .elig-block.caution .elig-title { color: #b02020; }
+    .elig-block ul { padding-left: 18px; }
+    .elig-block ul li { margin-bottom: 5px; line-height: 1.6; }
+    .elig-block p { line-height: 1.65; }
+
+    /* ── TOOLS ────────────────────────────── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .tool-cat {
+      background: #f8faf8;
+      border: 1px solid #e4ece4;
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .tool-cat-title {
+      font-size: 16px;
+      color: #2C3444;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 10px;
+    }
+    .tag {
+      display: inline-block;
+      background: #fff;
+      border: 1px solid #d8e4d8;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 16px;
+      color: #2d4a2d;
+      margin: 2px 2px 2px 0;
+    }
+    .tools-note {
+      margin-top: 12px;
+      font-size: 16px;
+      color: #2C3444;
+    }
+
+    /* ── CURRICULUM TABLE ─────────────────── */
+    .curr-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+    .curr-table thead th {
+      background: #FFFFFF;
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .curr-table thead th:first-child { border-radius: 6px 0 0 0; width: 72px; }
+    .curr-table thead th:last-child  { border-radius: 0 6px 0 0; width: 210px; }
+    .curr-table tbody tr:hover td { background: #f4faf6; }
+    .curr-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #eef0ee;
+      vertical-align: top;
+    }
+    .curr-table tbody tr:last-child td { border-bottom: none; }
+    .sess-num {
+      font-weight: 700;
+      color: #166534;
+      white-space: nowrap;
+    }
+    .sess-title { font-weight: 600; margin-bottom: 4px; }
+    .sess-desc  { font-size: 16px; color: #666; line-height: 1.55; }
+    .mini-tags  { display: flex; flex-wrap: wrap; gap: 4px; }
+    .mini-tag {
+      background: #d8f0e0;
+      color: #0B1220;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+    .mini-tag.platform {
+      background: #e8eeff;
+      color: #2a3890;
+    }
+
+    /* ── FOOTER ───────────────────────────── */
+    .footer {
+      background: #FFFFFF;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      padding: 28px 44px;
+      font-size: 16px;
+    }
+    .footer strong {
+      display: block;
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { margin: 0; border-radius: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badges">
+      <span class="badge">서울시 새싹 사업</span>
+      <span class="badge">청년취업사관학교 강동캠퍼스</span>
+      <span class="badge">2026년 1차</span>
+      <span class="badge">강사·운영 SBS아카데미</span>
+    </div>
+    <h1>생성형 AI 기반<br>숏폼 영상콘텐츠 제작 실무과정</h1>
+    <div class="hero-meta">
+      <span>📅 2026.06.29 ~ 2026.09.28</span>
+      <span>⏰ 월~금 10:00~18:00</span>
+      <span>📍 5호선 강일역</span>
+      <span>👥 30명 선착순</span>
+    </div>
+  </div>
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat">
+      <div class="stat-label">교육 기간</div>
+      <div class="stat-value">3개월</div>
+      <div class="stat-sub">총 434시간</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">교육비</div>
+      <div class="stat-value">전액 무료</div>
+      <div class="stat-sub">4,800,000원 상당 지원</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">예치금</div>
+      <div class="stat-value">100,000원</div>
+      <div class="stat-sub">수료 시 전액 반환</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">취업 연계</div>
+      <div class="stat-value">1:1 지원</div>
+      <div class="stat-sub">포트폴리오 피드백 + 직무 매칭</div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHTS -->
+  <div class="section">
+    <div class="section-title">SBS아카데미와 함께하는 이유</div>
+    <div class="highlights">
+      <div class="hl-card">
+        <div class="hl-icon">🏫</div>
+        <div class="hl-title">SBS 현업 강사진 직접 운영</div>
+        <div class="hl-desc">강의장은 강동캠퍼스이지만, 강사 섭외·수업 진행·학습자 관리는 SBS아카데미가 직접 담당합니다. 외주 과정이 아닌 SBS 본원 강사 풀에서 배정됩니다.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">📚</div>
+        <div class="hl-title">14단계 실무 풀스택 커리큘럼</div>
+        <div class="hl-desc">기획 → 프롬프트 → AI 이미지·영상 생성 → 편집 → SNS 마케팅 → 포트폴리오 → 창업 특강까지. 단순 도구 소개가 아니라 취업·창업 가능한 결과물 완성이 목표입니다.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🌐</div>
+        <div class="hl-title">SBS 본원 인프라·네트워크 접근</div>
+        <div class="hl-desc">수료 후 SBS아카데미 본원의 포트폴리오 피드백·취업 상담·동문 네트워크 접근이 가능합니다. 강동캠퍼스에서 시작해도 SBS 졸업생 풀의 일원이 됩니다.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🎯</div>
+        <div class="hl-title">1:1 취업 연계 + 포트폴리오 리뷰</div>
+        <div class="hl-desc">수료 후 개인 포트폴리오 1:1 피드백과 영상편집·SNS 콘텐츠 PD·AI 크리에이터 관련 직무 매칭 지원까지 이어집니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ELIGIBILITY -->
+  <div class="section">
+    <div class="section-title">참여 대상 및 자격</div>
+
+    <div class="elig-block basic">
+      <div class="elig-title">기본 자격</div>
+      <p>19~39세 서울시민 중 취업 또는 창업 의지가 있는 자</p>
+    </div>
+
+    <div class="elig-block prefer">
+      <div class="elig-title">⭐ 우대 조건</div>
+      <ul>
+        <li>서울 거주자 또는 서울 소재 대학·회사 3년 이상 재직자</li>
+        <li>거소자(서울 외 거주, 서울에서 생활): 정원 10% 이내 선발 가능: 개강부터 종료까지 서울 거주 유지 필수</li>
+      </ul>
+    </div>
+
+    <div class="elig-block except">
+      <div class="elig-title">📌 예외 지원 가능 (정원 10% 이내)</div>
+      <ul>
+        <li>서울 소재 대학(원)생</li>
+        <li>모집 공고일로부터 3년 이내 서울 소재 대학(원) 졸업생</li>
+        <li>모집 공고일로부터 3년 이내 서울 소재 기업 근무 경력자</li>
+      </ul>
+    </div>
+
+    <div class="elig-block caution">
+      <div class="elig-title">⚠️ 지원 불가 조건</div>
+      <ul>
+        <li>4대보험 가입 재직자 (알바 포함)<br>
+          <span style="color: #2C3444; font-size:16px;">단, 주 15시간 미만 또는 월 평균 10일 미만인 경우 지원 가능</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div class="section">
+    <div class="section-title">사용 도구 (메인 10종)</div>
+    <div class="tools-grid">
+      <div class="tool-cat">
+        <div class="tool-cat-title">텍스트 생성 AI</div>
+        <span class="tag">ChatGPT</span>
+        <span class="tag">Claude</span>
+        <span class="tag">Gemini</span>
+      </div>
+      <div class="tool-cat">
+        <div class="tool-cat-title">이미지 생성 AI</div>
+        <span class="tag">Midjourney</span>
+        <span class="tag">Canva AI</span>
+      </div>
+      <div class="tool-cat">
+        <div class="tool-cat-title">영상 생성 AI</div>
+        <span class="tag">Runway</span>
+        <span class="tag">Kling</span>
+      </div>
+      <div class="tool-cat">
+        <div class="tool-cat-title">음성·자막 AI</div>
+        <span class="tag">ElevenLabs</span>
+        <span class="tag">CapCut</span>
+      </div>
+      <div class="tool-cat">
+        <div class="tool-cat-title">편집 도구</div>
+        <span class="tag">CapCut</span>
+      </div>
+      <div class="tool-cat">
+        <div class="tool-cat-title">협업·포트폴리오</div>
+        <span class="tag">Canva</span>
+        <span class="tag">Google Drive</span>
+      </div>
+    </div>
+    <p class="tools-note">※ 어도비(포토샵·일러스트·프리미어)는 참고용: 정식 커리큘럼은 위 10종 중심</p>
+  </div>
+
+  <!-- CURRICULUM -->
+  <div class="section">
+    <div class="section-title">세부 커리큘럼 (14회차)</div>
+    <table class="curr-table">
+      <thead>
+        <tr>
+          <th>회차</th>
+          <th>학습 내용</th>
+          <th>사용 도구</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="sess-num">1회차</td>
+          <td>
+            <div class="sess-title">과정 OT 및 AI 콘텐츠 산업 이해</div>
+            <div class="sess-desc">과정 운영 안내 + AI 영상콘텐츠 산업 구조·주요 직무 + 학습 목표 설정</div>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="sess-num">2회차</td>
+          <td>
+            <div class="sess-title">숏폼 플랫폼 콘텐츠 트렌드 분석</div>
+            <div class="sess-desc">플랫폼 구조 이해 + 인기 콘텐츠 유형·포맷 분석</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag platform">YouTube Shorts</span>
+              <span class="mini-tag platform">Instagram Reels</span>
+              <span class="mini-tag platform">TikTok</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">3회차</td>
+          <td>
+            <div class="sess-title">콘텐츠 기획 및 스토리보드</div>
+            <div class="sess-desc">아이디어 도출 + 대본 작성 + 스토리보드 설계</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag">ChatGPT</span>
+              <span class="mini-tag">Claude</span>
+              <span class="mini-tag">Gemini</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">4회차</td>
+          <td>
+            <div class="sess-title">생성형 AI 기초 및 프롬프트 엔지니어링</div>
+            <div class="sess-desc">텍스트·이미지·영상 생성 프롬프트 작성 기법</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag">ChatGPT</span>
+              <span class="mini-tag">Claude</span>
+              <span class="mini-tag">Gemini</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">5회차</td>
+          <td>
+            <div class="sess-title">AI 이미지 제작 및 브랜드 비주얼 디자인</div>
+            <div class="sess-desc">썸네일·캐릭터·무드보드 제작</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag">Midjourney</span>
+              <span class="mini-tag">Canva</span>
+              <span class="mini-tag">Canva AI</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">6회차</td>
+          <td>
+            <div class="sess-title">AI 영상 생성 실습</div>
+            <div class="sess-desc">텍스트·이미지 기반 숏폼 영상 제작</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag">Runway</span>
+              <span class="mini-tag">Kling</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">7회차</td>
+          <td>
+            <div class="sess-title">AI 음성 및 자막 제작</div>
+            <div class="sess-desc">내레이션·더빙·자동 자막 생성</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag">ElevenLabs</span>
+              <span class="mini-tag">CapCut</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">8회차</td>
+          <td>
+            <div class="sess-title">숏폼 영상 편집 실무</div>
+            <div class="sess-desc">컷 편집·자막·효과·색보정·사운드</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag">CapCut</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">9회차</td>
+          <td>
+            <div class="sess-title">SNS 채널 운영 및 콘텐츠 마케팅</div>
+            <div class="sess-desc">콘텐츠 캘린더 + 업로드 전략 + 성과 분석</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag">ChatGPT</span>
+              <span class="mini-tag">Canva</span>
+              <span class="mini-tag">Google Drive</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">10회차</td>
+          <td>
+            <div class="sess-title">저작권 및 AI 콘텐츠 윤리</div>
+            <div class="sess-desc">AI 생성물 저작권 + 이미지·음원·폰트 라이선스 + 초상권·딥페이크</div>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="sess-num">11회차</td>
+          <td>
+            <div class="sess-title">개인 프로젝트 및 포트폴리오 제작</div>
+            <div class="sess-desc">개인 숏폼 영상 + 취업 포트폴리오 구성</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag">Canva</span>
+              <span class="mini-tag">Google Drive</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">12회차</td>
+          <td>
+            <div class="sess-title">팀 프로젝트 및 브랜드 캠페인</div>
+            <div class="sess-desc">팀 브랜드 숏폼 제작 + 최종 발표 준비</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag">ChatGPT</span>
+              <span class="mini-tag">Midjourney</span>
+              <span class="mini-tag">Canva AI</span>
+              <span class="mini-tag">Runway</span>
+              <span class="mini-tag">Kling</span>
+              <span class="mini-tag">ElevenLabs</span>
+              <span class="mini-tag">CapCut</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">13회차</td>
+          <td>
+            <div class="sess-title">취업 역량 강화 및 포트폴리오 리뷰</div>
+            <div class="sess-desc">이력서·자기소개서 + 포트폴리오 정리·발표</div>
+          </td>
+          <td>
+            <div class="mini-tags">
+              <span class="mini-tag">Canva</span>
+              <span class="mini-tag">Google Drive</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="sess-num">14회차</td>
+          <td>
+            <div class="sess-title">콘텐츠 기반 창업 특강</div>
+            <div class="sess-desc">AI 숏폼 제작·SNS 운영 대행 사업 모델 + 창업 아이디어 기획</div>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <strong>SBS아카데미 강남 본점</strong>
+    강남역 9번 출구 메가박스 빌딩 5층
+  </div>
+
+</div>
+</body>
+</html>

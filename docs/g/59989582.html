@@ -1,0 +1,378 @@
+<meta name="robots" content="noindex,nofollow">
+<title>SBS아카데미 AIX학원 강남지점 · 커리큘럼 노선도</title>
+<style>
+  :root{
+    --bg:#F4F5F7; --ink:#171B23; --ink-soft:#565E6B; --ink-faint:#8A93A2;
+    --surface:#FFFFFF; --surface-2:#EDEFF3; --rail:#D8DBE0; --border:#E2E5EA;
+    --aix:#C8791F; --aix-ink:#7A4A10; --aix-soft:#FBEDD6;
+    --shadow: 0 1px 2px rgba(23,27,35,.04), 0 8px 24px -12px rgba(23,27,35,.18);
+    --l1:#B5533F; --l2:#3E7CB1; --l3:#1E8E6E; --l4:#8A6D3B; --l5:#6E56B8; --l6:#2C6E6B; --l7:#33509E; --l8:#5B6270; --l9:#8A5A9E;
+    --focus:#2F6FED;
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151A; --ink:#ECEEF2; --ink-soft:#A7AEBA; --ink-faint:#6B7280;
+    --surface:#1B1F27; --surface-2:#20242D; --rail:#333947; --border:#2A2F3A;
+    --aix:#E8A33D; --aix-ink:#F4C87B; --aix-soft:#3A2E14;
+    --l1:#D97A63; --l2:#6FA8DA; --l3:#3FB98F; --l4:#B99A5F; --l5:#9885E0; --l6:#4E9C98; --l7:#6C8AD6; --l8:#8D93A0; --l9:#B489C4;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151A; --ink:#ECEEF2; --ink-soft:#A7AEBA; --ink-faint:#6B7280;
+      --surface:#1B1F27; --surface-2:#20242D; --rail:#333947; --border:#2A2F3A;
+      --aix:#E8A33D; --aix-ink:#F4C87B; --aix-soft:#3A2E14;
+      --l1:#D97A63; --l2:#6FA8DA; --l3:#3FB98F; --l4:#B99A5F; --l5:#9885E0; --l6:#4E9C98; --l7:#6C8AD6; --l8:#8D93A0; --l9:#B489C4;
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Pretendard Variable","Pretendard",-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  .wrap{ max-width:840px; margin:0 auto; padding:40px 20px 96px; }
+  a{ color:inherit; }
+
+  /* ---------- hero ---------- */
+  .hero{ padding:8px 0 28px; border-bottom:1px solid var(--border); margin-bottom:22px; }
+  .eyebrow{
+    display:flex; align-items:center; gap:8px;
+    font-family:"JetBrains Mono","SF Mono",Consolas,monospace;
+    font-size:16px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint);
+    margin-bottom:10px;
+  }
+  .eyebrow .dot{ width:6px;height:6px;border-radius:50%;background:var(--aix); }
+  h1{ margin:0 0 8px; font-size:26px; font-weight:800; letter-spacing:-.01em; text-wrap:balance; }
+  .sub{ margin:0; color:var(--ink-soft); font-size:16px; max-width:62ch; }
+
+  .legend{ display:flex; flex-wrap:wrap; gap:6px; margin-top:18px; }
+  .legend button{
+    display:flex; align-items:center; gap:6px;
+    border:1px solid var(--border); background:var(--surface); color:var(--ink-soft);
+    border-radius:8px; padding:5px 11px 5px 8px; font-size:16px; cursor:pointer;
+    font-family:inherit;
+    transition:transform .12s ease, border-color .12s ease, color .12s ease;
+  }
+  .legend button:hover{ color:var(--ink); border-color:var(--ink-faint); }
+  .legend button:active{ transform:scale(.97); }
+  .legend button:focus-visible{ outline:2px solid var(--focus); outline-offset:2px; }
+  .legend .chip{ width:8px;height:8px;border-radius:50%; flex:none; }
+
+  .aix-note{
+    margin-top:16px; display:flex; gap:8px; align-items:flex-start;
+    background:var(--aix-soft); border:1px solid color-mix(in srgb, var(--aix) 35%, transparent);
+    border-radius:10px; padding:10px 12px; font-size:16px; color:var(--aix-ink);
+  }
+  .aix-note b{ color:var(--aix-ink); }
+  .aix-badge-demo{
+    display:inline-flex; align-items:center; gap:4px; flex:none;
+    background:var(--aix); color:#1B1204; font-weight:700; font-size:16px;
+    border-radius:5px; padding:2px 6px; font-family:"JetBrains Mono",monospace;
+    transform:translateY(-1px);
+  }
+
+  .top-res{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .res-link{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:16px; color:var(--ink-soft); text-decoration:none;
+    border:1px solid var(--border); border-radius:8px; padding:5px 9px;
+    background:var(--surface);
+    transition:border-color .12s ease,color .12s ease;
+  }
+  .res-link:hover{ color:var(--ink); border-color:var(--ink-faint); }
+  .res-link svg{ width:11px;height:11px;flex:none;opacity:.6; }
+
+  /* ---------- lines ---------- */
+  .lines{ display:flex; flex-direction:column; gap:10px; }
+  .line{ background:var(--surface); border:1px solid var(--border); border-radius:14px; overflow:hidden; box-shadow:var(--shadow); }
+  .line-head{ all:unset; box-sizing:border-box; display:flex; align-items:center; gap:14px; width:100%; padding:16px 18px; cursor:pointer; }
+  .line-head:focus-visible{ outline:2px solid var(--focus); outline-offset:-2px; }
+  .line-num{
+    flex:none; width:34px;height:34px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"JetBrains Mono",monospace; font-weight:700; font-size:16px; color:#fff;
+    background:var(--line-color);
+  }
+  .line-title{ flex:1 1 auto; min-width:0; }
+  .line-title .name{ font-weight:700; font-size:16px; }
+  .line-title .tag{ color:var(--ink-soft); font-size:16px; margin-top:1px; }
+  .line-meta{ flex:none; display:flex; align-items:center; gap:10px; color:var(--ink-faint); font-size:16px; }
+  .line-meta .count{ font-family:"JetBrains Mono",monospace; }
+  .chev{ flex:none; width:16px; height:16px; transition:transform .18s ease; color:var(--ink-faint); }
+  .line.open .chev{ transform:rotate(90deg); }
+
+  .line-body{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .22s ease; }
+  .line.open .line-body{ grid-template-rows:1fr; }
+  .line-body-inner{ overflow:hidden; }
+
+  .line-res{ display:flex; flex-wrap:wrap; gap:6px; padding:2px 18px 12px 18px; }
+
+  .track{ padding:4px 18px 18px 18px; }
+  .track + .track{ padding-top:2px; }
+  .track-label{
+    font-size:16px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.07em;
+    font-family:"JetBrains Mono",monospace; padding:14px 0 8px 46px;
+  }
+  .stations{ list-style:none; margin:0; padding:0; }
+  .station{ position:relative; display:flex; align-items:flex-start; gap:12px; padding:0 0 0 46px; min-height:34px; }
+  .station .rail{ position:absolute; left:15px; top:0; bottom:0; width:2px; background:var(--rail); }
+  .station:first-child .rail{ top:9px; }
+  .station:last-child .rail{ bottom:calc(100% - 9px); }
+  .station .dot{
+    position:absolute; left:10px; top:6px; width:12px;height:12px;border-radius:50%;
+    background:var(--surface); border:2.5px solid var(--line-color); z-index:1;
+  }
+  .station.face .dot{ background:var(--line-color); }
+  .station-row{ flex:1 1 auto; display:flex; flex-wrap:wrap; align-items:center; gap:7px; padding:6px 0 12px; }
+  .station-name{ font-size:16px; color:var(--ink); }
+  .tag-face{ font-size:16px; color:var(--ink-faint); border:1px solid var(--border); border-radius:4px; padding:1px 5px; font-family:"JetBrains Mono",monospace; }
+  .tag-aix{
+    display:inline-flex; align-items:center; gap:4px;
+    background:var(--aix-soft); color:var(--aix-ink); font-size:16px; font-weight:700;
+    border-radius:5px; padding:2px 7px 2px 6px; font-family:"JetBrains Mono",monospace; white-space:nowrap;
+  }
+  .tag-aix .arrow{ opacity:.7; font-weight:400; }
+  .station-link{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:20px;height:20px;border-radius:6px; color:var(--ink-faint);
+    border:1px solid var(--border); background:var(--surface-2); text-decoration:none;
+    transition:color .12s ease, border-color .12s ease;
+  }
+  .station-link:hover{ color:var(--focus); border-color:var(--focus); }
+  .station-link svg{ width:11px;height:11px; }
+
+  footer{ margin-top:32px; padding-top:16px; border-top:1px solid var(--border); font-size:16px; color:var(--ink-faint); }
+
+  @media (max-width:600px){
+    .wrap{ padding:28px 14px 80px; }
+    h1{ font-size:22px; }
+    .line-meta .label{ display:none; }
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow"><span class="dot"></span>SBS ACADEMY AIX GANGNAM · CURRICULUM MAP</div>
+    <h1>커리큘럼 노선도</h1>
+    <p class="sub">학과를 누르면 실제 수강 순서가 정거장처럼 펼쳐집니다. 링크 아이콘이 있는 항목은 상담자료로 바로 연결됩니다.</p>
+
+    <div class="legend" id="legend"></div>
+
+    <div class="aix-note">
+      <span class="aix-badge-demo">AIX</span>
+      <div><b>2026년 9월부터</b> 과목명·시수가 바뀌는 정거장에는 새 이름이 함께 표시됩니다. 확정 전까지는 기존 편성과 병행 운영됩니다. 세부 시수·요일 패턴은 <b>AIX_커리큘럼개편_260715</b> 문서가 정본입니다. 진한 점(●)은 100% 대면 전용 수업입니다.</div>
+    </div>
+
+    <div class="top-res" id="topRes"></div>
+  </div>
+
+  <div class="lines" id="lines"></div>
+
+  <footer>최종 확인 2026-07-18 · 과목·순서 출처: 학과별 로드맵 실측 자료 · 개편 매핑 출처: AIX_커리큘럼개편_260715.md · 상담자료 링크는 로컬 파일(file://) 또는 외부 페이지 · 상시 갱신 대상(스냅샷 아님)</footer>
+</div>
+
+<script>
+const SYS = "G:/내 드라이브/Obsidian_Master/ADELIE_WORK/99_시스템/";
+const GUIDE = "G:/내 드라이브/Obsidian_Master/ADELIE_WORK/01_안내용자료/";
+function L(base, name){ return "file:///" + encodeURI(base + name); }
+
+const TOP_RES = [
+  ["전체 로드맵(원본)","http://serjin.dothome.co.kr/web/sbs/full_roadmap.html"],
+  ["방학특강","https://cajincrsm.github.io/Summer-Information-Session/"],
+  ["계열별 상담 치트키", L(SYS,"계열별_핵심_상담_치트키_2026_완결본.md")],
+  ["상담 스피치뱅크", L(SYS,"상담플레이북_스피치뱅크_260717.md")]
+];
+
+// [이름, 대면(1/0), AIX새이름 or null, 자료링크 or null]
+const DATA = [
+  { id:"common", num:"01", color:"var(--l9)", name:"공통과정", tag:"AI 기초 · 3D 기초 · 전학과 선이수",
+    res:[["AI학과 지식 통합본", L(SYS,"AI학과_지식_통합본.md")]],
+    tracks:[{ label:null, stations:[
+      ["시니어기초/금",0,null,null],
+      ["발상과 표현",0,"Design Core Foundation",null],
+      ["색채학",0,"Design Core Foundation",null],
+      ["AI프롬프트 엔지니어링(1-2)",0,"AI Core Foundation", L(GUIDE,"AI프롬프트 엔지니어링_리뉴얼_영업상담가이드_v2.docx")],
+      ["블렌더1",0,null,null],["블렌더2",0,null,null],
+      ["AI에이전트1",1,null,"https://hw5511.github.io/ai-agent-lecture/"],
+      ["AI에이전트2",1,null,"https://hw5511.github.io/ai-agent-lecture/"]
+    ]}]
+  },
+  { id:"artwork", num:"02", color:"var(--l1)", name:"아트웍", tag:"드로잉 · 캐릭터 · 웹툰",
+    res:[["아트웍학과 지식 통합본", L(SYS,"아트웍학과_지식_통합본.md")]],
+    tracks:[{ label:null, stations:[
+      ["컨셉드로잉(1~3)",1,null,null],["포토샵",0,"AIX 포토샵",null],["디지털 스토리보드",0,null,null],
+      ["일러스트",0,"AIX 일러스트",null],["플랫모션(1~2)",0,null,null],["디지털드로잉(1~4)",0,null,null],
+      ["웹툰(1~4)",1,null,"https://cajincrsm.github.io/webtoon-sbs/"]
+    ]}]
+  },
+  { id:"visual", num:"03", color:"var(--l2)", name:"시각/편집디자인", tag:"편집디자인 · 브랜딩 · 패키지",
+    res:[["시각편집디자인 지식 통합본", L(SYS,"시각편집디자인_지식_통합본.md")]],
+    tracks:[{ label:null, stations:[
+      ["포토샵",0,"AIX 포토샵",null],["일러스트",0,"AIX 일러스트",null],["인디자인",0,"AIX 디지털출판",null],
+      ["포토웍스",0,"AIX 포토샵",null],["디테일일러스트",0,"AIX 일러스트",null],["플랫모션",0,null,null],
+      ["그래픽아트웍",0,null,null],["인포그래픽",0,null,null],["패키지MD1",0,"AIX 패키지MD",null],["패키지MD2",0,"AIX 패키지MD",null],
+      ["브랜딩디자인1",0,"AIX 브랜딩실무",null],["브랜딩디자인2",0,"AIX 브랜딩실무",null],["엔터디렉팅",0,null,null],["편집포폴(2~4)",1,null,null]
+    ]}]
+  },
+  { id:"web", num:"04", color:"var(--l3)", name:"웹", tag:"UX/UI · 퍼블리싱 · 바이브코딩",
+    res:[["웹학과 지식 통합본", L(SYS,"웹학과_지식_통합본.md")]],
+    tracks:[{ label:null, stations:[
+      ["포토샵",0,"AIX 포토샵",null],["일러스트",0,"AIX 일러스트",null],["AI에이전트1",1,null,null],
+      ["AI에이전트웹",1,"AIX 바이브코딩","http://serjin.dothome.co.kr/web/sbs/agent_curriculum.html"],
+      ["AI피그마1",0,"AIX 피그마",null],["AI피그마2",0,"AIX 피그마",null],["AI피그마3",0,"AIX 피그마",null],
+      ["UX/UI포폴(1~2)",1,null,null],["웹1",0,null,null],["웹2",0,null,null],["웹3",0,null,null],
+      ["AI바이브코딩-웹",1,"AIX 바이브코딩", L(SYS,"바이브코딩(VibeCoding) 상담자료_과정.pdf")],
+      ["웹 포폴(2~3)",1,null,null]
+    ]}]
+  },
+  { id:"interior", num:"05", color:"var(--l4)", name:"건축/인테리어", tag:"도면 · 3D · 자격증 (기계·제품 포함)",
+    res:[["건축인테리어학과 지식 통합본", L(SYS,"건축인테리어학과_지식_통합본.md")]],
+    tracks:[
+      { label:"인테리어", stations:[
+        ["스케치1",1,null,null],["스케치2",1,null,null],["스케치3",1,null,null],["실내건축이론",0,null,null],
+        ["포토샵",0,"AIX 포토샵",null],["일러스트",0,"AIX 일러스트",null],
+        ["캐드1",0,"AIX 공간기획&도면",null],["캐드2",0,"AIX 공간기획&도면",null],
+        ["스케치업(1~2)",0,"AIX 3D인테리어",null],["실내건축/기출",0,null,null],["엔스케이프/금",0,null,null],
+        ["스케치업 포폴(1~2)",1,null,null],["맥스1",0,null,null],["맥스2",0,null,null],["맥스3",0,null,null],
+        ["BIM레빗(1~2)",0,null, L(GUIDE,"BIM전문가자격증_안내자료_2026.html")],
+        ["AI 크리에이터 인테리어",0,null,null],["인테리어포폴(1~4)",1,null,null]
+      ]},
+      { label:"기계·제품", stations:[
+        ["스케치1",1,null,null],["스케치2",1,null,null],["스케치3",1,null,null],["포토샵",0,"AIX 포토샵",null],
+        ["일러스트",0,"AIX 일러스트",null],["포토웍스",0,"AIX 포토샵",null],["디테일일러스트",0,"AIX 일러스트",null],
+        ["캐드1",0,null,null],["라이노",0,null,null],["인벤터",0,null,null]
+      ]},
+      { label:"자격증(건축·기계)", stations:[
+        ["CAT2급",0,null,null],["실내건축 자격증",0,null,null],
+        ["전산응용 건축제도",0,null, L(SYS,"전산응용건축제도기능사(공개문제20250402).pdf")],
+        ["전산응용 기계제도",0,null,null]
+      ]}
+    ]
+  },
+  { id:"motion", num:"06", color:"var(--l5)", name:"모션 · 유튜브", tag:"영상편집 · 2D/3D모션 · 콘텐츠",
+    res:[["모션학과 지식 통합본", L(SYS,"모션학과_지식_통합본.md")], ["영상모션 커리큘럼","https://cajincrsm.github.io/motion/"]],
+    tracks:[
+      { label:"모션그래픽", stations:[
+        ["포토샵",0,"AIX 포토샵",null],["일러스트",0,"AIX 일러스트",null],["포토웍스",0,"AIX 포토샵",null],["디테일일러스트",0,"AIX 일러스트",null],
+        ["플랫모션",0,null,null],["프리미어 실전",0,"AIX 실전영상",null],["에펙/모션에펙",0,"AIX 2D모션디자인",null],
+        ["어드밴스 에펙(1/2)",0,null,null],["2D 모션그래픽 포폴(1~2)",1,null,null],["시포디(1~4)",0,null,null],
+        ["어드밴스 시포디(1/2)",0,null,null],["3D모션그래픽 포폴(3~4)",1,null,null]
+      ]},
+      { label:"유튜브 크리에이터", stations:[
+        ["포토샵",0,"AIX 포토샵",null],["일러스트",0,"AIX 일러스트",null],["포토웍스",0,"AIX 포토샵",null],["디테일일러스트",0,"AIX 일러스트",null],
+        ["프리미어 실전",0,"AIX 실전영상",null],["에펙/모션에펙",0,"AIX 2D모션디자인",null],
+        ["유크리 기초",0,null,null],["유크리 심화",0,null,null],
+        ["컨텐츠 크리에이터",0,null, L(GUIDE,"새싹_AI숏폼영상콘텐츠_안내자료_20260602.html")],
+        ["AI마케팅영상",0,"AIX 마케팅영상", L(GUIDE,"AI마케팅영상제작과정_영업상담가이드_v2.docx")]
+      ]}
+    ]
+  },
+  { id:"cg", num:"07", color:"var(--l6)", name:"CG", tag:"모델링 · 합성 · 후디니 · 애니메이션",
+    res:[["CG학과 지식 통합본", L(SYS,"CG학과_지식_통합본.md")], ["CG 커리큘럼","https://www.canva.com/design/DAG7iq31Jvc/QoXnYloFC3kaM1jc9EfwsA/view"]],
+    tracks:[
+      { label:"CG 기초", stations:[
+        ["베이직아트웍",0,null,null],["포토샵",0,"AIX 포토샵",null],["에펙",0,"AIX 2D모션디자인",null],
+        ["마야기초1",0,null,null],["마야기초2",0,null,null],["마야기초3",0,null,null]
+      ]},
+      { label:"CG 모델링", stations:[ ["모델링(1~6)",0,null,null],["모델링 포폴(6~9)",1,null,null] ]},
+      { label:"CG 합성", stations:[ ["포토웍스",0,"AIX 포토샵",null],["합성(1~5)",0,null,null],["합성 포폴(3~4)",1,null,null] ]},
+      { label:"CG 후디니", stations:[ ["후디니(1~7)",0,null,null],["후디니포폴(6~9)",1,null,null] ]},
+      { label:"CG 룩뎁", stations:[ ["룩뎁(1~6)",0,null,null],["룩뎁 포폴(6~9)",1,null,null] ]},
+      { label:"CG 하드서피스", stations:[ ["하드섭UV(1~5)",0,null,null],["모델링 포폴(6~9)",1,null,null] ]},
+      { label:"CG 애니메이션", stations:[ ["애니메이션(1~5)",0,null,null],["애니포폴(3~4)",1,null,null] ]}
+    ]
+  },
+  { id:"aicreator", num:"08", color:"var(--l7)", name:"AI 크리에이터", tag:"학과별 AI 연계 과정",
+    res:[["AI학과 지식 통합본", L(SYS,"AI학과_지식_통합본.md")], ["AI 가이드","https://cajincrsm.github.io/Summer-Intensive-Course/"]],
+    tracks:[{ label:null, stations:[
+      ["AI크리에이터 아트웍",0,null,null],["AI크리에이터 시각/편집",0,null,null],["AI크리에이터 웹",0,null,null],
+      ["AI크리에이터 영상모션",0,null,null],["AI크리에이터 인테리어",0,null,null],["AI크리에이터 유튜브",0,null,null],
+      ["AI크리에이터 CG/마야",0,null,null],
+      ["AI 비주얼디자인",0,null, L(GUIDE,"AI비주얼디자인_영업상담가이드_v2.docx")]
+    ]}]
+  },
+  { id:"license", num:"09", color:"var(--l8)", name:"자격증", tag:"사무자동화 · 디자인 자격증",
+    res:[["OA전산세무회계 지식 통합본", L(SYS,"OA전산세무회계_지식_통합본.md")]],
+    tracks:[
+      { label:"사무자격증", stations:[
+        ["모스(MOS)",0,null,null],["실무엑셀",0,null,null],
+        ["컴퓨터활용능력 1급",0,null, L(GUIDE,"컴활_출제기준개편_상담자료.md")],
+        ["전산회계 1급",0,null,null],["전산세무 2급",0,null,null],["전산세무 1급",0,null,null],
+        ["재경관리사",1,null, L(SYS,"재경관리사 상담자료 PPT.pdf")]
+      ]},
+      { label:"디자인 자격증", stations:[
+        ["ACP 자격증",0,null,null],["GTQ",0,null,null],["컴퓨터그래픽 기능사",0,null,null],
+        ["웹디자인 개발기능사",0,null,null],["컬러리스트 실기",1,null,null]
+      ]}
+    ]
+  }
+];
+
+const LINK_ICON = '<svg viewBox="0 0 16 16" fill="none"><path d="M6.5 9.5L13 3M13 3H8.5M13 3V7.5M12.5 9V12.2C12.5 12.6 12.2 13 11.7 13H3.8C3.4 13 3 12.6 3 12.2V4.3C3 3.9 3.4 3.5 3.8 3.5H7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+function stationHtml(name, face, aix, url){
+  const cls = "station" + (face ? " face" : "");
+  const faceTag = face ? '<span class="tag-face">대면</span>' : "";
+  const aixTag = aix ? `<span class="tag-aix"><span class="arrow">→</span>AIX ${aix}</span>` : "";
+  const link = url ? `<a class="station-link" href="${url}" target="_blank" rel="noopener" title="상담자료 열기">${LINK_ICON}</a>` : "";
+  return `<li class="${cls}"><span class="rail"></span><span class="dot"></span>
+    <span class="station-row"><span class="station-name">${name}</span>${faceTag}${aixTag}${link}</span></li>`;
+}
+
+function trackHtml(track){
+  const label = track.label ? `<div class="track-label">${track.label}</div>` : "";
+  const items = track.stations.map(s => stationHtml(s[0], s[1], s[2], s[3])).join("");
+  return `<div class="track">${label}<ul class="stations">${items}</ul></div>`;
+}
+
+function resLinkHtml([label, url]){
+  return `<a class="res-link" href="${url}" target="_blank" rel="noopener">${LINK_ICON}${label}</a>`;
+}
+
+function lineHtml(line){
+  const count = line.tracks.reduce((n,t)=>n+t.stations.length,0);
+  const tracks = line.tracks.map(trackHtml).join("");
+  const res = (line.res && line.res.length) ? `<div class="line-res">${line.res.map(resLinkHtml).join("")}</div>` : "";
+  return `
+  <div class="line" id="line-${line.id}" style="--line-color:${line.color}">
+    <button class="line-head" aria-expanded="false">
+      <span class="line-num">${line.num}</span>
+      <span class="line-title"><div class="name">${line.name}</div><div class="tag">${line.tag}</div></span>
+      <span class="line-meta"><span class="label">정거장</span><span class="count">${count}</span></span>
+      <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l6 5-6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="line-body"><div class="line-body-inner">${res}${tracks}</div></div>
+  </div>`;
+}
+
+document.getElementById("topRes").innerHTML = TOP_RES.map(resLinkHtml).join("");
+
+const linesEl = document.getElementById("lines");
+linesEl.innerHTML = DATA.map(lineHtml).join("");
+
+const legendEl = document.getElementById("legend");
+legendEl.innerHTML = DATA.map(l => `<button data-target="line-${l.id}"><span class="chip" style="background:${l.color}"></span>${l.name}</button>`).join("");
+
+function toggleLine(el, force){
+  const open = force !== undefined ? force : !el.classList.contains("open");
+  el.classList.toggle("open", open);
+  el.querySelector(".line-head").setAttribute("aria-expanded", String(open));
+}
+
+linesEl.addEventListener("click", (e)=>{
+  if(e.target.closest(".station-link")) return;
+  const head = e.target.closest(".line-head");
+  if(!head) return;
+  toggleLine(head.closest(".line"));
+});
+
+legendEl.addEventListener("click", (e)=>{
+  const btn = e.target.closest("button[data-target]");
+  if(!btn) return;
+  const target = document.getElementById(btn.dataset.target);
+  toggleLine(target, true);
+  target.scrollIntoView({behavior:"smooth", block:"start"});
+});
+</script>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>상담자료 총집합</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --paper:#F0F8FF; --white:#FFFFFF;
+  --ink:#0B1220; --ink-2:#2C3444;
+  --line:#C3CAD8; --line-soft:#E2E8F2;
+  --brand:#2F6BFF; --brand-ink:#1642C4; --brand-soft:#E8EFFF;
+  --peri:#A7B4F0; --baby:#9CD3F5;
+  --sh-sm:0 2px 8px rgba(10,17,40,.06);
+  --font:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI','Malgun Gothic',sans-serif;
+  --t-body:19px; --t-name:19px; --t-small:16px; --t-mid:17px; --t-note:18px; --t-h2:25px;
+}
+html[data-fs="lg"]{ --t-body:21px; --t-name:21px; --t-small:18px; --t-mid:19px; --t-note:20px; --t-h2:27px; }
+html[data-fs="xl"]{ --t-body:23px; --t-name:23px; --t-small:20px; --t-mid:21px; --t-note:22px; --t-h2:29px; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);
+  font-size:var(--t-body);font-weight:400;line-height:1.8;word-break:keep-all;
+  -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+@media(max-width:720px){.wrap{padding:0 20px}}
+a{color:inherit}
+button{font-family:inherit}
+
+.skip{position:absolute;left:-9999px;top:0;background:var(--brand-ink);color:#fff;
+  padding:12px 20px;font-size:var(--t-small);font-weight:700;z-index:99;border-radius:0 0 8px 0}
+.skip:focus{left:0}
+
+header{background:var(--white);border-bottom:2px solid var(--ink);padding:36px 0 28px}
+.kicker{font-size:var(--t-small);font-weight:800;letter-spacing:.05em;color:var(--brand-ink);margin:0 0 8px}
+header h1{font-size:clamp(32px,7vw,44px);font-weight:800;letter-spacing:-.01em;margin:0 0 8px;line-height:1.3}
+header .sub{color:var(--ink-2);font-weight:400;margin:0;max-width:700px;font-size:var(--t-body)}
+.stat{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.stat span{background:var(--brand-soft);color:var(--ink-2);border-radius:6px;padding:5px 12px;
+  font-size:var(--t-small);font-weight:700}
+
+.bar{position:sticky;top:0;z-index:9;background:var(--white);border-bottom:1px solid var(--line);padding:10px 0}
+.barrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.barrow+.barrow{margin-top:8px}
+#q{flex:1 1 240px;min-width:200px;min-height:48px;padding:10px 16px;border:1px solid var(--line);
+  border-radius:8px;background:var(--white);font:inherit;font-size:var(--t-mid);color:var(--ink)}
+#q::placeholder{color:var(--ink-2)}
+.fslabel{font-size:var(--t-small);font-weight:700;color:var(--ink-2)}
+.fsbtn,.tab,.chip{min-height:44px;padding:8px 16px;border-radius:8px;font-size:var(--t-small);
+  font-weight:700;cursor:pointer;color:var(--ink-2);border:1px solid var(--line);background:var(--white)}
+.fsbtn[aria-pressed="true"],.tab[aria-current="true"],.chip[aria-pressed="true"]{
+  background:var(--brand-ink);border-color:var(--brand-ink);color:#fff}
+.tabs,.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px}
+.tab,.chip{white-space:nowrap}
+@media(hover:hover){
+  .fsbtn:hover,.tab:hover,.chip:hover{border-color:var(--brand-ink);color:var(--brand-ink)}
+  .fsbtn[aria-pressed="true"]:hover,.tab[aria-current="true"]:hover,.chip[aria-pressed="true"]:hover{color:#fff}
+}
+:focus-visible{outline:3px solid var(--brand-ink);outline-offset:2px}
+
+.howto{background:var(--brand-soft);border-radius:12px;padding:16px 20px;margin:24px 0 4px;
+  font-size:var(--t-note);color:var(--ink-2);font-weight:400}
+.howto b{color:var(--ink);font-weight:700}
+.recent{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:16px 0 0}
+.recent .rlabel{font-size:var(--t-small);font-weight:700;color:var(--ink-2)}
+.rchip{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border-radius:6px;
+  background:var(--peri);color:var(--ink);font-size:var(--t-small);font-weight:700;text-decoration:none}
+#stat{font-size:var(--t-small);font-weight:700;color:var(--ink-2);margin:16px 0 0}
+
+main{padding:8px 0 0}
+.band{padding:48px 0 40px}
+.band.alt{background:var(--white);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.shead{margin-bottom:28px}
+.slabel{font-size:var(--t-mid);font-weight:700;color:var(--ink-2);margin:8px 0 0;line-height:1.6}
+.shead h2{font-size:clamp(30px,5.5vw,40px);font-weight:800;letter-spacing:-.01em;margin:0 0 6px;line-height:1.25}
+.sdesc{color:var(--ink-2);font-size:var(--t-body);font-weight:400;margin:0}
+
+.grid{display:grid;gap:0 40px;grid-template-columns:repeat(2,1fr)}
+@media(max-width:999px){.grid{grid-template-columns:1fr}}
+.row{display:flex;gap:10px;align-items:stretch;border-bottom:1px solid var(--line);padding:6px 0}
+a.item{flex:1;min-width:0;display:block;text-decoration:none;color:var(--ink);
+  padding:10px 10px;border-radius:8px;min-height:44px}
+a.item:hover{background:var(--brand-soft)}
+.item.still{flex:1;min-width:0;display:block;padding:10px 10px;min-height:44px}
+.nm{font-size:var(--t-name);font-weight:700;letter-spacing:-.01em;line-height:1.5;display:block}
+.ds{display:block;font-size:var(--t-small);color:var(--ink-2);font-weight:400;margin-top:2px;line-height:1.6}
+.tg{display:inline-block;font-size:var(--t-small);font-weight:700;border-radius:6px;
+  padding:1px 10px;margin-left:8px;vertical-align:1px;line-height:1.6}
+.tg.web{background:var(--brand-ink);color:#fff}
+.tg.out{background:var(--brand-soft);color:var(--brand-ink)}
+.tg.pc{background:var(--white);color:var(--ink-2);border:1px solid var(--line)}
+.tg.ok{background:var(--peri);color:var(--ink)}
+.tg.x{background:#FBEAE8;color:#B3261E;border:1px solid #B3261E}
+.cp{flex:0 0 auto;align-self:center;min-width:44px;min-height:44px;padding:6px 12px;
+  border:1px solid var(--line);border-radius:8px;background:var(--white);color:var(--ink-2);
+  font-size:var(--t-small);font-weight:700;cursor:pointer}
+.cp:hover{border-color:var(--brand-ink);color:var(--brand-ink)}
+
+details.pcfold{margin-top:16px;border:1px solid var(--line);border-radius:12px;padding:4px 16px;background:var(--white)}
+details.pcfold summary{cursor:pointer;min-height:44px;display:flex;align-items:center;
+  font-size:var(--t-mid);font-weight:700;color:var(--ink-2)}
+
+.empty{padding:40px 0;font-size:var(--t-body)}
+.empty p{margin:0 0 16px}
+.ebtn{display:inline-block;min-height:44px;padding:10px 18px;border-radius:8px;border:1px solid var(--brand-ink);
+  color:var(--brand-ink);background:var(--white);font-size:var(--t-small);font-weight:700;
+  cursor:pointer;text-decoration:none;margin-right:8px}
+
+footer{background:var(--white);border-top:2px solid var(--ink);color:var(--ink-2);
+  padding:24px 0 32px;font-size:var(--t-small);font-weight:500;margin-top:48px}
+footer b{color:var(--ink);font-weight:700}
+footer p{margin:0}
+footer p+p{margin-top:6px}
+@media(prefers-reduced-motion:no-preference){
+  a.item,.tab,.chip,.fsbtn,.cp{transition:background-color .15s,border-color .15s,color .15s}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">SBS아카데미 AIX 강남 · 상담 허브</p>
+    <h1>상담자료 총집합</h1>
+    <p class="sub">상담 중 찾는 자료를 한 곳에 모았습니다. 검색하거나 분류·학과 단추로 거르면 됩니다.</p>
+    <div class="stat">
+      <span id="s1">전체 -건</span>
+      <span>기준 2026-08-25</span>
+      <span>WEB = 폰에서도 열림</span>
+    </div>
+  </div>
+</header>
+
+<nav class="bar" aria-label="검색과 분류">
+  <div class="wrap">
+    <div class="barrow">
+      <input id="q" type="search" placeholder="검색 (예: 수강료, 피그마, 환불, 컴활)" autocomplete="off" aria-label="자료 검색">
+      <span class="fslabel">글자</span>
+      <button class="fsbtn" data-fs="" aria-pressed="true">보통</button>
+      <button class="fsbtn" data-fs="lg" aria-pressed="false">크게</button>
+      <button class="fsbtn" data-fs="xl" aria-pressed="false">아주 크게</button>
+    </div>
+    <div class="barrow"><div class="tabs" id="tabs" role="tablist"></div></div>
+    <div class="barrow"><div class="chips" id="chips"></div></div>
+  </div>
+</nav>
+
+<main id="main" class="wrap">
+  <div class="howto">
+    <b>WEB · 외부</b> 표시는 폰에서도 열리고 오른쪽 복사 단추로 주소를 학생에게 보낼 수 있습니다.
+    <b>PC</b> 표시는 사무실 PC 전용입니다. PC에서는 바탕화면의 상담자료 총집합 바로가기(로컬판)로 열면
+    자료가 브라우저에서 바로 열립니다(옵시디언은 md 양식에만). 검색창은 <b>/</b> 키로 바로 이동합니다.
+  </div>
+  <div class="recent" id="recent" hidden>
+    <span class="rlabel">최근 연 자료</span><span id="rchips"></span>
+  </div>
+  <p id="stat" role="status" aria-live="polite"></p>
+</main>
+<div id="out"></div>
+
+<footer>
+  <div class="wrap">
+    <p><b>SBS아카데미 AIX 강남지점</b> · 경력멘토 오영선 · 02-530-8555</p>
+    <p>상담용 자료 허브 · 기준 2026-08-25 · 정본은 볼트 01_안내용자료 · OYS</p>
+  </div>
+</footer>
+
+<script>
+var VAULT="ADELIE_WORK";
+var G="https://navyorca.github.io/guide-web/g/";
+var LOCALROOT="file:///G:/"+encodeURI("내 드라이브/Obsidian_Master/ADELIE_WORK/");
+var NASROOT="file://192.168.201.202/";
+var WIKI=G+"1580575c.html";
+var MOBILE=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+var DEPLOYED=location.protocol.indexOf("http")===0;
+var PHONE=MOBILE&&DEPLOYED;
+
+// 항목: [이름, 설명, 경로, 학과, 표시]
+// 경로: http…=외부 / g:해시=guide-web 배포본 / v:=볼트(옵시디언) / f:=로컬 파일 / n:=NAS
+// 표시: s=발송OK, x=화면전용
+var F09="https://www.figma.com/proto/AmlgIzhyqk3Zbpc1OXjDN9/ux-ui-_portfolio--%EC%82%AC%EC%97%85%ED%8C%80--%EC%83%81%EB%8B%B9%EC%9A%A9-?";
+var F10="https://www.figma.com/proto/EcF2ua75SJSKG0uXCh0rnl/UX-UI_portfolio?page-id=0%3A1&";
+var F12="https://www.figma.com/proto/A0DomGn2MiL9rPc1oE1543/ux-ui-portfolio--3%EA%B8%B0-%EC%82%AC%EC%97%85%ED%8C%80--%EC%83%81%EB%8B%B4%EC%9A%A9?page-id=0%3A1&";
+
+var DATA=[
+ {k:"t1",name:"커리큘럼",desc:"학과별 과목 순서 · 신편성 과정 소개 페이지와 사업부 원본",items:[
+  ["AIX 과정 커리큘럼 전문","사업부 pptx 9종 슬라이드 전량 · 내부 확인용","g:8d9a7c0e.html","공통",""],
+  ["전체 커리큘럼 로드맵","학과별 전 과목 순서 · 100% 대면 과목 표시","http://serjin.dothome.co.kr/web/sbs/full_roadmap.html","공통","s"],
+  ["커리큘럼 노선도","과정 흐름을 노선도로 정리한 자체 제작본","g:59989582","공통","s"],
+  ["AIX 모듈화 통합로드맵","모듈 개편 후 전체 편성 설명자료","g:15466125","AI","s"],
+  ["AIX 모듈개편 암기카드","개편 내용을 빠르게 훑는 카드","g:7030c811","AI",""],
+  ["AIX 모듈개편 정본","신과목 · 시수 · 구과목 매핑 정본 · 9월 개강분부터 신편성 적용","g:f55191ef.html","AI",""],
+  ["커리큘럼 전체 요약","과목별 한 줄 설명 · 학과별 정리","g:47fb5b42.html","공통",""],
+  ["AI에이전트 커리큘럼","3단계 로드맵 · 기초 8회 · 심화 8회","https://hw5511.github.io/ai-agent-class/consultation/","AI","s"],
+  ["웹에이전트 커리큘럼","웹 학과 AI에이전트 트랙","http://serjin.dothome.co.kr/web/sbs/agent_curriculum.html","웹","s"],
+  ["AI 피그마 스튜디오","90시간 12주 디자인 워크플로우","https://charming-daifuku-34debc.netlify.app/","웹","s"],
+  ["웹툰 과정 커리큘럼","웹툰 1~4 구성","https://cajincrsm.github.io/webtoon-sbs/","아트웍","s"],
+  ["AIX 애니메이션(ART) 소개","과정 소개 슬라이드","https://slides.com/soo0011/bold","아트웍","s"],
+  ["영상모션 커리큘럼","모션 · 시포디 · 포폴 구성","https://cajincrsm.github.io/motion/","모션영상","s"],
+  ["CG 커리큘럼","CG 전 트랙 안내 (Canva)","https://www.canva.com/design/DAG7iq31Jvc/QoXnYloFC3kaM1jc9EfwsA/view","CG","s"],
+  ["AI 비주얼디자인","과정 소개 (Notion)","https://www.notion.so/Ai-35020ccb9321809a8fefed96c5d09292","AI","s"],
+  ["AI크리에이터 시각편집","과정 소개 (gamma)","https://gamma.app/docs/AI-PR-tu3dhjk2kay375h","시각편집",""],
+  ["AI크리에이터 영상모션","과정 소개 (gamma) · 제목이 Copy of라 발송 전 원본 확인","https://gamma.app/docs/Copy-of-AI--t171k5kj4knc1r6?mode=doc","모션영상","x"],
+  ["AI크리에이터 CG마야","과정 소개 (gamma) · 지점용 표기라 학생 발송 금지","https://gamma.app/docs/AI-CG--82rcvas1mffkdai","CG","x"],
+  ["방학특강 안내","방학 집중 과정 소개","https://cajincrsm.github.io/Summer-Information-Session/","공통","s"],
+  ["AI 가이드","여름 집중 과정 AI 가이드","https://cajincrsm.github.io/Summer-Intensive-Course/","공통","s"],
+  ["AIX 포토샵 커리큘럼","신과목 소개 pdf","g:be784fa4.pdf","AI",""],
+  ["AIX 일러스트 커리큘럼","신과목 소개 pdf","g:065b06f6.pdf","AI",""],
+  ["AIX 포토샵 사업부 PPT","원본 pptx · NAS 260724 수록","g:63a259fc.html#c0","AI",""],
+  ["AIX 일러스트 사업부 PPT","원본 pptx · NAS 260724 수록","g:63a259fc.html#c1","AI",""],
+  ["AIX 브랜딩 디자인 실무","사업부 PPT · NAS 260724 수록","g:63a259fc.html#c2","AI",""],
+  ["AIX 패키지·굿즈 제작 실무","사업부 PPT · NAS 260724 수록","g:63a259fc.html#c3","AI",""],
+  ["AIX 디지털 출판 실무","사업부 PPT · NAS 260724 수록","g:63a259fc.html#c4","AI",""],
+  ["AIX 프라이빗 마케팅 클래스","사업부 PPT · 자료 제목은 AI 맞춤 브랜딩 프라이빗","g:63a259fc.html#c5","AI",""],
+  ["AIX 마케팅영상","사업부 PPT · NAS 260724 수록","g:63a259fc.html#c6","AI",""],
+  ["2D 모션 디자인 클래스","사업부 PPT · NAS 260724 수록","g:63a259fc.html#c7","모션영상",""],
+  ["실전 영상편집 클래스","사업부 PPT · NAS 260727 수록","g:63a259fc.html#c8","시각편집",""],
+  ["바이브코딩 모듈B 설명회","사업부 설명회 202607 · NAS 수록","g:41ba9163.html","AI",""],
+  ["스페이스 과목1 AI공간기획","인테리어설계 홍보 pdf","g:a3f8be13.pdf","인테리어",""],
+  ["스페이스 과목2A SketchUp 트랙","AI 3D모델링 렌더링 홍보 pdf","g:0a46d0b9.pdf","인테리어",""],
+  ["스페이스 과목2B SketchUp+3dsMax","AI 3D모델링 렌더링 홍보 pdf","g:29629581.pdf","인테리어",""],
+  ["스페이스 과목3 BIM기초 AI활용","홍보 pdf","g:702df025.pdf","인테리어",""],
+  ["스페이스 과목4 공간VR시각화","홍보 pdf","g:ca58110a.pdf","인테리어",""],
+  ["Ai디지털스토리보드 커리큘럼","아트웍 정규 pdf · NAS 260824 수록","g:388df1bf.pdf","아트웍",""],
+  ["유튜브 올인원 커리큘럼","신판 260723 · 구 유튜브 성장과정 대체","g:844919d9.pdf","모션영상",""],
+  ["유튜브 시니어 커리큘럼","신판 260723","g:6cbeb134.pdf","모션영상",""],
+  ["AI크리에이터 유튜브 커리큘럼","신판 260723","g:18535a64.pdf","모션영상",""],
+  ["NAS 커리큘럼 원본 폴더","학과별 커리큘럼 자료 원본 (사무실 PC)","g:76bb608a.html#s379fe3b4","공통",""]
+ ]},
+ {k:"t2",name:"상담자료",desc:"과정 · 학과 설명자료와 시장 근거 자료",items:[
+  ["AI에이전트 × AI피그마 통합안내","두 과정 비교 · 접점 · 추천 대상","g:3bfe8c99","AI·웹","s"],
+  ["바이브코딩 90시간","과정 상담자료 (강남)","g:abcc31b2","AI","s"],
+  ["바이브코딩 과정 PDF","과정 소개 pdf","g:7043411e.pdf","AI",""],
+  ["바이브코딩 상담자료 (조우정)","202607 · NAS 수록","g:132b133c.html","AI",""],
+  ["전통 툴 교육의 가치","AI 시대에 툴 교육이 왜 필요한가","g:ddb93ffd","공통","s"],
+  ["금융권 취업 자격증 가이드","전산회계 · 세무 · 재경관리사 경로","g:50169cde","전산회계","s"],
+  ["BIM 전문가 자격증 안내","2026 기준 응시 · 준비 안내","g:37f6089d","인테리어","s"],
+  ["새싹 AI숏폼 영상콘텐츠","생성형 AI 숏폼 실무과정 안내","g:ad9ed1fc","모션영상","s"],
+  ["제품디자인 상담 참고","외부 정보 정리본","g:85137b41","공통",""],
+  ["국비 멀티미디어콘텐츠제작","사내 1차 상담자료 v1.3","g:75ed3090.html","국비",""],
+  ["9월 모션 국비 홍보 포스터","모집 홍보 이미지","g:afd8287b.png","국비·모션영상",""],
+  ["CG학과 상담자료 AIX판","계열공통 세트 · NAS 260819 수록","g:35602dda.pdf","CG",""],
+  ["모션학과 상담자료","계열공통 세트 · NAS 수록","g:d2a79c34.pdf","모션영상",""],
+  ["시각편집학과 과정설명","26.04판 계열공통 세트 · NAS 수록","g:04f80090.pdf","시각편집",""],
+  ["아트웍학과 상담자료","계열공통 세트 · NAS 수록","g:c4122ccb.pdf","아트웍",""],
+  ["웹학과 상담자료","계열공통 세트 · NAS 수록","g:7df32f27.pdf","웹",""],
+  ["건축·인테리어 공통 상담자료","계열공통 세트 · NAS 수록","g:d1562d5c.pdf","인테리어",""],
+  ["AI마케팅영상 제작 과정","여름 과정 · 이송희 학과장 · NAS 수록","g:054ad375.pdf","AI",""],
+  ["학과 브로셔","AI 콘텐츠디자인 · 게임콘텐츠","g:294e0003.pdf","공통",""],
+  ["컴활 출제기준 개편","개편 내용 상담용 정리","g:1f975cc8.html","자격증·OA",""],
+  ["AIX 개편 문의응대","개편 관련 질문 대응","g:627675f0.html","AI",""],
+  ["결재권자 설득자료 템플릿","회사 지원 받는 수강생용","g:9fb9ed83.html","공통",""],
+  ["사무OA 상담자료","김범수 자료","g:6b34bc4c.pdf","자격증·OA",""],
+  ["재경관리사 상담자료","PPT 정리본","g:7aad44af.pdf","전산회계",""],
+  ["캐드 자격증 상담자료","자격증 경로 안내","g:0e316be7.pdf","인테리어",""],
+  ["포토샵·일러스트 필요이유","원장 자료 상세버전","g:686bb7e1.pdf","공통",""],
+  ["영상·모션 시장 심층 분석","시장 자료","g:91564d66.pdf","모션영상",""],
+  ["웹툰 과정 설명","과정 설명 pdf","g:8433a3a7.pdf","아트웍",""],
+  ["아트웍학과 정규 (웹툰)","정규 과정 pdf","g:1b1d55a6.pdf","아트웍",""],
+  ["AI 시니어","시니어 대상 과정 자료","g:045a1adb.pdf","AI",""],
+  ["NAS 계열공통 상담자료 폴더","원본 폴더 (사무실 PC)","g:76bb608a.html#sc715424c","공통",""],
+  ["NAS 강사프로필 폴더","학과별 강사 프로필 (사무실 PC)","g:76bb608a.html#sdaf9cd0f","공통",""]
+ ]},
+ {k:"t3",name:"포트폴리오",desc:"상담 중 결과물 먼저 보여주기 · 수강생 작품과 NAS 원본 폴더",items:[
+  ["웹 UXUI 서OO 작품 ★강사 강추","25.09기 피그마 프로토타입",F09+"page-id=0%3A1&node-id=8-2&viewport=592%2C359%2C0.02&t=MQLSBZz82mJO4hDu-1&scaling=min-zoom&content-scaling=fixed","웹",""],
+  ["웹 UXUI 구OO 작품","25.09기 피그마 프로토타입",F09+"page-id=0%3A1&node-id=0-3&viewport=58%2C341%2C0.1&t=y4jHdccVbwQSowMM-1&scaling=scale-down-width&content-scaling=fixed","웹",""],
+  ["웹 UXUI 이OO 작품","25.09기 피그마 프로토타입",F09+"page-id=0%3A1&node-id=0-19&viewport=592%2C359%2C0.02&t=MQLSBZz82mJO4hDu-1&scaling=min-zoom&content-scaling=fixed","웹",""],
+  ["웹 UXUI 김OO 작품","25.10기 피그마 프로토타입",F10+"node-id=17-76&viewport=243%2C359%2C0.1&t=5yhdvpxMIoZTef3T-1&scaling=min-zoom&content-scaling=fixed","웹",""],
+  ["웹 UXUI 구OO 작품 (수정판)","25.10기 피그마 프로토타입",F10+"node-id=17-12&viewport=243%2C359%2C0.1&t=5yhdvpxMIoZTef3T-1&scaling=min-zoom&content-scaling=fixed","웹",""],
+  ["웹 UXUI 조OO 작품","25.12기(3기) 피그마 프로토타입",F12+"node-id=5-304&p=f&viewport=-475%2C48%2C0.06&t=XVZ0QHeQhpsV2IHH-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=5%3A304","웹",""],
+  ["웹 UXUI 곽OO 작품","25.12기(3기) 피그마 프로토타입",F12+"node-id=131-156&p=f&viewport=-475%2C48%2C0.06&t=XVZ0QHeQhpsV2IHH-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=131%3A156","웹",""],
+  ["웹 UXUI 이OO 작품","25.12기(3기) 피그마 프로토타입",F12+"node-id=19-27&p=f&viewport=-475%2C48%2C0.06&t=XVZ0QHeQhpsV2IHH-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=19%3A27","웹",""],
+  ["웹 UXUI 이OO 작품","26.06기(4기) 피그마 프로토타입","https://www.figma.com/proto/UHNi4B2xkrcHHHgvQgNfv5/4%EA%B8%B0%ED%8F%AC%ED%86%A0%ED%8F%B4%EB%A6%AC%EC%98%A4-%EC%9D%B4%EC%9A%A9%EC%9A%B0-?node-id=1-5409&viewport=-771%2C391%2C0.22&t=huYyOxCyUeY2Zb1u-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1","웹",""],
+  ["웹 UXUI 조OO 작품","26.06기(4기) 피그마 프로토타입","https://www.figma.com/proto/8bZQQUIoZQxCGkjhJHLbO4/4%EA%B8%B0-portfolio?node-id=2-4&viewport=354%2C101%2C0.04&t=JizYxHbRkwD0zoEL-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=2%3A4&page-id=0%3A1","웹",""],
+  ["웹 UXUI 유OO 작품","26.06기(4기) 피그마 프로토타입","https://www.figma.com/proto/8bZQQUIoZQxCGkjhJHLbO4/4%EA%B8%B0-portfolio?node-id=7-2049&viewport=577%2C117%2C0.46&t=Ta00rFnyOaC9JUh0-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=7%3A2049&page-id=0%3A1","웹",""],
+  ["웹 UXUI 안OO 작품","26.06기(4기) 피그마 프로토타입","https://www.figma.com/proto/8bZQQUIoZQxCGkjhJHLbO4/4%EA%B8%B0-portfolio?node-id=7-298&viewport=-483%2C164%2C0.26&t=LljhtY0vcSi0sWhn-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=7%3A298&page-id=0%3A1","웹",""],
+  ["UXUI 링크 원본 txt · 웹 폴더","강사 배포 정본 (2026.07 수정) · 사무실 PC","g:76bb608a.html#dd45ee7e9","웹",""],
+  ["NAS 포트폴리오: CG","작품 폴더 (사무실 PC)","g:76bb608a.html#dd7db7054","CG",""],
+  ["NAS 포트폴리오: 모션","작품 폴더 (사무실 PC)","g:76bb608a.html#d82d45717","모션영상",""],
+  ["NAS 포트폴리오: 시각편집","작품 폴더 (사무실 PC)","g:76bb608a.html#dc6b9e840","시각편집",""],
+  ["NAS 포트폴리오: 아트웍","작품 폴더 (사무실 PC)","g:76bb608a.html#d0a60337b","아트웍",""],
+  ["NAS 포트폴리오: 인테리어","작품 폴더 (사무실 PC)","g:76bb608a.html#d713617ca","인테리어",""]
+ ]},
+ {k:"t4",name:"학생 발송",desc:"수강생에게 바로 보내는 링크와 문구 양식",items:[
+  ["수강생 필수정보 링크모음","카톡 고정공지 정본 · 공지 1·2","g:411ca311.html","공통",""],
+  ["비대면 강의장 줌링크","강의장별 ZOOM 정본","g:cab1b40b.html","공통",""],
+  ["교재몰","온라인 교재 주문 · 현장 구매 불가","https://kedustore.com","공통","s"],
+  ["웹하드 예제파일","kegstore01 · kegstore02 / 0000","http://www.webhard.co.kr","공통","s"],
+  ["따즈아 온라인강의","결석 보충 · 쿠폰 등록","https://www.ddazua.com/","공통","s"],
+  ["AI에이전트1 1·2회차 수업정리","첫 수업 결석자 공유용 · 클로드코드 설치 순서 포함(260822 수업분)","g:2d3ce441","AI","s"],
+  ["따즈아 홍보멘트·과목링크","가격 안내 문구 + 과목별 인강 직링크 표","g:1044d348.html","공통",""],
+  ["따즈아 수강방법 PDF","안내서","g:a4ddb0a2.pdf","공통",""],
+  ["컴활·모스 녹화본 카페","기존 자료 공유 네이버 카페","https://m.cafe.naver.com/answard.cafe","자격증·OA","s"],
+  ["카톡 메시지 양식","상황별 발송 문구","g:2e282983.html","공통",""],
+  ["상담예약 일정안내","예약 확정 카톡 기본양식 (핀 정본)","g:d4991c4f.html","공통",""],
+  ["부재중 카톡 양식","연결 실패 시 발송","g:707c6a8f.html","공통",""],
+  ["면담예약 일정안내","등록생 면담 예약 문구","g:a9a556be.html","공통",""],
+  ["개강안내 기본 양식","개강 문자 뼈대","g:f0d3ca40.html","공통",""],
+  ["교재 및 준비물 안내","과목별 준비물","g:16b0f315.html","공통",""],
+  ["모스 교재 이미지","교재 안내 발송용","g:13950339.png","자격증·OA",""],
+  ["컴활 교재 이미지","교재 안내 발송용","g:15b5c6d2.png","자격증·OA",""],
+  ["시간표안내 포토샵 외 4과목","시간표 안내 문구","g:9efd7af6.html","공통",""],
+  ["프엔1 가입안내","AI프롬프트 1 수강 준비 pdf","g:84f6db7b.pdf","AI",""],
+  ["계좌이체 전달용 이미지","계좌 안내 발송용","g:111146f6.jpg","공통",""],
+  ["안내문 SBS아카데미","학원 소개 안내문","g:739e24ea.html","공통",""],
+  ["네이버리뷰 안내","리뷰 요청 문구","g:6844dffc.html","공통",""],
+  ["친구추천 할인 안내","추천 할인 조건","g:b09435b2.html","공통",""],
+  ["재원증명서 발급방법","발급 절차 안내","g:5239e725.html","공통",""],
+  ["스마트러닝 앱 안내","설치 안내 이미지","g:ca0407b7.png","공통",""],
+  ["비대면 수업 안내","비대면 안내 이미지","g:503a7b23.png","공통",""],
+  ["교재몰 안내 이미지","주문 방법 이미지","g:fadfcdd4.jpg","공통",""],
+  ["학원 약도","방문 안내용","g:d942eb6b.png","공통",""],
+  ["명함","카톡 발송용","g:3973056c.jpg","공통",""]
+ ]},
+ {k:"t5",name:"상담 실무",desc:"수강료 · 결제 · 환불 · 시험 일정 · 체크리스트",items:[
+  ["수강료 정본","과정별 정가 · 회당시간 · 시수","g:28606043.html","공통",""],
+  ["환불규정","규정 이미지","g:cbc7189b.png","공통",""],
+  ["환불 공제금 스크립트","환불 안내 화법","g:5936b4e8.html","공통",""],
+  ["결제안내 + 안내멘트","계좌 정본 · 결제 수단별 안내 · 등록 후 멘트","g:d5c54cc2.html","공통",""],
+  ["결제변경 순서","수단 변경 절차","g:21a965c8.html","공통",""],
+  ["결제선생 소개서","결제 서비스 안내","g:1ff69426.pdf","공통",""],
+  ["KEG ONE PASS 바우처","바우처 안내","g:b59c9283.html","공통",""],
+  ["KEG ONE PASS 세부 운영안","운영 규정 pdf","g:9fba6e5b.pdf","공통",""],
+  ["KEG 바우처 사용 공지","260617 공지 pdf","g:3f689d13.pdf","공통",""],
+  ["Microsoft 365 할인","수강생 할인 안내","g:05dd5558.pdf","공통",""],
+  ["기초자 등록 전 체크리스트","등록 전 확인 · 인포 제출","g:a58ce830.pdf","공통",""],
+  ["컴퓨터 기초자 체크리스트","기초 수준 확인","g:cbe29008.pdf","공통",""],
+  ["AI프롬프트 기초 체크리스트","모아폼 온라인 체크리스트","https://answer.moaform.com/answers/W7rJj9","AI","s"],
+  ["포토샵 기초 실기 체크리스트","모아폼 온라인 체크리스트","https://answer.moaform.com/answers/EBo4AX","공통","s"],
+  ["일러스트 기초 실기 체크리스트","모아폼 온라인 체크리스트","https://answer.moaform.com/answers/RwBwwn","공통","s"],
+  ["레벨체크 디일러","수준 확인 이미지","g:ffd4539f.jpg","시각편집",""],
+  ["레벨체크 포토웍스","수준 확인 이미지","g:350e78c9.jpg","시각편집",""],
+  ["용어집","과정명 · 자격증명 표준 표기","g:a0c2083a.html","공통",""],
+  ["시험일정 2026 하반기","MOS · ACP · GTQ 통합 일정","g:f808fd97","자격증·OA","s"],
+  ["2026 CAT 시험일정","연간 일정","g:4de57fb1.png","자격증·OA",""],
+  ["2026 AI-POT 시험일정","연간 일정","g:c12b86d5.png","자격증·OA",""],
+  ["AI-POT 1급 대비책","준비 방향","g:ac2e472f.html","자격증·OA",""],
+  ["MOS 시험 접수 안내","접수 절차","g:836d2c2a.pdf","자격증·OA",""],
+  ["ACP 시험 접수 안내","접수 절차","g:e5184999.pdf","자격증·OA",""],
+  ["ACP 응시료 안내","비용 안내","g:c012df82.pdf","자격증·OA",""],
+  ["ACP 추가 자격증","취득 가능 목록","g:fe1fca2d.png","자격증·OA",""],
+  ["공군 가산점 자격증","군 지원 가산점 목록","g:b0c624a5.jpg","자격증·OA",""],
+  ["AI 릴레이특강 일정","특강 운영 일정","g:df56000c.html","공통",""],
+  ["신규과정 교육","신설 과정 정리","g:edb1eb90.html","공통",""],
+  ["국비 지원 신청서","국기과정 개인정보동의서","g:d14c818a.pdf","국비",""],
+  ["국비 선발 동의서","훈련생 선발 동의서 (모션)","g:add1860a.pdf","국비",""],
+  ["국비 NCS 면접 질문지","9월 모션 국기과정","g:51bc1266.pdf","국비",""]
+ ]},
+ {k:"t6",name:"내부(멘토)",desc:"멘토 전용 · 스크립트 · 영업 가이드 · 사내 교육 (폰 배포판에서는 숨김)",items:[
+  ["교육기록 모음","사내 교육 보고서 37건을 주제별로 묶음 · 원본은 볼트","g:93d17f84.html","공통",""],
+  ["★ 컨텍 메모 양식","인트라넷 기입 틀 (핀 정본)","g:6a545d51.html","공통",""],
+  ["상담플레이북 스피치뱅크","상황별 스피치 모음","g:bb052c1f.html","공통",""],
+  ["컨텍 대처법 스크립트","전화 응대 상황별 대응","g:9384ef0b.html","공통",""],
+  ["오영선 상담 프로파일 분석","학과 분포 · 유형 · 갭 분석","g:5bc50e29.html","공통",""],
+  ["인테리어 스피치 참고","인테리어 학과 상담 화법","g:46e6cafa.html","인테리어",""],
+  ["고객응대 매너 메모","응대 기본","g:eba99c43.pdf","공통",""],
+  ["신입 영업업무매뉴얼","인트라넷 사용법 rev3","g:d6466a26.pdf","공통",""],
+  ["원장 컨택 표준매뉴얼 v2","엄진용 원장 배포본","g:e2dcc69b.html","공통",""],
+  ["원장 신인 8주 미션그리드","엄진용 원장 배포본","g:0165c956.html","공통",""],
+  ["AIX계열 국비사업 정리","사업부 교육 260824 · NAS 수록","g:8127d52a.html","국비",""],
+  ["심평원 B2G 사업 이해","사업부 교육 260824 · NAS 수록","g:02a1716a.html","국비",""],
+  ["따즈아 노하우 (김범수)","판매 노하우 docx","g:e7ac1b71.html","공통",""],
+  ["따즈아 상위판매자 인터뷰","판매 사례 pdf","g:65f2cd97.pdf","공통",""],
+  ["신인멘토 상담 평가리스트","평가 항목 이미지","g:a53523d1.png","공통",""],
+  ["사업부교육 김정현 260619","교육 pptx","g:131d4f1c.html","공통",""],
+  ["NAS 원장 자료 폴더","목표수수료 계산기 등 (사무실 PC)","g:76bb608a.html#s1f72dab6","공통",""],
+  ["NAS 사업부 상담자료 폴더","6.상담자료 (사무실 PC)","g:76bb608a.html#s8c207726","공통",""]
+ ]}
+];
+
+var DEPTS=["공통","AI","웹","아트웍","시각편집","모션영상","CG","인테리어","자격증·OA","전산회계","국비"];
+if(PHONE){ DATA=DATA.filter(function(t){return t.k!=="t6";}); }
+
+function href(p){
+  // 260829: PDF·이미지도 배포하면서 g: 뒤에 확장자가 붙는 경우가 생겼다.
+  // 260829: PDF·이미지도 배포하면서 g: 뒤에 확장자가 붙는 경우가 생겼다.
+  // 과정 상세처럼 #c0 같은 해시가 따라오면 확장자 판정은 해시 앞부분으로 한다.
+  if(p.indexOf("g:")===0){
+    var s=p.slice(2), base=s.split("#")[0], rest=s.slice(base.length);
+    return G+(/\.[a-z0-9]+$/i.test(base) ? s : base+".html"+rest);
+  }
+  if(p.indexOf("v:")===0){
+    var rel=p.slice(2);
+    // 로컬판(file:)에서는 md 외 자료를 브라우저가 바로 연다. 옵시디언은 md 양식에만 쓴다.
+    if(!/\.md$/i.test(rel)&&location.protocol==="file:") return LOCALROOT+encodeURI(rel);
+    return "obsidian://open?vault="+encodeURIComponent(VAULT)+"&file="+encodeURIComponent(rel);
+  }
+  if(p.indexOf("f:")===0) return LOCALROOT+encodeURI(p.slice(2));
+  if(p.indexOf("n:")===0) return NASROOT+encodeURI(p.slice(2));
+  return p;
+}
+function kind(p){
+  if(p.indexOf("g:")===0) return "web";
+  if(/^https?:/.test(p)) return "out";
+  return "pc";
+}
+var LABEL={web:"WEB",out:"외부",pc:"PC"};
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");}
+function rowHTML(it){
+  var k=kind(it[2]), h=href(it[2]);
+  var tags='<span class="tg '+k+'">'+LABEL[k]+'</span>';
+  if(it[4]==="s") tags+='<span class="tg ok">발송OK</span>';
+  if(it[4]==="x") tags+='<span class="tg x">화면전용</span>';
+  var body='<span class="nm">'+esc(it[0])+tags+'</span><span class="ds">'+esc(it[1])+'</span>';
+  // 폰에서는 PC 전용 항목을 눌리지 않는 정보 행으로만 보여 준다(옵시디언 호출 방지)
+  if(PHONE&&k==="pc"){
+    return '<div class="row"><div class="item still">'+body+'</div></div>';
+  }
+  var blank=/^(https?:|file:)/.test(h)?' target="_blank" rel="noopener"':'';
+  var cp=(k==="web"||k==="out")?'<button class="cp" type="button" data-h="'+esc(h)+'" aria-label="'+esc(it[0])+' 주소 복사">복사</button>':"";
+  return '<div class="row"><a class="item" data-nm="'+esc(it[0])+'" href="'+esc(h)+'"'+blank+'>'+body+'</a>'+cp+'</div>';
+}
+
+var total=0; DATA.forEach(function(t){ total+=t.items.length; });
+document.getElementById("s1").textContent="전체 "+total+"건";
+
+var cur="all", dept="all";
+var tabs=document.getElementById("tabs");
+tabs.innerHTML='<button class="tab" role="tab" data-k="all" aria-current="true">전체</button>'
+  +DATA.map(function(t){return '<button class="tab" role="tab" data-k="'+t.k+'" aria-current="false">'+t.name+'</button>';}).join("");
+tabs.addEventListener("click",function(e){
+  var b=e.target.closest(".tab"); if(!b) return;
+  cur=b.dataset.k;
+  [].forEach.call(tabs.children,function(x){x.setAttribute("aria-current",x===b?"true":"false");});
+  render();
+});
+
+var chips=document.getElementById("chips");
+chips.innerHTML='<button class="chip" data-d="all" aria-pressed="true">학과 전체</button>'
+  +DEPTS.map(function(d){return '<button class="chip" data-d="'+d+'" aria-pressed="false">'+d+'</button>';}).join("");
+chips.addEventListener("click",function(e){
+  var b=e.target.closest(".chip"); if(!b) return;
+  dept=b.dataset.d;
+  [].forEach.call(chips.children,function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});
+  render();
+});
+
+var q=document.getElementById("q");
+q.addEventListener("input",render);
+document.addEventListener("keydown",function(e){
+  if(e.key==="/"&&document.activeElement!==q&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){
+    e.preventDefault(); q.focus();
+  }
+});
+
+// 글자 크기: 선택 저장
+var FSKEY="hub_fs";
+function applyFS(v){
+  document.documentElement.setAttribute("data-fs",v||"");
+  [].forEach.call(document.querySelectorAll(".fsbtn"),function(b){
+    b.setAttribute("aria-pressed",(b.dataset.fs===(v||""))?"true":"false");
+  });
+}
+try{ applyFS(localStorage.getItem(FSKEY)||""); }catch(err){ applyFS(""); }
+[].forEach.call(document.querySelectorAll(".fsbtn"),function(b){
+  b.addEventListener("click",function(){
+    try{ localStorage.setItem(FSKEY,b.dataset.fs); }catch(err){}
+    applyFS(b.dataset.fs);
+  });
+});
+
+// 최근 연 자료
+var RKEY="hub_recent_v1";
+function loadRecent(){ try{ return JSON.parse(localStorage.getItem(RKEY)||"[]"); }catch(err){ return []; } }
+function renderRecent(){
+  var r=loadRecent(), box=document.getElementById("recent");
+  if(!r.length){ box.hidden=true; return; }
+  box.hidden=false;
+  document.getElementById("rchips").innerHTML=r.map(function(x){
+    return '<a class="rchip" href="'+esc(x.h)+'">'+esc(x.n)+'</a> ';
+  }).join("");
+}
+document.addEventListener("click",function(e){
+  var a=e.target.closest("a.item"); if(!a) return;
+  var r=loadRecent().filter(function(x){return x.n!==a.dataset.nm;});
+  r.unshift({n:a.dataset.nm,h:a.getAttribute("href")});
+  try{ localStorage.setItem(RKEY,JSON.stringify(r.slice(0,6))); }catch(err){}
+  renderRecent();
+});
+
+// 주소 복사 (실패 시 선택창 폴백)
+document.addEventListener("click",function(e){
+  var b=e.target.closest(".cp"); if(!b) return;
+  var h=b.dataset.h;
+  function done(ok){
+    b.textContent=ok?"복사됨":"실패";
+    document.getElementById("stat").textContent=ok?"주소를 복사했습니다.":"복사에 실패했습니다. 링크를 길게 눌러 복사하세요.";
+    setTimeout(function(){ b.textContent="복사"; },1600);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(h).then(function(){done(true);},function(){fallback();});
+  } else { fallback(); }
+  function fallback(){
+    var t=document.createElement("textarea");
+    t.value=h; document.body.appendChild(t); t.select();
+    var ok=false; try{ ok=document.execCommand("copy"); }catch(err){}
+    document.body.removeChild(t); done(ok);
+  }
+});
+
+function render(){
+  var term=q.value.trim().toLowerCase();
+  var out="", hits=0, bandIdx=0;
+  DATA.forEach(function(t){
+    if(cur!=="all"&&cur!==t.k) return;
+    var items=t.items.filter(function(it){
+      if(dept!=="all"&&it[3].indexOf(dept)<0) return false;
+      if(term&&(it[0]+" "+it[1]+" "+it[3]+" "+t.name).toLowerCase().indexOf(term)<0) return false;
+      return true;
+    });
+    if(!items.length) return;
+    hits+=items.length;
+    var open=items, fold=[];
+    if(PHONE){
+      open=items.filter(function(it){return kind(it[2])!=="pc";});
+      fold=items.filter(function(it){return kind(it[2])==="pc";});
+    }
+    var body='<div class="grid">'+open.map(rowHTML).join("")+'</div>';
+    if(fold.length){
+      body+='<details class="pcfold"><summary>PC 전용 '+fold.length+'건 · 폰에서는 안 열리는 목록(사무실 PC용)</summary>'
+        +'<div class="grid">'+fold.map(rowHTML).join("")+'</div></details>';
+    }
+    out+='<section class="band'+(bandIdx%2?" alt":"")+'"><div class="wrap">'
+      +'<div class="shead"><h2>'+t.name+'</h2>'
+      +'<p class="sdesc">'+t.desc+'</p><p class="slabel">'+items.length+'건</p></div>'+body+'</div></section>';
+    bandIdx++;
+  });
+  if(!out){
+    out='<section class="band"><div class="wrap"><div class="empty">'
+      +'<p>"'+esc(q.value)+'" 검색 결과가 없습니다. 다른 낱말로 찾거나 아래에서 이어가세요.</p>'
+      +'<button class="ebtn" type="button" onclick="document.getElementById(\'q\').value=\'\';render();">전체 보기로 돌아가기</button>'
+      +'<a class="ebtn" href="'+WIKI+'" target="_blank" rel="noopener">업무위키에서 찾기</a>'
+      +'</div></div></section>';
+  }
+  document.getElementById("out").innerHTML=out;
+  document.getElementById("stat").textContent=hits?hits+"건 표시 중":"검색 결과 없음";
+}
+renderRecent();
+render();
+
+// 주소 뒤에 #selftest 를 붙여 열면 실측값을 상태줄에 출력한다(배포 전 점검용)
+if(location.hash==="#selftest"){
+  (function(){
+    var over=document.body.scrollWidth>window.innerWidth;
+    var small=0;
+    [].forEach.call(document.querySelectorAll("body *"),function(e){
+      if(!e.textContent.trim())return;
+      if(parseFloat(getComputedStyle(e).fontSize)<16) small++;
+    });
+    document.documentElement.setAttribute("data-fs","xl");
+    void document.body.offsetWidth;
+    var overXL=document.body.scrollWidth>window.innerWidth;
+    document.documentElement.setAttribute("data-fs","");
+    document.getElementById("stat").textContent="SELFTEST inner="+window.innerWidth
+      +" scroll="+document.body.scrollWidth+" overflow="+over+" overflowXL="+overXL
+      +" under16="+small+" tabs="+document.querySelectorAll(".tab").length
+      +" folds="+document.querySelectorAll("details.pcfold").length
+      +" phone="+PHONE;
+  })();
+}
+</script>
+
+</body>
+</html>

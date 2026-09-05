@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>환불안내 공제금 안내 스크립트</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--paper:#F0F8FF;--white:#FFFFFF;--ink:#0B1220;--ink-2:#2C3444;--line:#C3CAD8;
+ --brand-ink:#1642C4;--brand-soft:#E8EFFF;
+ --font:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI','Malgun Gothic',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);
+ font-size:19px;font-weight:400;line-height:1.8;word-break:keep-all}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 64px}
+header{background:var(--white);border-bottom:2px solid var(--ink);padding:32px 0 24px;margin-bottom:32px}
+header .wrap{padding-bottom:0}
+h1{font-size:clamp(28px,6vw,36px);font-weight:800;letter-spacing:-.01em;line-height:1.3;margin:0}
+h2{font-size:26px;font-weight:800;letter-spacing:-.01em;line-height:1.35;margin:40px 0 10px}
+h3{font-size:21px;font-weight:700;margin:28px 0 8px;color:var(--brand-ink)}
+h4,h5,h6{font-size:19px;font-weight:700;margin:22px 0 6px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:24px}
+li{margin:6px 0}
+table{width:100%;border-collapse:collapse;background:var(--white);margin:16px 0;font-size:17px}
+th{background:var(--brand-soft);color:var(--ink);font-weight:700;text-align:left;padding:10px 12px;border:1px solid var(--line)}
+td{padding:10px 12px;border:1px solid var(--line);vertical-align:top}
+blockquote{margin:16px 0;padding:14px 18px;background:var(--brand-soft);border-radius:8px;color:var(--ink-2)}
+blockquote p:last-child{margin:0}
+pre{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow-x:auto;font-size:16px}
+code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:16px}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+a{color:var(--brand-ink)}
+.src{margin-top:32px;padding-top:14px;border-top:2px solid var(--ink);font-size:16px;color:var(--ink-2)}
+/* 각주(260829). 본문에는 번호만 두고 근거는 아래로 내린다. 번호도 16px 아래로 내리지 않는다. */
+sup.fnref{font-size:16px;font-weight:700;line-height:1;vertical-align:super;margin-left:2px}
+sup.fnref a{display:inline-block;min-width:22px;text-align:center;padding:0 4px;border-radius:6px;
+ background:var(--brand-soft);color:var(--brand-ink);text-decoration:none}
+sup.fnref a:hover{background:var(--brand-ink);color:#fff}
+.fns{margin-top:40px;padding-top:8px;border-top:2px solid var(--ink)}
+.fns h2{font-size:21px;font-weight:800;margin:18px 0 12px}
+.fns ol{list-style:none;margin:0;padding:0;counter-reset:fn}
+.fns li{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:17px;line-height:1.7}
+.fns li:first-child{border-top:0}
+.fns li:target{background:var(--brand-soft);border-radius:8px;padding-left:12px;padding-right:12px}
+.fns .n{flex:0 0 auto;min-width:26px;font-weight:800;color:var(--brand-ink);font-variant-numeric:tabular-nums}
+.fns .t{flex:1;min-width:0;color:var(--ink-2)}
+.fns .back{display:inline-block;min-height:44px;line-height:44px;margin-left:8px;font-size:16px;
+ font-weight:700;color:var(--brand-ink);text-decoration:none;white-space:nowrap}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>환불안내 공제금 안내 스크립트</h1></div></header>
+<div class="wrap"><p>#환불 #환불절차 #공제금 #공제 #환불스크립트</p>
+<p>ㅁㅁ님 환불 금액과 산정 방식을 안내해 드리겠습니다.</p>
+<p>ㅁㅁ님께서 수업에 대한 불편한 부분이 생기셔서 최대한 이득되는 방향으로 안내를 드리고자 했습니다.</p>
+<p>시간표 변경 및 추가적인 인터넷 강의지원도 편의를 도와드리고자 안내드렸지만</p>
+<p>단순변심/컴플레인 등등 여러가지 사유로 환불요청 주시면 규정에 기재된 내용으로 안내를 드리는거라 해당내용 전달드려요.</p>
+<p>환불 규정의 경우는 수업들으신 횟수로 결정되는게 아닙니다.</p>
+<p>1회 수업료만 빠지는 방식이 아니고 수업일수 진행구간에 따라 공제 금액이 나뉘게 됩니다.</p>
+<p>현재 ㅁㅁㅁ 수업은 전체 ㅁ회 중 1회 수강하셨으므로, 수업일수 30% 미만 구간에 해당합니다.</p>
+<p>따라서 1회를 들으셨든 2회를 들으셨든, 30% 미만이면 공제금은 동일하게 원수강료의 1/3이 적용됩니다.</p><p class="src">원본: 01_안내용자료/환불안내 공제금 안내 스크립트.md · 볼트 문서를 폰에서 읽도록 옮긴 것입니다.</p></div>
+</body>
+</html>

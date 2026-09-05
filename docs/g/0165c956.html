@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>신인사원 8주 양성 미션 그리드</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --navy:#005192; --blue:#0085CD; --gold:#F6AB00; --ink:#0A0A0A;
+  --line:#E3E8EF; --bg:#F5F7FA; --card:#FFFFFF; --muted:#5B6776;
+  --ok:#1E8E5A; --okbg:#E7F6EF; --wip:#C77700; --wipbg:#FCF1DD; --todo:#7A8595; --todobg:#EEF1F5;
+  --m1bg:#EAF4FB; --m2bg:#FDF4E0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard',-apple-system,'Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+header{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;border-radius:18px;padding:30px 32px;box-shadow:0 8px 28px rgba(0,81,146,.18)}
+header h1{font-size:27px;font-weight:800;letter-spacing:-.5px}
+header .sub{margin-top:8px;font-size:14.5px;opacity:.92}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:600}
+.chip b{color:var(--gold)}
+h2.sec{font-size:19px;font-weight:800;color:var(--navy);margin:34px 0 14px;padding-left:12px;border-left:5px solid var(--gold)}
+.note{font-size:13px;color:var(--muted);margin:6px 0 14px}
+table.ov{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(10,20,40,.05);font-size:13.5px}
+table.ov th{background:var(--navy);color:#fff;font-weight:700;padding:11px 10px;text-align:left;font-size:12.5px}
+table.ov td{padding:11px 10px;border-top:1px solid var(--line);vertical-align:middle}
+table.ov tr.m1 td:first-child{box-shadow:inset 4px 0 0 var(--blue)}
+table.ov tr.m2 td:first-child{box-shadow:inset 4px 0 0 var(--gold)}
+table.ov tr:hover td{background:#FAFCFE}
+.wk{font-weight:800;color:var(--navy)}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.b-ok{background:var(--okbg);color:var(--ok)} .b-wip{background:var(--wipbg);color:var(--wip)} .b-todo{background:var(--todobg);color:var(--todo)}
+.star{color:var(--gold)}
+.routine{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:12px;padding:14px 18px;margin-top:6px;font-size:13.5px}
+.routine b{color:var(--navy)}
+.routine .r{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.routine .r span{background:var(--m1bg);border-radius:7px;padding:4px 10px;font-size:12.5px;font-weight:600;color:var(--navy)}
+.weeks{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+.wcard{background:var(--card);border-radius:14px;box-shadow:0 2px 12px rgba(10,20,40,.05);overflow:hidden;border:1px solid var(--line)}
+.wcard .wh{padding:14px 16px;color:#fff}
+.wcard.m1 .wh{background:linear-gradient(120deg,var(--navy),var(--blue))}
+.wcard.m2 .wh{background:linear-gradient(120deg,#9A6B00,var(--gold))}
+.wh .wt{font-size:16px;font-weight:800;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.wh .goal{font-size:13.5px;font-weight:700;margin-top:3px;color:#fff}
+.wh .goal .em{color:var(--gold)}
+.wh .wg{margin-top:9px;font-size:12.5px;background:rgba(255,255,255,.16);border-radius:8px;padding:7px 10px;line-height:1.45}
+.wh .wg b{color:var(--gold)}
+.wbody{padding:13px 16px}
+ol.ms{list-style:none;counter-reset:m;font-size:13px}
+ol.ms li{counter-increment:m;display:flex;gap:9px;padding:4px 0;border-top:1px dashed var(--line)}
+ol.ms li:first-child{border-top:0}
+ol.ms li::before{content:counter(m);flex:0 0 18px;height:18px;background:var(--blue);color:#fff;border-radius:5px;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.wcard.m2 ol.ms li::before{background:var(--wip)}
+ol.ms li.hi{font-weight:600}
+ol.ms li.hi b{color:var(--navy)}
+.lead{margin-top:11px;font-size:12px;color:#5a4500;background:#FFF8E8;border:1px dashed #E8C870;border-radius:8px;padding:8px 11px}
+.lead .tag{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:var(--wip);border-radius:5px;padding:1px 7px;margin-right:6px;vertical-align:1px}
+table.rp{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(10,20,40,.05);font-size:13px;margin-top:4px}
+table.rp th,table.rp td{padding:9px 11px;border-top:1px solid var(--line);text-align:center}
+table.rp th{background:var(--navy);color:#fff;font-size:12px}
+table.rp td:first-child{text-align:left;font-weight:700;color:var(--navy)}
+table.rp .em{color:var(--wip);font-weight:800}
+.dbbox{background:var(--m1bg);border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13.5px}
+.dbbox b{color:var(--navy)} .dbbox .flow{margin-top:7px;font-weight:600;color:var(--navy)}
+.dbbox .arr{color:var(--gold);font-weight:800}
+.contest{background:linear-gradient(135deg,#2B1E00,#7A5400);color:#fff;border-radius:16px;padding:24px 26px;margin-top:8px;box-shadow:0 8px 24px rgba(122,84,0,.25)}
+.contest h3{font-size:19px;font-weight:800;color:var(--gold)}
+.contest .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0;font-size:13.5px;font-weight:600}
+.contest .step{background:rgba(255,255,255,.12);border:1px solid rgba(246,171,0,.4);border-radius:9px;padding:8px 13px}
+.contest .arr{color:var(--gold);font-weight:800}
+.contest ul{margin:8px 0 0 18px;font-size:13px;opacity:.95}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.vcat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;box-shadow:0 2px 8px rgba(10,20,40,.04)}
+.vcat .vh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:8px}
+.vcat .vn{font-weight:800;color:var(--navy);font-size:14px}
+.vcat .vc{font-size:11px;color:#fff;background:var(--blue);border-radius:999px;padding:1px 8px;font-weight:700}
+.vcat.core .vh{border-color:var(--gold)} .vcat.core .vc{background:var(--gold)}
+.vcat ul{list-style:none;font-size:12px;color:#333}
+.vcat ul li{padding:3px 0;border-top:1px dotted var(--line)}
+.vcat ul li:first-child{border-top:0}
+.vcat ul li .who{color:var(--muted);font-size:11px}
+.vplan{background:var(--m1bg);border-radius:12px;padding:14px 18px;margin-top:14px;font-size:13px}
+.vplan b{color:var(--navy)} .vplan ol{margin:6px 0 0 18px} .vplan ol li{margin:3px 0}
+footer{margin-top:40px;padding:18px 20px;background:var(--card);border:1px solid var(--line);border-radius:12px;font-size:12px;color:var(--muted)}
+footer b{color:var(--navy)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0 0;font-size:12px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+@media(max-width:880px){.weeks,.vgrid{grid-template-columns:1fr}}
+@media print{body{background:#fff;font-size:11px}.wrap{max-width:100%;padding:0}.weeks{grid-template-columns:1fr 1fr}.wcard,table.ov,.vcat,.contest,table.rp{break-inside:avoid;box-shadow:none}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>신인사원 8주 양성 — 미션 그리드</h1>
+  <div class="sub">주 5일 × 8주 = 40영업일 · 주차 방향성 = JY 확정(07) · <span style="opacity:.8">2026-06-05</span></div>
+  <div class="chips">
+    <span class="chip">W1 <b>모든 세팅 1주차에 완료</b></span>
+    <span class="chip">영상교육 <b>1일 1개</b> 시청+정리</span>
+    <span class="chip">상담자료 <b>매주 1개</b> 누적 → 컨테스트</span>
+    <span class="chip">롤플레잉(컨택·상담) <b>핵심</b></span>
+    <span class="chip">W6 <b>컨택 테스트 → 페이스북 문의 배정</b></span>
+    <span class="chip">W7 <b>최소기준 200만</b></span>
+    <span class="chip">통화량 = <b>팀장 재량</b></span>
+  </div>
+</header>
+
+<!-- 한눈 -->
+<h2 class="sec">한눈에 — 8주 ★목표 × 게이트·이벤트</h2>
+<table class="ov">
+  <thead><tr><th style="width:48px">주</th><th style="width:60px">영업일</th><th style="width:160px">★ 목표</th><th style="width:74px">주력</th><th>게이트 · 이벤트</th><th style="width:58px">본문</th></tr></thead>
+  <tbody>
+    <tr class="m1"><td class="wk">W1</td><td>D1~5</td><td><b>첫 세팅 완료</b><br><span class="note" style="margin:0">모든 세팅 1주차에</span></td><td>M1</td><td>블로그·인스타·키워드광고 계정 + 키워드 등록 / 블로그·인스타 2건씩(2~3일차~)</td><td><span class="badge b-ok">✅</span></td></tr>
+    <tr class="m1"><td class="wk">W2</td><td>D6~10</td><td>업무 루틴 안착·컨택 준비</td><td>M1·M2</td><td>마케팅 루틴 + 녹취→스크립트 시작 + 상담자료 1</td><td><span class="badge b-ok">✅</span><span class="badge b-wip">🟡</span></td></tr>
+    <tr class="m1"><td class="wk">W3</td><td>D11~15</td><td><b>개인문의 1건</b></td><td>M2</td><td>컨택 롤플 <b>1일 2회</b> + 학과별 상담자료 주1 (실컨택=가벼운 안내)</td><td><span class="badge b-wip">🟡</span></td></tr>
+    <tr class="m1"><td class="wk">W4</td><td>D16~20</td><td><b>상담 1건</b> · 복기 습관화</td><td>M3</td><td>컨택 롤플 1일 1회 + <b>상담 롤플 주 2회</b> / 개인문의 컨택=준비된 자만</td><td><span class="badge b-todo">⬜</span></td></tr>
+    <tr class="m2"><td class="wk">W5</td><td>D21~25</td><td>경력사원 마인드 start</td><td>M3·M4</td><td><b>컨택 복기 메신저방 운영</b> + 재컨택·상담 생산 + 6주 테스트 준비</td><td><span class="badge b-todo">⬜</span></td></tr>
+    <tr class="m2"><td class="wk">W6</td><td>D26~30</td><td><b>컨택 테스트</b></td><td>M4·M5</td><td>테스트 합격 → <b>페이스북 문의 배정</b> + 롤플레잉 지속여부 결정</td><td><span class="badge b-todo">⬜</span></td></tr>
+    <tr class="m2"><td class="wk">W7</td><td>D31~35</td><td><span class="star">★</span><b>최소기준 200만</b></td><td>M5·M6</td><td><b>교육과정 발표 컨테스트 실시</b></td><td><span class="badge b-todo">⬜</span></td></tr>
+    <tr class="m2"><td class="wk">W8</td><td>D36~40</td><td>경력전환 준비 완료</td><td>M6</td><td><b>컨테스트 완료</b> + 경력전환 판정</td><td><span class="badge b-todo">⬜</span></td></tr>
+    <tr class="m2"><td class="wk">Day60</td><td>—</td><td>전환 직후 안착</td><td>(팀장)</td><td>컨택/상담/관리 루틴 정상화 점검</td><td><span class="badge b-todo">⬜</span></td></tr>
+  </tbody>
+</table>
+<div class="legend">
+  <span><span class="dot" style="background:var(--blue)"></span> 1개월차</span>
+  <span><span class="dot" style="background:var(--gold)"></span> 2개월차</span>
+  <span><span class="badge b-ok">✅</span> 본문 확정</span><span><span class="badge b-wip">🟡</span> 설계도</span><span><span class="badge b-todo">⬜</span> 예약</span>
+  <span style="margin-left:auto">게이트 = 활동 쿼터 아닌 <b>역량 입증</b> · 미통과 = 진도 유예 + 코칭(압박 X)</span>
+</div>
+
+<!-- 고정 루틴 -->
+<h2 class="sec">고정 일일 루틴 (전 주차 반복)</h2>
+<div class="routine">
+  <b>매일</b> · 영상교육 1일 1개 시청+정리(핵심 3줄 + 상담 포인트 1) / 블로그·인스타·키워드 / 교육일정표 교육
+  <div class="r">
+    <span>블로그 포스팅 2건</span><span>인스타 키우기(2건)</span><span>키워드 등록</span>
+    <span>🎬 영상 1일 1개 + 정리</span><span>교육일정표 교육</span>
+    <span>컨택 녹취→스크립트 (W2~)</span><span>상담자료 매주 1개 (W2~)</span><span>학과별 상담자료 주1 (W3~)</span>
+  </div>
+</div>
+
+<!-- 1개월차 -->
+<h2 class="sec">1개월차 — 기반·습관 (W1~W4)</h2>
+<div class="weeks">
+
+  <div class="wcard m1">
+    <div class="wh"><div class="wt"><span>W1 · 첫 세팅</span><span class="badge b-ok" style="background:rgba(255,255,255,.2);color:#fff">✅ M1</span></div>
+      <div class="goal">★ <span class="em">모든 세팅은 1주차에 끝낸다!</span></div>
+      <div class="wg"><b>게이트</b> · 블로그·인스타·키워드광고 계정 + 키워드 등록 <b>전부 완료</b> / 주력 과정 3분 브리핑</div></div>
+    <div class="wbody"><ol class="ms">
+      <li class="hi"><span>블로그·인스타 계정 생성 · <b>키워드 광고 계정 생성 + 키워드 등록</b></span></li>
+      <li><span>교육일정표 교육(회사·업무프로세스·수수료 & 교육부)</span></li>
+      <li><span>영상교육 1일 1개 시청 → 정리</span></li>
+      <li class="hi"><span><b>2~3일차부터 블로그 2건 / 인스타 게시 2건</b></span></li>
+    </ol>
+      <div class="lead"><span class="tag">★</span>인스타 구조 만들고 순차 업로드 + 팔로워 늘리기 / <span class="tag">팀장</span>세팅 완수·인스타 구조 코칭. 결과 아닌 <b>완수·태도</b> 칭찬.</div>
+    </div>
+  </div>
+
+  <div class="wcard m1">
+    <div class="wh"><div class="wt"><span>W2 · 루틴 안착</span><span class="badge" style="background:rgba(255,255,255,.2);color:#fff">✅🟡 M1·M2</span></div>
+      <div class="goal">★ 업무 루틴 안착 / 마케팅 루틴·컨택 준비</div>
+      <div class="wg"><b>게이트</b> · 마케팅 루틴 + 녹취→스크립트 시작 + 상담자료 1</div></div>
+    <div class="wbody"><ol class="ms">
+      <li><span>블로그 포스팅 지속 · 키워드 등록 지속</span></li>
+      <li><span>영상교육 1일 1개 → 정리 지속</span></li>
+      <li><span>교육일정표(사업부 교육과정 + 컨택교육)</span></li>
+      <li class="hi"><span><b>컨택 녹취 청취 → 스크립트 정리 시작</b></span></li>
+      <li class="hi"><span><b>본인 상담자료 1개 만들기</b></span></li>
+    </ol>
+      <div class="lead"><span class="tag">팀장</span>루틴 정착 여부 · 녹취 캐치력 · 상담자료 방향 코칭.</div>
+    </div>
+  </div>
+
+  <div class="wcard m1">
+    <div class="wh"><div class="wt"><span>W3 · 개인문의</span><span class="badge" style="background:rgba(255,255,255,.2);color:#fff">🟡 M2</span></div>
+      <div class="goal">★ <span class="em">개인문의 1건 목표</span></div>
+      <div class="wg"><b>게이트</b> · 개인문의 1건 + 컨택 롤플레잉 안착</div></div>
+    <div class="wbody"><ol class="ms">
+      <li><span>블로그 지속 · 인스타 키우기 · 키워드 지속</span></li>
+      <li><span>영상교육 1일 1개 → 정리</span></li>
+      <li><span>교육일정표(사업부 교육과정 + 컨택 & 교육부 + 국비)</span></li>
+      <li><span>컨택 녹취 → 스크립트 정리</span></li>
+      <li class="hi"><span><b>개인 학과별 상담자료 주 1개</b></span></li>
+      <li class="hi"><span><b>컨택 롤플레잉 1일 2회</b>(녹취 정리 + 본인 컨택 분석)</span></li>
+      <li><span>실제 컨택 = 수강생 이벤트/강의 일정 안내 등 가볍게</span></li>
+      <li><span>본인 상담자료 1개</span></li>
+    </ol>
+      <div class="lead"><span class="tag">팀장</span>롤플레잉 피드백(대본 낭독·일방 설명 신호) · 거절 회복탄력성. <b>결과 질책 X → 시도·복기 칭찬</b>.</div>
+    </div>
+  </div>
+
+  <div class="wcard m1">
+    <div class="wh"><div class="wt"><span>W4 · 상담 1건</span><span class="badge b-todo" style="background:rgba(255,255,255,.2);color:#fff">⬜ M3</span></div>
+      <div class="goal">★ 상담 1건 / <span class="em">컨택·상담 시 복기 습관화!</span></div>
+      <div class="wg"><b>게이트</b> · 상담 1건 + <span style="color:var(--gold)">★</span> 개인문의→컨택→상담 전 과정 1회 경험</div></div>
+    <div class="wbody"><ol class="ms">
+      <li><span>블로그·인스타·키워드 지속</span></li>
+      <li><span>영상교육 1일 1개 → 정리</span></li>
+      <li><span>교육일정표(사업부 컨택/상담 & 교육부 + 인트라넷 행정)</span></li>
+      <li><span>컨택 녹취 → 스크립트</span></li>
+      <li><span>개인 학과별 상담자료 주 1개</span></li>
+      <li><span>컨택 롤플레잉 1일 1회(녹취 정리+분석) 지속</span></li>
+      <li class="hi"><span><b>개인문의 컨택/재컨택은 "준비된 자만" 실시</b>(역량 게이트)</span></li>
+      <li class="hi"><span><b>상담 롤플레잉 주 2회</b>(첫 멘트부터 등록까지)</span></li>
+      <li><span>본인 상담자료 1개</span></li>
+    </ol>
+      <div class="lead"><span class="tag">팀장</span>"준비된 자" 판정(개인문의 컨택 허용 기준) · 상담 롤플 동반 · 1개월차 게이트.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 2개월차 -->
+<h2 class="sec">2개월차 — 실전·전환 (W5~W8) · 경력사원처럼 자력 수행</h2>
+<div class="weeks">
+
+  <div class="wcard m2">
+    <div class="wh"><div class="wt"><span>W5 · 경력 마인드 start</span><span class="badge b-todo" style="background:rgba(255,255,255,.2);color:#fff">⬜ M3·M4</span></div>
+      <div class="goal">★ <span class="em">컨택 복기 메신저방 운영</span></div>
+      <div class="wg"><b>게이트</b> · 재컨택·상담 생산 시작 + 6주 테스트 준비</div></div>
+    <div class="wbody"><ol class="ms">
+      <li><span>블로그·인스타·키워드 지속</span></li>
+      <li><span>교육일정표(기타교육)</span></li>
+      <li><span>컨택 녹취 → 스크립트</span></li>
+      <li><span>개인 학과별 상담자료 주 1개</span></li>
+      <li><span>컨택 롤플레잉 1일 1회 / <b>6주차 테스트 준비</b></span></li>
+      <li class="hi"><span><b>재컨택·상담 생산</b>(일 컨택시도/통화량 = 팀장 재량)</span></li>
+      <li><span>상담 롤플레잉 주 2회</span></li>
+      <li><span>본인 상담자료 1개</span></li>
+    </ol>
+      <div class="lead"><span class="tag">팀장</span>★ 컨택 복기 메신저방 운영 · 6주 테스트 출제·기준 · 통화량 재량.</div>
+    </div>
+  </div>
+
+  <div class="wcard m2">
+    <div class="wh"><div class="wt"><span>W6 · 컨택 테스트</span><span class="badge b-todo" style="background:rgba(255,255,255,.2);color:#fff">⬜ M4·M5</span></div>
+      <div class="goal">★ 합격 → <span class="em">페이스북 문의 배정</span></div>
+      <div class="wg"><b>게이트</b> · 컨택 테스트 합격 → 첫 실전 DB(페북) / 롤플레잉 지속여부 결정</div></div>
+    <div class="wbody"><ol class="ms">
+      <li><span>블로그·인스타·키워드 지속</span></li>
+      <li><span>교육일정표(기타교육)</span></li>
+      <li><span>컨택 녹취 → 스크립트</span></li>
+      <li><span>개인 학과별 상담자료 주 1개</span></li>
+      <li><span>재컨택·상담 생산(통화량 팀장 재량)</span></li>
+      <li><span>상담 롤플레잉 주 2회</span></li>
+      <li><span>본인 상담자료 1개</span></li>
+    </ol>
+      <div class="lead"><span class="tag">팀장</span>컨택 테스트 채점 · <b>합격자 페이스북 문의 배정</b> · 롤플레잉 지속여부 결정.</div>
+    </div>
+  </div>
+
+  <div class="wcard m2">
+    <div class="wh"><div class="wt"><span>W7 · 200만 + 컨테스트</span><span class="badge b-todo" style="background:rgba(255,255,255,.2);color:#fff">⬜ M5·M6</span></div>
+      <div class="goal">★ <span class="em">최소기준 200만!</span> + 교육과정 발표 컨테스트 실시</div>
+      <div class="wg"><b>게이트</b> · 순매출 200만 달성 + 컨테스트 실시</div></div>
+    <div class="wbody"><ol class="ms">
+      <li><span>블로그·키워드 지속</span></li>
+      <li><span>교육일정표(기타교육)</span></li>
+      <li><span>컨택 녹취 → 스크립트</span></li>
+      <li><span>개인 학과별 상담자료 주 1개</span></li>
+      <li><span>재컨택·상담 생산(통화량 팀장 재량)</span></li>
+      <li><span>상담 롤플레잉 주 2회</span></li>
+      <li class="hi"><span><b>본인 상담자료 1개 → 컨테스트 출품</b></span></li>
+    </ol>
+      <div class="lead"><span class="tag">팀장</span>200만 달성 코칭(데이터 근거) · 컨테스트 채점·운영.</div>
+    </div>
+  </div>
+
+  <div class="wcard m2">
+    <div class="wh"><div class="wt"><span>W8 · 경력전환</span><span class="badge b-todo" style="background:rgba(255,255,255,.2);color:#fff">⬜ M6</span></div>
+      <div class="goal">★ <span class="em">컨테스트 완료 / 경력전환 준비 완료!</span></div>
+      <div class="wg"><b>게이트</b> · 컨테스트 완료 + 경력전환 판정(200만+CBT + 미션 달성률 + 컨테스트)</div></div>
+    <div class="wbody"><ol class="ms">
+      <li><span>블로그·인스타·키워드 지속</span></li>
+      <li><span>교육일정표(기타교육)</span></li>
+      <li><span>컨택 녹취 → 스크립트</span></li>
+      <li><span>개인 학과별 상담자료 주 1개</span></li>
+      <li><span>재컨택·상담 생산(통화량 팀장 재량)</span></li>
+      <li><span>상담 롤플레잉 주 2회</span></li>
+      <li><span>본인 상담자료 1개</span></li>
+    </ol>
+      <div class="lead"><span class="tag">팀장</span>경력전환 판정 · 컨테스트 시상 · 전환 후 업무 흐름 안내.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 롤플레잉 cadence -->
+<h2 class="sec">롤플레잉 cadence (07 핵심 요소)</h2>
+<table class="rp">
+  <thead><tr><th style="width:180px">종류</th><th>W3</th><th>W4</th><th>W5</th><th>W6</th><th>W7~8</th></tr></thead>
+  <tbody>
+    <tr><td>컨택 롤플레잉</td><td class="em">1일 2회</td><td>1일 1회</td><td>1일 1회</td><td>테스트로 지속여부 결정</td><td>—</td></tr>
+    <tr><td>상담 롤플레잉</td><td>—</td><td class="em">주 2회</td><td>주 2회</td><td>주 2회</td><td>주 2회</td></tr>
+  </tbody>
+</table>
+<div class="note">매 롤플레잉 = 녹취 정리 + 본인 컨택/상담 분석(복기). W5부터 ★ 컨택 복기 메신저방 운영.</div>
+
+<!-- DB 배정 -->
+<h2 class="sec">DB 배정 정책</h2>
+<div class="dbbox">
+  <b>입문 진입점</b> = W6 컨택 테스트 합격 → <b>페이스북 문의 배정</b>(첫 실전 DB).
+  <div class="flow">컨택 테스트 합격(W6) <span class="arr">→</span> 페이스북 문의 <span class="arr">→</span> 200만 달성(W7) + 미션 달성률 <span class="arr">→</span> 공식 → 대표 → 내사 (구매욕구·성공확률순 상승)</div>
+  <div class="note" style="margin:8px 0 0">DB는 소화 능력이 전제 · 통화량(일 컨택 시도) = 팀장 재량(강제 아님) · 상세 = M2 §1-5</div>
+</div>
+
+<!-- 컨테스트 -->
+<h2 class="sec">신인 컨테스트 (상담자료 누적 → W7 실시 → W8 완료)</h2>
+<div class="contest">
+  <h3>🏆 교육과정 발표 컨테스트</h3>
+  <div class="flow">
+    <span class="step">상담자료 매주 누적(W2~)</span><span class="arr">→</span>
+    <span class="step">교육과정 1개 선별</span><span class="arr">→</span>
+    <span class="step">발표 / 브리핑(W7 실시)</span><span class="arr">→</span>
+    <span class="step">점수화</span><span class="arr">→</span>
+    <span class="step" style="background:rgba(246,171,0,.25);border-color:var(--gold)">완료·시상(W8)</span>
+  </div>
+  <ul>
+    <li><b>재료</b> · 본인 상담자료 매주 1개 + 학과별 주 1개(W3~)가 출품작으로 누적</li>
+    <li><b>점수화(초안)</b> · 과정 이해도 · 상담자료 완성도 · 발표/브리핑 전달력 · 3관(관심·관계) 반영 · 설득력</li>
+    <li><b>활용</b> · 경력전환 판정 근거 + 동기부여(시상) / 선별 풀 = 인트라넷 과정교육 영상 5개(컴자격·아트웍·편집·웹·모션)</li>
+  </ul>
+</div>
+
+<!-- 영상 카탈로그 -->
+<h2 class="sec">인트라넷 교육 영상 카탈로그 — ★ 유익 큐레이션 (총 18개 · 4분류)</h2>
+<div class="note">출처: 신인사원교육.xlsx · <b>JY 유익 큐레이션(2026-06-06)</b> — 전체 44개 중 <b>미운영·중복·비핵심 26개 제외</b>, 꼭 필요한 <b>18개</b>만 시청 · <b>영상교육 1일 1개 시청 + 정리</b>(핵심 3줄 + 상담 포인트 1) · W1~W4 ≈ 18영업일에 완결</div>
+<div class="vgrid">
+  <div class="vcat"><div class="vh"><span class="vn">마케팅</span><span class="vc">2</span></div>
+    <ul><li>마케팅 교육(블로그 마케팅) <span class="who">· 배국환 팀장 · ▶10,911</span></li><li>🎯 사업부 전체업무 흐름(마케팅→DB→컨택→상담→매출→학생관리)+바이럴 <span class="who">· 이상용 부장 · <b>W1 필견</b></span></li></ul></div>
+  <div class="vcat core"><div class="vh"><span class="vn">★ 컨택/상담</span><span class="vc">5</span></div>
+    <ul><li>컨택1 기본+구DB <span class="who">· 김승현 부장</span></li><li>컨택2 어려운문의·대표전화 <span class="who">· 김바울 원장</span></li><li>상담1 기본+수강료·할인율 <span class="who">· 김태원 부장</span></li><li>상담2 어려운상담·COD <span class="who">· 이형주 부장</span></li><li>입시문의 대응 <span class="who">· 경규민 부장</span></li></ul></div>
+  <div class="vcat core"><div class="vh"><span class="vn">★ 학생관리</span><span class="vc">5</span></div>
+    <ul><li>학생관리 추가등록·친추+클레임 <span class="who">· 강경묵 부장</span></li><li>상담클로징/환불예방 <span class="who">· 김태원 부장</span></li><li>부가수당 따즈아·ACP·광고자 <span class="who">· 이진현 부장</span></li><li>따즈아 판매 필요성·상담방법·스피치 <span class="who">· 김두이 부장</span></li><li>따즈아 판매 전략·실전 스피치 <span class="who">· 서명규 팀장</span></li></ul></div>
+  <div class="vcat core"><div class="vh"><span class="vn">★ 과정교육 (1~5)</span><span class="vc">6</span></div>
+    <ul><li>①컴퓨터자격증 <span class="who">· 이민국 부원장</span></li><li>②아트웍&드로잉 <span class="who">· 이은상 학과장</span></li><li>③편집디자인 <span class="who">· 이준호 부원장</span></li><li>④웹디자인 <span class="who">· 김태완 강사</span></li><li>⑤모션그래픽 <span class="who">· 최찬선 부원장</span></li><li>정규과정 중요성·확대(등록 당위성·명분) <span class="who">· 원유창 부장</span></li></ul></div>
+</div>
+<div class="vplan">
+  <b>시청 순서 (권장 · 1일 1개 · W1~W4 18개 완결)</b>
+  <ol>
+    <li><b>W1 D1</b> — 사업부 전체업무 흐름(<b>필견</b> · 오리엔테이션)</li>
+    <li><b>W1</b> — 마케팅(블로그 마케팅) + 과정교육 1~5 (블로그 글쓰기와 병행) · 6개</li>
+    <li><b>W2</b> — ★ 컨택1·2 + 상담1·2 + 입시문의 (컨택/상담 본격) · 5개</li>
+    <li><b>W3</b> — ★ 학생관리(추가등록·친추 / 상담클로징·환불예방 / 부가수당) + 따즈아 판매 2 · 5개</li>
+    <li><b>W4</b> — 정규과정 중요성·확대 + 미시청 보충·복습 · 1개+α</li>
+  </ol>
+  <div class="note" style="margin:6px 0 0">1일 1개 × W1~W4 = <b>18개 전부 소화</b>. <b>미운영(메타버스·그래픽툴·프로그래밍/IT)·중복(DB·정규과정·입시문의 사본)·비핵심 26개는 시청 목록에서 제외</b> — 필요 시 교육일정표(라이브)/개별 참고.</div>
+</div>
+
+<footer>
+  <b>SSOT 체계</b> · 주차·일일 미션 정본 = <b>_research/07</b>(JY 직접 작성) · 표준 일일 루틴 = <b>_research/05</b>(이현정 실측) · 철학·원안 = <b>_research/06</b>(팀장교육) · 일자 전개 = <b>00_미션그리드_골격.md</b> · 설계 SSOT = <b>00_마스터_설계도.md</b>(M0)<br>
+  <b>원칙</b> · 권장 가이드형(위촉직 컴플라이언스, 금지어 0건) · 통화량=팀장 재량 · 신인용/팀장용 2트랙(본 문서는 통합 뷰) · 마인드셋=별도 원장님 프로세스<br>
+  <span class="note" style="margin:6px 0 0">2026-06-05 · 신인사원 8주 양성 (07_신인양성) · ★ 사업부 채용</span>
+</footer>
+
+</div>
+</body>
+</html>

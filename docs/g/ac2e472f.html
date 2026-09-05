@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIPOT_1급_대비책</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--paper:#F0F8FF;--white:#FFFFFF;--ink:#0B1220;--ink-2:#2C3444;--line:#C3CAD8;
+ --brand-ink:#1642C4;--brand-soft:#E8EFFF;
+ --font:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI','Malgun Gothic',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);
+ font-size:19px;font-weight:400;line-height:1.8;word-break:keep-all}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 64px}
+header{background:var(--white);border-bottom:2px solid var(--ink);padding:32px 0 24px;margin-bottom:32px}
+header .wrap{padding-bottom:0}
+h1{font-size:clamp(28px,6vw,36px);font-weight:800;letter-spacing:-.01em;line-height:1.3;margin:0}
+h2{font-size:26px;font-weight:800;letter-spacing:-.01em;line-height:1.35;margin:40px 0 10px}
+h3{font-size:21px;font-weight:700;margin:28px 0 8px;color:var(--brand-ink)}
+h4,h5,h6{font-size:19px;font-weight:700;margin:22px 0 6px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:24px}
+li{margin:6px 0}
+table{width:100%;border-collapse:collapse;background:var(--white);margin:16px 0;font-size:17px}
+th{background:var(--brand-soft);color:var(--ink);font-weight:700;text-align:left;padding:10px 12px;border:1px solid var(--line)}
+td{padding:10px 12px;border:1px solid var(--line);vertical-align:top}
+blockquote{margin:16px 0;padding:14px 18px;background:var(--brand-soft);border-radius:8px;color:var(--ink-2)}
+blockquote p:last-child{margin:0}
+pre{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow-x:auto;font-size:16px}
+code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:16px}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+a{color:var(--brand-ink)}
+.src{margin-top:32px;padding-top:14px;border-top:2px solid var(--ink);font-size:16px;color:var(--ink-2)}
+/* 각주(260829). 본문에는 번호만 두고 근거는 아래로 내린다. 번호도 16px 아래로 내리지 않는다. */
+sup.fnref{font-size:16px;font-weight:700;line-height:1;vertical-align:super;margin-left:2px}
+sup.fnref a{display:inline-block;min-width:22px;text-align:center;padding:0 4px;border-radius:6px;
+ background:var(--brand-soft);color:var(--brand-ink);text-decoration:none}
+sup.fnref a:hover{background:var(--brand-ink);color:#fff}
+.fns{margin-top:40px;padding-top:8px;border-top:2px solid var(--ink)}
+.fns h2{font-size:21px;font-weight:800;margin:18px 0 12px}
+.fns ol{list-style:none;margin:0;padding:0;counter-reset:fn}
+.fns li{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:17px;line-height:1.7}
+.fns li:first-child{border-top:0}
+.fns li:target{background:var(--brand-soft);border-radius:8px;padding-left:12px;padding-right:12px}
+.fns .n{flex:0 0 auto;min-width:26px;font-weight:800;color:var(--brand-ink);font-variant-numeric:tabular-nums}
+.fns .t{flex:1;min-width:0;color:var(--ink-2)}
+.fns .back{display:inline-block;min-height:44px;line-height:44px;margin-left:8px;font-size:16px;
+ font-weight:700;color:var(--brand-ink);text-decoration:none;white-space:nowrap}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>AIPOT_1급_대비책</h1></div></header>
+<div class="wrap"><p>#에이아이팟 #AI자격증 #프롬프트엔지니어링자격증 #시험대비 #한국생산성본부</p>
+<p>AIPOT 1급(생성형 AI프롬프트 엔지니어링) 취득 대비책. A형·B형 공식 샘플문제와 사용가이드 v09 분석 기준. 작성일 2026-06-30.</p>
+<h3>시험 구조 (샘플 기준)</h3>
+<p>40문항, 60분. A형·B형 동형 구조이며 블록별 배치가 동일하다.</p>
+<ul>
+<li>1~23번: 객관식 4지선다 + 일부 단답. 인공지능·생성형 AI 이론.</li>
+<li>24~30번: 단답형([단답]). 용어·기법명을 정확한 표기로 적는다.</li>
+<li>31~35번: 도구 실습 매칭/빈칸. A형은 SORA(영상), B형은 ComfyUI(이미지) 사용.</li>
+<li>36~40번: 서술형. 실제 프롬프트를 작성해 제출. 배점·변별력 최상.</li>
+</ul>
+<p>득점 전략: 1~30번은 개념 암기로 확보, 36~40번 서술형은 패턴 공식으로 만점을 노린다. 31~35번은 도구별 노드·메뉴 명칭 암기가 관건.</p>
+<h3>시험 운영 규칙 (가이드 v09, 반드시 숙지)</h3>
+<ul>
+<li>단일 턴(Single turn). 한 번의 프롬프트로 결과를 내야 하며 대화 이어가기로 보정 불가.</li>
+<li>파일 첨부 가능 형식은 txt, jpg, png 세 가지뿐.</li>
+<li>입력 글자수 제한: 영문 약 3,000자, 한글 약 1,024자.</li>
+<li>서술형 답안 분량 권장 10~15줄.</li>
+<li>코드·결과는 지정된 구분기호(따옴표, 백틱, 꺾쇠 등) 형식을 그대로 지켜 출력하도록 지시해야 함.</li>
+</ul>
+<h3>출제 영역별 핵심 (빈출 순)</h3>
+<p>인공지능 이론</p>
+<ul>
+<li>머신러닝·딥러닝·지도학습 위계와 정의 구분.</li>
+<li>혼동행렬(Confusion Matrix): 정확도·정밀도·재현율·F1 계산. F1 = 2 × (정밀도 × 재현율) / (정밀도 + 재현율).</li>
+<li>경사하강법·역전파·학습률·활성화함수의 역할 구분.</li>
+<li>과적합(Overfitting)·과소적합(Underfitting)·결측치(Missing Value) 개념.</li>
+<li>가지치기(Pruning), K-Fold 교차검증, 시그모이드 함수.</li>
+<li>프레임워크: TensorFlow(텐서·그래프·세션), PyTorch(Pythonic), XGBoost, Spark MLlib.</li>
+</ul>
+<p>생성형 AI 이론</p>
+<ul>
+<li>트랜스포머·어텐션(2017, 자연어처리 기반), GAN(생성자 대 판별자), VAE.</li>
+<li>GPT·BERT, 사전학습(Pre-trained)과 파인튜닝(Fine-tuning) 차이.</li>
+<li>LLM·파운데이션 모델, 멀티모달, AI에이전트, 온디바이스 AI, AGI.</li>
+<li>LangChain, RAG(검색증강생성)의 구성·동작 원리.</li>
+<li>에이전트 구성요소: 입력·LLM·도구(API·DB)·루프(Loop)·출력.</li>
+</ul>
+<p>프롬프트 엔지니어링 기법(단답·서술 모두 빈출)</p>
+<ul>
+<li>Zero-shot / Few-shot Learning, Fine-tuning 구분.</li>
+<li>CoT(Chain of Thought), Zero-shot CoT("Let's think step by step").</li>
+<li>Self-refine(자기개선), Complexity-based, Generated-knowledge 프롬프팅.</li>
+<li>구분기호 용도: 큰따옴표·작은따옴표·백틱(```)·꺾쇠(&lt;&gt;)·달러($$)·중괄호({}).</li>
+<li>마크다운 출력 지시: 굵게(**), 헤더(##), 표, 목록.</li>
+<li>디코딩 파라미터: Beam Width, Top-p, Temperature.</li>
+</ul>
+<p>도구 활용</p>
+<ul>
+<li>ChatGPT for Excel: AI.TABLE, AI.EXTRACT, AI.CHOICE, AI.TRANSLATE 기능 구분.</li>
+<li>ChatGPT for PowerPoint: Create from Text / Topic / YouTube / File 구분.</li>
+<li>데이터 분석: EDA(탐색적 데이터분석), PCA(주성분분석), CSV 통계 해석.</li>
+<li>SORA(A형): txt2vid·img2vid·vid2vid, Re-cut·Remix·Blend·Loop, 해상도(1080p FHD / 720p HD / 480p SD), 화면비 계산.</li>
+<li>ComfyUI(B형): Empty Latent Image(Width·Height), KSampler(Steps·cfg·Seed), VAE 노드 명칭.</li>
+</ul>
+<p>윤리·리스크</p>
+<ul>
+<li>4대 원칙: 공정성(Fairness)·투명성(Transparency)·책임성(Accountability)·안전성(Safety).</li>
+<li>환각(Hallucination), 편향(Bias), 저작권, 딥페이크, 워터마크(Watermark).</li>
+</ul>
+<h3>서술형(36~40) 답안 공식</h3>
+<p>이 블록은 패턴이 고정되어 있다. 샘플 5유형을 그대로 익히면 응용 가능하다.</p>
+<p>이미지 분석 후 영문 프롬프트 작성형(A형 37번)</p>
+<p>업로드 이미지를 묘사하는 영문 한 문장. 필수 요소를 빠짐없이 나열한다. 예시 구조: "Create a black and white, 1:1 square ratio image of [주체] [행동], with [부속 요소], and [배경 요소]." 색상·화면비·주요 사물·배경을 모두 포함해야 감점이 없다.</p>
+<p>JSON 출력 지시형(A형 39번)</p>
+<p>첨부 txt를 읽어 조건을 모두 만족하는 JSON을 출력하라고 명시. 필수 지시 사항: key 구성 고정, 숫자형은 쉼표 없이, 문자열 처리 항목 구분, 정보 없는 항목은 반드시 null로 출력. "텍스트 기반으로 모든 조건을 충족하는 JSON만 출력"을 못 박는다.</p>
+<p>이미지 키워드 추출형(A형 40번)</p>
+<p>응답 포맷을 그대로 제시하고 빈칸만 채우게 한다. "영어 : {1}, {2}, {3}" / "한글 : {1}, {2}, {3}" 형식 유지.</p>
+<p>텍스트 핵심정보 추출형(B형 39번)</p>
+<p>첨부 txt에서 고유명사·수치를 지정 형식으로 추출. 숫자 단위·연도를 누락 없이.</p>
+<p>표·다항목 구조화형(B형 40번, A형 38번)</p>
+<p>여러 항목을 ### 헤더 + - <strong>속성</strong>: 값 구조나 정렬된 목록으로 출력하도록 지시. 정렬 기준(오름차순 등)을 명시.</p>
+<h3>학습 우선순위</h3>
+<p>1순위(득점 직결): 서술형 5패턴 공식 + 구분기호·마크다운 출력 규칙 + JSON/null 처리.</p>
+<p>2순위(개념 확보): 프롬프트 기법명 정확한 표기, 혼동행렬 계산, 트랜스포머·RAG·파인튜닝.</p>
+<p>3순위(도구 암기): 응시 회차 도구(SORA 또는 ComfyUI) 노드·메뉴 명칭, Excel/PPT 함수 구분.</p>
+<p>4순위(마무리): 윤리 4원칙, 환각·워터마크 등 리스크 용어.</p>
+<h3>권장 일정 (집중 학습 시)</h3>
+<ul>
+<li>1~2일차: A형·B형 샘플 40문항씩 정답 가린 채 풀고 오답 정리.</li>
+<li>3일차: 서술형 36~40번 5패턴을 직접 손으로 3회 이상 재작성.</li>
+<li>4일차: 응시 도구(SORA/ComfyUI) 실습 또는 노드 명칭 암기, Excel·PPT 함수 정리.</li>
+<li>5일차: 단답 용어 50개 플래시카드 암기, 윤리·리스크 마무리.</li>
+<li>직전: 시험 운영 규칙(단일 턴·글자수·파일형식) 재확인, 샘플 재풀이로 시간 배분 점검.</li>
+</ul><p class="src">원본: 01_안내용자료/AIPOT_1급_대비책.md · 볼트 문서를 폰에서 읽도록 옮긴 것입니다.</p></div>
+</body>
+</html>

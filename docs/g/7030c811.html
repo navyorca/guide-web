@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIX강남 모듈개편 암기카드</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nb-navy:#005192; --nb-navy-d:#003D72; --nb-blue:#0085CD; --nb-gold:#F6AB00; --nb-gold-d:#D4920A; --nb-gold-t:#B47F08;
+  --nb-text:#3D3D3D; --nb-muted:#888888; --nb-line:#E8E8E8; --nb-bg:#FFFFFF; --nb-bg-soft:#F7F8FA;
+  --r-md:8px; --r-lg:12px; --pill:6px; --sh:0 4px 20px rgba(0,81,146,.08);
+  --s-found:#005192;  --s-found-s:#E4EEF7;
+  --s-media:#8E7CC3;  --s-media-s:#EDE7F7;
+  --s-web:#4FB06A;    --s-web-s:#E4F4E8;
+  --s-graphic:#D4920A;--s-graphic-s:#FBF0D6;
+  --s-space:#DB6E93;  --s-space-s:#FBE4EC;
+  --s-virtual:#2AA4E8;--s-virtual-s:#E1F1FB;
+  --warn:#C0392B; --warn-s:#FBEAE8;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--nb-bg-soft); color:var(--nb-text);
+  font-family:"Pretendard","Pretendard Variable","Noto Sans KR",-apple-system,BlinkMacSystemFont,sans-serif;
+  line-height:1.8; letter-spacing:-.01em; font-size:clamp(19px,1.4vw,21px);
+}
+.num{font-family:"Inter",sans-serif; font-weight:700;}
+.wrap{max-width:1180px; margin:0 auto; padding:0 20px 70px;}
+b,strong{font-weight:700;}
+header.hero{
+  background:#FFFFFF;
+  color:#0B1220; padding:36px 20px 30px; margin-bottom:22px; border-bottom:2px solid #0B1220;
+}
+.hero-in{max-width:1180px; margin:0 auto;}
+.kicker{display:inline-block; font-size:16px; font-weight:800; letter-spacing:.04em;
+  background:#E8EFFF; color:#1642C4; padding:6px 13px; border-radius:6px; margin-bottom:14px;}
+header.hero h1{margin:0 0 10px; font-size:clamp(21px,3vw,27px); font-weight:900; letter-spacing:-.02em;}
+header.hero p{margin:0; font-size:18px; color:#2C3444; max-width:800px;}
+header.hero .cutoff{margin-top:14px; display:inline-block; background:#E8EFFF; border:1px solid #C3CAD8;
+  border-radius:var(--r-md); padding:8px 14px; font-size:16px; font-weight:700;}
+
+.card-box{background:var(--nb-bg); border:1px solid var(--nb-line); border-radius:var(--r-lg); box-shadow:var(--sh); padding:22px 24px; margin-bottom:18px;}
+.sec-title{display:flex; align-items:center; gap:10px; margin:0 0 12px;}
+.sec-title .dot{width:28px; height:28px; border-radius:9px; background:#1642C4; color:#fff; font-weight:900;
+  display:flex; align-items:center; justify-content:center; font-size:16px; flex:none;}
+.sec-title h2{margin:0; font-size:16.5px; font-weight:900; color:var(--nb-navy-d); letter-spacing:-.01em;}
+
+.method{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:4px;}
+.method .m{border:1px solid var(--nb-line); border-radius:var(--r-md); padding:14px 15px; background:var(--nb-bg-soft);}
+.method .m .mt{font-weight:800; color:var(--nb-navy-d); font-size:16px; margin-bottom:4px;}
+.method .m .md{font-size:16px; color:var(--nb-text);}
+
+.skeleton{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:6px;}
+.skel-zone{display:flex; flex-direction:column; align-items:center; gap:8px;}
+.skel-label{font-size:16px; font-weight:800; color:var(--nb-muted); letter-spacing:.06em;}
+.skel-chips{display:flex; gap:7px; flex-wrap:wrap; justify-content:center; max-width:420px;}
+.chip{border-radius:var(--pill); padding:7px 13px; font-size:16px; font-weight:800; color:#fff; white-space:nowrap;}
+.skel-arrow{font-size:20px; color:var(--nb-blue); font-weight:800; flex:none;}
+.proj-chip{background:#E8EFFF; border:1px solid #C3CAD8; color:#1642C4; border-radius:var(--pill); padding:7px 13px; font-size:16px; font-weight:800;}
+.skel-note{width:100%; font-size:16px; color:var(--nb-muted); margin-top:8px;}
+.skel-note b{color:var(--nb-navy-d);}
+
+.point{background:var(--s-found-s); border:1px solid rgba(0,81,146,.18); border-radius:var(--r-md); padding:12px 14px; margin-top:10px; font-size:16px; color:var(--nb-navy-d);}
+
+.toolbar{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+.f-btn{appearance:none; border:1px solid var(--nb-line); background:#fff; color:var(--nb-text);
+  font-family:inherit; font-weight:700; font-size:16px; padding:7px 13px; border-radius:var(--pill); cursor:pointer; transition:.12s;}
+.f-btn:hover{border-color:var(--nb-blue);}
+.f-btn.active{background:var(--nb-navy-d); color:#fff; border-color:var(--nb-navy-d);}
+.f-btn.warn-btn{margin-left:auto; color:var(--warn); border-color:rgba(192,57,43,.4);}
+.f-btn.warn-btn.active{background:var(--warn); color:#fff; border-color:var(--warn);}
+.progress{font-size:16px; color:var(--nb-muted); font-weight:700; margin-bottom:14px;}
+.progress .num{color:var(--nb-navy-d);}
+.progress .kn{color:#3d8b56;}
+.progress .cf{color:var(--warn);}
+
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px;}
+.flashcard{perspective:1200px; height:200px; cursor:pointer;}
+.flashcard.hidden{display:none;}
+.fc-inner{position:relative; width:100%; height:100%; transition:transform .45s; transform-style:preserve-3d;}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg);}
+.fc-face{position:absolute; inset:0; backface-visibility:hidden; border-radius:var(--r-md); border:1px solid var(--nb-line);
+  box-shadow:var(--sh); padding:14px 15px; display:flex; flex-direction:column;}
+.fc-front{background:#fff;}
+.fc-back{transform:rotateY(180deg); background:var(--nb-bg-soft);}
+.fc-studio-bar{height:5px; border-radius:3px; margin:-14px -15px 10px; }
+.fc-name{font-size:16px; font-weight:900; color:var(--nb-navy-d); line-height:1.3;}
+.fc-sub{font-size:16px; font-weight:700; color:var(--nb-muted); margin-top:2px;}
+.fc-hours{display:inline-block; margin-top:9px; font-size:16px; font-weight:800; color:#fff;
+  background:#1642C4; padding:3px 10px; border-radius:6px; align-self:flex-start;}
+.fc-hint{margin-top:auto; font-size:16px; color:var(--nb-muted); font-weight:600;}
+.fc-old{font-size:16px; font-weight:800; color:var(--nb-muted); letter-spacing:.02em;}
+.fc-old span{color:var(--nb-navy-d);}
+.fc-outcome{font-size:16px; color:var(--nb-text); margin-top:7px; line-height:1.45; flex:1;}
+.fc-price{font-size:16px; font-weight:800; color:#1642C4; margin-top:7px;}
+.fc-price .warn-tag{display:inline-block; background:var(--warn-s); color:var(--warn); font-size:16px; font-weight:800; padding:1px 7px; border-radius:var(--pill); margin-left:5px;}
+.fc-note{font-size:16px; color:var(--warn); margin-top:4px; font-weight:700;}
+.fc-marks{display:flex; gap:6px; margin-top:8px;}
+.mk-btn{flex:1; border:1px solid var(--nb-line); background:#fff; border-radius:8px; padding:6px 4px; font-size:16px; font-weight:800; cursor:pointer; font-family:inherit;}
+.mk-btn.know{color:#3d8b56;} .mk-btn.know.on{background:#3d8b56; color:#fff; border-color:#3d8b56;}
+.mk-btn.confused{color:var(--warn);} .mk-btn.confused.on{background:var(--warn); color:#fff; border-color:var(--warn);}
+.status-dot{position:absolute; top:10px; right:10px; width:9px; height:9px; border-radius:50%; background:var(--nb-line);}
+.status-dot.know{background:#3d8b56;} .status-dot.confused{background:var(--warn);}
+
+.confirm-box{border:1.5px solid rgba(192,57,43,.4); background:var(--warn-s); border-radius:var(--r-lg); padding:20px 22px; margin-bottom:18px;}
+.confirm-box h2{color:var(--warn);}
+.confirm-box .dot{background:#B3261E;}
+.confirm-list{margin:0; padding-left:18px; font-size:16px; color:var(--nb-text);}
+.confirm-list li{margin-bottom:8px;}
+.confirm-list b{color:var(--warn);}
+.confirm-foot{font-size:16px; font-weight:800; color:var(--warn); margin-top:10px;}
+
+.ops{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:10px; margin-top:4px;}
+.ops li{font-size:16px; margin-bottom:6px; line-height:1.5;}
+
+footer{text-align:center; color:var(--nb-muted); font-size:16px; margin-top:24px; font-weight:600;}
+@media (max-width:640px){
+  .skeleton{justify-content:center;}
+  .toolbar{gap:6px;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <span class="kicker">개인 암기용 · 정본 기반</span>
+    <h1>AIX강남 모듈개편 암기카드</h1>
+    <p>구과목 → 신과목 매핑·시수·수강료를 낱개로 외우지 않고, 구조에 걸어서 능동회상으로 익히는 자가학습 도구입니다.</p>
+    <span class="cutoff">적용 시점: <span class="num">9월</span> 개강분부터 신과목명 사용 · <span class="num">8월</span> 이전 개강분은 기존 과목명 유지</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="card-box">
+    <div class="sec-title"><div class="dot">1</div><h2>외우는 방법 (이 카드의 설계 원리)</h2></div>
+    <div class="method">
+      <div class="m"><div class="mt">① 구조 압축 (청킹)</div><div class="md">19개 과목을 따로 외우지 말고 "파운데이션 4 · 스튜디오 5 · 프로젝트 2" 뼈대 하나만 먼저 고정합니다. 각 과목은 그 뼈대에 매달린 가지로 기억됩니다.</div></div>
+      <div class="m"><div class="mt">② 능동회상 (플래시카드)</div><div class="md">아래 카드를 먼저 안 보고 신과목명만 보고 구과목·가격을 맞혀본 뒤 클릭해서 확인합니다. 다시 읽기보다 스스로 떠올리는 쪽이 오래 남습니다.</div></div>
+      <div class="m"><div class="mt">③ 헷갈림만 반복</div><div class="md">맞힌 카드는 "안다"로 표시해 넘기고, "헷갈림"만 필터로 모아 반복합니다. 표시는 이 브라우저에 저장되어 다음에 열어도 유지됩니다.</div></div>
+      <div class="m"><div class="mt">④ 실전 연결</div><div class="md">상담 중 실제로 안내하면서 쓰는 게 가장 강한 반복입니다. 카드 뒷면의 "결과물" 문구는 상담 소구 표현 그대로입니다.</div></div>
+    </div>
+  </div>
+
+  <div class="card-box">
+    <div class="sec-title"><div class="dot">2</div><h2>전체 뼈대 (숫자로 고정: 4 → 5 → 2)</h2></div>
+    <div class="skeleton">
+      <div class="skel-zone">
+        <div class="skel-label">파운데이션 4</div>
+        <div class="skel-chips"><span class="chip" style="background:var(--s-found)">AI 코어</span><span class="chip" style="background:var(--s-found)">디자인</span><span class="chip" style="background:var(--s-found)">포토</span><span class="chip" style="background:var(--s-found)">일러</span></div>
+      </div>
+      <div class="skel-arrow">→</div>
+      <div class="skel-zone">
+        <div class="skel-label">스튜디오 5 (결과물 키워드)</div>
+        <div class="skel-chips">
+          <span class="chip" style="background:var(--s-media)">미디어 · 영상</span>
+          <span class="chip" style="background:var(--s-web)">인터랙티브 · 웹</span>
+          <span class="chip" style="background:var(--s-graphic)">그래픽 · 시각편집</span>
+          <span class="chip" style="background:var(--s-space)">스페이스 · 인테리어</span>
+          <span class="chip" style="background:var(--s-virtual)">버추얼 · CG(준비중)</span>
+        </div>
+      </div>
+      <div class="skel-arrow">→</div>
+      <div class="skel-zone">
+        <div class="skel-label">프로젝트 2</div>
+        <div class="skel-chips"><span class="proj-chip">AI Digital Art&Drawing</span><span class="proj-chip">웹툰&AI어시스트</span></div>
+      </div>
+      <div class="skel-note">기존 드로잉·웹툰 수업은 개별 포폴 수업으로 프로젝트에 직행. 인터랙티브 프로젝트반은 <b>60H · 정원 6~10명</b>. 전 과정 선수과목 없음, 예외 1건: <b>스페이스 ④ 공간VR시각화는 ② 3D모델링&렌더링 필수 선이수</b>.</div>
+    </div>
+    <div class="point"><b>왜 이름이 바뀌었나 (이해가 곧 암기입니다):</b> 과정명은 프로그램명이 아니라 결과물 중심으로 바뀌었습니다. "포토샵 수업"이 아니라 "무엇을 완성하는 수업인지"가 과정명이 되었습니다. 그래서 구과목명(도구)과 신과목명(결과물)을 짝으로 기억하면 됩니다.</div>
+  </div>
+
+  <div class="card-box">
+    <div class="sec-title"><div class="dot">3</div><h2>플래시카드 (클릭해서 뒤집기)</h2></div>
+    <div class="toolbar">
+      <button class="f-btn active" data-filter="all">전체</button>
+      <button class="f-btn" data-filter="found">파운데이션</button>
+      <button class="f-btn" data-filter="media">미디어</button>
+      <button class="f-btn" data-filter="web">인터랙티브</button>
+      <button class="f-btn" data-filter="graphic">그래픽</button>
+      <button class="f-btn" data-filter="space">스페이스</button>
+      <button class="f-btn" data-filter="virtual">버추얼</button>
+      <button class="f-btn warn-btn" id="confusedToggle">헷갈리는 것만</button>
+      <button class="f-btn" id="resetBtn">기록 초기화</button>
+    </div>
+    <div class="progress" id="progress"></div>
+    <div class="grid" id="cardGrid"></div>
+  </div>
+
+  <div class="confirm-box">
+    <div class="sec-title"><div class="dot">!</div><h2>확인 필요 (상담·견적에 확답 금지)</h2></div>
+    <ul class="confirm-list">
+      <li><b>AIX 3D 모델링&렌더링 총액 불일치:</b> 통합로드맵 V1(260728)은 90H·3개월·총 180만, 수강료_안내 260727 확정분은 1~3단계 각 24H·각 50만(총 72H·150만). 시수·총액 모두 다릅니다.</li>
+      <li><b>유튜브 올인원클래스 총액:</b> V1 문서는 32H·2개월·총 100만, 260725 구두 전언은 50만. 최신 문서(V1) 금액을 우선하되 확정 전 견적 발행은 금지입니다.</li>
+      <li><b>AIX 디자인 파운데이션(16H) 수강료:</b> V1 수강료 탭에 미등재라 260822에 구과목 가격 정본으로 <b>16H·50만원</b>을 채웠습니다(발상과표현·색채학이 각각 16H·50만원이고 편성이 같습니다). 32H 두 과목을 16H로 합친 개편이라 승계인지 재산정인지는 확정받아야 합니다.</li>
+      <li><b>바탕화면 파일 안내:</b> 오늘 참조하신 "AIX강남_모듈개편_통합_설명자료_260721.html"은 정본(260728 V1)보다 앞선 중간 초안으로 확인됩니다. 수강료 탭에 BIM·공간VR시각화 가격이 아예 빠져 있고, 디지털출판실무 시수도 문서 안에서 32H(전체 로드맵 탭)와 30H(수강료 탭)로 서로 다릅니다. 이 카드와 상담에는 정본(99_시스템\02_학과지식\AIX_모듈개편_정본.md) 수치만 사용하시길 권합니다.</li>
+    </ul>
+    <div class="confirm-foot">v0.1 기획단계 문서 기반. 확정 공지 전까지 팀장 확인 후 사용.</div>
+  </div>
+
+  <div class="card-box">
+    <div class="sec-title"><div class="dot">4</div><h2>자주 헷갈리는 운영 조건</h2></div>
+    <ul class="ops">
+      <li><b>AIX 프라이빗 마케팅 / 디지털 출판 실무:</b> 격일반(2H×16일) 또는 금요반(4H×8일) 중 선택</li>
+      <li><b>AIX 패키지&굿즈 / 브랜딩 디자인:</b> Day1~2 공통 이론 → Day3~5 분반(미경험/선수강) → Day6~16 합류 실무</li>
+      <li><b>AIX 피그마:</b> 정원 15~20명 · <b>AIX 바이브코딩:</b> 정원 12명, 오류 1:1 소수정예 · <b>AIX 에이전트 업무자동화:</b> 정원 12명, 플립러닝</li>
+      <li><b>스페이스 전공 4과목:</b> 전부 해당 소프트웨어 미경험자 기준 재설계, 종료 시 Live Brief로 납품 수준 결과물 완성</li>
+      <li><b>인터랙티브 공통 운영비율:</b> 개념 20% · 시연 10% · 실습 50% · 피드백 20%</li>
+      <li><b>주말반:</b> 260729 원장 공지, 9월 개강분부터 전 주말반 10시 시작 통일(예외 없음). 주말 AIX는 6주 과정 운영 예정</li>
+    </ul>
+  </div>
+
+  <footer>SBS Academy · 오영선 개인 암기용 도구 · 데이터 출처: 99_시스템\02_학과지식\AIX_모듈개편_정본.md (260728 V1 기준) · 생성 260804</footer>
+</div>
+
+<script>
+const COURSES = [
+  {id:'found-core', studio:'found', name:'AIX 코어 파운데이션', sub:'FOUNDATION', hours:'개발중', oldName:'AI프롬프트 엔지니어링 1·2', outcome:'커리큘럼 개발 전까지 기존 AI프롬프트 엔지니어링 수업으로 대체 운영', price:'미정(개발중)'},
+  {id:'found-design', studio:'found', name:'AIX 디자인 파운데이션', sub:'16H · 2H×8D', hours:'16H', oldName:'발상과 표현 + 색채학', outcome:'비주얼아이디어·컬러디자인·기초 핸드드로잉', price:'50만원(승계 추정)', priceWarn:'V1 수강료 탭 미등재. 260822 구과목 가격 정본에서 채운 값(발상과표현·색채학 각 16H 50만, 시간당 31,250원은 프라이빗 마케팅 클래스와 동일). 32H 두 과목을 16H로 합친 개편이라 재산정 가능, 견적 전 확인'},
+  {id:'found-photo', studio:'found', name:'AIX 포토', sub:'24H · 3H×8D', hours:'24H', oldName:'포토샵 + 포토웍스', outcome:'포토샵 기반 이미지 편집·합성·보정 툴 기초', price:'월 50만 × 1개월 = 50만원'},
+  {id:'found-illust', studio:'found', name:'AIX 일러', sub:'24H · 3H×8D', hours:'24H', oldName:'일러스트 + 디테일 일러스트', outcome:'일러스트 기반 벡터 그래픽·아트웍 툴 기초', price:'월 50만 × 1개월 = 50만원'},
+
+  {id:'media-marketing', studio:'media', name:'AIX 마케팅영상', sub:'24H · 3H×8D', hours:'24H', oldName:'마케팅영상 방특', outcome:'웹용 AI 영상 콘텐츠 + 브랜드 광고·캠페인 기획(촬영장비 없이 AI로 제작)', price:'월 50만 × 1개월 = 50만원'},
+  {id:'media-youtube', studio:'media', name:'유튜브 올인원클래스', sub:'32H · 2H×8D×2M', hours:'32H', oldName:'유크리 기초·심화 + 컨텐츠크리에이터', outcome:'숏폼 콘텐츠 + 유튜브 채널 기획·운영(스마트폰 촬영·CapCut)', price:'월 50만 × 2개월 = 100만원', priceWarn:'260725 구두 전언 50만과 상이, V1 문서 우선'},
+  {id:'media-edit', studio:'media', name:'실전 영상편집 클래스', sub:'24H · 3H×8D', hours:'24H', oldName:'프리미어 + 애프터이펙트 기초', outcome:'브이로그·인터뷰·정보·홍보 등 콘텐츠 유형별 완성 영상', price:'월 50만 × 1개월 = 50만원'},
+  {id:'media-motion', studio:'media', name:'2D 모션 디자인 클래스', sub:'48H · 3H×8D×2M', hours:'48H', oldName:'에펙 + 모션에펙', outcome:'로고 애니메이션·브랜드 모션 + 모션그래픽 예제', price:'월 50만 × 2개월 = 100만원'},
+
+  {id:'web-figma', studio:'web', name:'AIX 피그마', sub:'90H · 3H×10D×3M', hours:'90H', oldName:'Figma Studio(8주)+Masterclass(4주)', outcome:'디자인 시스템+핵심 화면+클릭 프로토타입(Figma MCP로 코드화 가능)', price:'월 50만 × 3개월 = 150만원'},
+  {id:'web-vibe', studio:'web', name:'AIX 바이브코딩', sub:'90H · 3H×10D×3M', hours:'90H', oldName:'AI 바이브코딩 웹(16H)', outcome:'로그인·CRUD 작동하는 실제 배포 URL 서비스 + README + 발표', price:'월 60만 × 3개월 = 180만원'},
+  {id:'web-agent', studio:'web', name:'AIX 에이전트 업무자동화', sub:'48H · 2H×8D×3M', hours:'48H', oldName:'클로드코드 기초 8일 + 심화 8일', outcome:'내 업무에 실제로 도는 자동화 시스템 1식', price:'월 60만 × 3개월 = 180만원'},
+  {id:'web-ecommerce', studio:'web', name:'AIX 이커머스 창업', sub:'24H · 신설', hours:'24H', oldName:'신설 과정', outcome:'운영 중인 스토어 + 수강 기간 내 첫 매출 경험', price:'월 60만 × 1개월 = 60만원'},
+
+  {id:'graphic-marketing', studio:'graphic', name:'AIX 프라이빗 마케팅 클래스', sub:'32H · 2H×8D×2M', hours:'32H', oldName:'방과후특강 비주얼디자인', outcome:'SNS 콘텐츠 풀세트 + 브랜드 에셋 풀세트(로고·컬러·폰트·명함·굿즈시안·미니브랜드북)', price:'월 50만 × 2개월 = 100만원'},
+  {id:'graphic-publish', studio:'graphic', name:'AIX 디지털 출판 실무', sub:'32H · 2H×8D×2M', hours:'32H', oldName:'인디자인', outcome:'리플렛·브로슈어·매거진 중 택1(인터랙티브 PDF·전자책 변환 포함)', price:'월 50만 × 2개월 = 100만원'},
+  {id:'graphic-package', studio:'graphic', name:'AIX 패키지 & 굿즈 제작 실무', sub:'48H · 3H×8D×2M', hours:'48H', oldName:'패키지 MD', outcome:'입체 상품 박스(패키지) + 브랜드 굿즈', price:'월 50만 × 2개월 = 100만원'},
+  {id:'graphic-branding', studio:'graphic', name:'AIX 브랜딩 디자인 실무', sub:'48H · 3H×8D×2M', hours:'48H', oldName:'브랜딩', outcome:'BI 로고 + 컬러·서체 가이드 + 브랜드 비주얼 가이드북', price:'월 50만 × 2개월 = 100만원'},
+
+  {id:'space-plan', studio:'space', name:'AIX 공간기획 & 인테리어 설계', sub:'48H · 3H×8D×2M', hours:'48H', oldName:'캐드 1·2 + 스케치/이론·실내건축이론', outcome:'AutoCAD 도면세트(평면·입면·천장)+AI 컨셉이미지 3장+제안 PPT 10장 이상', price:'월 45만 × 2개월 = 90만원'},
+  {id:'space-3d', studio:'space', name:'AIX 3D 모델링 & 렌더링', sub:'90H · 3H×10D×3M', hours:'90H', oldName:'스케치업1·2·포폴+맥스1·2·3+엔스케이프', outcome:'주거(2LDK) 렌더링 3컷 + 소형 상업공간 렌더링 2컷 이상', price:'월 60만 × 3개월 = 180만원', priceWarn:'수강료_안내 260727 확정분은 72H·150만으로 시수·총액 모두 불일치, 견적 전 확인'},
+  {id:'space-bim', studio:'space', name:'BIM 기초 & AIX 활용', sub:'64H · 4H×8D×2M', hours:'64H', oldName:'BIM 레빗 1·2', outcome:'소형 단독주택·상가 BIM 모델+도면세트+수량산출표', price:'월 50만 × 2개월 = 100만원'},
+  {id:'space-vr', studio:'space', name:'AIX 공간VR시각화', sub:'48H · 3H×8D×2M · 선수과목 있음', hours:'48H', oldName:'AI 크리에이터 인테리어', outcome:'VR 워크스루 영상 1건 + Krpano 인터랙티브 웹 VR투어 1건', price:'월 50만 × 2개월 = 100만원', note:'선수과목: ②3D모델링&렌더링 필수 선이수 (전 과정 중 유일한 예외)'},
+
+  {id:'virtual-prep', studio:'virtual', name:'버추얼(CG)', sub:'개편 준비 중', hours:'-', oldName:'(기존 마야 기반 과정)', outcome:'마야 제외, 언리얼·블렌더·스테이블디퓨전 ComfyUI로 결과물 중심 개편 예정', price:'과정명·시수·수강료 전부 미정'}
+];
+
+const STUDIO_META = {
+  found:{label:'파운데이션', color:'var(--s-found)', soft:'var(--s-found-s)'},
+  media:{label:'미디어', color:'var(--s-media)', soft:'var(--s-media-s)'},
+  web:{label:'인터랙티브', color:'var(--s-web)', soft:'var(--s-web-s)'},
+  graphic:{label:'그래픽', color:'var(--s-graphic)', soft:'var(--s-graphic-s)'},
+  space:{label:'스페이스', color:'var(--s-space)', soft:'var(--s-space-s)'},
+  virtual:{label:'버추얼', color:'var(--s-virtual)', soft:'var(--s-virtual-s)'}
+};
+
+const STORE_KEY = 'aixMemoCard_v1';
+let state = {};
+try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e) { state = {}; }
+let currentFilter = 'all';
+let confusedOnly = false;
+
+function saveState(){ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+
+function buildCard(c){
+  const meta = STUDIO_META[c.studio];
+  const el = document.createElement('div');
+  el.className = 'flashcard';
+  el.dataset.studio = c.studio;
+  el.dataset.id = c.id;
+
+  const mark = state[c.id];
+  const priceHtml = c.price
+    ? `<div class="fc-price">${c.price}${c.priceWarn ? '<span class="warn-tag">확인필요</span>' : ''}</div>${c.priceWarn ? `<div class="fc-note">${c.priceWarn}</div>` : ''}`
+    : `<div class="fc-price" style="color:var(--warn)">가격 확인필요${c.priceWarn ? '<span class="warn-tag">확인필요</span>' : ''}</div>${c.priceWarn ? `<div class="fc-note">${c.priceWarn}</div>` : ''}`;
+
+  el.innerHTML = `
+    <div class="fc-inner">
+      <div class="fc-face fc-front">
+        <span class="status-dot ${mark || ''}"></span>
+        <div class="fc-studio-bar" style="background:${meta.color}"></div>
+        <div class="fc-name">${c.name}</div>
+        <div class="fc-sub">${meta.label} · <span class="num">${c.sub}</span></div>
+        <div class="fc-hours">${c.hours}</div>
+        <div class="fc-hint">클릭해서 구과목·가격 확인 →</div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-old">구과목: <span>${c.oldName}</span></div>
+        <div class="fc-outcome">${c.outcome}</div>
+        ${c.note ? `<div class="fc-note">${c.note}</div>` : ''}
+        ${priceHtml}
+        <div class="fc-marks">
+          <button class="mk-btn know ${mark==='know'?'on':''}" data-act="know">안다</button>
+          <button class="mk-btn confused ${mark==='confused'?'on':''}" data-act="confused">헷갈림</button>
+        </div>
+      </div>
+    </div>`;
+
+  el.addEventListener('click', (e) => {
+    if (e.target.closest('.mk-btn')) return;
+    el.classList.toggle('flipped');
+  });
+  el.querySelectorAll('.mk-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const act = btn.dataset.act;
+      state[c.id] = (state[c.id] === act) ? undefined : act;
+      if (!state[c.id]) delete state[c.id];
+      saveState();
+      render();
+    });
+  });
+  return el;
+}
+
+function render(){
+  const grid = document.getElementById('cardGrid');
+  grid.innerHTML = '';
+  let know = 0, confused = 0;
+  COURSES.forEach(c => {
+    if (state[c.id] === 'know') know++;
+    if (state[c.id] === 'confused') confused++;
+    const passStudio = currentFilter === 'all' || c.studio === currentFilter;
+    const passConfused = !confusedOnly || state[c.id] === 'confused';
+    const card = buildCard(c);
+    if (!(passStudio && passConfused)) card.classList.add('hidden');
+    grid.appendChild(card);
+  });
+  const total = COURSES.length;
+  const unmarked = total - know - confused;
+  document.getElementById('progress').innerHTML =
+    `총 <span class="num">${total}</span>장 · <span class="kn num">안다 ${know}</span> · <span class="cf num">헷갈림 ${confused}</span> · 미확인 <span class="num">${unmarked}</span>`;
+}
+
+document.querySelectorAll('.f-btn[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.f-btn[data-filter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    render();
+  });
+});
+document.getElementById('confusedToggle').addEventListener('click', function(){
+  confusedOnly = !confusedOnly;
+  this.classList.toggle('active', confusedOnly);
+  render();
+});
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (!confirm('모든 안다/헷갈림 기록을 초기화할까요?')) return;
+  state = {};
+  saveState();
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

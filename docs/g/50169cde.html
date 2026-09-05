@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>금융권 취업 자격증 가이드</title>
+<style>
+  :root {
+    --blue-900: #0b2545;
+    --blue-700: #13315c;
+    --blue-500: #1d5fb0;
+    --blue-300: #4f8ef7;
+    --blue-100: #e8f1ff;
+    --blue-50: #f4f8ff;
+    --white: #ffffff;
+    --gray-700: #3d4552;
+    --gray-200: #e2e8f0;
+    --accent: #1642C4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", "맑은 고딕", sans-serif;
+    color: var(--gray-700);
+    background: var(--blue-50);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  header.hero {
+    background: linear-gradient(135deg, var(--blue-900), var(--blue-500));
+    color: var(--white);
+    padding: 64px 24px 48px;
+    text-align: center;
+    position: relative;
+  }
+  header.hero h1 {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+  }
+  header.hero p.subtitle {
+    font-size: clamp(19px, 2.5vw, 19px);
+    color: var(--blue-100);
+    font-weight: 400;
+  }
+
+  nav.topnav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(11, 37, 69, 0.97);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+  }
+  nav.topnav .brand {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 16px;
+  }
+  nav.topnav ul {
+    list-style: none;
+    display: flex;
+    gap: 4px;
+  }
+  nav.topnav ul li a {
+    color: var(--blue-100);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: block;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  nav.topnav ul li a:hover {
+    background: var(--blue-500);
+    color: var(--white);
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .hamburger span {
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+  }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  section {
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-title .num {
+    background: var(--blue-500);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius:8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title h2 {
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700;
+    color: var(--blue-900);
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 28px 26px;
+    box-shadow: 0 2px 14px rgba(11, 37, 69, 0.06);
+    border: 1px solid var(--gray-200);
+  }
+  .card + .card { margin-top: 16px; }
+
+  .badge {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius:6px;
+    background: var(--blue-100);
+    color: var(--blue-700);
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  .badge.orange { background: #E8EFFF; color: #1642C4; }
+
+  .highlight {
+    background: var(--blue-100);
+    border-left: 4px solid var(--blue-500);
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 14px 0;
+    font-size: 16px;
+  }
+  strong.point { color: var(--blue-500); font-weight: 700; }
+  strong.warn { color: var(--accent); font-weight: 700; }
+
+  .table-wrap {
+    overflow-x: auto;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 2px 14px rgba(11, 37, 69, 0.06);
+    border: 1px solid var(--gray-200);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 640px;
+    font-size: 16px;
+  }
+  thead th {
+    background: var(--blue-900);
+    color: var(--white);
+    padding: 14px 12px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--gray-200);
+    vertical-align: top;
+  }
+  tbody tr {
+    transition: background 0.2s;
+  }
+  tbody tr:hover {
+    background: var(--blue-50);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+
+  ul.plain-list { list-style: none; padding-left: 0; }
+  ul.plain-list li {
+    padding: 8px 0 8px 20px;
+    position: relative;
+    font-size: 16px;
+  }
+  ul.plain-list li::before {
+    content: "•";
+    color: var(--blue-500);
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+  }
+
+  .roadmap {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .roadmap-step {
+    display: flex;
+    gap: 16px;
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid var(--gray-200);
+    box-shadow: 0 2px 14px rgba(11, 37, 69, 0.06);
+  }
+  .roadmap-step .step-num {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius:8px;
+    background: linear-gradient(135deg, var(--blue-500), var(--blue-300));
+    color: var(--white);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .roadmap-step h3 { color: var(--blue-900); font-size: 16.5px; margin-bottom: 6px; }
+  .roadmap-step p { font-size: 16px; color: var(--ink-2); }
+
+  .btn {
+    display: inline-block;
+    background: var(--blue-500);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn:hover { background: var(--blue-700); transform: translateY(-1px); }
+  .btn.outline {
+    background: var(--white);
+    color: var(--blue-500);
+    border: 1.5px solid var(--blue-500);
+  }
+  .btn.outline:hover { background: var(--blue-100); }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+
+  footer {
+    text-align: center;
+    padding: 30px 20px 50px;
+    color: var(--ink-2);
+    font-size: 16px;
+  }
+
+  @media (max-width: 760px) {
+    nav.topnav ul {
+      position: fixed;
+      top: 56px;
+      left: 0;
+      right: 0;
+      background: var(--blue-900);
+      flex-direction: column;
+      gap: 0;
+      padding: 8px 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    nav.topnav ul.open { max-height: 480px; }
+    nav.topnav ul li a { padding: 14px 24px; border-radius: 0; }
+    .hamburger { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="brand">금융권 자격증 가이드</span>
+  <button class="hamburger" id="menuBtn" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="navMenu">
+    <li><a href="#trend">채용동향</a></li>
+    <li><a href="#compare">비교표</a></li>
+    <li><a href="#detail">자격증상세</a></li>
+    <li><a href="#roadmap">로드맵</a></li>
+    <li><a href="#conclusion">결론</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <h1>금융권 취업 자격증 가이드</h1>
+  <p class="subtitle">2026년 기준 필수 자격증 및 취득 로드맵</p>
+</header>
+
+<main>
+
+  <section id="trend">
+    <div class="section-title"><span class="num">1</span><h2>2026 금융권 채용 동향</h2></div>
+    <div class="card">
+      <p>은행·증권·보험 등 금융권은 디지털 전환과 함께 채용 방식이 <strong class="point">수시·상시 채용 중심</strong>으로 재편되는 추세다. 공채 규모는 예년 대비 축소되었지만, IT·데이터 역량을 겸비한 지원자나 관련 자격증 보유자에 대한 우대는 꾸준히 유지되고 있다.</p>
+      <div class="highlight">
+        서류 전형에서 자격증은 <strong class="point">전공 무관 지원자의 직무 이해도를 증명하는 핵심 수단</strong>으로 작용한다. 특히 금융투자업권(증권사·자산운용사)은 관련 자격증이 사실상 필수 요건으로 요구되는 경우가 많다.
+      </div>
+      <p style="margin-top:12px;">
+        <span class="badge">디지털 금융 인력 수요 증가</span>
+        <span class="badge">전공 무관 채용 확대</span>
+        <span class="badge orange">자격증 보유자 우대</span>
+        <span class="badge">수시채용 비중 확대</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="compare">
+    <div class="section-title"><span class="num">2</span><h2>자격증별 메리트 비교표</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>자격증</th>
+            <th>주관기관</th>
+            <th>난이도</th>
+            <th>취업 연계 직무</th>
+            <th>추천 대상</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>펀드투자권유자문인력</strong></td>
+            <td>금융투자협회</td>
+            <td>★★☆☆☆</td>
+            <td>은행 창구, 증권사 리테일</td>
+            <td>금융권 입문자</td>
+          </tr>
+          <tr>
+            <td><strong>증권투자권유자문인력</strong></td>
+            <td>금융투자협회</td>
+            <td>★★★☆☆</td>
+            <td>증권사 영업·리테일</td>
+            <td>증권사 지망생</td>
+          </tr>
+          <tr>
+            <td><strong>파생상품투자권유자문인력</strong></td>
+            <td>금융투자협회</td>
+            <td>★★★★☆</td>
+            <td>증권사 파생상품 부서</td>
+            <td>증권사 심화 지망생</td>
+          </tr>
+          <tr>
+            <td><strong>투자자산운용사</strong></td>
+            <td>금융투자협회</td>
+            <td>★★★★☆</td>
+            <td>자산운용사, 증권사 운용부서</td>
+            <td>운용·리서치 지망생</td>
+          </tr>
+          <tr>
+            <td><strong>AFPK</strong></td>
+            <td>한국FPSB</td>
+            <td>★★★☆☆</td>
+            <td>은행 PB, 자산관리 부서</td>
+            <td>자산관리(WM) 지망생</td>
+          </tr>
+          <tr>
+            <td><strong>손해사정사</strong></td>
+            <td>금융감독원</td>
+            <td>★★★★★</td>
+            <td>보험사, 손해사정법인</td>
+            <td>보험업권 지망생</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:12px; font-size:16px; color:var(--ink-2);">
+      ※ 난이도는 일반적인 체감 난이도 기준이며, 실제 합격률·시행 일정은 각 주관기관 공고를 통해 확인이 필요하다.
+    </p>
+  </section>
+
+  <section id="detail">
+    <div class="section-title"><span class="num">3</span><h2>자격증 상세 설명</h2></div>
+
+    <div class="card">
+      <span class="badge">입문 필수</span>
+      <h3 style="color:var(--blue-900); margin:8px 0;">펀드투자권유자문인력</h3>
+      <p><strong>특징:</strong> 펀드 상품을 고객에게 권유·판매하기 위해 요구되는 기본 자격. 은행·증권사 리테일 창구 업무의 최소 요건으로 활용된다.</p>
+      <p><strong>메리트:</strong> 상대적으로 <strong class="point">단기간 취득 가능</strong>하며, 은행·증권사 신입 채용 시 보유를 우대하거나 입사 후 취득을 요구하는 경우가 많다.</p>
+      <p><strong>추천 대상:</strong> 금융권 신입 지원 전 기본기를 다지려는 전공 무관 취업준비생.</p>
+    </div>
+
+    <div class="card">
+      <span class="badge orange">증권사 지망</span>
+      <h3 style="color:var(--blue-900); margin:8px 0;">증권투자권유자문인력 · 파생상품투자권유자문인력</h3>
+      <p><strong>특징:</strong> 주식·채권 등 증권 상품, 선물·옵션 등 파생상품에 대한 투자 권유 자격. 증권사 영업·리테일 직무 지원 시 사실상 필수로 요구되는 경우가 많다.</p>
+      <p><strong>메리트:</strong> 증권사 채용 공고의 <strong class="point">자격요건란에 직접 명시</strong>되는 경우가 잦아, 서류 통과율에 실질적으로 영향을 준다.</p>
+      <p><strong>추천 대상:</strong> 증권사 리테일·영업 직무를 목표로 하는 지원자.</p>
+    </div>
+
+    <div class="card">
+      <span class="badge">전문성 강화</span>
+      <h3 style="color:var(--blue-900); margin:8px 0;">투자자산운용사</h3>
+      <p><strong>특징:</strong> 집합투자재산 등을 운용하는 업무에 필요한 자격으로, 세 자격증 중 상대적으로 난이도가 높은 편에 속한다.</p>
+      <p><strong>메리트:</strong> 자산운용사, 증권사 운용·리서치 부서 등 <strong class="point">전문성이 요구되는 직무 지원 시 차별화 요소</strong>가 된다.</p>
+      <p><strong>추천 대상:</strong> 운용·리서치·헤지펀드 등 전문 직무를 목표로 하는 지원자.</p>
+    </div>
+
+    <div class="card">
+      <span class="badge">자산관리(WM)</span>
+      <h3 style="color:var(--blue-900); margin:8px 0;">AFPK (Associate Financial Planner Korea)</h3>
+      <p><strong>특징:</strong> 개인 재무설계 전반(자산관리, 세무, 은퇴설계 등)을 다루는 자격으로, 한국FPSB가 주관한다. 상위 자격으로 CFP가 있다.</p>
+      <p><strong>메리트:</strong> 은행 PB, WM(자산관리) 부서 지원 시 <strong class="point">고객 상담 역량을 증명하는 자격</strong>으로 인정받는다.</p>
+      <p><strong>추천 대상:</strong> 은행 PB, 자산관리사(WM) 직무를 목표로 하는 지원자.</p>
+    </div>
+
+    <div class="card">
+      <span class="badge orange">보험업권 · 고난도</span>
+      <h3 style="color:var(--blue-900); margin:8px 0;">손해사정사</h3>
+      <p><strong>특징:</strong> 보험사고 발생 시 손해액 산정 및 보험금 지급 업무를 수행하는 국가전문자격으로, 금융감독원이 주관한다.</p>
+      <p><strong>메리트:</strong> <strong class="warn">합격까지 상대적으로 장기간이 소요</strong>되나, 취득 시 보험사·손해사정법인 취업뿐 아니라 개업까지 가능한 전문자격이다.</p>
+      <p><strong>추천 대상:</strong> 보험업권에서 전문직으로 장기 커리어를 쌓고자 하는 지원자.</p>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="section-title"><span class="num">4</span><h2>우선순위 추천 로드맵</h2></div>
+    <div class="roadmap">
+      <div class="roadmap-step">
+        <div class="step-num">1</div>
+        <div>
+          <h3>1단계 · 입문 자격 확보</h3>
+          <p>펀드투자권유자문인력 취득으로 금융권 지원 최소 요건을 갖춘다. 전공 무관 지원자는 이 단계부터 시작하는 것을 권장한다.</p>
+        </div>
+      </div>
+      <div class="roadmap-step">
+        <div class="step-num">2</div>
+        <div>
+          <h3>2단계 · 목표 직무별 심화 자격</h3>
+          <p>증권사 지망이라면 증권투자권유자문인력·파생상품투자권유자문인력을, 은행 PB·WM 지망이라면 AFPK를 추가로 취득한다.</p>
+        </div>
+      </div>
+      <div class="roadmap-step">
+        <div class="step-num">3</div>
+        <div>
+          <h3>3단계 · 전문성 차별화</h3>
+          <p>운용·리서치 직무 목표 시 투자자산운용사를, 자산관리 커리어 심화 시 CFP를 다음 목표로 설정한다.</p>
+        </div>
+      </div>
+      <div class="roadmap-step">
+        <div class="step-num">4</div>
+        <div>
+          <h3>4단계 · 장기 전문자격(선택)</h3>
+          <p>보험업권 전문직을 목표로 한다면 손해사정사 등 고난도 국가전문자격을 별도 트랙으로 준비한다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="conclusion">
+    <div class="section-title"><span class="num">5</span><h2>결론 및 추가 팁</h2></div>
+    <div class="card">
+      <p>금융권 취업에서 자격증은 <strong class="point">직무 이해도와 준비 성실성을 보여주는 근거</strong>로 작동한다. 단, 자격증만으로 합격이 보장되지는 않으며, 인턴·대외활동 등 실무 경험과 병행할 때 효과가 극대화된다.</p>
+      <ul class="plain-list" style="margin-top:14px;">
+        <li>지원 직무를 먼저 정하고, 그에 맞는 자격증부터 우선 취득한다.</li>
+        <li>자격증 시행 일정·응시자격은 반드시 각 주관기관(금융투자협회, 한국FPSB, 금융감독원 등) 최신 공고로 확인한다.</li>
+        <li>동일 계열 자격증을 중복 취득하기보다, 목표 직무와 연계된 자격증 1~2개를 심화 학습하는 편이 효율적이다.</li>
+      </ul>
+      <div class="btn-row">
+        <button class="btn" onclick="alert('상담 신청은 담당자에게 문의 바랍니다.')">상담 신청하기</button>
+        <a class="btn outline" href="#trend">맨 위로</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  ※ 본 자료는 일반적으로 알려진 자격 정보를 바탕으로 작성되었으며, 세부 시행일정·응시료·합격기준은 각 주관기관 공고 확인이 필요합니다.
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navMenu = document.getElementById('navMenu');
+  menuBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('open');
+  });
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navMenu.classList.remove('open'));
+  });
+
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  sections.forEach(sec => observer.observe(sec));
+</script>
+
+</body>
+</html>

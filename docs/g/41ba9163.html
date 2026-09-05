@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바이브코딩(모듈 B) 과정 설명: 사업부 설명회</title>
+<style>
+:root{
+  --navy-950:#080f22; --navy-900:#0d1730; --navy-800:#132145; --navy-700:#1c2e5c; --navy-500:#2f4d8a;
+  --accent:#8a9bc4; --accent-deep:#425a8f;
+  --paper:#f4f5f8; --paper-2:#eaedf3; --ink:#12172a; --ink-soft:#525a72; --line:#d8dce6;
+  --amber:#1642C4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Pretendard',-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  background:var(--paper);color:var(--ink);line-height:1.8;font-size:19px;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:980px;margin:0 auto;padding:0 28px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+.hero{
+  background:#FFFFFF;
+  color:var(--ink);padding:96px 0 80px;border-bottom:2px solid var(--navy-900);
+}
+.eyebrow{font-size:16px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;margin-bottom:24px;display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:var(--accent-deep)}
+.hero h1{font-size:clamp(30px,5vw,48px);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:20px}
+.hero .lede{font-size:clamp(17px,1.8vw,19px);color:var(--ink-soft);max-width:640px;margin-bottom:36px}
+.stat-row{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:24px}
+.stat{padding:0 28px 0 0;margin-right:28px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat .num{font-size:26px;font-weight:800;color:var(--navy-900);line-height:1}
+.stat .lbl{font-size:16px;color:var(--ink-soft);margin-top:6px}
+
+section.block{padding:76px 0;border-top:1px solid var(--line)}
+section.block.dark{background:var(--paper-2);color:var(--ink);border-top:2px solid var(--navy-900)}
+.sec-eyebrow{font-size:16px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-deep);font-weight:800;margin-bottom:12px}
+.dark .sec-eyebrow{color:var(--accent-deep)}
+h2.sec-title{font-size:clamp(22px,3.2vw,30px);font-weight:800;letter-spacing:-.015em;color:var(--navy-900);line-height:1.3;margin-bottom:14px}
+.dark h2.sec-title{color:var(--navy-900)}
+.sec-sub{color:var(--ink-soft);font-size:16px;max-width:680px;margin-bottom:36px}
+.dark .sec-sub{color:var(--ink-soft)}
+
+/* 배경 3카드 */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.reason{background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px}
+.reason .rt{font-weight:800;font-size:16px;color:var(--navy-900);margin-bottom:8px}
+.reason .rd{font-size:16px;color:var(--ink-soft);line-height:1.6}
+.callout{background:#FFFFFF;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:22px 26px}
+.callout .tag{font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-deep);font-weight:800;margin-bottom:8px}
+.callout .big{font-size:19px;font-weight:800;line-height:1.5}
+
+/* 비교 테이블 */
+table.tbl{width:100%;border-collapse:collapse;font-size:16px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+table.tbl th{background:var(--navy-900);color:#fff;text-align:left;padding:11px 14px;font-weight:700;font-size:16px}
+table.tbl td{padding:10px 14px;border-top:1px solid var(--line);color:var(--ink-soft)}
+table.tbl tr:nth-child(even) td{background:var(--paper)}
+table.tbl tr.hi td{background:var(--accent-deep);color:#fff;font-weight:700}
+.market-note{margin-top:20px;background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:16px 20px;font-weight:700;color:var(--navy-900);font-size:16px}
+
+/* VS */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.vs-head{font-weight:800;text-align:center;padding:10px;border-radius:6px;font-size:16px}
+.vs-head.a{background:var(--paper-2);color:var(--ink-soft)}
+.vs-head.b{background:var(--navy-900);color:#fff}
+.vs-row{background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px 16px;font-size:16px}
+.vs-row .l{font-size:16px;color:var(--accent-deep);font-weight:700;margin-bottom:4px}
+.vs-row.hi{background:var(--paper-2);color:var(--ink);border:1px solid var(--line);font-weight:700}
+.vs-row.hi .l{color:var(--accent-deep)}
+.vs-conclude{margin-top:18px;text-align:center;font-weight:700;color:var(--amber);font-style:italic;font-size:16px}
+
+/* 3모듈 카드 */
+.mods3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mod3{background:#FFFFFF;border:1px solid var(--line);border-radius:8px;padding:22px}
+.mod3.hi{background:var(--accent-deep);border-color:var(--accent)}
+.mod3 .mh{font-size:16px;color:var(--ink-soft);font-weight:700;letter-spacing:.05em;margin-bottom:6px}
+.mod3.hi .mh{color:#e4e9f5}
+.mod3 .mt{font-size:20px;font-weight:800;color:var(--navy-900);margin-bottom:14px}
+.mod3.hi .mt{color:#FFFFFF}
+.mod3 .hrs{font-size:24px;font-weight:800;color:var(--navy-900)}
+.mod3.hi .hrs{color:#FFFFFF}
+.mod3 .price{font-size:16px;color:var(--ink-soft);margin:4px 0 14px}
+.mod3.hi .price{color:#e4e9f5}
+.mod3 .desc{font-size:16px;color:var(--ink-soft);line-height:1.7;border-top:1px solid var(--line);padding-top:12px}
+.mod3.hi .desc{color:#e4e9f5}
+.mod3 .badge{display:inline-block;margin-top:12px;font-size:16px;font-weight:800;background:var(--accent-deep);color:#FFFFFF;padding:4px 12px;border-radius:6px}
+
+/* 원리 칩 */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.chip{font-size:16px;font-weight:700;padding:7px 14px;border-radius:6px}
+.chip.dark{background:var(--navy-900);color:#fff}
+.chip.arrow{background:#fff;border:1px solid var(--line);color:var(--ink-soft)}
+.principles{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.principle{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px 20px}
+.principle .pt{font-weight:800;color:var(--navy-900);font-size:16px;margin-bottom:6px}
+.principle .pd{font-size:16px;color:var(--ink-soft);line-height:1.6}
+
+/* 타임라인 */
+.timeline{display:flex;justify-content:space-between;margin:36px 0 20px;position:relative}
+.tl-node{flex:1;text-align:center;position:relative}
+.tl-node .circle{width:52px;height:52px;border-radius:8px;background:var(--navy-800);border:2px solid var(--navy-700);color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;position:relative;z-index:2}
+.tl-node.hi .circle{background:var(--accent-deep);border-color:var(--accent)}
+.tl-node::before{content:"";position:absolute;top:26px;left:-50%;width:100%;height:1.5px;background:var(--line);z-index:1}
+.tl-node:first-child::before{display:none}
+.tl-node .tt{font-size:16px;font-weight:700;color:var(--navy-900)}
+.tl-node .tr{font-size:16px;color:var(--ink-soft);margin-top:3px}
+.tl-note{background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:14px 20px;font-size:16px;color:var(--navy-900);font-weight:700}
+
+/* 결과물 */
+.output-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
+.output-list .oi{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 18px;margin-bottom:10px}
+.output-list .oi .ck{width:26px;height:26px;border-radius:8px;background:var(--accent-deep);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0}
+.output-list .oi span.t{font-size:16px;font-weight:700;color:var(--ink)}
+.output-side{background:#FFFFFF;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:26px}
+.output-side .big{font-size:16px;font-weight:700;line-height:1.7;margin-bottom:18px}
+.output-side .divider{border-top:1px solid var(--line);margin:14px 0}
+.output-side .lbl{font-size:16px;color:var(--ink-soft)}
+.output-side .val{font-size:16px;font-weight:800;color:var(--accent-deep);margin-top:3px}
+
+/* 가격 */
+.price-note{margin-top:16px;font-size:16px;color:var(--ink-soft);font-style:italic}
+.op-note{margin-top:16px;background:var(--paper-2);border:1px solid var(--line);border-radius:8px;padding:14px 18px;font-weight:700;color:var(--navy-900);font-size:16px}
+
+/* 로드맵 */
+.roadmap{display:flex;flex-direction:column;gap:0}
+.rm-step{display:flex;gap:18px;padding-bottom:26px;position:relative}
+.rm-step:not(:last-child)::before{content:"";position:absolute;left:20px;top:44px;bottom:0;width:1.5px;background:var(--line)}
+.rm-step .num{width:40px;height:40px;border-radius:8px;background:var(--accent-deep);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:2}
+.rm-step .rt{font-size:16px;font-weight:800;color:var(--navy-900);margin-bottom:4px}
+.rm-step .rd{font-size:16px;color:var(--ink-soft);line-height:1.7}
+
+.cta{background:#FFFFFF;color:var(--ink);border-top:2px solid var(--navy-900);padding:88px 0 60px;text-align:center}
+.cta h2{font-size:clamp(22px,3.6vw,32px);font-weight:800;line-height:1.5;margin-bottom:18px;max-width:820px;margin-left:auto;margin-right:auto}
+.cta p{color:var(--ink-soft);font-size:17px;max-width:600px;margin:0 auto 40px}
+.cta .fnote{font-size:16px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:20px}
+
+@media(max-width:760px){
+  .reasons,.mods3,.principles,.output-grid,.vs{grid-template-columns:1fr}
+  .timeline{flex-direction:column;gap:20px}
+  .tl-node::before{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">SBS아카데미컴퓨터아트 강남 · 사업부 설명회</div>
+    <h1>바이브코딩 (Module B) 과정 설명</h1>
+    <p class="lede">AI 웹과정 개편안 3모듈 中 'Build' 모듈: Claude Code로 본인 서비스를 만들고 실제 URL로 배포한다.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="num">90h</div><div class="lbl">3개월 · 30회차</div></div>
+      <div class="stat"><div class="num">180만</div><div class="lbl">수강료</div></div>
+      <div class="stat"><div class="num">1개</div><div class="lbl">실제 배포 서비스</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- 과정 소개 -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-eyebrow">Overview</div>
+    <h2 class="sec-title reveal">이 과정은 무엇인가</h2>
+    <p class="sec-sub reveal">코딩을 몰라도 Claude Code와 대화하며 실습으로 배우고, 90시간 동안 기획부터 배포까지 직접 완주하는 과정입니다.</p>
+    <div class="callout reveal">
+      <div class="tag">핵심</div>
+      <div class="big">문법을 먼저 배우지 않습니다. 실습하며 필요한 개념을 그때그때 익히고, 마지막엔 본인 서비스 하나를 실제 URL로 완성합니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3모듈 구조 -->
+<section class="block dark">
+  <div class="wrap">
+    <div class="sec-eyebrow">Structure</div>
+    <h2 class="sec-title reveal">3모듈 구조 속 모듈 B의 위치</h2>
+    <p class="sec-sub reveal">선수과목 없는 병렬 형제 모듈: Design → Build → Ship</p>
+    <div class="mods3">
+      <div class="mod3 reveal">
+        <div class="mh">A · DESIGN</div><div class="mt">피그마</div>
+        <div class="hrs">90h</div><div class="price">180만 원</div>
+        <div class="desc">디자인 시스템 + 프로토타입 완성</div>
+      </div>
+      <div class="mod3 hi reveal">
+        <div class="mh">B · BUILD</div><div class="mt">바이브코딩</div>
+        <div class="hrs">90h</div><div class="price">180만 원</div>
+        <div class="desc">본인 서비스를 만들고 실제 URL로 배포</div>
+        <div class="badge">오늘 설명 대상</div>
+      </div>
+      <div class="mod3 reveal">
+        <div class="mh">C · SHIP</div><div class="mt">프로젝트반</div>
+        <div class="hrs">60h</div><div class="price">120만 원</div>
+        <div class="desc">완성한 서비스를 취업 포트폴리오 수준으로 다듬는 모듈</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 학습 원리 -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-eyebrow">Principle</div>
+    <h2 class="sec-title reveal">모듈 B 학습 원리</h2>
+    <p class="sec-sub reveal">선행 문법이 아니라 '만들면서 배우는' 순환 구조</p>
+    <div class="principles" style="grid-template-columns:repeat(3,1fr)">
+      <div class="principle reveal"><div class="pt">선수과목 없음</div><div class="pd">피그마 수강 여부와 무관하게 누구나 바로 시작할 수 있습니다</div></div>
+      <div class="principle reveal"><div class="pt">실습 중심 진행</div><div class="pd">개념 설명은 짧게, 직접 만들어보는 실습과 피드백에 대부분의 시간을 씁니다</div></div>
+      <div class="principle reveal"><div class="pt">범위는 기획부터 배포까지</div><div class="pd">기획·화면 제작·데이터 연동·배포까지 다루고, 마케팅·판매는 다루지 않습니다</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 커리큘럼 타임라인 -->
+<section class="block dark">
+  <div class="wrap">
+    <div class="sec-eyebrow">Curriculum</div>
+    <h2 class="sec-title reveal">모듈 B: 6단계 30회차 흐름</h2>
+    <p class="sec-sub reveal">환경 세팅부터 실제 배포까지, 끊기지 않는 하나의 흐름</p>
+    <div class="timeline reveal">
+      <div class="tl-node"><div class="circle">01</div><div class="tt">도구랑 친해지기</div><div class="tr">1~6회</div></div>
+      <div class="tl-node"><div class="circle">02</div><div class="tt">설계하기</div><div class="tr">7~10회</div></div>
+      <div class="tl-node"><div class="circle">03</div><div class="tt">화면 완성</div><div class="tr">11~18회</div></div>
+      <div class="tl-node hi"><div class="circle">04</div><div class="tt">실제로 작동</div><div class="tr">19~24회</div></div>
+      <div class="tl-node"><div class="circle">05</div><div class="tt">배포·보안</div><div class="tr">25~27회</div></div>
+      <div class="tl-node"><div class="circle">06</div><div class="tt">다듬고 발표</div><div class="tr">28~30회</div></div>
+    </div>
+    <div class="tl-note reveal">19~24회차 핵심 구간 : Supabase를 연결해 저장·조회·수정·삭제(CRUD)가 실제로 작동하는 서비스로 전환</div>
+  </div>
+</section>
+
+<!-- 목표 결과물 -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-eyebrow">Output</div>
+    <h2 class="sec-title reveal">완성되는 결과물</h2>
+    <p class="sec-sub reveal">30회차를 마치면 손에 남는 것</p>
+    <div class="output-list reveal" style="max-width:640px">
+      <div class="oi"><div class="ck">✓</div><span class="t">기획서 · 기능정의서 · CLAUDE.md</span></div>
+      <div class="oi"><div class="ck">✓</div><span class="t">실제 페이지 5개 · 반응형</span></div>
+      <div class="oi"><div class="ck">✓</div><span class="t">Supabase CRUD · 로그인 인증</span></div>
+      <div class="oi"><div class="ck">✓</div><span class="t">GitHub 저장소 · README</span></div>
+      <div class="oi"><div class="ck">✓</div><span class="t">실제 Vercel 배포 URL</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 가격 -->
+<section class="block" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="sec-eyebrow">Pricing</div>
+    <h2 class="sec-title reveal">가격 · 패키지 구조</h2>
+    <p class="sec-sub reveal">3모듈 조합에 따른 상담 제안가</p>
+    <table class="tbl reveal">
+      <tr><th>상품</th><th>정가</th><th>상담 제안가</th><th>설명</th></tr>
+      <tr><td>피그마 단독</td><td>180만</td><td>180만</td><td>디자인 결과물 완성</td></tr>
+      <tr><td>바이브 단독</td><td>180만</td><td>180만</td><td>작동 서비스 완성</td></tr>
+      <tr><td>피그마 + 바이브</td><td>360만</td><td>330~340만</td><td>디자인부터 구현까지 완성</td></tr>
+      <tr class="hi"><td>3모듈 풀패키지</td><td>480만</td><td>430~450만</td><td>취업포폴 고도화 완성</td></tr>
+      <tr><td>프로젝트반 별도</td><td>120만</td><td>120만</td><td>기존 수료생 고도화</td></tr>
+    </table>
+    <div class="price-note reveal">※ 패키지 할인 마진은 BEP 산출 후 최종 확정</div>
+    <div class="op-note reveal">운영 방식: 오프라인 실습 중심 (개념 20%·시연 10%·실습 50%·피드백 20%)</div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="cta">
+  <div class="wrap">
+    <h2>코딩을 몰라도, 실제로 작동하는<br>내 서비스 하나를 완성하는 과정</h2>
+    <p>90시간 동안 기획부터 배포까지: 본인 손으로 완성한 서비스 하나가 남습니다.</p>
+    <div class="fnote">SBS아카데미컴퓨터아트 강남 · 사업부 설명회: 바이브코딩(모듈 B) 과정 설명 자료</div>
+  </div>
+</section>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.1});
+  els.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

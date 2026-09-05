@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIX_모듈개편_정본</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--paper:#F0F8FF;--white:#FFFFFF;--ink:#0B1220;--ink-2:#2C3444;--line:#C3CAD8;
+ --brand-ink:#1642C4;--brand-soft:#E8EFFF;
+ --font:'Pretendard Variable',Pretendard,-apple-system,'Segoe UI','Malgun Gothic',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);
+ font-size:19px;font-weight:400;line-height:1.8;word-break:keep-all}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 64px}
+header{background:var(--white);border-bottom:2px solid var(--ink);padding:32px 0 24px;margin-bottom:32px}
+header .wrap{padding-bottom:0}
+h1{font-size:clamp(28px,6vw,36px);font-weight:800;letter-spacing:-.01em;line-height:1.3;margin:0}
+h2{font-size:26px;font-weight:800;letter-spacing:-.01em;line-height:1.35;margin:40px 0 10px}
+h3{font-size:21px;font-weight:700;margin:28px 0 8px;color:var(--brand-ink)}
+h4,h5,h6{font-size:19px;font-weight:700;margin:22px 0 6px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:24px}
+li{margin:6px 0}
+table{width:100%;border-collapse:collapse;background:var(--white);margin:16px 0;font-size:17px}
+th{background:var(--brand-soft);color:var(--ink);font-weight:700;text-align:left;padding:10px 12px;border:1px solid var(--line)}
+td{padding:10px 12px;border:1px solid var(--line);vertical-align:top}
+blockquote{margin:16px 0;padding:14px 18px;background:var(--brand-soft);border-radius:8px;color:var(--ink-2)}
+blockquote p:last-child{margin:0}
+pre{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow-x:auto;font-size:16px}
+code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:16px}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+a{color:var(--brand-ink)}
+.src{margin-top:32px;padding-top:14px;border-top:2px solid var(--ink);font-size:16px;color:var(--ink-2)}
+/* 각주(260829). 본문에는 번호만 두고 근거는 아래로 내린다. 번호도 16px 아래로 내리지 않는다. */
+sup.fnref{font-size:16px;font-weight:700;line-height:1;vertical-align:super;margin-left:2px}
+sup.fnref a{display:inline-block;min-width:22px;text-align:center;padding:0 4px;border-radius:6px;
+ background:var(--brand-soft);color:var(--brand-ink);text-decoration:none}
+sup.fnref a:hover{background:var(--brand-ink);color:#fff}
+.fns{margin-top:40px;padding-top:8px;border-top:2px solid var(--ink)}
+.fns h2{font-size:21px;font-weight:800;margin:18px 0 12px}
+.fns ol{list-style:none;margin:0;padding:0;counter-reset:fn}
+.fns li{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:17px;line-height:1.7}
+.fns li:first-child{border-top:0}
+.fns li:target{background:var(--brand-soft);border-radius:8px;padding-left:12px;padding-right:12px}
+.fns .n{flex:0 0 auto;min-width:26px;font-weight:800;color:var(--brand-ink);font-variant-numeric:tabular-nums}
+.fns .t{flex:1;min-width:0;color:var(--ink-2)}
+.fns .back{display:inline-block;min-height:44px;line-height:44px;margin-left:8px;font-size:16px;
+ font-weight:700;color:var(--brand-ink);text-decoration:none;white-space:nowrap}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>AIX_모듈개편_정본</h1></div></header>
+<div class="wrap"><p>#AIX #구과목매핑 #시수 #수강료</p>
+<h2>AIX 모듈개편 정본</h2>
+<p>핵심요약</p>
+<ul>
+<li>결론: 9월 개강분부터 스튜디오·모듈 체계로 전환. 과정명은 프로그램명이 아닌 결과물 중심.</li>
+<li>조건: 교육기획팀 문서 표기는 아직 v0.1(기획단계). 확정 공지 전까지 8월 이전 개강분은 기존 과목명·편성 유지.</li>
+<li>출처: <code>99_시스템\02_학과지식\AIX모듈화 과정_통합로드맵_V1(최종).html</code>(260728 수신, 탭 6개: 전체 로드맵·수강료·미디어·그래픽&amp;브랜딩·인터랙티브·스페이스). 이전판 <code>AIX강남_모듈화과정개편_전체로드맵_260720.html</code>·<code>AIX_모듈_수강료_시수_분석_260718.xlsx</code>·<code>AIX강남_모듈개편_통합_설명자료_260721.html</code>(260901 재열람, 탭 구성은 V1과 동일하나 문서 안에서 값이 여러 곳 어긋난다. 아래 "구버전 설명자료와의 값 차이" 절 참조)는 참고 중단. 스튜디오별 커리큘럼·상담자료 링크는 아래 "모듈별 커리큘럼·상담자료 링크" 섹션이 정본.</li>
+<li>다음 행동: 아래 "확인 필요" 3건을 팀장 확인 후 이 문서와 수강료_안내에 반영.</li>
+<li>260729 갱신: 오전 원장 공지(형식은 회의, 실질은 원장 지시) 반영. 주말반 10시 시작 통일·주말 AIX 6주과정·구과목(포토웍스·디테일일러스트) 저녁주말반 10월 폐지는 v0.1 기획문서와 별개로 확정.</li>
+</ul>
+<p>이 문서가 AIX 개편 단일 정본이다. 구 문서 AIX_커리큘럼개편_260715는 스텁으로 전환했다. 조직개편 배경은 AIX_조직개편, 가격 정본은 수강료_안내.</p>
+<h3>전체 구조</h3>
+<p>공통 파운데이션 4종(추천·권장, 필수 아님) → 5개 스튜디오 실무 모듈 → 스튜디오별 프로젝트반.</p>
+<ul>
+<li>전 과정 선수과목 없음. 스페이스 ④ 공간VR시각화도 260811 학과장 설명회 기준 선이수 없이 진입 가능(스케치업 기초 포함)하나, 포트폴리오 활용 목적이면 ② 3D 모델링 &amp; 렌더링 선이수 필수. 단 NAS 홍보소개자료 PDF는 "과목 2 선이수 기준 설계·36H"로 표기되어 상충(아래 확인 필요 4번).</li>
+<li>파운데이션: AIX 코어 파운데이션(개발 중, 개발 전까지 기존 AI프롬프트 엔지니어링으로 대체 운영) / AIX 디자인 파운데이션 16H(2H×8D) / AIX 포토 24H(3H×8D) / AIX 일러 24H(3H×8D).</li>
+<li>버추얼(CG) 스튜디오는 개편 준비 중. 마야 제외, 언리얼·블렌더·스테이블디퓨전 ComfyUI 결과물 중심으로 과정명·커리큘럼 변경 예정.</li>
+<li>프로젝트반: AI Digital Art &amp; Drawing / 웹툰 &amp; AI 어시스트. 기존 드로잉·웹툰 수업은 개별 포폴 수업으로 프로젝트에 직행. 인터랙티브 프로젝트반은 60H·정원 6~10명.</li>
+</ul>
+<h3>모듈별 시수·수강료 (통합로드맵 V1 수강료 탭)</h3>
+<p>총 수강료 = 월 수강료 × 운영개월.</p>
+<table><tr><th>스튜디오</th><th>과정명</th><th>시수</th><th>편성</th><th>개월</th><th>월 수강료</th><th>총 수강료</th></tr>
+<tr><td>파운데이션</td><td>AIX 디자인 파운데이션</td><td>16H</td><td>2H×8D</td><td>1</td><td>50만*</td><td>50만*</td></tr>
+<tr><td>파운데이션</td><td>AIX 포토</td><td>24H</td><td>3H×8D</td><td>1</td><td>50만</td><td>50만</td></tr>
+<tr><td>파운데이션</td><td>AIX 일러</td><td>24H</td><td>3H×8D</td><td>1</td><td>50만</td><td>50만</td></tr>
+<tr><td>미디어</td><td>AIX 마케팅영상</td><td>24H</td><td>3H×8D</td><td>1</td><td>50만</td><td>50만</td></tr>
+<tr><td>미디어</td><td>유튜브 올인원클래스</td><td>32H</td><td>2H×8D×2M</td><td>2</td><td>50만</td><td>100만</td></tr>
+<tr><td>미디어</td><td>실전 영상편집 클래스</td><td>24H</td><td>3H×8D</td><td>1</td><td>50만</td><td>50만</td></tr>
+<tr><td>미디어</td><td>2D 모션 디자인 클래스</td><td>48H</td><td>3H×8D×2M</td><td>2</td><td>50만</td><td>100만</td></tr>
+<tr><td>인터랙티브</td><td>AIX 피그마</td><td>90H</td><td>3H×10D×3M</td><td>3</td><td>50만</td><td>150만</td></tr>
+<tr><td>인터랙티브</td><td>AIX 바이브코딩</td><td>90H</td><td>3H×10D×3M</td><td>3</td><td>60만</td><td>180만</td></tr>
+<tr><td>인터랙티브</td><td>AIX 에이전트 업무자동화</td><td>48H</td><td>2H×8D×3M</td><td>3</td><td>60만</td><td>180만</td></tr>
+<tr><td>인터랙티브</td><td>AIX 이커머스 창업</td><td>24H</td><td>3H×8D</td><td>1</td><td>60만</td><td>60만</td></tr>
+<tr><td>그래픽</td><td>AIX 프라이빗 마케팅 클래스</td><td>32H</td><td>2H×8D×2M</td><td>2</td><td>50만</td><td>100만</td></tr>
+<tr><td>그래픽</td><td>AIX 디지털 출판 실무</td><td>32H</td><td>2H×8D×2M</td><td>2</td><td>50만</td><td>100만</td></tr>
+<tr><td>그래픽</td><td>AIX 패키지 &amp; 굿즈 제작 실무</td><td>48H</td><td>3H×8D×2M</td><td>2</td><td>50만</td><td>100만</td></tr>
+<tr><td>그래픽</td><td>AIX 브랜딩 디자인 실무</td><td>48H</td><td>3H×8D×2M</td><td>2</td><td>50만</td><td>100만</td></tr>
+<tr><td>스페이스</td><td>AIX 공간기획 &amp; 인테리어 설계</td><td>48H</td><td>3H×8D×2M</td><td>2</td><td>45만</td><td>90만</td></tr>
+<tr><td>스페이스</td><td>AIX 3D 모델링 &amp; 렌더링</td><td>90H</td><td>3H×10D×3M</td><td>3</td><td>60만</td><td>180만</td></tr>
+<tr><td>스페이스</td><td>BIM 기초 &amp; AIX 활용</td><td>64H</td><td>4H×8D×2M</td><td>2</td><td>50만</td><td>100만</td></tr>
+<tr><td>스페이스</td><td>AIX 공간VR시각화</td><td>48H</td><td>3H×8D×2M</td><td>2</td><td>50만</td><td>100만</td></tr>
+</table>
+<p>\* AIX 디자인 파운데이션 50만은 V1 수강료 탭에 없는 값을 260822에 다른 자료로 채운 것이다. 근거 세 가지가 같은 금액을 가리킨다. ① 가격 정본 수강료_안내 아트웍 표의 구과목 <code>발상과표현(1,2)/A,B</code>·<code>색채학(1,2)/A,B</code>가 둘 다 격일 2H×8D·16H·500,000원으로, 신설 모듈의 편성(16H·2H×8D)과 완전히 같다. ② 수강료모음202605김범수에디션.XLSX(강남본원 수강료표, 볼트에 없음 · 260904 확인)도 발상과표현·색채학을 각 1개월 500,000원으로 적는다. ③ 16H·50만은 시간당 31,250원으로, V1 표에 이미 들어 있는 AIX 프라이빗 마케팅 클래스(32H·100만)와 단가가 같다. 다만 두 구과목을 하나로 합치면서 시수가 32H에서 16H로 줄어든 개편이므로, 금액 승계인지 재산정인지는 사업부 확정 전까지 단정하지 않는다. 견적 발행 전 팀장 확인 대상이다.</p>
+<p><strong>구버전 설명자료와의 값 차이(260901 전탭 재실측).</strong> 구버전 <code>AIX강남_모듈개편_통합_설명자료_260721.html</code>(260721 14:14 · 219,085바이트)의 6개 탭을 전부 열어 V1(260728 09:15)과 대조한 결과다. 데스크톱과 볼트 <code>99_시스템\04_도구HTML\</code>에 같은 파일이 있고 MD5는 <code>37f50753138483a9ef932b5a947604d5</code>로 동일하다. 상담 중 열릴 수 있으므로 어긋나는 값을 적어 둔다.</p>
+<table><tr><th>과정</th><th>로드맵 V1 (260728, 정본)</th><th>설명자료 (260721, 구버전)</th></tr>
+<tr><td>AIX 디지털 출판 실무</td><td>32H · 2개월 · 월 50만 · 총 100만</td><td>수강료 탭 30H · 1개월 · 총 50만 / 로드맵·시각편집 탭 32H (문서 안에서 어긋난다)</td></tr>
+<tr><td>AIX 3D 모델링 &amp; 렌더링</td><td>90H · 3개월 · 월 60만 · 총 180만</td><td>72H · 3개월 · 월 50만 · 총 150만</td></tr>
+<tr><td>AIX 공간VR시각화</td><td>48H</td><td>로드맵 탭 44H / 스페이스 탭 30H · 1달 (세 값이 전부 다르다)</td></tr>
+<tr><td>AIX 코어 파운데이션</td><td>개발 중, 시수 미정</td><td>스페이스 탭 16H · 1달</td></tr>
+</table>
+<p><strong>구버전 로드맵 탭의 편성 표기는 총시수와 맞지 않는다(260901 발견).</strong> 총 회차를 월당 일수 자리에 적어 넣은 것으로 보인다. 상담에서 이 탭의 <code>H×D×M</code> 표기를 읽어 주면 시수를 두세 배로 잘못 안내하게 된다. 같은 문서의 스튜디오별 상세 탭은 정확하므로 그쪽을 쓴다.</p>
+<table><tr><th>과정</th><th>로드맵 탭 표기</th><th>곱하면</th><th>맞는 편성(V1·상세 탭)</th></tr>
+<tr><td>AIX 피그마</td><td>3H×30D×3M</td><td>270H</td><td>3H×10D×3M = 90H (상세 탭 "3H×월10회×3개월")</td></tr>
+<tr><td>AIX 바이브코딩</td><td>3H×30D×3M</td><td>270H</td><td>3H×10D×3M = 90H (상세 탭 "30회차")</td></tr>
+<tr><td>AIX 에이전트 업무자동화</td><td>2H×24D×3M</td><td>144H</td><td>2H×8D×3M = 48H (상세 탭 "주2회×2H")</td></tr>
+<tr><td>유튜브 올인원클래스</td><td>2H×16D×2M</td><td>64H</td><td>2H×8D×2M = 32H</td></tr>
+<tr><td>AIX 디지털 출판 실무</td><td>2H×16D×2M</td><td>64H</td><td>2H×8D×2M = 32H (상세 탭 "격일 2H×16 또는 금요 4H×8")</td></tr>
+<tr><td>AIX 프라이빗 마케팅 클래스</td><td>3H×8D×2M</td><td>48H</td><td>2H×8D×2M = 32H (상세 탭 "격일 2H×16 또는 금요 4H×8")</td></tr>
+<tr><td>AIX 공간기획 &amp; 인테리어 설계</td><td>3H×16D×2M</td><td>96H</td><td>3H×8D×2M = 48H (스페이스 탭 "48H·2달")</td></tr>
+<tr><td>AIX 3D 모델링 &amp; 렌더링</td><td>3H×24D×3M</td><td>216H</td><td>스페이스 탭 "72H·3달"</td></tr>
+</table>
+<p>구버전 수강료 탭은 16개 과정이고 BIM 기초 &amp; AIX 활용(64H)과 공간VR시각화가 빠져 있다. 스페이스 문의를 구버전 수강료 탭으로 응대하면 4과목 중 2과목을 빠뜨린다. 그 둘을 뺀 나머지 값은 위 표의 3건 말고는 두 판이 같다.</p>
+<p><strong>구버전이 오히려 더 정확하거나 V1에 없는 정보 4가지(260901).</strong> 참고 중단 문서라도 아래는 살려 쓴다.</p>
+<ul>
+<li>과정명이 인트라넷 등록명과 같다. 시각편집 탭은 <code>AIX 포토샵</code>·<code>AIX 일러스트</code>로 쓰는데 이것이 인트라넷 등록명이다. V1과 이 문서 로드맵 탭의 <code>AIX 포토</code>·<code>AIX 일러</code>는 인트라넷에 없는 이름이다.</li>
+<li>AIX 디자인 파운데이션 구성이 세 갈래다. 비주얼아이디어(발상과 표현) · 컬러디자인(색채학) · <strong>기초 핸드드로잉</strong>. 세 번째는 V1에 없다. 시수는 16H·8일×1일 2H이고 문서가 "조정 가능"이라 적었다.</li>
+<li>버추얼(CG) 개편 방향이 <code>마야 제외 · 언리얼 · 블렌더 · 스테이블디퓨전 ComfyUI</code>다. 260901 강의시간표 실측에서 <code>언리얼엔진1/A·2/A</code>가 실제로 열려 있어 이 방향이 실물로 확인됐다.</li>
+<li>패키지 &amp; 굿즈, 브랜딩 디자인의 분반 운영이 상세하다. Day1~2 이론·기획 공통 → Day3~5 미경험자/선수강자 분반 → Day6~16 합류 실무. 브랜딩은 패키지&amp;굿즈 이수자도 선수강자 쪽에 넣는다.</li>
+</ul>
+<h3>구과목 → 신과목 매핑</h3>
+<p>미디어 컨텐츠(영상모션)</p>
+<ul>
+<li>마케팅영상 방특 → AIX 마케팅영상 24H (신설·정규화)</li>
+<li>유크리 기초·심화 + 컨텐츠크리에이터 → 유튜브 올인원클래스 32H (통합·개편)</li>
+<li>프리미어 + 애프터이펙트 기초 → 실전 영상편집 클래스 24H (개편)</li>
+<li>에펙 + 모션에펙 → 2D 모션 디자인 클래스 48H (통합·개편)</li>
+</ul>
+<p>인터랙티브(웹)</p>
+<ul>
+<li>AI UX UI Figma Studio(8주) + Figma Masterclass(4주) → AIX 피그마 90H (통합·재배치)</li>
+<li>AI 바이브코딩 웹(16H) → AIX 바이브코딩 90H (확장·개편)</li>
+<li>클로드코드(에이전트) 기초 8일 + 심화 8일 → AIX 에이전트 업무자동화 48H (흡수·개편)</li>
+<li>신설 → AIX 이커머스 창업 24H</li>
+<li>HTML/CSS/JS·웹1·2·3 → 폐지 아님. 계열 공통 비대면 선택형 보충으로 잔존·재배치</li>
+</ul>
+<p>그래픽 &amp; 브랜딩(시각편집)</p>
+<ul>
+<li>방과후특강 비주얼디자인 → AIX 프라이빗 마케팅 클래스 32H (정규 과정화)</li>
+<li>인디자인 → AIX 디지털 출판 실무 32H (개편)</li>
+<li>패키지 MD → AIX 패키지 &amp; 굿즈 제작 실무 48H (개편)</li>
+<li>브랜딩 → AIX 브랜딩 디자인 실무 48H (개편)</li>
+<li>AIX One-pass 2D 그래픽 마스터 → 폐지</li>
+</ul>
+<p>스페이스(인테리어)</p>
+<ul>
+<li>캐드 1·2 + 스케치/이론·실내건축이론 → AIX 공간기획 &amp; 인테리어 설계 48H (개편·확대)</li>
+<li>스케치업1·2·포폴 + 맥스 1·2·3 + 엔스케이프 → AIX 3D 모델링 &amp; 렌더링 90H (통합·확대)</li>
+<li>BIM 레빗 1·2 → BIM 기초 &amp; AIX 활용 64H (개편)</li>
+<li>AI 크리에이터 인테리어 → AIX 공간VR시각화 48H (개편·확대)</li>
+<li>인테리어 포폴 → 인테리어 프로젝트반</li>
+<li>실내건축 자격증·CAT·전산응용건축/기계제도·라이노·인벤터 → 별도 라인 존치·병행</li>
+</ul>
+<p>공통 파운데이션</p>
+<ul>
+<li>AI프롬프트 엔지니어링 1·2 → AIX 코어 파운데이션 (공통 승격, 커리큘럼 개발 중)</li>
+<li>발상과 표현 + 색채학 → AIX 디자인 파운데이션 16H</li>
+<li>포토샵 + 포토웍스 → AIX 포토 24H</li>
+<li>일러스트 + 디테일 일러스트 → AIX 일러 24H</li>
+</ul>
+<h3>운영 형태·정원 (상담 시 자주 묻는 항목)</h3>
+<ul>
+<li>AIX 프라이빗 마케팅 클래스, AIX 디지털 출판 실무: 격일반(2H×16일) 또는 금요반(4H×8일) 중 선택.</li>
+<li>AIX 패키지 &amp; 굿즈 제작 실무, AIX 브랜딩 디자인 실무: Day1~2 공통 이론·기획 → Day3~5 분반(미경험자/선수강자) → Day6~16 합류 실무. 포토샵·일러스트 미경험자와 선수강자가 같은 반에서 수강 가능.</li>
+<li>AIX 피그마: 정원 15~20명. AIX 바이브코딩: 정원 12명, 오류 1:1 대응 소수정예. AIX 에이전트 업무자동화: 정원 12명, 플립러닝. 인터랙티브 프로젝트반: 정원 6~10명.</li>
+<li>AIX 이커머스 창업: 수강 기간 내 첫 매출을 목표로 하는 실전형.</li>
+<li>스페이스 전공 4과목: 전부 해당 소프트웨어 미경험자 기준으로 재설계. 과목 종료 시 Live Brief로 납품 수준 결과물 완성.</li>
+<li>인터랙티브 공통 운영비율: 개념 20% / 시연 10% / 실습 50% / 피드백·오류해결 20%.</li>
+<li>주말반 시간표: 260729 원장 공지, 9월 개강분부터 전 주말반 10시 시작으로 통일(예외 없음).</li>
+<li>주말 AIX: 260729 원장 공지, 6주 과정으로 운영 예정(대상 모듈 범위 [확인 필요]).</li>
+<li>260824 정정: 실전영상편집은 6주(4H*6주 · 토)에서 /주(토/일 3H*4주)로 되돌아갔다. 6층O의 AIX 포토샵/6주·AIX 일러스트/6주는 그대로라 6주 운영 방침 전체가 철회된 것은 아니다. 아래 "개별 개강분 변경 이력" 260824 블록 참조.</li>
+</ul>
+<h3>스페이스 운영 상세 (260811 학과장 설명회, 정리 정본은 260811_인테리어_모듈개편_설명회_보고서)</h3>
+<ul>
+<li>모듈 2(3D 모델링 &amp; 렌더링)는 A·B 트랙 구분: A=SketchUp 심화+V-Ray+Enscape+D5, B=A 렌더러 전부+3ds Max·Max V-Ray. 시수 동일 각 90H(설명회 발언). 요일 A/B 패턴 표기와 무관.</li>
+<li>전 모듈 격일반만 운영(매일반 없음)·1회 3H·기수제(중간 투입 불가, 경험자도 처음부터). 9월부터 저녁반 한정 시작(모듈 1부터). 진행 중 단과 기수는 종강까지 기존 체제 유지(8월 캐드1 저녁 진입 시 9월 캐드2 개설 보장, 이후 10월 모듈 진입).</li>
+<li>실내건축 자격증(기능사·산업기사·기사 공통) 대비반 선수 = 모듈 1 + 모듈 2A(Max 불요).</li>
+<li>전 모듈 수료 후 포폴반 배정(모듈 3·4는 직군별 선택). 포폴반만 비대면 불가, 나머지는 비대면·녹화본 운영.</li>
+<li>구독: 챗GPT·미드저니 필수(모듈 3 제외), 감마·캔바 무료판만, D5 무료, Krpano 소액 가능.</li>
+<li>AI 자동 도면(도면 생성·스케치업 연동) 수업 신설 예정(원장 협의 완료, 시기 [확인 필요]).</li>
+<li>시수 상충은 아래 확인 필요 4번 참조. 학과장 확인 전 시수 확정 안내 금지.</li>
+</ul>
+<h3>모듈별 완성 결과물 (상담 소구 문구)</h3>
+<ul>
+<li>AIX 마케팅영상: 웹용 AI 영상 콘텐츠 + 브랜드 광고 영상·캠페인 기획 (촬영 장비 없이 AI 툴만으로 제작)</li>
+<li>유튜브 올인원클래스: 숏폼 콘텐츠 + 유튜브 채널 기획·운영 계획 (스마트폰 촬영·CapCut)</li>
+<li>실전 영상편집 클래스: 브이로그·인터뷰·정보·홍보 등 콘텐츠 유형별 완성 영상</li>
+<li>2D 모션 디자인 클래스: 로고 애니메이션·브랜드 모션 + 모션그래픽 예제</li>
+<li>AIX 피그마: 디자인 시스템 + 핵심 화면 + 클릭 프로토타입 (Figma MCP로 코드화 가능 상태 마감)</li>
+<li>AIX 바이브코딩: 로그인·CRUD가 작동하는 실제 배포 URL 서비스 + README + 발표</li>
+<li>AIX 에이전트 업무자동화: 내 업무에 실제로 도는 자동화 시스템 1식</li>
+<li>AIX 이커머스 창업: 운영 중인 스토어 + 수강 기간 내 첫 매출 경험</li>
+<li>AIX 프라이빗 마케팅 클래스: SNS 콘텐츠 풀세트 + 브랜드 에셋 풀세트(로고·컬러·폰트·명함·굿즈 시안·미니 브랜드북)</li>
+<li>AIX 디지털 출판 실무: 리플렛·브로슈어·매거진 중 택1 편집출판물 (인터랙티브 PDF·전자책 변환 포함)</li>
+<li>AIX 패키지 &amp; 굿즈 제작 실무: 입체 상품 박스(패키지) + 브랜드 굿즈</li>
+<li>AIX 브랜딩 디자인 실무: BI 로고 + 컬러·서체 가이드 + 브랜드 비주얼 가이드북</li>
+<li>AIX 공간기획 &amp; 인테리어 설계: AutoCAD 도면세트(평면·입면·천장) + AI 컨셉 이미지 3장 + 제안 PPT 10장 이상</li>
+<li>AIX 3D 모델링 &amp; 렌더링: 주거(2LDK) 렌더링 3컷 + 소형 상업 공간 렌더링 2컷 이상</li>
+<li>BIM 기초 &amp; AIX 활용: 소형 단독주택·상가 BIM 모델 + 도면세트 + 수량 산출표</li>
+<li>AIX 공간VR시각화: VR 워크스루 영상 1건 + Krpano 인터랙티브 웹 VR 투어 1건</li>
+</ul>
+<h3>모듈별 커리큘럼·상담자료 링크 (260728 수신)</h3>
+<p>성격이 두 갈래다. 앞 두 곳은 멘토·강사용 커리큘럼 원본 배포 허브(다운로드 비밀번호 필요), 뒤 세 건은 학생 대면 상담용 자료다. 수강생에게는 상담용 자료만 전달한다.</p>
+<ul>
+<li>그래픽 &amp; 브랜딩 스튜디오 커리큘럼 다운로드 센터: https://aix-module-guide.ddonddo.chatgpt.site/ → 모듈 6종(01 AI 맞춤 브랜딩 프라이빗 클래스 / 02 AIX 포토샵 / 03 AIX 일러스트 / 04 AIX 디지털 출판 실무 / 05 AIX 패키지 &amp; 굿즈 제작 실무 / 06 AIX 브랜딩 디자인 실무). 원본 PPT 슬라이드 열람 + 파일 다운로드. 수신 링크는 개별 페이지 <code>/module/02</code>(AIX 포토샵)였고 루트가 전체 인덱스다.</li>
+<li>미디어 콘텐츠 스튜디오 커리큘럼 라이브러리: https://effulgent-macaron-05d5a6.netlify.app/ → 모듈 4종(01 AIX 마케팅영상 / 02 유튜브 올인원 클래스 / 03 실전 영상편집 클래스 / 04 2D 모션 디자인 클래스). 미리보기는 비밀번호 없이 공개, 다운로드만 비밀번호 필요(비밀번호 [확인 필요]).</li>
+<li>AI 피그마 스튜디오 상담용 랜딩(260820 갱신, 이 URL이 현행): https://charming-daifuku-34debc.netlify.app/ → 학생 대면 소구 페이지. 커리큘럼·결과물·워크플로우·추천 대상 12유형 전체 수록. 구 링크 https://silver-froyo-714a3b.netlify.app/ 는 참고 중단. 강사가 함께 배포한 수강생 포트폴리오 URL 12~20건은 NAS 업로드분이라 경로 [확인 필요].</li>
+<li>건축·인테리어(스페이스) 자료: NAS <code>\\192.168.201.202\1-Education\[학과별 커리큘럼 자료]\AIX 모듈\</code> 내 ★Studio4 홍보소개자료 PDF 5종(과목1 공간기획 / 과목2A SketchUp트랙 / 과목2B SketchUp+3dsMax트랙 / 과목3 BIM / 과목4 공간VR)이 정본(260811 접근 확인). 상세 커리큘럼 HTML·설명회 녹화영상도 같은 NAS. 구 링크(claude.ai artifact, 열람 불가)는 참고 중단. 운영 상세는 아래 "스페이스 운영 상세" 절과 260811_인테리어_모듈개편_설명회_보고서 참조.</li>
+<li>AIX 바이브코딩 상담자료: <code>01_안내용자료\바이브코딩_상담자료_강남.html</code>(260728 데스크톱 원본을 볼트로 복사, 이 경로가 정본). 단일 HTML이라 무설치로 열린다.</li>
+<li>AIX강남 모듈 개편 사업부 설명자료(통합본, 260721 작성분): <code>99_시스템\04_도구HTML\AIX강남_모듈개편_통합_설명자료_260721.html</code>(260901 데스크톱 원본을 볼트로 다시 복사해 MD5 일치 확인, 이 경로가 정본). 탭 6개(전체 로드맵 / 수강료 / 미디어 컨텐츠 / 그래픽 &amp; 브랜딩 / 인터랙티브 / 스페이스) 구성, 단일 HTML이라 무설치로 열린다. 사업부 설명용이며 학생 대면 배포물이 아니다.</li>
+</ul>
+<p>자료에서 확인된 보강 내용</p>
+<ul>
+<li>AIX 바이브코딩: 90H·30회차(3H 회차, 월 10회 기준 약 3개월)로 위 표와 일치. 결과물 6종 = 기획서·기능정의서·CLAUDE.md / 실제 페이지 5개 + 반응형 / Supabase CRUD + 로그인 인증 / Vercel 배포 URL / GitHub 저장소·README / 엔드투엔드 결과물. 사용 도구 = Claude Code·Cursor·GitHub·Vercel·Supabase(피그마 병행 시 Figma MCP). 진입 조건 = 코딩 무경험 가능, 피그마 미수강자는 학원 제공 템플릿으로 시작. 운영비율 개념 20 / 시연 10 / 실습 50 / 피드백 20으로 인터랙티브 공통과 동일. 수강료는 자료에 미기재.</li>
+<li>AIX 피그마(260820 랜딩 전면 확인분으로 갱신): 90시간·<strong>12주</strong>·4단계(이론 → 피그마 실습 → 생성 AI 활용 → 프로젝트 실습)·실전 프로젝트 9개. 종전 기재 "13주"는 구 랜딩 기준이므로 폐기하고 12주를 쓴다. 위 표 "3H×10D×3M(30회)"와 회차 기준 정합.</li>
+<li>Month 1 기초: 1주 UX/UI+Figma 기초(펜 툴·Iconify·Magician, 실습=이케아 앱 페인포인트 분석+커스텀 아이콘 셋) / 2주 타이포그래피(텍스트 스타일·로컬 변수·MagiCopy) / 3주 컬러(WCAG 2.2·Color Variables·Contrast AI, 실습=시맨틱 컬러 시스템) / 4주 그리드·레이아웃(오토 레이아웃·Breakpoints·Figma AI First Draft)</li>
+<li>Month 2 실무: 5주 Wireframe·기획·IA(사이트맵·FigJam·Relume AI) / 6주 Music App 제작(고급 오토레이아웃·LottieFile) / 7주 배너·홍보영상(AIDA 모델·숏폼 스토리보드·생성형 에셋) / 8주 IKEA 반응형 랜딩페이지(Hi-Fi 프로토타입·12/4 컬럼 그리드)</li>
+<li>Month 3 프로젝트: 9주 모바일 앱 개인화 서비스(Properties/Variants·수평 스크롤) / 10주 커머스 상세페이지·배너 UI(Sticky CTA·리뷰 필터·Relume AI·Stitch) / 11주 디자인 시스템 구축(Semantic Color·중첩 오토레이아웃·변수 프로토타입) / 12주 반응형 엔터테인먼트 웹사이트(Variable Modes·기기별 Breakpoints·Figma MCP·바이브 코딩 → 실제 URL 배포)</li>
+<li>결과물 8종 = 랜딩페이지·반응형 웹사이트·모바일 앱·대시보드·디자인 시스템·Hi-Fi 프로토타입·마이크로 인터랙션·UX/UI 포트폴리오. 실무 워크플로우 10단계 = Research → UX → Wireframe → UI → Component → Variables → Prototype → AI → Design System → Developer Handoff</li>
+<li>추천 대상 12유형 = 학생·취업준비생 / 현업 UX·UI 디자이너 / 웹디자이너 / GUI 디자이너 / 프로덕트 디자이너 / 프리랜서 디자이너 / 퍼블리셔 / 기획자·서비스 기획자 / PM / 스타트업 대표 / 디자인 팀장 / 마케팅 디자이너</li>
+<li>상담 운영 지침(260820 강사 교육): 커리큘럼보다 결과물을 먼저 보여주고 역으로 상담한다. 1·2는 이론+피그마 툴 기본까지, 3은 변수·IA·기획이 들어가는 고급이며 1·2 없이는 3의 AI 활용이 성립하지 않는다. UX/UI 포트폴리오는 90시간 밖의 별도 프로그램(최소 3~4개월). 전문은 260820_AI피그마_과정개편교육_보고서.</li>
+<li>UX/UI 포폴 수업 운영 결론(피그마 랜딩 기재): 포폴 수업은 기존 그대로(기획 → 설계 → 프로토타입) 유지하고, 완성 결과물을 바이브코딩으로 반응형 웹으로 구현해 GitHub Pages 또는 Vercel·Netlify로 실제 URL 배포한다. 학생 최종 제출물 평가 기준이 그 URL이다. 위 "프로젝트반" 항목에 미반영이므로 확정 여부 [확인 필요].</li>
+</ul>
+<h3>인트라넷 등록명 대조 (강의시간표 실측 260901)</h3>
+<p>원천 두 가지다. 개설 여부·요일은 강의시간표(<code>sv_time_list</code>) 2026-07~12 6개 차수 평일반·주말반 전량 실측(과목 280종), 수강료는 수강정보 수집본 260830(632행) 실측이다.</p>
+<p><strong>로드맵 V1 과정명은 인트라넷 등록명과 다르다.</strong> 상담 문안은 V1 과정명, 조회·배정·견적은 등록명을 쓴다. 단위 만원.</p>
+<table><tr><th>로드맵 V1 과정명</th><th>인트라넷 등록명</th><th>요일</th><th>수강료</th></tr>
+<tr><td>AIX 디자인 파운데이션</td><td>미개설 [확인 필요] · 260729 이력의 <code>Design Core Foundation1/A</code>도 6개 차수 전부 없다</td><td>-</td><td>-</td></tr>
+<tr><td>AIX 포토</td><td>AIX 포토샵/A · /B · /6주</td><td>월수 · 화목 · 토</td><td>50</td></tr>
+<tr><td>AIX 일러</td><td>AIX 일러스트/A · /B · /6주</td><td>월수 · 화목 · 토</td><td>50</td></tr>
+<tr><td>AIX 마케팅영상</td><td>AIX 마케팅영상/B · /6주 · AI마케팅영상/방학</td><td>화목 · 토 · 월~금</td><td>50</td></tr>
+<tr><td>유튜브 올인원클래스</td><td>유튜브 올인원1/B · 2/B</td><td>화목</td><td>[확인 필요]</td></tr>
+<tr><td>실전 영상편집 클래스</td><td>AIX 실전영상/A · AIX 실전영상편집/주</td><td>월수 · 토일</td><td>50</td></tr>
+<tr><td>2D 모션 디자인 클래스</td><td>AIX 2D 모션디자인1/A · 1/B · 2/A · 2/B</td><td>월수 · 화목</td><td>[확인 필요]</td></tr>
+<tr><td>AIX 피그마</td><td>AIX 피그마1/A · 2/A · 3/A (구 AI피그마1~3)</td><td>월수금월수</td><td>50</td></tr>
+<tr><td>AIX 바이브코딩</td><td>AIX 바이브코딩1/A · 1/B · 2/B · 3/B</td><td>월수금월수 · 화목화목금</td><td>60</td></tr>
+<tr><td>AIX 에이전트 업무자동화</td><td>AI에이전트1 · 2 (A·B·금·주·방학)</td><td>월수 · 화목 · 금 · 토 · 월~금</td><td>60</td></tr>
+<tr><td>AIX 이커머스 창업</td><td>미개설 · <code>창업마스터-소상공인/A·(비)/A</code>는 별개 과정으로 확정(260901)</td><td>-</td><td>-</td></tr>
+<tr><td>AIX 프라이빗 마케팅 클래스</td><td>AIX 프라이빗 마케팅 클래스1/B · 2/B</td><td>화목</td><td>[확인 필요]</td></tr>
+<tr><td>AIX 디지털 출판 실무</td><td>AIX 디지털 출판 실무1/A · 2/A</td><td>월수</td><td>[확인 필요]</td></tr>
+<tr><td>AIX 패키지 &amp; 굿즈 제작 실무</td><td>AIX 패키지MD1/A</td><td>월수</td><td>[확인 필요]</td></tr>
+<tr><td>AIX 브랜딩 디자인 실무</td><td>미개설 [확인 필요] · 구과목 브랜딩디자인1·2만 있다</td><td>-</td><td>55</td></tr>
+<tr><td>AIX 공간기획 &amp; 인테리어 설계</td><td>AIX 공간기획&amp;도면1/A · 1/B · 2/A · 2/B</td><td>월수 · 화목</td><td>45</td></tr>
+<tr><td>AIX 3D 모델링 &amp; 렌더링</td><td>AIX 3D 인테리어1/A · 2/A · 3/A</td><td>월수금월수</td><td>[확인 필요]</td></tr>
+<tr><td>BIM 기초 &amp; AIX 활용</td><td>BIM1/주 · BIM2/주 (AIX 접두 없음)</td><td>토일</td><td>50</td></tr>
+<tr><td>AIX 공간VR시각화</td><td>미개설 [확인 필요] · AI크리에이터-인테리어만 있다</td><td>화목</td><td>50</td></tr>
+</table>
+<p><strong>AIX 3D 모델링 &amp; 렌더링이 3단계로 열려 있다.</strong> 아래 "확인 필요" 1번은 V1의 90H·총 180만과 수강료_안내 260727 확정분의 1~3단계 각 24H·각 50만이 어긋나는 건이었다. 인트라넷은 <code>AIX 3D 인테리어1·2·3/A</code> 세 과목으로 등록해 두었으므로 1~3단계 편성 쪽이 실물과 맞는다. 금액은 수집본에 배정이 없어 여전히 확인 대상이다.</p>
+<p><strong>AIX 접두 없이 등록된 신규 과목.</strong> 상담에서 구과목으로 오인하지 않는다. 요일은 강의시간표 실측, 금액은 수집본 실측이다.</p>
+<table><tr><th>등록명</th><th>요일</th><th>수강료</th></tr>
+<tr><td>AIX 애니메이션(ART)/B</td><td>화목</td><td>[확인 필요]</td></tr>
+<tr><td>언리얼엔진1/A · 2/A</td><td>월수금월수</td><td>[확인 필요]</td></tr>
+<tr><td>창업마스터-소상공인/A · (비)/A</td><td>월수</td><td>오프라인 50 · 비대면 40 · AIX 모듈이 아닌 전사 창업 과정이다 → 창업실전마스터_지식_통합본</td></tr>
+<tr><td>AI에이전트웹/A</td><td>월수</td><td>60</td></tr>
+<tr><td>AI디지털스토리보드/A</td><td>월수</td><td>50</td></tr>
+<tr><td>AI블렌더1/A · 2/A</td><td>월수금월수</td><td>50</td></tr>
+<tr><td>AI비주얼디자인/방학</td><td>월~금</td><td>50</td></tr>
+<tr><td>웹툰&amp;AI어시스트/B</td><td>화목</td><td>[확인 필요]</td></tr>
+<tr><td>스마트AI시니어</td><td>금</td><td>35</td></tr>
+<tr><td>유튜브시니어/A</td><td>월수</td><td>40</td></tr>
+<tr><td>시니어기초</td><td>금</td><td>5</td></tr>
+<tr><td>실무엑셀(컴활2급)</td><td>금</td><td>20</td></tr>
+</table>
+<p><strong>구과목 중 6개 차수 전부 미개설인 항목.</strong> 상담에서 개설 과목으로 안내하지 않는다.</p>
+<p>웹4 · UXUI1 · UXUI2 · 엔스케이프 · 리얼타임렌더 · 매트페인팅. UXUI는 포폴반(<code>UXUI포폴/A</code>)만 남았고 본과정은 AIX 피그마1~3이 대체한다. 엔스케이프는 AIX 3D 인테리어에, 리얼타임렌더는 언리얼엔진1·2/A에 흡수된 것으로 보이나 확정 공지는 [확인 필요]다.</p>
+<p><strong>반대로 "배정 없음"이 개설 없음을 뜻하지 않는 사례 6건(260901 실측).</strong> 수강정보 수집본에는 재원생이 없어 안 보였으나 강의시간표에는 열려 있다.</p>
+<p>세무1급/주(토일) · 세무2급/A(월수금월수) · 세무2급/B(화목금화목) · 라이노/6주(토일) · 시포디1/6주 · 시포디2/6주(토일) · 컬러실기/6주(토일) · 그래픽기능사/3주(토일) · 웹디기능사/5주(토일). 수집본만 보고 폐강으로 판정하지 않는다.</p>
+<h3>NAS 커리큘럼 자료 현황 (260821 전수 확인)</h3>
+<p>경로 <code>\\192.168.201.202\1-Education\[학과별 커리큘럼 자료]\</code> 아래 10개 학과 폴더 236개 파일을 전수 확인했다. 접근은 전부 가능하다.</p>
+<table><tr><th>폴더</th><th>파일</th><th>용량</th><th>최신</th></tr>
+<tr><td>AIX 모듈</td><td>17</td><td>92.6MB</td><td>26-08-20</td></tr>
+<tr><td>기타학과_AI</td><td>25</td><td>585.8MB</td><td>26-08-19</td></tr>
+<tr><td>아트웍</td><td>28</td><td>444.7MB</td><td>26-07-29</td></tr>
+<tr><td>모션</td><td>16</td><td>56.1MB</td><td>26-07-23</td></tr>
+<tr><td>CG</td><td>10</td><td>5.6MB</td><td>26-06-02</td></tr>
+<tr><td>시각편집</td><td>53</td><td>419.1MB</td><td>26-05-26</td></tr>
+<tr><td>웹</td><td>7</td><td>114.4MB</td><td>26-05-11</td></tr>
+<tr><td>전산세무회계</td><td>32</td><td>1688MB</td><td>26-02-10</td></tr>
+<tr><td>인테리어</td><td>39</td><td>281.1MB</td><td>26-01-22</td></tr>
+<tr><td>자격증</td><td>9</td><td>7.3MB</td><td>25-10-22</td></tr>
+</table>
+<p>위 "모듈별 시수·수강료" 19과목을 <strong>NAS 파일 유무</strong>로만 대조하면 15과목에 자료가 있고 3과목(이커머스 창업·디자인 파운데이션·에이전트 업무자동화 개편 후판)이 비어 있다. 다만 <strong>NAS에 개별 파일이 없다는 것과 상담 근거가 없다는 것은 다르다.</strong> 260822 확인 결과 세 과목 모두 상담에 필요한 내용이 사업부 설명자료(<code>04_도구HTML\AIX강남_모듈개편_통합_설명자료_260721.html</code>) 안에 모듈 카드로 들어 있다(아래 "설명자료에서 확보한 모듈 카드" 절). NAS에 없는 것은 배포용 PPT·PDF 파일이지 커리큘럼 자체가 아니다.</p>
+<ul>
+<li><strong>AIX 에이전트 업무자동화</strong> · NAS <code>기타학과_AI\AI에이전트 커리큘럼.html</code>(26-02-24)은 개편 5개월 전 자료이고 제목도 "AI에이전트 강의 라인업 &amp; 판매 전략"이라 개편 후판이 아니다. 개편 후 내용은 설명자료 모듈 카드가 갖고 있으므로 상담은 가능하다</li>
+<li><strong>AIX 디자인 파운데이션</strong> · 정의와 시수는 설명자료에 있다(16H·2H×8D·디자인 판단력·기본기·신설, 구 발상과 표현·색채학의 정규화). AIX 자료 전체(V1 로드맵·설명자료·암기카드·수강료 시수 분석 xlsx)에는 금액이 없고, 260822에 구과목 가격 정본에서 <strong>16H·50만</strong>을 확보했다(위 수강료 표 각주). 사업부 확정 전까지는 승계 추정값이다</li>
+<li><strong>AIX 이커머스 창업</strong> · 설명자료에 모듈 카드가 통째로 있다(아래 절)</li>
+</ul>
+<p><strong>과목명 문제는 260822에 해소됐다.</strong> 같은 과목이 맞고, 사업부 공식 명칭은 설명자료 쪽이다.</p>
+<ul>
+<li>설명자료(260721, 사업부 설명용 공식본)는 <code>AIX 프라이빗 마케팅 클래스</code>를 6곳에서 일관되게 쓰고, 구과목 매핑표에 <strong>방과후특강 "비주얼디자인" → ① AIX 프라이빗 마케팅 클래스(정규 과정화)</strong>로 명시한다. 과정 정의도 "코딩·전공 무관, AI 도구만으로 온라인 판매 콘텐츠와 내 브랜드를 만드는 정규 과정"이라 마케팅 쪽 내용이다</li>
+<li>NAS 실물 PPT(260724)와 그래픽 다운로드 센터(260728)의 <code>AI 맞춤 브랜딩 프라이빗 클래스</code>는 같은 과목의 <strong>자료 제목</strong>으로 본다(시수 32H·프라이빗·AI 도구 구성이 모두 일치)</li>
+<li>상담·산출물 표기는 <code>AIX 프라이빗 마케팅 클래스</code>로 통일한다. 다만 자료 파일을 찾을 때는 NAS 파일명이 "AI 맞춤 브랜딩 프라이빗 클래스"임을 기억할 것</li>
+</ul>
+<p><strong>NAS 안의 링크는 전부 txt·url 파일에 들어 있다(260821 전수 열람·접속 확인).</strong> 커리큘럼 폴더의 텍스트류 9개 중 6개가 링크 파일이고, 나머지 3개는 컬러리스트 준비물 목록 2개(내용 동일·파일명만 다른 중복)와 인테리어 사전 테스트 안내다.</p>
+<table><tr><th>학과·과정</th><th>링크</th><th>출처 파일</th><th>수정일</th></tr>
+<tr><td>AI 피그마</td><td>https://charming-daifuku-34debc.netlify.app/</td><td><code>AIX 모듈\Ai피그마_상담자료.txt</code></td><td>26-08-20</td></tr>
+<tr><td>AI 크리에이터 시각편집</td><td>https://gamma.app/docs/AI-PR-tu3dhjk2kay375h</td><td><code>기타학과_AI\[상담자료] AI크리에이터 링크.txt</code></td><td>26-08-19</td></tr>
+<tr><td>AI 크리에이터 영상모션</td><td>https://gamma.app/docs/Copy-of-AI--t171k5kj4knc1r6?mode=doc</td><td>위와 같은 파일</td><td>26-08-19</td></tr>
+<tr><td>AI 크리에이터 CG·마야</td><td>https://gamma.app/docs/AI-CG--82rcvas1mffkdai</td><td>위와 같은 파일</td><td>26-08-19</td></tr>
+<tr><td>CG 블렌더 커리큘럼</td><td>https://blender-curriculum-banmj.lovable.app/</td><td><code>CG\[기본 상담 자료] Blender Curriculum.url</code></td><td>26-05-14</td></tr>
+<tr><td>CG학과 로드맵</td><td>https://slides.com/bss-1/cg-5e8efe/fullscreen</td><td><code>CG\[기본 상담 자료] CG학과 로드맵.url</code></td><td>25-09-19</td></tr>
+<tr><td>모션학과 커리큘럼(영상)</td><td>https://slides.com/mionimous/minimal/fullscreen</td><td><code>모션\[기본 상담 자료] 모션학과 전체 로드맵.url</code></td><td>26-01-25</td></tr>
+<tr><td>편집포트폴리오 일지 시스템</td><td>구글시트 <code>1GmT19e9Y7lTVSmefdtyQk6k8CT4ZdDD23P0vPgjK2c8</code></td><td><code>시각편집\편집포트폴리오 일지 시스템.url</code></td><td>24-06-25</td></tr>
+</table>
+<ul>
+<li><strong>AI 피그마 txt에는 랜딩 URL 한 줄뿐이다.</strong> 260820 강사가 배포했다는 수강생 포트폴리오 URL 12~20건은 이 파일에도, <code>[학과별 포트폴리오]\웹</code>(3건뿐)에도 없다 → 경로 [확인 필요] 유지</li>
+<li>블렌더 링크는 반명지 강사 작성분이며 블렌더1(8주 모델링·텍스처)·블렌더2(8주 물리엔진·리깅·애니메이션·렌더링) 2단계 구성이다</li>
+<li><strong>AI 크리에이터 CG 링크는 제목이 "지점용"이라 내부 자료다.</strong> 학생에게 그대로 보내지 않는다. 영상모션 링크는 제목이 "Copy of"로 시작해 원본인지 사본인지 불분명하므로 발송 전 확인한다</li>
+<li>gamma.app은 봇 차단(403)이라 WebFetch로는 안 열리고 브라우저로 열어야 한다</li>
+</ul>
+<p>폴더 배치상 주의할 점</p>
+<ul>
+<li>파운데이션 AIX 포토·AIX 일러 자료는 <code>AIX 모듈</code> 폴더에 <strong>그래픽 &amp; 브랜딩</strong> 접두로 들어 있다(<code>그래픽 &amp; 브랜딩 - AIX 포토샵.pptx</code>·<code>- AIX 일러스트.pptx</code>). 스튜디오 분류와 파일명이 어긋나므로 파운데이션 자료를 찾을 때 그래픽 쪽을 본다</li>
+<li>유튜브 올인원 클래스는 <code>AIX 모듈</code>이 아니라 <code>모션\과목별 세부 커리큘럼\신규_유튜브 올인원.pdf</code>(26-07-23)에 있다. AI 피그마도 <code>웹\AI피그마1,2_커리큘럼.pdf</code>·<code>AI피그마3_커리큘럼.pdf</code>(둘 다 26-05-11)에 있고 <code>AIX 모듈</code>에는 상담자료 txt만 있다</li>
+<li>스페이스 4과목은 <code>AIX 모듈\★Studio4 과목1~4</code> PDF 5종이 정본이다(과목2는 2A SketchUp 트랙·2B SketchUp+3dsMax 트랙으로 갈린다)</li>
+<li><code>전산세무회계\회계과정\학생자료\</code>는 2014~2017년 KG아이티뱅크 취업지원 자료 20여 건이다(면접 질문·이력서 양식·JAVA 강의용). 현행 과정과 무관한 타사 자료이므로 상담 근거로 쓰지 않는다</li>
+</ul>
+<h3>인터랙티브 모듈 커리큘럼·툴 (260822, 설명자료 본문에서 확보)</h3>
+<p>정원과 결과물은 위 "운영 형태·정원"·"모듈별 완성 결과물" 절에, 구신과목 매핑은 "구과목 → 신과목 매핑" 절에 있다. 여기는 그 세 절에 없는 커리큘럼 단계와 사용 도구만 둔다.</p>
+<table><tr><th>모듈</th><th>핵심 커리큘럼 단계</th><th>사용 도구</th></tr>
+<tr><td>AIX 피그마 90H</td><td>문제정의·벤치마크 → IA·User Flow → 디자인 시스템 → 핵심 화면 5개 이상 → 반응형 → 클릭 프로토타입 → Figma MCP 코드 변환</td><td>Figma · Figma MCP</td></tr>
+<tr><td>AIX 바이브코딩 90H</td><td>도구 세팅·첫 배포 체험 → 종이 설계(기획·기능·화면) → 정적 화면과 HTML·CSS 읽는 법 → DB 연동·CRUD → 인증·보안(Auth·RLS) → 버그수정·README·발표</td><td>Claude Code · Cursor · Supabase · GitHub · Vercel · Figma MCP</td></tr>
+<tr><td>AIX 에이전트 업무자동화 48H</td><td>에이전트·CLI·파일 제어 → MCP·Notion 연동 → 문서(엑셀·워드·PPT)·웹·API 자동화 → 내 업무 분해·워크플로우 설계 → 자동화 시스템 구축·안정화</td><td>Claude Code · Codex · Gemini CLI · MCP·Notion · Python · Playwright</td></tr>
+<tr><td>AIX 이커머스 창업 24H</td><td>무재고 소싱·상품 기획 → AI 상세페이지·썸네일 제작 → 광고·콘텐츠 자동화 → 스마트스토어·쿠팡·카카오 3대 채널 운영 → 첫 매출 프로세스</td><td>ChatGPT · AI 이미지·콘텐츠 툴</td></tr>
+<tr><td>AIX 프로젝트반 60H</td><td>결과물 고도화·QA·케이스스터디·GitHub 정리·데모데이</td><td>해당 없음</td></tr>
+</table>
+<p>대상은 전 모듈 선수과목이 없고, 에이전트는 업무 자동화가 필요한 재직자·실무자, 이커머스는 1인·부업 셀러와 디자인·마케팅 무경험자, 바이브코딩은 코딩 무경험자 기준이다.</p>
+<p><strong>취업 방향별 추천 조합(상담에서 그대로 쓰는 문장).</strong> UX·UI 디자이너는 피그마에 프로젝트반, 웹·서비스 개발은 피그마와 바이브코딩에 프로젝트반, AI 서비스 창업은 바이브코딩과 이커머스 창업, 재직자 리스킬은 에이전트 업무자동화, 1인 창업·부업 셀러는 이커머스 창업에 바이브코딩을 얹는다. 업셀은 취업이면 프로젝트반, 수익화면 이커머스 쪽으로 갈린다.</p>
+<p>편성 표기 주의: 설명자료는 총 일수(3H×30D×3M · 2H×24D×3M)로, 위 수강료 표는 월당 일수(3H×10D×3M · 2H×8D×3M)로 쓴다. 값은 같다.</p>
+<p>설명자료를 다시 읽을 일이 있으면 본문이 스크립트 안에 HTML 엔티티로 이스케이프돼 있다는 점을 먼저 본다. 엔티티를 해제한 뒤 태그를 제거해야 본문 1,151줄이 나오고, 순서를 바꾸면 빈 결과가 나온다.</p>
+<h3>학과 편성·구과목 전환 (260822 사업부 공지)</h3>
+<p><strong>AI학과 신설.</strong> AI에이전트 · AI업무 자동화 · AI프롬프트 3개 과정을 AI학과로 편성한다. 학과명 생성은 개발팀에서 계열 전 지점 완료했고, 계열 학과 생성 완료 후 3개 과정의 학과 변경 작업을 진행한다.</p>
+<ul>
+<li>학과 그룹은 신설하지 않고 <strong>기존 <code>AI디자인</code> 그룹을 그대로 쓴다.</strong></li>
+<li><strong>기존에 만들어 둔 AI 과목들은 기존 학과 편성을 유지한다</strong>(영상·시각·인테리어 등). 이름에 AI가 들어간다고 AI학과로 옮기지 않는다.</li>
+<li>추후 예정 2건: ① AI 캠퍼스 수업 중 대면 전환이 가능한 수업은 전환 시 AI학과로 편성 ② AI 자격증 편성.</li>
+<li>이 공지는 <strong>과목의 학과 귀속</strong> 변경이다. 수강생 개인의 과정명(소속 학과) 표기가 함께 바뀌는지는 [확인 필요] → 인트라넷 반영 후 실측으로 확인하고, 바뀌면 카드 파일명 <code>[이름]_[뒷4]_[학과].md</code>의 학과 부분을 같이 정리한다.</li>
+</ul>
+<p><strong>구과목 → AIX 전환 (가격·처리 경로).</strong> 포토샵(40만) → AIX포토샵(50만), 일러스트(40만) → AIX일러스트(50만). <strong>동일 과목의 신과정 변경은 차액 결제 없이 인트라넷 배정게시판(댓글배정)으로 처리한다.</strong> 포토샵 → AIX일러스트처럼 과목이 다르면 동일과목이 아니므로 <strong>특처 작성이 필수</strong>다. 금액 정본은 수강료_안내 "구과목 → AIX 전환 규칙" 절.</p>
+<p>구과목 매핑(위 매핑 절)은 포토샵+포토웍스 → AIX 포토, 일러스트+디테일 일러스트 → AIX 일러다. <strong>무상 전환이 열리는 것은 포토샵→AIX포토샵·일러스트→AIX일러스트 짝뿐이고, 포토웍스·디일러 보유분이 AIX 포토·일러로 무상 승계되는지는 [확인 필요]</strong>(공지 원문에 두 과목 언급 없음).</p>
+<h3>개별 개강분 변경 이력 (개강안내 D-5·배정 대조용)</h3>
+<p>11·12·1월 (260824 공지)</p>
+<ul>
+<li>과정변경: 11.21 AIX 실전영상편집/6주 14:00 6층Q → AIX 실전영상편집/주 15:00 6층Q</li>
+<li>과정변경: 12.19 AIX 실전영상편집/6주 14:00 6층Q → AIX 실전영상편집/주 15:00 6층Q</li>
+<li>과정변경+개강연기: 01.02 AIX 실전영상편집/6주 14:00 6층N → 01.16 AIX 실전영상편집/주 15:00 6층N</li>
+<li>규격: /6주(4H*6주 · 토) → /주(토/일 3H*4주). 시작시각도 14:00 → 15:00으로 통일. 6층Q 트랙은 260803 스냅샷에서도 3H*4주 토/일이라 /주 규격과 이미 같고, 6층N 트랙만 24H → 12H로 시수가 줄어든다(수강료 연동 여부 [확인 필요]).</li>
+<li>260821 폐강 2건(10.10·11.21 6층N)과 묶어 보면 6층N의 4H*6주 토 트랙이 정리되고 6층Q의 3H*4주 토/일 /주 규격으로 수렴하는 흐름이다. 남은 6층N 차수(01.02)도 이번에 /주로 넘어간다.</li>
+<li>260821 공지에서 11.21·12.19 6층Q는 프리미어/주 → AIX 실전영상편집/주로 이미 명칭변경된 건인데, 이번 공지 원문의 변경 전 표기는 /6주다. 인트라넷에 /6주로 반영됐다가 정정되는 흐름으로 보이며 최종 상태는 양쪽 다 /주 15:00로 같다. 반코드가 다르면 다른 과목이므로 인트라넷 실측 시 /6주 잔재가 남아 있는지 확인한다.</li>
+<li>이번 공지로 /6주·/주 두 표기는 /주로 합쳐졌으나, "실전 영상편집 클래스/A,B"(수강료_안내 16H·격일)·"AIX 실전영상/A"(9월 신과목표, 프리미어실전 매핑)와 동일 과정인지는 여전히 [확인 필요](팀장).</li>
+<li>내 담당 수강생 영향: 3건 모두 0명. 00_인트라넷_수강정보_과목별.csv에 /6주·/주 배정 0건, 프리미어/주 1건은 담당 최준3, AIX 실전영상편집/A 1건(조OO)은 반코드가 다른 별개 과목이며 260729 중퇴·환불 종결분이다.</li>
+</ul>
+<p>10·11·12월 (260821 공지)</p>
+<ul>
+<li>폐강: 10.10 AIX 실전영상편집/6주 14:00 6층N</li>
+<li>폐강: 11.21 AIX 실전영상편집/6주 10:00 6층N</li>
+<li>과정명변경: 11.21 프리미어/주 14:00 6층Q → AIX 실전영상편집/주</li>
+<li>과정명변경: 12.19 프리미어/주 14:00 6층Q → AIX 실전영상편집/주</li>
+<li>프리미어/주(수강료_안내 24H·50만)와 시수·금액이 같은 구과목 매핑(54행) "프리미어+애프터이펙트 기초 → 실전 영상편집 클래스 24H·50만"의 정식 명칭 적용으로 추정. 단 260728 신규 등재된 "실전 영상편집 클래스/A,B"(수강료_안내 16H·격일, 기존 확인 필요 L299 시수 불일치 대상), 9월 신과목표(162행) "AIX 실전영상/A"(편집 미표기, 프리미어실전 매핑)와도 표기가 달라 세 명칭의 동일 과정 여부는 [확인 필요](팀장).</li>
+<li>내 담당 수강생 영향: 4건 모두 0명. 00_인트라넷_수강정보_과목별.csv·카드 전체에 "프리미어/주"·"AIX 실전영상편집" 수강 기록 없음(프리미어실전/A·B 수강 이력 10건은 05층C·05층L 트랙이라 6층Q 트랙과 무관).</li>
+</ul>
+<p>11월·12월 (260728 접수)</p>
+<ul>
+<li>11.18 AIX 패키지MD1/A 19:00 5층B → AIX 디지털 출판 실무2/A (과정변경)</li>
+<li>12.16 AIX 패키지MD2/A 19:00 5층B → AIX 패키지MD1/A (과정변경)</li>
+<li>같은 19:00 5층B 로테이션 라인이며, 10월 개강분(패키지MD 로테이션분)은 자료 미수령([확인 필요]). 9월 시간표에는 19:00 패키지MD2/A가 05층A-1로 잡혀 있어 강의실 표기가 다르다([확인 필요]).</li>
+</ul>
+<p>10월 (260729 원장 공지)</p>
+<ul>
+<li>포토웍스·디테일일러스트(구과목) 저녁·주말반: 10월 개강분부터 폐지. 구과목 매핑상 AIX 포토·AIX 일러 통합 대상 항목의 저녁·주말반 종료 시점 확정. 오전·평일 주간반 존속 여부는 별도([확인 필요]).</li>
+</ul>
+<p>9월</p>
+<ul>
+<li>과목변경: 09.14 포토샵 09:30 12층V → 일러스트 09:30 12층V</li>
+<li>폐강: 09.19 컨텐츠크리에이터 18:00 6층Q (배정 없음)</li>
+<li>패턴변경(요일 축소): 09.15 AIX 공간기획&amp;도면1/B 6층R 화목화목금 → 화목 / 09.14 AIX 2D 모션디자인1/A 12층U 월수금월수 → 월수 / 09.14 AIX 일러스트/A 19:00 12층V 월수금월수 → 월수 / 09.15 AIX 포토샵/B 19:00 12층V 화목화목금 → 화목</li>
+<li>9월 개강 신과목 = 구과목(상담 안내용): 09.14 AIX 실전영상/A 19:00 5층I = 프리미어실전(인트라넷 등록명은 AIX 실전영상편집/A) / 09.15 AIX 마케팅영상/B 19:00 5층I = AI마케팅영상 / 09.14 Design Core Foundation1/A 14:00 5층L = 색채학+발상과표현 / 09.15 AIX 바이브코딩1/B 19:00 6층M = AI에이전트웹+AI바이브코딩 / 09.15 AIX 공간기획&amp;도면1/B 19:00 6층R = 캐드1,2 / 09.14 AIX 2D 모션디자인1/A 19:00 12층U = 에펙+모션에펙 / 09.14 AIX 일러스트/A 19:00 12층V = 일러스트+디일러 / 09.15 AIX 포토샵/B 19:00 12층V = 포토샵+포토웍스</li>
+</ul>
+<p>8월</p>
+<ul>
+<li>08.01 포토샵/주 09:00 6층O → 5층C (강의장변경)</li>
+<li>08.01 모스/주 09:30 12층V → 6층R (강의장변경)</li>
+<li>08.08 AI-POT 시험 09:00 6층O (신규 개설)</li>
+</ul>
+<h3>확인 필요 (4건: 1~3 팀장, 4 학과장)</h3>
+<ul>
+<li>AIX 3D 모델링 &amp; 렌더링 총액 불일치: 통합로드맵 V1은 90H·3개월·총 180만, 수강료_안내 260727 확정분은 1~3단계 각 24H·각 50만(총 72H·150만). 시수와 총액이 모두 다르다. 견적 전 확인.</li>
+<li>유튜브 올인원클래스 총액: 통합로드맵 V1은 32H·2개월·총 100만. 260725 구두 전언은 50만이었다. V1이 최신 문서이므로 100만을 우선하되 확정 전 견적 발행 금지.</li>
+<li>AIX 디자인 파운데이션(16H) 수강료: V1 수강료 탭에 미등재. 260822에 구과목 가격 정본으로 16H·50만을 채웠으나(수강료 표 각주 참조) 사업부 확정값이 아니다. 두 구과목 32H를 16H로 합친 개편이라 재산정 가능성이 남는다. 260715 문서의 30H 표기도 V1에서 16H로 축소됐다.</li>
+<li>스페이스 시수 상충(260811 발견, 학과장 확인 대상): 설명회 발언·로드맵 V1은 3D 모델링&amp;렌더링 각 90H·공간VR 48H, NAS 홍보소개자료 PDF는 과목 2A·2B 각 80H(8.9주)·과목 4 36H(4주, "과목 2 선이수 기준 설계"). 확인 전 시수는 "설명회 발언 기준"을 붙여 안내.</li>
+</ul>
+<h3>상담·산출물 적용 지침</h3>
+<ul>
+<li>9월 이후 개강 과목은 이 문서의 신과목명·시수로 안내한다. 8월 이전 개강분은 기존 과목명·시수 유지.</li>
+<li>과목명·시수·수강료는 위 표 그대로만 사용한다. 표에 없는 항목은 창작하지 않고 [확인 필요]로 남긴다.</li>
+<li>견적 발행 시 금액 정본은 수강료_안내다. 이 문서와 다르면 인트라넷 실측을 확인한 뒤 발행한다.</li>
+<li>확정 공지가 나오면 이 문서 → 수강료_안내 → 용어집 순으로 같은 흐름에서 갱신한다.</li>
+</ul>
+<p>재검 권장: v0.1 기획단계 문서 기반이므로 확정 공지 시점에 전 항목 재대조가 필요하다.</p><p class="src">원본: 99_시스템/02_학과지식/AIX_모듈개편_정본.md · 볼트 문서를 폰에서 읽도록 옮긴 것입니다.</p></div>
+</body>
+</html>

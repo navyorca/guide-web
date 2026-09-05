@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 시대, 전통 툴 교육의 가치: 정리본</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root{
+    --ink:#0B1220;          /* 본문 잉크 */
+    --ink-soft:#2C3444;
+    --paper:#F0F8FF;        /* 배경 */
+    --card:#ffffff;
+    --line:#C3CAD8;
+    --navy:#1642C4;         /* 구조·헤더 */
+    --gold:#1642C4;         /* "돈이 되는 20%" 액센트 */
+    --gold-soft:#E8EFFF;
+    --ai-gray:#2C3444;      /* AI 영역(80%) */
+    --danger:#a4432f;
+    --ok:#2e6b4f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Pretendard Variable',Pretendard,-apple-system,'Malgun Gothic',sans-serif;
+    background:var(--paper); color:var(--ink);
+    line-height:1.8; font-size:19px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px 80px}
+
+  /* ── 헤더 ── */
+  header{
+    background:#FFFFFF; color:var(--ink);
+    padding:52px 20px 46px; margin-bottom:44px; border-bottom:2px solid var(--ink);
+  }
+  .h-inner{max-width:960px;margin:0 auto}
+  .h-eyebrow{
+    display:inline-block; font-size:16px; letter-spacing:.04em;
+    color:#1642C4; border:1px solid #C3CAD8;
+    padding:4px 12px; border-radius:2px; margin-bottom:18px; font-weight:600;
+  }
+  header h1{font-size:31px;font-weight:800;line-height:1.32;letter-spacing:-.01em}
+  header h1 .u{color:#1642C4}
+  .h-sub{margin-top:14px;font-size:18px;color:#2C3444;max-width:640px}
+  .h-meta{margin-top:22px;font-size:16px;color:#2C3444;display:flex;gap:18px;flex-wrap:wrap}
+
+  /* ── 섹션 공통 ── */
+  section{margin-bottom:52px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;border-bottom:2px solid var(--ink);padding-bottom:10px}
+  .sec-head h2{font-size:21px;font-weight:800;letter-spacing:-.01em}
+  .sec-head .tag{font-size:16px;color:var(--gold);font-weight:700;letter-spacing:.08em}
+  .sec-lead{margin:14px 0 22px;color:var(--ink-soft);font-size:16px;max-width:760px}
+
+  /* ── 시그니처: 80/20 바 ── */
+  .split-hero{background:var(--card);border:1px solid var(--line);padding:28px 26px;margin-bottom:26px}
+  .split-bar{display:flex;height:52px;border-radius:3px;overflow:hidden;margin:16px 0 8px}
+  .split-ai{flex:0 0 80%;background:repeating-linear-gradient(-45deg,#e6e9ee 0 8px,#dde1e8 8px 16px);display:flex;align-items:center;justify-content:center;color:var(--ai-gray);font-weight:700;font-size:16px;letter-spacing:.03em}
+  .split-tool{flex:0 0 20%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px}
+  .split-caption{display:flex;justify-content:space-between;font-size:16px;color:var(--ink-soft)}
+  .split-caption b{color:var(--gold)}
+  .split-thesis{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);font-size:16.5px;font-weight:700;line-height:1.55}
+  .split-thesis .gold{color:var(--gold)}
+
+  /* ── 4대 논리 ── */
+  .logic-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .logic{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--navy);padding:20px 20px 18px}
+  .logic h3{font-size:16px;font-weight:800;margin-bottom:8px;line-height:1.4}
+  .logic p{font-size:16px;color:var(--ink-soft)}
+  .logic .n{font-size:16px;font-weight:700;color:var(--gold);letter-spacing:.04em;display:block;margin-bottom:6px}
+
+  /* ── 프로그램 카드 ── */
+  .prog{background:var(--card);border:1px solid var(--line);margin-bottom:22px}
+  .prog-head{
+    display:flex;align-items:center;gap:14px;
+    padding:16px 22px;border-bottom:1px solid var(--line);
+    background:linear-gradient(to right,#fbfaf7,#fff);
+  }
+  .prog-num{
+    flex:0 0 auto;width:34px;height:34px;border-radius:3px;
+    background:#FFFFFF;color:var(--ink);border:1px solid var(--ink);font-weight:800;font-size:16px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .prog-head h3{font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .prog-head .en{font-size:16px;color:var(--ai-gray);font-weight:600;margin-left:2px}
+  .prog-body{padding:20px 22px 22px}
+  .prog-row{margin-bottom:16px}
+  .prog-row:last-child{margin-bottom:0}
+  .prog-label{
+    display:inline-block;font-size:16px;font-weight:800;letter-spacing:.06em;
+    padding:2px 9px;border-radius:2px;margin-bottom:7px;
+  }
+  .lb-market{background:#e8edf4;color:var(--navy)}
+  .lb-limit{background:#f5e4de;color:var(--danger)}
+  .lb-inside{background:#e2ede7;color:var(--ok)}
+  .prog-row p{font-size:16px;color:var(--ink-soft)}
+  .prog-row p b{color:var(--ink)}
+  .prog-quote{
+    margin-top:18px;background:var(--gold-soft);border-left:3px solid var(--gold);
+    padding:13px 16px;font-size:16px;font-weight:700;line-height:1.55;color:#5c4715;
+  }
+  .prog-quote::before{content:"💬 상담 멘트 · ";font-size:16px;letter-spacing:.05em;color:var(--gold);display:block;margin-bottom:3px;font-weight:800}
+
+  /* CAD 특별 강조 */
+  .prog.cad{border:1px solid var(--navy)}
+  .cad-note{
+    margin:0 22px;margin-top:-2px;padding:10px 14px;font-size:16px;
+    background:#eef2f7;color:var(--navy);border-radius:0 0 3px 3px;font-weight:600;
+  }
+
+  /* ── 요약표 ── */
+  table{width:100%;border-collapse:collapse;background:var(--card);font-size:16px}
+  thead th{background:#E8EFFF;color:var(--ink);padding:11px 14px;text-align:left;font-weight:700;font-size:16px}
+  thead th:nth-child(2){color:var(--ink)}
+  thead th:nth-child(3){color:#1642C4}
+  tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tbody td:first-child{font-weight:800;white-space:nowrap}
+  tbody td:nth-child(2){color:var(--ai-gray)}
+  tbody td:nth-child(3){color:var(--ink);font-weight:600}
+  tbody tr:last-child td{border-bottom:none}
+  .tbl-note{margin-top:12px;font-size:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);padding:14px 18px;font-weight:700}
+
+  /* ── 스피치 ── */
+  .speech{background:var(--card);border:1px solid var(--line);padding:28px 30px}
+  .speech-part{margin-bottom:20px;padding-bottom:20px;border-bottom:1px dashed var(--line)}
+  .speech-part:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+  .speech-part .cue{font-size:16px;font-weight:800;color:var(--gold);letter-spacing:.08em;display:block;margin-bottom:7px}
+  .speech-part p{font-size:16px;line-height:1.8}
+  .speech-part p b{font-weight:800}
+  .promo-box{
+    margin-top:26px;background:#E8EFFF;color:var(--ink);padding:22px 26px;border-radius:8px;border:1px solid #C3CAD8;
+  }
+  .promo-box .pb-tag{font-size:16px;color:#1642C4;font-weight:800;letter-spacing:.04em;margin-bottom:8px}
+  .promo-box p{font-size:18px;line-height:1.8;color:var(--ink)}
+  .promo-box p b{color:#1642C4}
+
+  footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);font-size:16px;color:var(--ai-gray);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media (max-width:680px){
+    .logic-grid{grid-template-columns:1fr}
+    header h1{font-size:24px}
+    .prog-head h3{font-size:16px}
+    .split-ai,.split-tool{font-size:16px}
+    thead th,tbody td{padding:9px 10px;font-size:16px}
+  }
+  @media print{
+    body{background:#fff}
+    header{background:var(--navy)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .prog{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-inner">
+    <span class="h-eyebrow">상담 · 강사 공유용 정리본</span>
+    <h1>AI 시대, 전통 툴을 배워야 하는 이유<br><span class="u">"AI는 초안 담당, 툴은 완성 담당"</span></h1>
+    <p class="h-sub">포토샵 · 일러스트 · 인디자인 · 프리미어 · 애프터이펙트 · 시네마4D · 오토캐드: 프로그램별 시장 현황, AI의 실제 한계, 상담 멘트까지 한 장으로 정리한 자료입니다.</p>
+    <div class="h-meta"><span>SBS아카데미컴퓨터아트</span><span>2026.07</span><span>전통 툴 정규과정 5일 한정 50% 프로모션 연계</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- 1. 핵심 프레임 -->
+  <section>
+    <div class="sec-head"><h2>핵심 프레임</h2><span class="tag">전체를 관통하는 한 장</span></div>
+    <div class="split-hero">
+      <div style="font-size:16px;font-weight:700;color:var(--ink-soft)">실무 작업의 구조: 현업 표준 워크플로우</div>
+      <div class="split-bar">
+        <div class="split-ai">AI가 만드는 초안 · 80%</div>
+        <div class="split-tool">완성 20%</div>
+      </div>
+      <div class="split-caption">
+        <span>발상 · 시안 · 원재료 생성: 누구나 할 수 있게 된 영역</span>
+        <span><b>수정 · 판단 · 규격 · 납품: 시장이 돈을 내는 영역</b></span>
+      </div>
+      <div class="split-thesis">
+        "AI는 초안 담당, 툴은 완성 담당: 그리고 시장은 <span class="gold">완성에만 돈을 냅니다.</span>"<br>
+        채용도, 외주 단가도, 포트폴리오 평가도 전부 오른쪽 20%에서 결정됩니다.
+      </div>
+    </div>
+
+    <div class="logic-grid">
+      <div class="logic">
+        <span class="n">LOGIC 01</span>
+        <h3>AI는 80%를 만들고, 나머지 20%가 돈이 됩니다</h3>
+        <p>미드저니가 30초 만에 시안을 뽑아도 납품 단계에선 깨진 텍스트, 해상도 부족, 어색한 합성이 발생합니다. 현업 프리랜서의 표준이 "AI 초안 + 툴 완성" 워크플로우인 이유이며, AI 결과물을 다듬을 줄 아는 사람과 그대로 쓰는 사람의 격차가 곧 단가 차이입니다.</p>
+      </div>
+      <div class="logic">
+        <span class="n">LOGIC 02</span>
+        <h3>취업 시장은 여전히 툴을 요구합니다</h3>
+        <p>채용공고에서 AI 활용은 '우대사항'이 됐지만, 포토샵·일러스트·에펙은 여전히 '자격요건' 필수란에 있습니다. AI가 생성을 가속화한 만큼 디자이너의 가치는 '정밀 편집 + 의사결정'으로 이동했고, 이 격차는 포트폴리오 단계에서 가장 분명하게 드러납니다.</p>
+      </div>
+      <div class="logic">
+        <span class="n">LOGIC 03</span>
+        <h3>AI를 판단할 눈은 툴을 만지며 생깁니다</h3>
+        <p>레이어·마스크·베지어·키프레임을 직접 다뤄본 사람만 AI 결과물의 어디가 틀렸는지 보입니다. AI 의존도가 높아질수록 오히려 '검증력'이 핵심 역량이 된다는 것이 최근 채용 트렌드의 결론: 툴 기본기는 AI 시대의 "보는 눈"을 만드는 과정입니다.</p>
+      </div>
+      <div class="logic">
+        <span class="n">LOGIC 04</span>
+        <h3>AI는 툴을 대체한 게 아니라, 툴 안으로 들어왔습니다</h3>
+        <p>포토샵 생성형 채우기, 일러스트 벡터 생성, 에펙 AI 로토브러시: 지금 가장 강력한 실무 AI는 어도비 툴 안에 탑재되어 있습니다. 툴을 모르면 이 AI조차 못 씁니다. "AI vs 툴"이 아니라 "툴을 아는 사람이 AI를 2배로 쓰는" 구조입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 프로그램별 -->
+  <section>
+    <div class="sec-head"><h2>프로그램별 정리</h2><span class="tag">시장 → AI 한계 → 툴 속의 AI → 상담 멘트</span></div>
+
+    <!-- 포토샵 -->
+    <div class="prog">
+      <div class="prog-head"><div class="prog-num">01</div><h3>포토샵 <span class="en">Photoshop</span></h3></div>
+      <div class="prog-body">
+        <div class="prog-row"><span class="prog-label lb-market">시장 · 취업</span>
+          <p>그래픽·마케팅·커머스·영상 썸네일까지, 디자인 관련 채용공고에서 포토샵이 자격요건에서 빠지는 경우는 거의 없습니다. 특히 커머스 상세페이지·인쇄물·광고 소재 시장은 <b>"납품 규격"이 존재하는 시장</b>이라, 규격을 맞출 줄 아는 사람만 돈을 받습니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-limit">AI의 실제 한계</span>
+          <p>AI 생성은 "그럴듯한 한 장"까지는 갑니다. 그러나 실무가 요구하는 건 CMYK 색공간 변환, 300dpi 해상도, 제품 사진과의 정밀 합성, 로고의 정확한 배치, 그리고 <b>"모델 얼굴은 두고 배경만 바꿔주세요" 같은 수정 요청 대응</b>입니다. AI는 전체를 다시 생성할 뿐, 부분만 정밀하게 고치는 것은 여전히 레이어·마스크·선택 도구의 영역입니다. 수정이 3번 오가는 실제 프로젝트에서 AI 단독으로는 버틸 수 없습니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-inside">툴 속의 AI</span>
+          <p>생성형 채우기(Generative Fill)·생성형 확장·AI 개체 선택: 가장 실무적인 이미지 AI는 포토샵 안에 있으며, "어디를 선택하고 무엇을 지시할지" 아는 사람에게만 무기가 됩니다.</p></div>
+        <div class="prog-quote">"AI는 이미지를 만들지만, 클라이언트의 수정 요청은 포토샵만이 받아낼 수 있습니다."</div>
+      </div>
+    </div>
+
+    <!-- 일러스트 -->
+    <div class="prog">
+      <div class="prog-head"><div class="prog-num">02</div><h3>일러스트레이터 <span class="en">Illustrator</span></h3></div>
+      <div class="prog-body">
+        <div class="prog-row"><span class="prog-label lb-market">시장 · 취업</span>
+          <p>로고·패키지·굿즈·간판·인쇄물: 이 시장 전체가 벡터 기반입니다. 브랜딩·패키지 디자이너 채용에서 일러스트는 선택이 아니라 전제 조건입니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-limit">AI의 실제 한계</span>
+          <p>여기가 AI의 가장 명확한 약점입니다. AI 생성은 <b>픽셀(래스터)</b>을 만들지만 로고·패키지는 <b>벡터</b>여야 합니다. 간판 크기로 키워도 깨지지 않고, 인쇄소에 넘길 칼선 데이터가 있고, 별색(Pantone) 지정이 가능해야 합니다. AI가 뽑은 로고 시안은 "그림"일 뿐, 상표 등록·인쇄·굿즈 제작에 쓸 "데이터"가 아닙니다. <b>시안에서 납품물로 넘어가는 다리가 일러스트</b>이며, 패키지 칼선 설계는 AI가 접근조차 못 하는 영역입니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-inside">툴 속의 AI</span>
+          <p>Firefly 벡터 생성, 자동 트레이스 고도화: 그러나 생성된 벡터의 패스 정리와 앵커포인트 최적화는 결국 펜툴을 아는 사람의 손에서 완성됩니다.</p></div>
+        <div class="prog-quote">"AI가 그린 로고는 그림이고, 일러스트로 만든 로고는 재산(등록 가능한 데이터)입니다."</div>
+      </div>
+    </div>
+
+    <!-- 인디자인 -->
+    <div class="prog">
+      <div class="prog-head"><div class="prog-num">03</div><h3>인디자인 <span class="en">InDesign</span></h3></div>
+      <div class="prog-body">
+        <div class="prog-row"><span class="prog-label lb-market">시장 · 취업</span>
+          <p>편집·출판·사보·브로슈어·전자책 시장의 유일한 표준입니다. 대체 툴 자체가 없어서, 이 직군에서는 <b>인디자인 = 직무 그 자체</b>입니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-limit">AI의 실제 한계</span>
+          <p>AI는 카피·목차·이미지를 만들어줄 수 있지만, <b>수십 페이지의 조판 시스템</b> 마스터 페이지, 스타일 시트, 그리드, 흘림 텍스트, 인쇄용 재단선·도련: 은 만들지 못합니다. 40페이지 브로슈어에서 폰트 하나를 바꾸는 작업이 AI에겐 40번의 재생성이지만, 인디자인에선 스타일 시트 클릭 한 번입니다. 구조를 설계하는 툴은 생성형 AI와 작동 원리 자체가 다릅니다.</p></div>
+        <div class="prog-quote">"AI는 한 페이지를 만들고, 인디자인은 100페이지를 관리합니다. 출판은 관리의 기술입니다."</div>
+      </div>
+    </div>
+
+    <!-- 프리미어 -->
+    <div class="prog">
+      <div class="prog-head"><div class="prog-num">04</div><h3>프리미어 프로 <span class="en">Premiere Pro</span></h3></div>
+      <div class="prog-body">
+        <div class="prog-row"><span class="prog-label lb-market">시장 · 취업</span>
+          <p>유튜브·숏폼·광고·방송까지 영상 편집 수요는 AI 시대에 오히려 폭증했습니다. <b>콘텐츠 생산량이 늘수록 편집자 수요도 늘어나는 구조</b>입니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-limit">AI의 실제 한계</span>
+          <p>AI 자동 컷편집·자막 생성은 이미 실용화됐습니다. 하지만 편집의 본질은 자르는 기술이 아니라 <b>"어디서 자를지 판단하는 리듬감"</b>입니다. 어떤 컷에서 긴장을 만들고, 어디서 음악을 치고 들어갈지. AI는 평균적인 편집을 하고, 사람은 의도가 있는 편집을 합니다. 그리고 "3초 앞으로 당기고 BGM 교체" 같은 클라이언트 피드백은 타임라인을 다루는 사람만 처리할 수 있습니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-inside">툴 속의 AI</span>
+          <p>문장 기반 편집(텍스트로 컷 편집)·자동 문자 생성·AI 오디오 정리: 전부 프리미어 안에서 돌아갑니다. 툴을 알면 편집 속도가 2배가 되는 것이지, 툴 없이 AI만으로 편집이 되는 게 아닙니다.</p></div>
+        <div class="prog-quote">"AI는 컷을 자르고, 편집자는 심장 박동을 자릅니다. 리듬은 타임라인 위에서만 배웁니다."</div>
+      </div>
+    </div>
+
+    <!-- 에펙 -->
+    <div class="prog">
+      <div class="prog-head"><div class="prog-num">05</div><h3>애프터이펙트 <span class="en">After Effects</span></h3></div>
+      <div class="prog-body">
+        <div class="prog-row"><span class="prog-label lb-market">시장 · 취업</span>
+          <p>모션그래픽·광고·앱 UI 모션·방송 그래픽의 산업 표준. 브랜드 영상, 인포그래픽 영상, 로고 모션 등 <b>"정확한 통제가 필요한 움직임" 시장은 전부 에펙</b>입니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-limit">AI의 실제 한계</span>
+          <p>Sora·Veo 같은 영상 생성 AI가 만드는 건 "장면"입니다. 모션그래픽 실무가 요구하는 건 <b>"브랜드 로고가 정확히 0.5초에, 지정된 컬러로, 지정된 곡선(이징)으로 등장하는 것"</b>입니다. 생성형 AI는 확률적으로 움직임을 만들 뿐, 키프레임 단위의 정밀 통제가 불가능합니다. 브랜드 가이드를 1픽셀 단위로 지키는 작업은 키프레임·그래프 에디터·익스프레션의 영역이며, 대체 전망 자체가 없습니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-inside">툴 속의 AI</span>
+          <p>AI 로토브러시(자동 누끼 추적)·콘텐츠 인식 채우기: 과거 하루 걸리던 로토스코핑이 몇 분으로 줄었습니다. 에펙을 아는 사람의 생산성이 AI 덕분에 폭등한 것이지, 에펙이 필요 없어진 게 아닙니다.</p></div>
+        <div class="prog-quote">"AI 영상은 '우연히 멋진 장면'을 만들고, 에펙은 '의도한 그대로의 장면'을 만듭니다. 광고주는 우연에 돈을 주지 않습니다."</div>
+      </div>
+    </div>
+
+    <!-- 시포디 -->
+    <div class="prog">
+      <div class="prog-head"><div class="prog-num">06</div><h3>시네마4D <span class="en">Cinema 4D</span></h3></div>
+      <div class="prog-body">
+        <div class="prog-row"><span class="prog-label lb-market">시장 · 취업</span>
+          <p>3D 모션그래픽·광고·브랜드 필름·앨범 아트·전시 영상의 표준. 대기업 브랜드 영상부터 뮤직비디오까지 "고급 3D 그래픽" 시장이 곧 시포디 시장이며, <b>모션 디자이너의 연봉 상단을 가르는 기술이 2D(에펙)→3D(시포디) 전환 능력</b>입니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-limit">AI의 실제 한계</span>
+          <p>Meshy·Tripo 같은 3D 생성 AI가 모델을 뽑아주지만, 토폴로지(면 구조)가 엉망이라 애니메이션·정밀 렌더링에 그대로 못 씁니다. 3D의 진짜 가치는 모델링이 아니라 <b>라이팅·질감·카메라 연출·렌더링(Octane/Redshift)</b> "장면을 연출하는 능력"이며, 씬을 직접 구성해본 사람만 가질 수 있습니다. 본사 설계 문서에서도 고숙련 3D 계열은 "AI 대체 불가 영역: 핵심 유지"로 명시되어 있습니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-inside">툴 속의 AI</span>
+          <p>AI 생성 모델을 가져와 리토폴로지하고, 씬에 배치하고, 라이팅을 치고, 렌더링하는 것: AI가 재료를 주면 시포디가 완성합니다. 타임 인버전 그 자체입니다.</p></div>
+        <div class="prog-quote">"AI는 3D 덩어리를 주지만, 그걸 '작품'으로 만드는 조명과 카메라는 사람의 연출입니다."</div>
+      </div>
+    </div>
+
+    <!-- 캐드 -->
+    <div class="prog cad">
+      <div class="prog-head"><div class="prog-num">07</div><h3>오토캐드 <span class="en">AutoCAD</span></h3></div>
+      <div class="cad-note">※ 다른 툴이 "AI 80% + 툴 20%"라면, 캐드는 정확성이 100%여야 하는 영역: AI에게 위임 가능한 지분 자체가 구조적으로 가장 작은 툴입니다.</div>
+      <div class="prog-body">
+        <div class="prog-row"><span class="prog-label lb-market">시장 · 취업</span>
+          <p>인테리어·건축·기계설계·시공: 이 산업 전체의 공용 언어가 캐드 도면입니다. 인테리어 회사·설계사무소·시공사·가구·전시 업체까지 자격요건 1순위는 변함없이 "AutoCAD 가능자"이며, <b>전산응용건축제도·전산응용기계제도 등 국가자격증 시험 자체가 캐드 기반</b>이라 자격증 취업 루트에서도 우회로가 없습니다. 배워두면 인테리어→건축→기계→전시·무대→가구까지 산업을 옮겨 다닐 수 있는 몇 안 되는 툴로, 40~50대 재취업 시장에서도 수요가 꾸준합니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-limit">AI의 실제 한계</span>
+          <p><b>도면은 그림이 아니라 법적·계약적 문서입니다.</b> 치수가 10mm 틀리면 현장에서 벽이 안 맞고 책임은 도면 작성자가 집니다. AI의 "대략 맞는" 확률적 생성은 이 시장에서 허용 자체가 안 됩니다. 인허가(건축 신고·소방·구조 검토) 제출 도면은 규정된 표기법(선 종류·치수 기입·축척·레이어 체계)을 따라야 하고, 시공 현장과의 소통은 렌더링이 아니라 평면도·천장도·전개도로 이뤄집니다. 도면을 못 그리면 아무리 예쁜 3D를 만들어도 시공 지시를 못 합니다.</p></div>
+        <div class="prog-row"><span class="prog-label lb-inside">툴 속의 AI</span>
+          <p>AI는 캐드를 대체하는 게 아니라 <b>캐드의 앞뒤 공정에 붙었습니다.</b> 앞단은 AI 공간 배치 제안·컨셉 스케치·조닝, 뒷단은 도면→3D→AI 렌더링 보정 파이프라인. 그 한가운데 "컨셉을 시공 가능한 치수로 확정하는 단계"는 여전히 캐드이며, 도면을 읽을 줄 모르면 AI가 제안한 공간 배치가 실현 가능한지조차 판단할 수 없습니다.</p></div>
+        <div class="prog-quote">"포토샵이 틀리면 다시 그리면 되지만, 도면이 틀리면 벽을 부숩니다. 도면은 그림이 아니라 계약서입니다. AI는 아이디어를 내고, 캐드는 책임을 집니다. 산업은 책임질 수 있는 사람을 고용합니다."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 요약표 -->
+  <section>
+    <div class="sec-head"><h2>한 장 요약</h2><span class="tag">상담 데스크 비치용</span></div>
+    <table>
+      <thead><tr><th>프로그램</th><th>AI가 하는 것 (초안 80%)</th><th>툴을 아는 사람만 하는 것 (완성 20%)</th></tr></thead>
+      <tbody>
+        <tr><td>포토샵</td><td>이미지 생성</td><td>부분 수정 · 합성 · 인쇄 규격 · 수정 요청 대응</td></tr>
+        <tr><td>일러스트</td><td>그림(픽셀)</td><td>벡터 데이터 · 칼선 · 별색 · 등록 가능한 로고</td></tr>
+        <tr><td>인디자인</td><td>한 페이지</td><td>100페이지 조판 시스템 관리</td></tr>
+        <tr><td>프리미어</td><td>자동 컷 · 자막</td><td>리듬 · 의도 · 피드백 대응</td></tr>
+        <tr><td>에펙</td><td>우연한 장면</td><td>키프레임 단위 정밀 통제</td></tr>
+        <tr><td>시포디</td><td>3D 덩어리</td><td>라이팅 · 카메라 연출 · 렌더링</td></tr>
+        <tr><td>캐드</td><td>공간 배치 아이디어</td><td>시공 가능한 치수 확정 · 인허가 도면 · 현장 소통</td></tr>
+      </tbody>
+    </table>
+    <div class="tbl-note">채용 · 외주 단가 · 포트폴리오 평가는 전부 오른쪽 열에서 결정됩니다. 전통 툴 수업은 'AI 이전 시대의 수업'이 아니라, <span style="color:var(--gold)">AI 결과물을 판단하고 완성하는 눈과 손을 만드는 수업</span>입니다.</div>
+  </section>
+
+  <!-- 4. 스피치 -->
+  <section>
+    <div class="sec-head"><h2>상담 · 설명용 스피치</h2><span class="tag">5일 한정 50% 프로모션 연계</span></div>
+    <div class="speech">
+      <div class="speech-part">
+        <span class="cue">① 오프닝: 질문 되돌리기</span>
+        <p>요즘 상담 오시면 다들 똑같이 물어보세요. "AI가 다 해주는데, 포토샵을 굳이 배워야 하나요?" 반대로 여쭤볼게요. AI가 뽑아준 이미지, 그대로 클라이언트한테 낼 수 있을까요? 현업에서는 못 냅니다. 글자가 깨지고, 인쇄 해상도가 안 나옵니다. 그래서 지금 현업 디자이너들의 표준 작업 방식이 <b>"AI로 80%를 뽑고, 포토샵·일러스트·에펙으로 나머지 20%를 완성한다"</b>입니다. 그리고 회사가 월급을 주는 이유는 그 마지막 20% 때문입니다.</p>
+      </div>
+      <div class="speech-part">
+        <span class="cue">② 팩트: 채용공고</span>
+        <p>채용공고를 열어보세요. AI 활용은 '우대사항'입니다. 포토샵, 일러스트, 애프터이펙트는 여전히 '자격요건', 필수란에 있습니다. <b>AI만 쓸 줄 아는 사람은 뽑지 않습니다. 툴을 아는 사람이 AI까지 쓰면 뽑습니다.</b></p>
+      </div>
+      <div class="speech-part">
+        <span class="cue">③ 반전: AI는 툴 안에 있다</span>
+        <p>하나 더요. 지금 가장 좋은 AI가 어디 들어있는지 아세요? 포토샵 안에 있습니다. 생성형 채우기, 벡터 생성, AI 로토스코핑: 전부 어도비 툴 안에 탑재됐습니다. 포토샵을 모르면 그 AI조차 못 씁니다. <b>AI가 툴을 없앤 게 아니라, 툴 안으로 들어온 겁니다.</b></p>
+      </div>
+      <div class="speech-part">
+        <span class="cue">④ 정의: 수업의 재정의</span>
+        <p>그래서 저희는 이렇게 말씀드립니다. 전통 툴 수업은 'AI 이전 시대의 수업'이 아니라, <b>AI 결과물을 판단하고 완성하는 눈과 손을 만드는 수업</b>입니다. 이 기본기가 있는 사람과 없는 사람은 포트폴리오에서, 그리고 연봉 협상에서 갈립니다.</p>
+      </div>
+      <div class="promo-box">
+        <div class="pb-tag">⑤ 클로징: 프로모션</div>
+        <p>마침 오늘부터 딱 5일간, 포토샵·일러스트·에펙·시네마4D 등 전통 툴 정규과정을 <b>50% 할인</b>으로 열어드립니다. AI 시대라서 할인하는 게 아니라, AI 시대일수록 기본기의 가치가 올라가기 때문에: 진입 문턱만 낮춰드리는 겁니다. 5일 이후엔 정상가로 돌아갑니다. 시작하실 거라면, <b>지금이 가장 좋은 조건입니다.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>SBS아카데미컴퓨터아트 · 전통 툴 교육 가치 정리본</span>
+    <span>내부 상담 · 강사 공유용 / 2026.07</span>
+  </footer>
+
+</div>
+</body>
+</html>
