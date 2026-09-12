@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>네이버리뷰 안내</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* 260908: 화면 폰트 Freesentation(design-system 7절 타이포). 400·700·900 세 굵기만 싣는다.
+   이 생성기가 만드는 md·office 변환본도 배포되는 링크라 손으로 만든 HTML과 같은 글꼴을 쓴다. */
+@font-face{font-family:"Freesentation";font-style:normal;font-weight:400;font-display:swap;src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2") format("woff2")}
+@font-face{font-family:"Freesentation";font-style:normal;font-weight:700;font-display:swap;src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2") format("woff2")}
+@font-face{font-family:"Freesentation";font-style:normal;font-weight:900;font-display:swap;src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2") format("woff2")}
+:root{--paper:#F0F8FF;--white:#FFFFFF;--ink:#0B1220;--ink-2:#2C3444;--line:#DCE6F5;
+ --brand-ink:#1C3E92;--brand-soft:#E8EFFF;
+ --font:"Freesentation",'Pretendard Variable',Pretendard,-apple-system,'Segoe UI','Malgun Gothic',sans-serif}
+/* 260910: 폰 다크 모드 대응(수강생이 고른 설정이라 따른다). 면이 바탕보다 밝다. */
+@media(prefers-color-scheme:dark){
+ :root{--paper:#151728;--white:#1E2238;--ink:#E9EEFC;--ink-2:#B5BEE3;--line:#323758;
+  --brand-ink:#99ADFF;--brand-soft:#1D2F5E}
+}
+*{box-sizing:border-box}
+/* 260910: 크기는 전부 rem, 배율은 뿌리 한 줄. 아래 막대가 이 값을 바꾼다. */
+html{font-size:calc(16px * var(--scale,1))}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);
+ font-size:1.1875rem;font-weight:400;line-height:1.8;word-break:keep-all}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 64px}
+header{background:var(--white);border-bottom:2px solid var(--ink);padding:32px 0 24px;margin-bottom:32px}
+header .wrap{padding-bottom:0}
+h1{font-size:clamp(1.75rem,6vw,2.25rem);font-weight:800;letter-spacing:-.01em;line-height:1.3;margin:0}
+h2{font-size:1.625rem;font-weight:800;letter-spacing:-.01em;line-height:1.35;margin:40px 0 10px}
+h3{font-size:1.3125rem;font-weight:700;margin:28px 0 8px;color:var(--brand-ink)}
+h4,h5,h6{font-size:1.1875rem;font-weight:700;margin:22px 0 6px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 16px;padding-left:24px}
+li{margin:6px 0}
+table{width:100%;border-collapse:collapse;background:var(--white);margin:16px 0;font-size:1.0625rem}
+caption{text-align:left;font-weight:700;color:var(--ink-2);padding:0 0 6px;font-size:1rem}
+th{background:var(--brand-soft);color:var(--ink);font-weight:700;text-align:left;padding:10px 12px;border:1px solid var(--line)}
+td{padding:10px 12px;border:1px solid var(--line);vertical-align:top}
+blockquote{margin:16px 0;padding:0 0 0 16px;border-left:2px solid var(--brand-ink);color:var(--ink-2)}
+blockquote p:last-child{margin:0}
+pre{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:14px 16px;overflow-x:auto;font-size:1rem}
+code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1rem}
+hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+a{color:var(--brand-ink)}
+:focus-visible{outline:3px solid var(--brand-ink);outline-offset:2px}
+.src{margin-top:32px;padding-top:14px;border-top:2px solid var(--ink);font-size:1rem;color:var(--ink-2)}
+/* 본문 건너뛰기(260910). 평소에는 화면 밖에 있다가 키보드 초점이 오면 나타난다. */
+.skip{position:absolute;left:-9999px;top:8px;z-index:99;padding:10px 16px;border-radius:8px;
+ background:var(--brand-ink);color:#fff;font-weight:700;text-decoration:none}
+.skip:focus{left:8px}
+/* 글자 크기 조절 막대(260910). 손잡이 18×18·radius 5px, 막대 높이 44px */
+.fsbar{display:flex;justify-content:flex-end;align-items:center;gap:10px;min-height:48px}
+.fsbar .lb,.fsbar output{font-size:1rem;font-weight:700;color:var(--brand-ink);white-space:nowrap}
+.fsbar output{min-width:4.4em}
+.fsbar input{-webkit-appearance:none;appearance:none;width:120px;height:44px;margin:0;padding:0;background:none;cursor:pointer}
+.fsbar input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--line)}
+.fsbar input::-moz-range-track{height:6px;border-radius:3px;background:var(--line)}
+.fsbar input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;
+ margin-top:-6px;border-radius:5px;background:var(--brand-ink);border:0}
+.fsbar input::-moz-range-thumb{width:18px;height:18px;border-radius:5px;background:var(--brand-ink);border:0}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;
+ transition-duration:.01ms!important;scroll-behavior:auto!important}}
+/* 각주(260829). 본문에는 번호만 두고 근거는 아래로 내린다. 번호도 16px 아래로 내리지 않는다. */
+sup.fnref{font-size:1rem;font-weight:700;line-height:1;vertical-align:super;margin-left:2px}
+sup.fnref a{display:inline-block;min-width:22px;text-align:center;padding:0 4px;
+ color:var(--brand-ink);font-weight:700;text-decoration:none}
+sup.fnref a:hover{text-decoration:underline}
+.fns{margin-top:40px;padding-top:8px;border-top:2px solid var(--ink)}
+.fns h2{font-size:1.3125rem;font-weight:800;margin:18px 0 12px}
+.fns ol{list-style:none;margin:0;padding:0;counter-reset:fn}
+.fns li{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:1.0625rem;line-height:1.7}
+.fns li:first-child{border-top:0}
+.fns li:target{background:var(--brand-soft);border-radius:8px;padding-left:12px;padding-right:12px}
+.fns .n{flex:0 0 auto;min-width:26px;font-weight:800;color:var(--brand-ink);font-variant-numeric:tabular-nums}
+.fns .t{flex:1;min-width:0;color:var(--ink-2)}
+.fns .back{display:inline-block;min-height:44px;line-height:44px;margin-left:8px;font-size:1rem;
+ font-weight:700;color:var(--brand-ink);text-decoration:none;white-space:nowrap}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header><div class="wrap"><div class="fsbar" role="group" aria-label="글자 크기"><span class="lb" aria-hidden="true">글자</span><input id="fsr" type="range" min="0" max="2" step="1" value="0" aria-label="글자 크기" aria-valuetext="보통"><output for="fsr" id="fsout">보통</output></div><h1>네이버리뷰 안내</h1></div></header>
+<main id="main" class="wrap"><p>#네이버리뷰 #포토리뷰 #리뷰작성법 #리뷰할인</p>
+<p>✨ 네이버리뷰 안내</p>
+<ol>
+<li>네이버 마이플레이스(https://m.place.naver.com/my) 접속</li>
+<li>우측 하단의 '리뷰 쓰기' 클릭</li>
+<li>영수증 인증하기</li>
+<li>선택지 3개 클릭 후 다음으로 이동</li>
+<li>리뷰란에 오영선 멘토에게 에이전트 과정 상담받았습니다. 입력 후 리뷰 등록</li>
+<li>완료된 화면 담당 멘토에게 캡쳐 후 발송</li>
+</ol><p class="src">원본 문서: 네이버리뷰 안내.md · 폰에서 읽도록 옮긴 것입니다.</p></main>
+
+<script>
+(function(){
+ var S=[{k:'m',l:'보통',s:1},{k:'l',l:'크게',s:1.15},{k:'xl',l:'아주 크게',s:1.3}];
+ var r=document.getElementById('fsr'),o=document.getElementById('fsout'),i=0;
+ try{var k=localStorage.getItem('guide-size');if(k){i=Math.max(0,S.map(function(x){return x.k;}).indexOf(k));}}catch(e){}
+ function ap(){var s=S[i];document.documentElement.style.setProperty('--scale',s.s);
+  if(r){r.value=i;r.setAttribute('aria-valuetext',s.l);}if(o){o.textContent=s.l;}}
+ if(r)r.addEventListener('input',function(){i=Math.max(0,Math.min(2,parseInt(r.value,10)||0));
+  try{localStorage.setItem('guide-size',S[i].k);}catch(e){}ap();});
+ ap();
+})();
+</script>
+</body>
+</html>

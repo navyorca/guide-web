@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>클로드로 배우는 세 과정</title>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2">
+<style>
+@font-face{font-family:"Freesentation";font-style:normal;font-weight:400;font-display:swap;src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2") format("woff2")}
+@font-face{font-family:"Freesentation";font-style:normal;font-weight:700;font-display:swap;src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2") format("woff2")}
+@font-face{font-family:"Freesentation";font-style:normal;font-weight:900;font-display:swap;src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-9Black.woff2") format("woff2")}
+
+:root{
+  --paper:#F0F8FF; --white:#FFFFFF;
+  --ink:#0B1220; --ink-2:#2C3444;
+  --line:#C3CAD8; --line-soft:#F1F3F8;
+  --brand:#2F6BFF; --brand-ink:#1C3E92; --brand-soft:#E8EFFF; --brand-deep:#122A5E;
+  --peri:#A7B4F0;
+  --fs-h0:3.25rem; --fs-h1:2.75rem; --fs-h2:2rem; --fs-h3:1.5625rem;
+  --fs-h4:1.3125rem; --fs-p1:1.1875rem; --fs-p2:1.0625rem; --fs-p3:1rem;
+  --sh-sm:0 2px 8px rgba(10,17,40,.06);
+}
+@media (max-width:768px){
+  :root{ --fs-h0:2.25rem; --fs-h1:2rem; --fs-h2:1.625rem; --fs-h3:1.375rem; --fs-h4:1.25rem; }
+}
+html{font-size:calc(16px * var(--scale,1));scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--white);color:var(--ink);
+  font-family:"Freesentation","Pretendard Variable",system-ui,sans-serif;
+  font-size:var(--fs-p1);font-weight:400;line-height:1.8;
+  word-break:keep-all;-webkit-text-size-adjust:100%;
+}
+h1,h2,h3,h4{margin:0;line-height:1.28;letter-spacing:-0.01em}
+h1{font-size:var(--fs-h1);font-weight:900}
+h2{font-size:var(--fs-h2);font-weight:900}
+h3{font-size:var(--fs-h3);font-weight:700}
+h4{font-size:var(--fs-h4);font-weight:700}
+p{margin:0}
+a{color:var(--brand-ink)}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+@media (max-width:768px){ .wrap{padding:0 20px} }
+.sec{padding:96px 0;border-bottom:1px solid var(--line-soft)}
+@media (max-width:768px){ .sec{padding:72px 0} }
+.paper{background:var(--paper)}
+.eyebrow{font-size:var(--fs-p3);font-weight:700;color:var(--brand-ink);letter-spacing:.04em;margin-bottom:10px}
+.sec-head{margin-bottom:48px;max-width:760px}
+.sec-head p{font-size:var(--fs-p1);color:var(--ink-2);margin-top:14px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{position:static;display:inline-block;padding:12px 18px;background:var(--brand-ink);color:#fff;font-weight:700}
+
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--brand-ink);z-index:60}
+
+/* 열람기한 (260910 · 공유 후 일주일) */
+.expiry{background:var(--brand-soft);border-bottom:2px solid var(--brand-ink);padding:14px 0}
+.expiry .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}
+.expiry b{font-size:var(--fs-p3);font-weight:800;color:var(--brand-ink)}
+.expiry span{font-size:var(--fs-p3);color:var(--ink-2)}
+.gone{min-height:70vh;display:flex;align-items:center;justify-content:center;padding:56px 24px;text-align:center}
+.gone h1{font-size:var(--fs-h2);margin-bottom:16px}
+.gone p{color:var(--ink-2);font-size:var(--fs-p1);max-width:34em;margin:0 auto}
+
+header{background:var(--white);border-bottom:2px solid var(--ink);padding:56px 0 40px}
+.h-top{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between}
+.h-top h1{max-width:18ch}
+.lead{font-size:var(--fs-p1);color:var(--ink-2);margin-top:16px;max-width:64ch}
+.scaler{display:flex;align-items:center;gap:12px;min-height:44px}
+.scaler label{font-size:var(--fs-p3);font-weight:700;color:var(--ink-2)}
+.scaler input[type=range]{width:150px;height:44px;accent-color:var(--brand-ink);background:none}
+.scaler output{font-size:var(--fs-p3);font-weight:700;color:var(--brand-ink);min-width:5.5em}
+
+nav.toc{background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+nav.toc ul{display:flex;gap:0;list-style:none;margin:0;padding:0;overflow-x:auto}
+nav.toc a{
+  display:flex;align-items:center;min-height:48px;padding:0 14px;
+  font-size:var(--fs-p3);font-weight:700;color:var(--ink-2);text-decoration:none;
+  border:0;border-radius:0;background:none;border-bottom:3px solid transparent;
+  margin-bottom:-1px;white-space:nowrap;
+}
+nav.toc a[aria-current="true"]{color:var(--brand-ink);font-weight:800;border-bottom-color:var(--brand-ink)}
+@media (max-width:720px){ nav.toc{position:static} }
+
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--white)}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{padding:16px 18px;text-align:left;vertical-align:top;font-size:var(--fs-p2);border-bottom:1px solid var(--line-soft)}
+thead th{font-size:var(--fs-p3);font-weight:800;color:var(--brand-ink);background:var(--brand-soft);border-bottom:2px solid var(--line)}
+tbody th{font-weight:700;color:var(--ink);white-space:nowrap;background:var(--paper)}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+.num{font-variant-numeric:tabular-nums}
+
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media (max-width:980px){ .grid3{grid-template-columns:1fr} }
+.card{
+  background:var(--white);border-radius:12px;border:1px solid var(--line);
+  border-bottom:3px solid var(--ink);padding:28px 30px;box-shadow:var(--sh-sm);
+}
+.card .ic{width:32px;height:32px;color:var(--brand-ink);display:block;margin-bottom:14px}
+.card h3{margin-bottom:6px}
+.card .alt{font-size:var(--fs-p3);font-weight:700;color:var(--brand-ink);margin-bottom:14px}
+.card .def{font-size:var(--fs-p1);color:var(--ink);margin-bottom:18px}
+.card dl{margin:0;padding-top:18px;border-top:1px solid var(--line-soft)}
+.card dt{font-size:var(--fs-p3);font-weight:700;color:var(--ink-2);margin-top:14px}
+.card dt:first-child{margin-top:0}
+.card dd{margin:4px 0 0;font-size:var(--fs-p2);color:var(--ink)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tag{background:var(--peri);color:var(--ink);border-radius:6px;padding:5px 12px;font-size:var(--fs-p3);font-weight:700}
+
+/* 같은 시각 두 반 갈라 놓기 */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media (max-width:880px){ .split{grid-template-columns:1fr} }
+.split .card h4{margin-bottom:4px}
+.split .room{font-size:var(--fs-h3);font-weight:900;color:var(--brand-ink);margin:10px 0 6px}
+.split .card dd{font-size:var(--fs-p2)}
+
+.pick{list-style:none;margin:0;padding:0}
+.pick li{display:flex;gap:20px;padding:18px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+.pick li:last-child{border-bottom:0}
+.pick .when{flex:0 0 34%;font-size:var(--fs-p1);font-weight:700}
+.pick .then{flex:1;font-size:var(--fs-p2);color:var(--ink-2)}
+@media (max-width:720px){ .pick li{flex-direction:column;gap:6px} .pick .when{flex:auto} }
+
+.note{background:var(--brand-soft);color:var(--ink-2);border-radius:12px;padding:20px 24px;font-size:1.125rem;margin-top:28px}
+.note strong{color:var(--brand-ink);font-weight:700}
+
+footer{background:var(--white);border-top:2px solid var(--ink);padding:40px 0 56px}
+footer p{font-size:var(--fs-p2);color:var(--ink-2)}
+.top{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;margin-top:18px;
+  border:1px solid var(--line);border-radius:8px;background:var(--white);
+  font-size:var(--fs-p3);font-weight:700;color:var(--brand-ink);text-decoration:none}
+
+@media (prefers-reduced-motion:no-preference){
+  nav.toc a{transition:color .2s ease,border-color .2s ease}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M18.5 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>
+  </symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
+  </symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9S14.6 18.4 12 21c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/>
+  </symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 21V4M5 4h11l-2 3.5L16 11H5"/>
+  </symbol>
+</svg>
+
+<div id="bar" role="presentation"></div>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<div class="expiry" id="expiryBar">
+  <div class="wrap">
+    <b>열람기한 2026년 9월 17일 18:00까지</b>
+    <span>기한이 지나면 이 페이지는 안내 화면으로 바뀝니다. 이후에도 필요하시면 담당 멘토에게 요청해 주세요.</span>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <div class="h-top">
+      <div>
+        <p class="eyebrow">2026년 10월 개강분 기준</p>
+        <h1>클로드로 배우는 세 과정</h1>
+      </div>
+      <div class="scaler">
+        <label for="fs">글씨 크기</label>
+        <input type="range" id="fs" min="0" max="2" step="1" value="0" aria-label="글씨 크기 조절" aria-valuetext="보통">
+        <output for="fs" id="fsOut">보통</output>
+      </div>
+    </div>
+    <p class="lead">Claude Code를 도구로 쓰는 과정은 셋입니다. AI에이전트 · AIX 에이전트 업무자동화 · AIX 바이브코딩. 보는 순서는 금요일 두 반 구분 → 세 갈래 성격 → 한눈 비교 → 고르는 기준입니다.</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="문서 차례">
+  <div class="wrap">
+    <ul>
+      <li><a href="#friday" aria-current="true">금요일 두 반</a></li>
+      <li><a href="#three" aria-current="false">세 갈래</a></li>
+      <li><a href="#table" aria-current="false">한눈 비교</a></li>
+      <li><a href="#pick" aria-current="false">고르는 기준</a></li>
+      <li><a href="#open" aria-current="false">열리는 반</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+
+<section class="sec paper" id="friday">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">10월 23일 금요일 18:00 · 같은 시각 두 반</p>
+      <h2>먼저 금요일 두 반을 갈라 놓습니다</h2>
+      <p>10월 23일 금요일 18:00에 <strong>AI에이전트1/금</strong>과 <strong>AIX 에이전트 업무자동화/금</strong>이 나란히 열립니다. 이름·요일·시각·개강일이 겹치고 <strong>강의실만 다른 별개 반</strong>이라, 안내하실 때 강의실을 반드시 함께 적습니다.</p>
+    </div>
+    <div class="split">
+
+      <article class="card">
+        <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-spark"></use></svg>
+        <h4>AI에이전트1/금</h4>
+        <p class="room">12층V</p>
+        <p class="def">클로드 코드를 처음 잡아 보는 기초 반입니다. 기존부터 열리던 반이 그대로 이어집니다.</p>
+        <dl>
+          <dt>구성</dt><dd class="num">4시간 × 4일 · 금 18:00</dd>
+          <dt>정원</dt><dd class="num">25명 · 비대면 포함</dd>
+          <dt>기간</dt><dd class="num">2026-10-23 ~ 2026-11-13</dd>
+        </dl>
+      </article>
+
+      <article class="card">
+        <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-gear"></use></svg>
+        <h4>AIX 에이전트 업무자동화/금</h4>
+        <p class="room">06층O</p>
+        <p class="def">개편으로 새로 생긴 과정입니다. 260910 공지로 신설되어 이 차수가 첫 개강입니다.</p>
+        <dl>
+          <dt>구성</dt><dd class="num">4시간 × 4일 · 금 18:00</dd>
+          <dt>정원</dt><dd class="num">15명</dd>
+          <dt>기간</dt><dd class="num">2026-10-23 ~ 2026-11-13</dd>
+        </dl>
+      </article>
+
+    </div>
+    <p class="note"><strong>구분하는 한마디.</strong> AI에이전트는 클로드 코드를 다루는 법을 익히는 반이고, AIX 에이전트 업무자동화는 그 도구로 내 업무를 자동화하는 시스템을 만들어 나오는 반입니다. 12층V와 06층O로 갈라 적으면 헷갈릴 자리가 사라집니다.</p>
+  </div>
+</section>
+
+<section class="sec" id="three">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">셋 다 Claude Code를 씁니다</p>
+      <h2>무엇을 손에 쥐고 나오는가</h2>
+      <p>셋은 순서대로 밟는 계단이라기보다 목적이 다른 세 갈래입니다. 개편 후 AIX 모듈은 선수과목 조건이 열려 있어 어느 쪽부터 시작해도 됩니다.</p>
+    </div>
+    <div class="grid3">
+
+      <article class="card">
+        <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-spark"></use></svg>
+        <h3>AI에이전트 1 · 2</h3>
+        <p class="alt">단계당 16시간 · 기초와 심화 합쳐 32시간</p>
+        <p class="def">클로드 코드를 직접 잡고 에이전트가 어떻게 판단하고 도구를 쓰는지 익힙니다. 실행 전 승인을 받는 안전 절차까지 함께 다룹니다.</p>
+        <dl>
+          <dt>배우는 것</dt>
+          <dd>에이전트 3대 요소(판단 · 도구 사용 · 실행 전 승인) · 이메일 자동 발송과 승인 절차 · 매출 자료 분석과 보고서 초안 · 시스템 정리 · 구글 드라이브를 거쳐 폰과 태블릿에서 PC 원격 조작</dd>
+          <dt>쓰는 도구</dt>
+          <dd><span class="tags"><span class="tag">Claude Code</span><span class="tag">Node.js CLI</span><span class="tag">MCP 서버</span></span></dd>
+          <dt>진행</dt>
+          <dd>기초 8일을 마치면 심화 8일로 이어지고, 체크리스트를 통과하시면 심화부터 시작하실 수 있습니다</dd>
+          <dt>이런 분께</dt>
+          <dd>클로드 코드를 처음 다뤄 보시는 분, 어디까지 되는지 먼저 보고 싶은 분</dd>
+        </dl>
+      </article>
+
+      <article class="card">
+        <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-gear"></use></svg>
+        <h3>AIX 에이전트 업무자동화</h3>
+        <p class="alt">48시간 · 2시간 × 8일 × 3개월 · 금요일반 4시간 × 4일</p>
+        <p class="def">내가 매일 하는 업무를 잘게 나누고, 그 일을 대신 처리하는 자동화를 직접 만듭니다. 소수정예에 플립러닝으로 운영합니다.</p>
+        <dl>
+          <dt>수업 순서</dt>
+          <dd>에이전트와 명령줄 도구로 파일 다루기 → MCP와 노션 연동 → 문서 · 웹 · API 자동화 → 내 업무를 나누고 흐름 설계 → 자동화 시스템 구축과 안정화</dd>
+          <dt>쓰는 도구</dt>
+          <dd><span class="tags"><span class="tag">Claude Code</span><span class="tag">Codex</span><span class="tag">Gemini CLI</span><span class="tag">MCP · Notion</span><span class="tag">Python</span><span class="tag">Playwright</span></span></dd>
+          <dt>손에 남는 것</dt>
+          <dd>내 업무에서 실제로 처리되는 자동화 한 벌</dd>
+          <dt>이런 분께</dt>
+          <dd>업무 자동화가 필요한 재직자 · 실무자</dd>
+        </dl>
+      </article>
+
+      <article class="card">
+        <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-globe"></use></svg>
+        <h3>AIX 바이브코딩 1 · 2 · 3</h3>
+        <p class="alt">90시간 · 3시간 × 10일 × 3개월</p>
+        <p class="def">기획부터 배포까지 밟아 실제 주소가 살아 있는 서비스를 완성합니다. 정원 12명에 오류는 일대일로 잡아 드립니다.</p>
+        <dl>
+          <dt>수업 순서</dt>
+          <dd>도구 세팅과 첫 배포 체험 → 종이 설계(기획 · 기능 · 화면) → 정적 화면과 HTML · CSS 읽는 법 → 데이터베이스 연동과 CRUD → 인증과 보안 → 오류 수정 · README · 발표</dd>
+          <dt>쓰는 도구</dt>
+          <dd><span class="tags"><span class="tag">Claude Code</span><span class="tag">Cursor</span><span class="tag">GitHub</span><span class="tag">Vercel</span><span class="tag">Supabase</span><span class="tag">Figma MCP</span></span></dd>
+          <dt>손에 남는 것</dt>
+          <dd>로그인과 데이터 저장이 되는 배포 주소 · 저장소와 README · 발표 자료</dd>
+          <dt>이런 분께</dt>
+          <dd>코딩을 처음 접해도 서비스를 만들어 보고 싶은 분</dd>
+        </dl>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec paper" id="table">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">한 줄씩 맞대어 보기</p>
+      <h2>한눈 비교</h2>
+      <p>같은 항목을 나란히 놓아 어디가 갈리는지 보이게 정리했습니다. 수강료는 상담 자리에서 안내해 드립니다.</p>
+    </div>
+    <div class="tablebox">
+      <table>
+        <caption class="skip">세 과정의 구성·정원·도구·결과물 비교</caption>
+        <thead>
+          <tr>
+            <th scope="col">항목</th>
+            <th scope="col">AI에이전트 1 · 2</th>
+            <th scope="col">AIX 에이전트 업무자동화</th>
+            <th scope="col">AIX 바이브코딩 1 · 2 · 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">한 줄 정의</th>
+            <td>클로드 코드를 다루는 법을 익힌다</td>
+            <td>그 도구로 내 업무를 자동화한다</td>
+            <td>그 도구로 서비스를 만들어 배포한다</td>
+          </tr>
+          <tr>
+            <th scope="row">전체 시수</th>
+            <td class="num">32시간 · 기초 16 + 심화 16</td>
+            <td class="num">48시간 · 3단계</td>
+            <td class="num">90시간 · 3단계</td>
+          </tr>
+          <tr>
+            <th scope="row">회차 구성</th>
+            <td class="num">평일반 2시간 × 8일<br>금요일반 4시간 × 4일</td>
+            <td class="num">평일반 2시간 × 8일 × 3개월<br>금요일반 4시간 × 4일</td>
+            <td class="num">3시간 × 10일 × 3개월</td>
+          </tr>
+          <tr>
+            <th scope="row">정원</th>
+            <td class="num">25명 · 비대면 포함</td>
+            <td class="num">금요일반 15명<br>개편 기준 12명 플립러닝</td>
+            <td class="num">12명 · 오류 일대일 대응</td>
+          </tr>
+          <tr>
+            <th scope="row">쓰는 도구</th>
+            <td>Claude Code · Node.js CLI · MCP 서버</td>
+            <td>Claude Code · Codex · Gemini CLI · MCP · Notion · Python · Playwright</td>
+            <td>Claude Code · Cursor · GitHub · Vercel · Supabase · Figma MCP</td>
+          </tr>
+          <tr>
+            <th scope="row">손에 남는 것</th>
+            <td>클로드 코드로 직접 돌려 본 자동 발송 · 자료 분석 · 원격 조작 실습</td>
+            <td>내 업무에서 실제로 처리되는 자동화 한 벌</td>
+            <td>로그인·데이터 저장이 되는 배포 주소 · README · 발표</td>
+          </tr>
+          <tr>
+            <th scope="row">이런 분께</th>
+            <td>클로드 코드를 처음 다뤄 보시는 분</td>
+            <td>업무 자동화가 필요한 재직자 · 실무자</td>
+            <td>코딩을 처음 접해도 서비스를 만들고 싶은 분</td>
+          </tr>
+          <tr>
+            <th scope="row">시작 조건</th>
+            <td>기초부터 순서대로 듣고, 체크리스트를 통과하시면 심화부터 시작하실 수 있습니다</td>
+            <td>누구나 바로 들을 수 있습니다</td>
+            <td>코딩을 처음 접해도 시작할 수 있고, 피그마를 건너뛰신 분께는 학원 템플릿을 드립니다</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><strong>두 에이전트 과정의 관계.</strong> AI에이전트는 도구를 익히는 반이고 AIX 에이전트 업무자동화는 그 도구로 결과물을 만드는 반입니다. 같은 금요일 18:00에 강의실을 달리해 함께 열리므로 두 반을 한 과정으로 묶어 안내하지 마시고 강의실을 함께 적어 주세요.</p>
+  </div>
+</section>
+
+<section class="sec" id="pick">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">목적이 정해지면 답도 정해집니다</p>
+      <h2>고르는 기준</h2>
+      <p>수강생이 이루려는 것을 먼저 듣고 그대로 이어 붙이면 됩니다.</p>
+    </div>
+    <ul class="pick">
+      <li><span class="when">클로드가 뭔지부터 보고 싶다</span><span class="then">AI에이전트1로 시작합니다. 금요일 12층V 반이면 4주 만에 마칩니다.</span></li>
+      <li><span class="when">회사 업무를 줄이고 싶다</span><span class="then">AIX 에이전트 업무자동화입니다. 금요일 06층O 반이 10월 23일에 첫 개강합니다.</span></li>
+      <li><span class="when">서비스나 앱을 만들어 보고 싶다</span><span class="then">AIX 바이브코딩입니다. 화면 설계까지 챙기시려면 AIX 피그마를 함께 놓습니다.</span></li>
+      <li><span class="when">재직자 리스킬</span><span class="then">AIX 에이전트 업무자동화 하나로 충분합니다.</span></li>
+      <li><span class="when">UX·UI 디자이너로 취업</span><span class="then">AIX 피그마에 프로젝트반을 얹고, 완성작을 바이브코딩으로 실제 주소까지 올립니다.</span></li>
+      <li><span class="when">AI 서비스로 창업</span><span class="then">AIX 바이브코딩과 AIX 이커머스 창업을 함께 놓습니다.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec paper" id="open">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">2026년 10월 개강분 실측</p>
+      <h2>지금 열리는 반</h2>
+      <p>강의실과 정원은 10월 평일반 시간표 실측값입니다. 잔여 정원은 인트라넷에서 그때그때 확인합니다.</p>
+    </div>
+    <div class="tablebox">
+      <table>
+        <caption class="skip">10월 개강분 과정별 개설 반</caption>
+        <thead>
+          <tr><th scope="col">과목</th><th scope="col">요일</th><th scope="col">시각</th><th scope="col">강의실</th><th scope="col">구성 · 정원</th><th scope="col">개강</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>AI에이전트1/B</strong></td><td>화 · 목</td><td class="num">16:00</td><td class="num">05층K</td><td class="num">2시간 × 8일 · 26명</td><td class="num">10-20</td></tr>
+          <tr><td><strong>AI에이전트1/B</strong></td><td>화 · 목</td><td class="num">20:00</td><td class="num">12층V</td><td class="num">25명 · 비대면 포함</td><td class="num">10-20</td></tr>
+          <tr><td><strong>AI에이전트1/금</strong></td><td>금</td><td class="num">18:00</td><td class="num">12층V</td><td class="num">4시간 × 4일 · 25명 · 비대면 포함</td><td class="num">10-23</td></tr>
+          <tr><td><strong>AI에이전트2/A</strong></td><td>월 · 수</td><td class="num">18:00</td><td class="num">12층V</td><td class="num">25명</td><td class="num">10-19</td></tr>
+          <tr><td><strong>AI에이전트2/A</strong></td><td>월 · 수</td><td class="num">20:00</td><td class="num">12층V</td><td class="num">25명 · 비대면 포함</td><td class="num">10-19</td></tr>
+          <tr><td><strong>AIX 에이전트 업무자동화/금</strong></td><td>금</td><td class="num">18:00</td><td class="num">06층O</td><td class="num">4시간 × 4일 · 15명</td><td class="num">10-23</td></tr>
+          <tr><td><strong>AIX 바이브코딩1</strong></td><td>월~목</td><td class="num">16:00</td><td class="num">05층C</td><td class="num">12명</td><td class="num">10-19</td></tr>
+          <tr><td><strong>AIX 바이브코딩2/B</strong></td><td>화목화목금</td><td class="num">19:00</td><td class="num">05층L</td><td class="num">3시간 × 10일 · 20명</td><td class="num">10-20</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><strong>다음 차수.</strong> AIX 에이전트 업무자동화/금은 11월 20일, 12월 18일에도 같은 자리에서 이어집니다.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>기준일 2026-09-10 · 시수와 수업 순서는 AIX 모듈개편 정본, 개설 반과 강의실은 10월 평일반 시간표 실측을 따릅니다. 수강료는 상담 자리에서 안내합니다.</p>
+    <p>OYS</p>
+    <a class="top" href="#main">맨 위로</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var LABEL=["보통","크게","아주 크게"], SCALE=[1,1.15,1.32];
+  var fs=document.getElementById("fs"), out=document.getElementById("fsOut");
+  function apply(v){
+    document.documentElement.style.setProperty("--scale",SCALE[v]);
+    out.textContent=LABEL[v]; fs.setAttribute("aria-valuetext",LABEL[v]);
+    try{ localStorage.setItem("aiCompareScale",v); }catch(e){}
+  }
+  var saved=0; try{ saved=parseInt(localStorage.getItem("aiCompareScale")||"0",10)||0; }catch(e){}
+  if(saved<0||saved>2) saved=0;
+  fs.value=saved; apply(saved);
+  fs.addEventListener("input",function(){ apply(parseInt(fs.value,10)); });
+
+  var bar=document.getElementById("bar");
+  function progress(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?(window.scrollY/h)*100:0)+"%";
+  }
+  window.addEventListener("scroll",progress,{passive:true});
+  window.addEventListener("resize",progress); progress();
+
+  var links=[].slice.call(document.querySelectorAll("nav.toc a"));
+  var secs=links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  if("IntersectionObserver" in window){
+    var spy=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var i=secs.indexOf(e.target);
+        links.forEach(function(a,j){ a.setAttribute("aria-current", j===i?"true":"false"); });
+      });
+    },{rootMargin:"-45% 0px -50% 0px"});
+    secs.forEach(function(s){ if(s) spy.observe(s); });
+  }
+})();
+</script>
+<script>
+/* 열람기한 · 260910 공유분부터 일주일 */
+(function(){
+  var deadline=new Date('2026-09-17T18:00:00+09:00').getTime();
+  function check(){
+    if(Date.now()<deadline) return;
+    document.body.innerHTML='<div class="gone"><div>'
+      +'<h1>열람기한이 지났습니다</h1>'
+      +'<p>이 자료는 2026년 9월 17일 18:00까지 열람하실 수 있도록 공유되었습니다. '
+      +'다시 보셔야 하면 담당 멘토에게 요청해 주세요.</p></div></div>';
+    document.title='열람기한 종료';
+  }
+  check();
+  setInterval(check,30000);
+})();
+</script>
+</body>
+</html>
