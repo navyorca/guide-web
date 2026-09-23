@@ -1,0 +1,2118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<style>body::after{content:"";position:fixed;inset:0;z-index:2147483647;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22260%22%3E%3Ctext%20x%3D%220%22%20y%3D%22130%22%20font-family%3D%22sans-serif%22%20font-size%3D%2215%22%20fill%3D%22%23F0F8FF%22%20fill-opacity%3D%220.30%22%20transform%3D%22rotate%28-24%20210%20130%29%22%3ESBS%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8%20%EA%B0%95%EB%82%A8%20%C2%B7%20%EC%98%A4%EC%98%81%EC%84%A0%20%EB%A9%98%ED%86%A0%20%EC%A0%9C%EA%B3%B5%3C%2Ftext%3E%3C%2Fsvg%3E") 0 0/420px 260px repeat}</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1A1A2E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>수강생 시간표 설계 v12</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Asta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style id="page-style">@page{size:A4 landscape;margin:8mm}</style>
+<style>
+/* Freesentation v2.001 Base64 (Regular 400 · Medium 500 · ExtraBold 800 · Black 900) · design-system 스킬 기준 */
+
+
+
+
+:root{
+  --mono:'JetBrains Mono',monospace;
+  --display:'Asta Sans','Pretendard','Malgun Gothic',sans-serif;
+  --body:'Asta Sans','Pretendard','Malgun Gothic',sans-serif;
+  --num:'Inter','Freesentation','Malgun Gothic',sans-serif;
+  --bg:#FFFFFF; --bg2:#FFFFFF; --bg3:#FFFFFF;
+  --text:#111111; --text2:#444444;
+  --accent:#1A1A2E; --teal:#0D9488;
+  --line:#E6E6EA; --line2:#D2D2D8;
+  --wd-fill:#FFF2CC; --we-fill:#DCE6F1; --lunch:#FCE4D6;
+  --danger:#C62828;
+  --topH:64px; --bbarH:0px;
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--body);color:var(--text);background:var(--bg2);font-size:18px;line-height:1.5;letter-spacing:-.01em;-webkit-tap-highlight-color:transparent}
+button,input,select{font-family:inherit;color:inherit}
+button{touch-action:manipulation}
+.num{font-family:var(--num);font-feature-settings:'tnum' 1}
+[hidden]{display:none!important}
+svg.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- 상단 바 ---------- */
+.top{position:sticky;top:0;z-index:40;background:var(--accent);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:calc(10px + var(--sat)) max(16px,env(safe-area-inset-right)) 10px max(16px,env(safe-area-inset-left))}
+.brand{min-width:0}
+.brand b{display:block;font-family:var(--display);font-weight:900;font-size:18px;letter-spacing:-.02em;line-height:1.3}
+.brand small{display:block;font-size:14px;color:#C4C6DC}
+.who{display:none;margin-left:auto;appearance:none;border:1px solid rgba(255,255,255,.28);background:#141489;color:#fff;border-radius:999px;padding:7px 14px;font-size:14px;font-weight:800;cursor:pointer;max-width:55%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who.empty{color:#C4C6DC;font-weight:500}
+.fields{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.fld{display:flex;align-items:center;gap:6px;background:#141489;border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:4px 10px;font-size:14px;color:#C4C6DC}
+.fld input{background:transparent;border:0;color:#fff;font-size:14px;font-weight:500;width:96px;outline:none;padding:2px 0;min-width:0}
+.fld input::placeholder{color:#8E91AE}
+.fld span{color:#fff}
+.acts{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.btn{appearance:none;border:1px solid rgba(255,255,255,.24);background:transparent;color:#fff;border-radius:8px;padding:7px 12px;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap}
+.btn:hover{background:rgba(255,255,255,.1)}
+.btn.pri{background:var(--teal);border-color:var(--teal);font-weight:800}
+.btn.pri:hover{background:#0B7F75}
+.btn.kakao{background:#FEE500;border-color:#FEE500;color:#191919;font-weight:800}
+.btn.kakao:hover{background:#F2DA00}
+.btn.mute{color:#B9BBD2}
+
+/* ---------- 레이아웃 ---------- */
+.main{display:grid;grid-template-columns:304px minmax(0,1fr);gap:16px;padding:16px;align-items:start}
+body.pal-collapsed .main{grid-template-columns:minmax(0,1fr)}
+body.pal-collapsed .palette{display:none}
+.palette{position:sticky;top:calc(var(--topH) + 16px);height:calc(100vh - var(--topH) - 32px);display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pal-h{display:none;align-items:center;justify-content:space-between;padding:16px 14px 6px;position:relative}
+.pal-h::before{content:'';position:absolute;left:50%;top:7px;width:40px;height:4px;margin-left:-20px;border-radius:2px;background:var(--line2)}
+.pal-h b{font-size:15px;font-weight:800}
+.pal-h button{appearance:none;border:0;background:var(--bg2);border-radius:8px;padding:8px 14px;font-weight:800;font-size:14px;cursor:pointer}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.tab{appearance:none;border:0;background:#fff;padding:12px 2px 10px;font-size:14px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:3px solid transparent}
+.tab.on{color:var(--text);font-weight:800;border-bottom-color:var(--accent)}
+.search{padding:10px 12px;border-bottom:1px solid var(--line)}
+.search input{width:100%;border:1px solid var(--line2);border-radius:8px;padding:8px 10px;font-size:14px;outline:none;background:#fff}
+.search input:focus{border-color:var(--accent)}
+#groups{overflow:auto;flex:1;padding:4px 12px 14px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.grp{margin-top:14px}
+.grp-h{display:flex;align-items:baseline;gap:6px;font-weight:800;font-size:14px;margin-bottom:6px;flex-wrap:wrap}
+.grp-h .dot{align-self:center}
+.grp-h small{font-weight:400;color:var(--text2);font-size:14px;flex-basis:100%;padding-left:14px;line-height:1.35}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:none}
+.chips{display:flex;flex-direction:column;gap:5px}
+.chip{position:relative;display:flex;align-items:center;gap:8px;padding:7px 10px 7px 13px;background:var(--cs);border:1px solid color-mix(in srgb,var(--c) 40%,#fff);border-radius:8px;cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:manipulation;transition:box-shadow .12s,transform .12s}
+.chip::before{content:'';position:absolute;left:-1px;top:-1px;bottom:-1px;width:5px;background:var(--c);border-radius:8px 0 0 8px}
+.chip.legacy{border-style:dashed;border-color:color-mix(in srgb,var(--c) 70%,#fff)}
+.chip.first{border:2px solid var(--text)}
+.chip.proj{background:#fff;border:1.5px solid var(--text)}
+.chip.picked{box-shadow:0 0 0 2px var(--accent)}
+.c-txt{min-width:0;flex:1}
+.c-txt b{display:block;font-weight:800;font-size:14px;line-height:1.3}
+.c-txt small{display:block;color:var(--text2);font-size:14px;line-height:1.35;margin-top:1px}
+.no{flex:none;width:20px;height:20px;border-radius:50%;background:var(--c);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.tg{font-style:normal;font-size:14px;font-weight:700;padding:1px 6px;border-radius:99px;background:#fff;border:1px solid var(--line2);color:var(--text2);white-space:nowrap;flex:none}
+.tg.warn{border-color:#E7B7B7;color:#9B2C2C}
+.cnt{flex:none;font-size:14px;font-weight:700;color:var(--teal);font-family:var(--num)}
+.empty{color:var(--text2);font-size:14px;padding:16px 4px}
+.info{border-top:1px solid var(--line);padding:12px 14px;background:var(--bg2);font-size:14px;line-height:1.55;max-height:34%;overflow:auto;color:var(--text2)}
+.info b.t{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--text);font-weight:800}
+.info .m{margin:2px 0 6px;color:var(--text2)}
+.info .pre{color:#9B2C2C;font-weight:500}
+.info .hint{margin-top:6px;color:var(--text2);font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;padding:9px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--text2)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.lg{display:inline-block;width:18px;height:11px;border-radius:3px;background:#fff;border:1px solid var(--text2)}
+.lg.dash{border-style:dashed}
+.lg.bold{border:2px solid var(--text)}
+.del-zone{display:none;position:absolute;inset:0;background:rgba(198,40,40,.07);border:3px dashed var(--danger);border-radius:14px;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:var(--danger);z-index:5;pointer-events:none}
+body.over-del .del-zone{display:flex}
+
+/* 직무 경로 탭 */
+.pctl{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:6px;margin-top:12px}
+.pctl label{display:flex;flex-direction:column;font-size:14px;color:var(--text2);gap:2px}
+.pctl select{border:1px solid var(--line2);border-radius:6px;padding:5px 4px;font-size:14px;background:#fff;min-width:0}
+.pnote{font-size:14px;color:var(--text2);margin:8px 0 0;line-height:1.45}
+.pcard{border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:10px;border-top:4px solid var(--c)}
+.pc-h{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px}
+.pc-h .dot{margin-top:6px}
+.pc-h b{display:block;font-size:14px;font-weight:800;line-height:1.3}
+.pc-h small{display:block;font-size:14px;color:var(--text2)}
+.pbtn{margin-top:8px;width:100%;appearance:none;border:1px solid var(--accent);background:#fff;color:var(--accent);border-radius:7px;padding:8px;font-size:14px;font-weight:800;cursor:pointer}
+
+/* ---------- 보드 ---------- */
+.board{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 18px 20px;min-width:0}
+.doc-head{border-bottom:2px solid var(--text);padding-bottom:10px}
+.dh-title{font-family:var(--display);font-weight:900;font-size:clamp(16px,1.6vw,22px);letter-spacing:-.02em;line-height:1.3}
+.dh-year{font-size:.72em;color:var(--text2);margin-left:8px;font-weight:700;white-space:nowrap}
+.dh-row{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center;margin-top:6px;font-size:14px;color:var(--text2)}
+.dh-notice{flex:1;min-width:220px;border:1px dashed transparent;border-radius:6px;padding:2px 4px;margin-left:-4px;font-size:14px;color:var(--text2);background:transparent;outline:none;cursor:text;word-break:keep-all}
+.dh-notice:empty::before{content:'안내 문구 입력';color:#9A9AA2}
+.dh-notice:hover,.dh-notice:focus{border-color:var(--line2)}
+.dh-legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:8px;font-size:14px;color:var(--text2)}
+.dh-legend span{display:inline-flex;align-items:center;gap:5px}
+.guide-wrap{margin-top:10px}
+.guide-wrap>summary{cursor:pointer;font-size:14px;font-weight:800;color:var(--text2);list-style:none;display:inline-flex;align-items:center;gap:6px;padding:4px 0}
+.guide-wrap>summary::-webkit-details-marker{display:none}
+.guide-wrap>summary::before{content:'▸';font-size:14px;transition:transform .15s}
+.guide-wrap[open]>summary::before{transform:rotate(90deg)}
+.guide{list-style:none;counter-reset:g;margin:6px 0 0;padding:10px 12px;background:var(--bg2);border-radius:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:6px 16px;font-size:14px;color:var(--text2)}
+.guide li{counter-increment:g;display:flex;gap:7px;line-height:1.45}
+.guide li::before{content:counter(g);flex:none;width:18px;height:18px;border-radius:50%;background:var(--accent);color:#fff;font:700 11px/18px var(--num);text-align:center;margin-top:1px}
+.guide b{color:var(--text);font-weight:800;margin-right:3px}
+.vbar{display:flex;align-items:center;gap:8px 10px;flex-wrap:wrap;margin-top:12px}
+.vstart{display:inline-flex;align-items:center;gap:0;border:1.5px solid var(--accent);border-radius:9px;overflow:hidden;background:#fff}
+.vstart span{background:var(--accent);color:#fff;font-size:14px;font-weight:800;padding:8px 10px;white-space:nowrap}
+.vstart select{appearance:none;-webkit-appearance:none;border:0;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231A1A2E'/%3E%3C/svg%3E") no-repeat right 10px center;padding:7px 28px 7px 10px;font-size:14px;font-weight:800;cursor:pointer;outline:none;min-width:0}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:9px;overflow:hidden;background:#fff}
+.seg button{appearance:none;border:0;border-left:1px solid var(--line2);background:#fff;padding:7px 12px;font-size:14px;font-weight:500;color:var(--text2);cursor:pointer}
+.seg button:first-child{border-left:0}
+.seg button.on{background:var(--accent);color:#fff;font-weight:800}
+.mnav{display:inline-flex;align-items:center;gap:6px}
+.mnav button{appearance:none;width:34px;height:34px;border:1px solid var(--line2);border-radius:9px;background:#fff;cursor:pointer;font-size:14px;display:inline-flex;align-items:center;justify-content:center}
+.mnav button:disabled{opacity:.35;cursor:default}
+.mnav b{min-width:112px;text-align:center;font-size:14px;font-weight:800;white-space:nowrap}
+.vacts{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.vb{appearance:none;border:1px solid var(--accent);background:#fff;color:var(--accent);border-radius:9px;padding:8px 12px;font-size:14px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.vb svg.ic{width:16px;height:16px}
+.vb.vb-sub{border-color:var(--line2);color:var(--text2);font-weight:500}
+.vb.kakao{background:#FEE500;border-color:#E6CF00;color:#191919}
+.board-scroll{overflow-x:auto;margin-top:6px;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.board-scroll.fit{overflow:visible}
+#secs{--hour:40px;--tw:58px;--cw:92px;--mc:12}
+.grid{display:grid;grid-template-columns:var(--tw) repeat(var(--mc),minmax(var(--cw),1fr));min-width:calc(var(--tw) + var(--mc) * var(--cw))}
+.m-out{display:none!important}
+.sec{--t0:9;--t1:22;margin-top:12px;border:1px solid var(--line2);border-radius:10px;overflow:hidden;overflow:clip}
+.sec[data-sec="we"]{--t1:18}
+.sec-head{border-bottom:1px solid var(--line2);background:#fff}
+.board-scroll.fit .sec-head{position:sticky;top:var(--stickyTop,0px);z-index:7;box-shadow:0 2px 6px rgba(17,17,17,.06)}
+.sec-label{appearance:none;border:0;border-right:1px solid rgba(0,0,0,.08);text-align:left;padding:6px 8px;cursor:pointer;display:flex;flex-direction:column;justify-content:center;color:var(--text);min-width:0}
+.sec-label b{font-size:14px;font-weight:900;line-height:1.2}
+.sec-label small{font-size:10.5px;color:var(--text2);line-height:1.25} /* audit-ok: 시간표 칸 폭 */
+.sec-label i{font-style:normal;font-size:10px;color:var(--text2);margin-top:2px} /* audit-ok: 시간표 칸 폭 */
+.mh{padding:6px 4px 5px;border-left:1px solid rgba(0,0,0,.07);text-align:center;min-width:0}
+.mh .yr{display:block;font-style:normal;font-family:var(--num);font-size:10px;font-weight:700;color:#8A6D00;line-height:1.1} /* audit-ok: 시간표 칸 폭 */
+.sec[data-sec="we"] .mh .yr{color:#2F5E8C}
+.mh b{display:block;font-size:14px;font-weight:800;line-height:1.2}
+.mh.first b::after{content:' 시작';font-size:10px;font-weight:800;color:var(--teal)} /* audit-ok: 시간표 칸 폭 */
+.mdate{width:100%;border:1px dashed transparent;background:transparent;text-align:center;font-family:var(--num);font-size:11px;color:var(--text2);padding:1px 2px;border-radius:4px;outline:none} /* audit-ok: 시간표 칸 폭 */
+.mdate:hover,.mdate:focus{border-color:rgba(0,0,0,.28);background:rgba(255,255,255,.65)}
+.mdate::placeholder{color:#9A9AA2;font-family:var(--body)}
+.sec.folded .sec-body{display:none}
+.sec.folded .sec-head{border-bottom:0}
+.tcol,.mcol{height:calc((var(--t1) - var(--t0)) * var(--hour))}
+.tcol{position:relative;border-right:1px solid var(--line2);background:var(--bg2);overflow:hidden}
+.tcol span{position:absolute;right:6px;font-size:10.5px;color:var(--text2);margin-top:2px;white-space:nowrap} /* audit-ok: 시간표 칸 폭 */
+.tcol .lunch-t{right:auto;left:5px;font-family:var(--body);color:#B0643A;font-size:10px;margin-top:0;line-height:calc(.5 * var(--hour))} /* audit-ok: 시간표 칸 폭 */
+.mcol{position:relative;overflow:hidden;border-left:1px solid var(--line);
+  background-image:repeating-linear-gradient(to bottom,#E4E4E9 0,#E4E4E9 1px,transparent 1px,transparent calc(var(--hour) / 2),#F1F1F4 calc(var(--hour) / 2),#F1F1F4 calc(var(--hour) / 2 + 1px),transparent calc(var(--hour) / 2 + 1px),transparent var(--hour))}
+.mcol.hot{background-color:#EEF8F6}
+.lunch{position:absolute;left:0;right:0;top:calc((13.5 - var(--t0)) * var(--hour));height:calc(.5 * var(--hour));background:repeating-linear-gradient(135deg,var(--lunch) 0 5px,#FFF7F2 5px 10px);pointer-events:none}
+
+/* ---------- 블록 ---------- */
+.blk{position:absolute;top:calc((var(--s) - var(--t0)) * var(--hour) + 1px);height:calc(var(--d) * var(--hour) - 2px);background:var(--cs);border:1px solid color-mix(in srgb,var(--c) 50%,#fff);border-left:4px solid var(--c);border-radius:6px;padding:3px 5px;overflow:hidden;cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:manipulation;z-index:2;line-height:1.25}
+.blk.legacy{border-style:dashed;border-left-style:solid;border-color:color-mix(in srgb,var(--c) 75%,#fff);border-left-color:var(--c)}
+.blk.proj{border-color:var(--text);border-left-color:var(--c)}
+.blk.narrow{padding:2px 3px}
+.b-name{font-weight:800;font-size:11.5px;color:var(--text);word-break:keep-all;overflow-wrap:anywhere} /* audit-ok: 시간표 칸 폭 */
+.blk.narrow .b-name{font-size:10.5px;overflow-wrap:normal} /* audit-ok: 시간표 칸 폭 */
+.b-meta{font-size:10.5px;color:var(--text2)} /* audit-ok: 시간표 칸 폭 */
+.blk.narrow .b-meta{font-size:9.5px} /* audit-ok: 시간표 칸 폭 */
+.b-ov{font-size:10px;font-weight:800;color:var(--c);margin-top:1px} /* audit-ok: 시간표 칸 폭 */
+.b-warn{display:inline-block;background:var(--danger);color:#fff;border-radius:99px;font-size:9.5px;line-height:14px;padding:0 5px;margin-left:2px;vertical-align:1px} /* audit-ok: 시간표 칸 폭 */
+.blk.conflict{outline:2px solid var(--danger);outline-offset:-1px}
+.blk.sel{box-shadow:0 0 0 2px var(--accent),0 4px 14px rgba(17,17,17,.18);z-index:4}
+.blk.src{opacity:.28}
+.b-x{position:absolute;top:2px;right:2px;width:18px;height:18px;border:0;border-radius:4px;background:rgba(255,255,255,.92);color:var(--text2);font-size:14px;line-height:18px;padding:0;cursor:pointer;display:none}
+.b-x:hover{background:var(--danger);color:#fff}
+.blk.sel .b-x{display:block}
+.b-rz{position:absolute;left:0;right:0;bottom:0;height:8px;cursor:ns-resize;touch-action:none}
+.b-rz::after{content:'';position:absolute;left:50%;bottom:2px;width:20px;height:3px;margin-left:-10px;border-radius:2px;background:var(--c);opacity:0;transition:opacity .12s}
+.blk.sel .b-rz::after{opacity:.8}
+.blk.preview{border:2px dashed var(--c);background:color-mix(in srgb,var(--cs) 75%,transparent);pointer-events:none;z-index:6;box-shadow:none}
+.blk.preview .b-meta{font-weight:800;color:var(--text)}
+.lift{box-shadow:0 10px 26px rgba(17,17,17,.28)!important;transform:scale(1.03);z-index:9!important}
+.ghost{position:fixed;left:0;top:0;z-index:120;pointer-events:none;padding:7px 11px;border-radius:8px;background:var(--cs);border:1px solid var(--c);border-left:5px solid var(--c);font-weight:800;font-size:14px;box-shadow:0 10px 26px rgba(17,17,17,.22);white-space:nowrap;max-width:220px;overflow:hidden;text-overflow:ellipsis}
+body.dragging,body.dragging *{cursor:grabbing!important}
+body.resizing,body.resizing *{cursor:ns-resize!important}
+@media (hover:hover){
+  .chip:hover{box-shadow:0 3px 10px rgba(17,17,17,.10);transform:translateY(-1px)}
+  .blk:hover{box-shadow:0 3px 10px rgba(17,17,17,.12);z-index:3}
+  .blk:hover .b-x{display:block}
+  .blk:hover .b-rz::after{opacity:.8}
+  .pbtn:hover{background:var(--accent);color:#fff}
+  .tab:hover{color:var(--text)}
+}
+body.selecting .mcol{cursor:crosshair;touch-action:none}
+body.selecting .blk{pointer-events:none}
+.selbox{position:absolute;left:0;right:0;background:rgba(13,148,136,.16);border:2px solid var(--teal);pointer-events:none;z-index:8}
+
+/* ---------- 요약 ---------- */
+.summary{margin-top:16px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.stat{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.stat small{display:block;font-size:14px;color:var(--text2)}
+.stat b{display:block;font-size:18px;font-weight:800;line-height:1.3;margin-top:2px}
+.stat b.num{font-family:var(--num)}
+.stat.alert b{color:var(--danger)}
+.sum-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:10px}
+.sum-box{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.sum-box .h,.pl-h{font-weight:800;font-size:14px;margin-bottom:6px}
+.sum-box ul,.sum-box ol,#pa-list ol{margin:0;padding:0;list-style:none;font-size:14px;color:var(--text2)}
+.sum-box li,#pa-list li{padding:4px 0;border-top:1px solid var(--bg3);display:flex;gap:6px;align-items:baseline;line-height:1.45}
+.sum-box li:first-child,#pa-list li:first-child{border-top:0}
+.sum-box li .dot,#pa-list li .dot{align-self:center}
+.sum-box li b,#pa-list li b{color:var(--text);font-weight:800}
+.w-conf b{color:var(--danger)!important}
+.w-pre b{color:#9B5D00!important}
+.ok{color:var(--teal);font-size:14px}
+#pa-list{display:none;margin-top:6mm}
+
+/* ---------- 하단 탭 바 (태블릿·휴대폰) ---------- */
+.bbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:65;background:rgba(255,255,255,.96);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);border-top:1px solid var(--line);padding:6px max(6px,env(safe-area-inset-left)) calc(6px + var(--sab)) max(6px,env(safe-area-inset-right));grid-template-columns:repeat(5,1fr);gap:2px}
+.bbar button{appearance:none;border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:52px;border-radius:12px;font-size:14px;font-weight:700;color:var(--text2);cursor:pointer;padding:4px 2px}
+.bbar button svg.ic{width:23px;height:23px}
+.bbar button:active{background:var(--bg2)}
+.bbar button.kk{color:#191919}
+.bbar button.kk .ib{background:#FEE500;border-radius:10px;padding:3px 10px;display:inline-flex}
+.bbar button.on{color:var(--accent)}
+
+/* ---------- 떠 있는 요소 ---------- */
+.floatbar{position:fixed;left:50%;transform:translateX(-50%);z-index:90;background:var(--accent);color:#fff;border-radius:12px;padding:8px 8px 8px 14px;display:flex;align-items:center;gap:8px 10px;box-shadow:0 10px 30px rgba(17,17,17,.3);font-size:14px;width:max-content;max-width:calc(100vw - 24px)}
+.floatbar button{appearance:none;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:8px;padding:8px 12px;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap}
+.floatbar button.pri{background:var(--teal);border-color:var(--teal)}
+.armbar{bottom:calc(20px + var(--bbarH) + var(--sab))}
+.selbar,.pvbar{top:calc(12px + var(--sat))}
+.pvbar{flex-wrap:wrap;justify-content:center}
+.pvbar span{flex:1 1 auto;min-width:0}
+.trash{display:none;position:fixed;left:50%;bottom:calc(18px + var(--bbarH) + var(--sab));transform:translateX(-50%);z-index:95;background:#fff;border:2px dashed var(--danger);color:var(--danger);border-radius:14px;padding:12px 26px;font-weight:800;font-size:14px;box-shadow:0 8px 24px rgba(17,17,17,.15)}
+body.moving .trash{display:block}
+body.over-trash .trash{background:var(--danger);color:#fff}
+
+/* 편집 팝오버 */
+.pop{position:absolute;z-index:80;width:290px;background:#fff;border:1px solid var(--line2);border-radius:12px;box-shadow:0 14px 36px rgba(17,17,17,.18);padding:14px}
+.pop-h{display:flex;gap:8px;align-items:flex-start;margin-bottom:10px}
+.pop-h .dot{margin-top:6px;width:10px;height:10px}
+.pop-h b{display:block;font-size:14.5px;font-weight:800;line-height:1.3}
+.pop-h small{display:block;font-size:14px;color:var(--text2)}
+.pop-h>div{flex:1;min-width:0}
+.p-close{appearance:none;border:0;background:transparent;font-size:24px;line-height:1;color:var(--text2);cursor:pointer;padding:0 6px;min-width:36px;min-height:36px}
+.pf{display:flex;flex-direction:column;gap:3px;font-size:14px;color:var(--text2);margin-top:8px}
+.pf input,.pf select{border:1px solid var(--line2);border-radius:7px;padding:7px 8px;font-size:14px;color:var(--text);background:#fff;outline:none;width:100%}
+.pf input:focus,.pf select:focus{border-color:var(--accent)}
+.pr{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pop-f{display:flex;gap:6px;margin-top:14px}
+.pb{appearance:none;border:1px solid var(--line2);background:#fff;border-radius:8px;padding:8px 10px;font-size:14px;font-weight:500;cursor:pointer;color:var(--text)}
+.pb:hover{background:var(--bg2)}
+.pb.pri{margin-left:auto;background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800}
+.pb.kakao{background:#FEE500;border-color:#E6CF00;color:#191919;font-weight:800}
+.pb.danger{color:var(--danger);border-color:#EBC4C4}
+
+/* 시트형 창 (내보내기·더보기) */
+.modal{position:fixed;inset:0;z-index:110;background:rgba(17,17,26,.45);display:flex;align-items:center;justify-content:center;padding:16px}
+.sheet{background:#fff;border-radius:16px;width:min(480px,100%);max-height:calc(100vh - 32px);display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.sh-h{display:flex;align-items:center;justify-content:space-between;padding:12px 12px 12px 16px;border-bottom:1px solid var(--line)}
+.sh-h b{font-size:15.5px;font-weight:800}
+.pm-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 16px 0}
+.pm-tabs button{appearance:none;border:1px solid var(--line2);background:#fff;border-radius:10px;padding:10px;font-size:14px;font-weight:700;cursor:pointer;color:var(--text2)}
+.pm-tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.pm-tabs button[data-mode="png"].on{background:#FEE500;border-color:#E6CF00;color:#191919}
+#pm[data-mode="pdf"] .only-png,#pm[data-mode="png"] .only-pdf{display:none!important}
+#pm[data-mode="png"][data-kind="list"] .kind-grid{display:none!important}
+.pm-body{padding:4px 16px 14px;overflow:auto;-webkit-overflow-scrolling:touch}
+.pm-row{display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap;margin-top:14px}
+.pm-row .lab{width:62px;font-size:14px;color:var(--text2);font-weight:800}
+.pm-row select{border:1px solid var(--line2);border-radius:7px;padding:6px 8px;background:#fff;font-size:14px}
+.chk{display:inline-flex;align-items:center;gap:6px;font-size:14px;cursor:pointer;min-height:32px}
+.chk input{width:18px;height:18px;margin:0;accent-color:var(--accent)}
+.quick{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0 76px}
+.quick button{appearance:none;border:1px solid var(--line2);background:var(--bg2);border-radius:99px;padding:6px 11px;font-size:14px;cursor:pointer}
+.pm-drag{margin-top:16px;width:100%;appearance:none;border:1.5px dashed var(--teal);background:#F1FAF8;color:#0B6B63;border-radius:10px;padding:11px;font-weight:800;font-size:14px;cursor:pointer}
+.pm-note{font-size:14px;color:var(--text2);margin-top:10px;line-height:1.5}
+.im-wrap{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.im-wrap img{display:block;width:100%;max-height:44vh;object-fit:contain;background:#EEF0F3;border:1px solid var(--line);border-radius:10px}
+.im-acts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.im-acts .pb{padding:11px 6px;font-size:14px;font-weight:800;margin:0}
+.im-meta{font-size:14px;color:var(--text2);margin-top:8px;line-height:1.5}
+.sh-f{display:flex;gap:8px;padding:12px 16px calc(12px + var(--sab));border-top:1px solid var(--line)}
+.sh-f .pb{flex:1;padding:12px;font-size:14px}
+.sh-f .pb.pri{margin-left:0}
+.more-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 4px}
+.mg{appearance:none;border:1px solid var(--line2);background:#fff;border-radius:12px;padding:14px 10px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;text-align:left}
+.mg svg.ic{color:var(--text2)}
+.mg.danger{color:var(--danger);border-color:#EBC4C4}
+
+/* 토스트 */
+.toast{position:fixed;left:50%;bottom:calc(22px + var(--bbarH) + var(--sab));transform:translate(-50%,12px);opacity:0;z-index:130;background:var(--accent);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;box-shadow:0 10px 30px rgba(17,17,17,.25);transition:opacity .18s,transform .18s;display:flex;gap:12px;align-items:center;max-width:calc(100vw - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast button{appearance:none;border:0;background:transparent;color:#5EEAD4;font-weight:800;cursor:pointer;padding:0}
+
+/* ---------- 인쇄 영역 적용 (미리보기·인쇄 공통) ---------- */
+body.pa #secs{--hour:var(--phour);--tw:12mm;--cw:0px}
+body.pa .grid{min-width:0}
+body.pa .sec.pa-off{display:none}
+body.pa .sec.folded .sec-body{display:grid}
+body.pa .sec.folded .sec-head{border-bottom:1px solid var(--line2)}
+body.pa .sec{margin-top:3mm}
+body.pa .sec-head{position:static!important;box-shadow:none!important}
+body.pa .blk{padding:1px 3px;border-radius:3px;border-left-width:3px}
+body.pa .blk .b-name{font-size:var(--pbn)}
+body.pa .blk .b-meta,body.pa .blk .b-ov{font-size:var(--pbm)}
+body.pa .blk.narrow .b-name{font-size:calc(var(--pbn) * .92)}
+body.pa .blk.sel{box-shadow:none}
+body.pa .tcol span{font-size:max(7px,var(--pbm));right:3px;margin-top:0}
+body.pa .tcol .lunch-t{display:none}
+body.pa .mh{padding:3px 2px}
+body.pa .mh b{font-size:calc(var(--pbn) + 1px)}
+body.pa .mh .yr{font-size:var(--pbm)}
+body.pa .mdate{font-size:var(--pbm);border:0;pointer-events:none;transform:none!important;width:100%!important;margin:0!important}
+body.pa .mdate::placeholder{color:transparent}
+body.pa .sec-label{padding:3px 5px}
+body.pa .sec-label b{font-size:calc(var(--pbn) + 1px)}
+body.pa .sec-label small{font-size:var(--pbm)}
+body.pa .sec-label i,body.pa .b-x,body.pa .b-rz{display:none}
+body.pa:not(.pa-legend) .dh-legend{display:none}
+body.pa.pa-list #pa-list{display:block}
+body.pa .dh-notice{pointer-events:none}
+body.pa .guide-wrap,body.pa .vbar,body.pa .summary{display:none}
+body.pv{background:#E4E4EA}
+body.pv .top,body.pv .palette,body.pv .bbar{display:none!important}
+body.pv .main{display:block;padding:calc(76px + var(--sat)) 12px 28px}
+body.pv .board{width:var(--pw);margin:0 auto;padding:8mm;border:0;border-radius:2px;box-shadow:0 6px 30px rgba(0,0,0,.16);zoom:var(--pz,1)}
+body.pv .board-scroll{overflow:visible}
+body.pv .blk{pointer-events:none}
+body.pv.pa-list #pa-list{border-top:2px dashed var(--line2);padding-top:6mm}
+
+/* ---------- 반응형: 태블릿 가로 (1024~1279) ---------- */
+@media (max-width:1279px){
+  .main{grid-template-columns:268px minmax(0,1fr);gap:12px;padding:12px}
+  .board{padding:16px 14px 18px}
+  .acts .btn{padding:7px 10px}
+}
+/* ---------- 반응형: 태블릿 세로·휴대폰 (1023 이하) = 앱형 화면 ---------- */
+@media (max-width:1023px){
+  :root{--bbarH:70px}
+  .top{position:relative;flex-wrap:nowrap;gap:10px}
+  .brand small{display:none}
+  .who{display:block}
+  .top .fields,.top .acts{display:none}
+  .bbar{display:grid}
+  .vacts{display:none}
+  .main{display:block;padding:12px 12px calc(var(--bbarH) + 24px + var(--sab))}
+  .palette{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:70;height:min(70vh,640px);border:0;border-radius:18px 18px 0 0;box-shadow:0 -12px 40px rgba(17,17,17,.24);transform:translateY(105%);transition:transform .24s ease;padding-bottom:var(--sab)}
+  .palette.open{transform:none}
+  body.pal-collapsed .palette{display:flex}
+  .pal-h{display:flex}
+  .legend{display:none}
+  .info{max-height:24%}
+  .sum-cols{grid-template-columns:1fr}
+  body.sheet-open .armbar{display:none!important}
+  .modal{align-items:flex-end;padding:0}
+  .sheet{width:100%;max-width:640px;border-radius:18px 18px 0 0;max-height:90vh}
+}
+/* ---------- 반응형: 휴대폰 (767 이하) ---------- */
+@media (max-width:767px){
+  .top{padding-top:calc(8px + var(--sat));padding-bottom:8px}
+  .brand b{font-size:16.5px}
+  .main{padding:8px 8px calc(var(--bbarH) + 20px + var(--sab))}
+  .board{padding:12px 10px 16px;border-radius:12px}
+  .dh-row{font-size:14px}
+  .dh-legend{font-size:14px;gap:3px 10px}
+  #secs{--tw:44px;--cw:86px}
+  .tcol span{right:4px;font-size:10px} /* audit-ok: 시간표 칸 폭 */
+  .sec-label{padding:5px 4px}
+  .sec-label b{font-size:14px}
+  .vbar{gap:8px}
+  .vstart{flex:1 1 auto}
+  .vstart select{flex:1;min-width:0}
+  .vbar .seg button{padding:8px 9px}
+  .mnav{flex:1 1 100%;justify-content:space-between}
+  .mnav button{width:44px;height:40px}
+  .mnav b{min-width:0;font-size:14px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .pop{position:fixed;left:0!important;right:0;top:auto!important;bottom:0;width:100%;border-radius:18px 18px 0 0;padding:16px 16px calc(16px + var(--sab));box-shadow:0 -12px 40px rgba(17,17,17,.24);z-index:100}
+  .quick{margin-left:0}
+  .floatbar{font-size:14px}
+}
+/* ---------- 터치 기기 ---------- */
+@media (pointer:coarse){
+  .fld input,.search input,.pf input,.pf select,.pm-row select,.pctl select,.vstart select{font-size:16px}
+  .mdate{font-size:16px;transform:scale(.7);width:143%;margin:0 -21.5%} /* audit-ok: 시간표 칸 폭 */
+  .chip{padding:10px 12px 10px 15px}
+  .tab{padding:14px 2px 12px}
+  .b-rz{height:18px}
+  .blk.sel .b-rz::after{height:4px;width:30px;margin-left:-15px;opacity:.9}
+  .b-x{width:28px;height:28px;font-size:18px;line-height:28px}
+  .mnav button{min-width:40px;min-height:40px}
+  .seg button{padding:9px 12px}
+}
+
+/* ---------- 인쇄 ---------- */
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body,body.pv{background:#fff;font-size:11px}
+  .top,.palette,.guide-wrap,.vbar,.summary,.pop,.toast,.bbar,.floatbar,.trash,.modal,.b-x,.b-rz,.del-zone,.ghost{display:none!important}
+  .main,body.pv .main{display:block;padding:0}
+  .board,body.pv .board{width:auto;border:0;padding:0;box-shadow:none;border-radius:0;zoom:1}
+  .board-scroll{overflow:visible}
+  .sec{break-inside:avoid}
+  #pa-list{break-before:page;border-top:0!important;padding-top:0!important}
+  .dh-title{font-size:15px}
+  .dh-row,.dh-legend{font-size:9.5px;margin-top:3px}
+  .dh-notice{font-size:9.5px;border:0}
+  .doc-head{padding-bottom:6px}
+}
+
+/* ===== 디자인 시스템 오버라이드 (dnd_board_build.py 자동 적용, 260923) ===== */
+:root{
+  --accent:#00007F; --teal:#0B5FBF;
+  --wd-fill:#FFFFFF; --we-fill:#FFFFFF;
+  --lunch:#EAF2FF;
+}
+body{background:#FFFFFF}
+.chip::before{display:none}
+.chip:hover,.blk:hover{box-shadow:none}
+.palette,.board,.pop{box-shadow:none}
+.stat,.sum-box,.pcard{box-shadow:none}
+section.sec[data-sec="wd"] .sec-label b,section.sec[data-sec="wd"] .mh b{color:#00007F}
+section.sec[data-sec="we"] .sec-label b,section.sec[data-sec="we"] .mh b{color:#0B5FBF}
+.mcol.hot{background-color:#EAF2FF}
+.mcol.hl{background-color:#DCEBFB}
+.tabs{grid-template-columns:repeat(5,1fr)}
+.tab{word-break:keep-all}
+@media screen{.dh-year{font-size:max(14px,.72em)}}
+.btn,.tab,.pb,.search input{min-height:40px}
+.chip{min-height:40px;touch-action:pan-y}
+/* 접근성(a11y-audit, 260923 전역 검수): 본문 건너뛰기 · 키보드 포커스 표시 · 동작 최소화 */
+.skip{position:absolute;left:8px;top:-80px;z-index:100;background:#00007F;color:#FFFFFF;padding:10px 16px;border-radius:8px;font-size:16px;font-weight:700;text-decoration:none}
+.skip:focus{top:8px}
+:focus-visible{outline:3px solid #00007F;outline-offset:2px}
+.top :focus-visible{outline-color:#FFFFFF}
+.fld:focus-within{border-color:#FFFFFF}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문 건너뛰기</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-open" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+  <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></symbol>
+</svg>
+
+<header class="top" id="top" data-ver="12">
+  <div class="brand"><b>수강생 시간표 설계</b><small>AIX강남 스튜디오 모듈 로드맵 연동 · 드래그 앤 드롭 · v12 (09-23 21:38)</small></div>
+  <button class="who empty" id="who" type="button" aria-label="수강생 정보 입력">수강생 입력</button>
+  <div class="fields">
+    <label class="fld">수강생<input id="in-name" placeholder="이름 입력"><span>님</span></label>
+    <label class="fld">담당<input id="in-mgr" style="width:170px"></label>
+  </div>
+  <div class="acts">
+    <button class="btn" data-act="sample" title="김수현님시간표가안(2026).xlsx · 스케줄가안 시트">예시: 엑셀 가안</button>
+    <button class="btn" data-act="undo" title="Ctrl+Z">되돌리기</button>
+    <button class="btn" data-act="copy">안내 문구 복사</button>
+    <button class="btn" data-act="export">JSON 저장</button>
+    <button class="btn" data-act="import">불러오기</button>
+    <button class="btn kakao" data-act="png">카톡 이미지</button>
+    <button class="btn pri" data-act="print">인쇄 · PDF</button>
+    <button class="btn mute" data-act="reset">초기화</button>
+  </div>
+  <input type="file" id="file" accept=".json,application/json" hidden>
+</header>
+
+<main class="main" id="main">
+  <aside class="palette" id="palette" aria-label="과목 목록">
+    <div class="pal-h"><b>과목 목록</b><button id="pal-close">닫기</button></div>
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-tab="mod" role="tab">AIX 모듈</button>
+      <button class="tab" data-tab="leg" role="tab">기존 과정</button>
+      <button class="tab" data-tab="cert" role="tab">자격증</button>
+      <button class="tab" data-tab="path" role="tab">직무 경로</button>
+      <button class="tab" data-tab="open" role="tab">개설반</button>
+    </div>
+    <div class="search"><input id="q" type="search" placeholder="과목 검색 (예: 포토, 캐드, 에펙)" autocomplete="off"></div>
+    <div id="groups"></div>
+    <div class="info" id="info"></div>
+    <div class="legend">
+      <span><i class="lg"></i>AIX 모듈</span>
+      <span><i class="lg dash"></i>기존 과정</span>
+      <span><i class="lg bold"></i>먼저 들을 것</span>
+      <span><i class="tg">대면</i>100% 대면</span>
+    </div>
+    <div class="del-zone">여기에 놓으면 삭제</div>
+  </aside>
+
+  <section class="board" id="board">
+    <div class="doc-head">
+      <div class="dh-title">SBS아카데미컴퓨터아트학원 강남본원 "<span id="dh-name">수강생</span>님" 스케줄 가안<span class="dh-year num" id="dh-year"></span></div>
+      <div class="dh-row">
+        <div id="in-notice" class="dh-notice" contenteditable="true" role="textbox" aria-label="안내 문구" spellcheck="false"></div>
+        <span>담당 : <span id="dh-mgr"></span></span>
+      </div>
+      <div class="dh-legend" id="dh-legend"></div>
+    </div>
+    <details class="guide-wrap" id="guide-wrap" open>
+      <summary>사용법</summary>
+      <ol class="guide">
+        <li><span><b>시작 월</b>개강 월을 고르면 그 달부터 12개월이 표시된다. 해가 바뀌는 달에는 연도가 붙는다.</span></li>
+        <li><span><b>배치</b>과목을 끌어 칸에 놓기(터치: 길게 누른 뒤 끌기). 과목을 누른 다음 칸을 눌러도 배치된다.</span></li>
+        <li><span><b>수정</b>블록을 끌어 이동, 아래 가장자리로 시간 조절, 누르면 요일·시간·개월·메모 변경.</span></li>
+        <li><span><b>내보내기</b>카톡 이미지(PNG)와 인쇄·PDF 모두 원하는 월·시간 영역만 골라 만든다.</span></li>
+      </ol>
+    </details>
+    <div class="vbar">
+      <label class="vstart"><span>시작 월</span><select id="in-start" aria-label="시간표 시작 월(개강 월)"></select></label>
+      <div class="seg" id="v-span" role="group" aria-label="표시 개월 수"><button data-span="3">3개월</button><button data-span="6">6개월</button><button data-span="12">12개월</button></div>
+      <div class="mnav"><button id="v-prev" aria-label="이전 달">◀</button><b id="v-label" class="num"></b><button id="v-next" aria-label="다음 달">▶</button></div>
+      <div class="vacts">
+        <button class="vb vb-sub" id="v-pal"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-panel"/></svg><span>목록 접기</span></button>
+        <button class="vb kakao" data-act="png"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-image"/></svg>카톡 이미지</button>
+        <button class="vb" data-act="print"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-print"/></svg>인쇄 영역</button>
+      </div>
+    </div>
+    <div class="board-scroll" id="board-scroll"><div id="secs"></div></div>
+    <div id="pa-list"></div>
+    <div class="summary" id="summary"></div>
+    <footer id="tt-note" style="margin-top:10px;font-size:14px;color:var(--text2)"></footer>
+  </section>
+</main>
+
+<nav class="bbar" id="bbar" aria-label="주요 기능">
+  <button data-act="palette"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-plus"/></svg><span>과목</span></button>
+  <button data-act="undo"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-undo"/></svg><span>되돌리기</span></button>
+  <button data-act="png" class="kk"><span class="ib"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-image"/></svg></span><span>카톡 이미지</span></button>
+  <button data-act="print"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-print"/></svg><span>인쇄·PDF</span></button>
+  <button data-act="more"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-more"/></svg><span>더보기</span></button>
+</nav>
+<div class="floatbar armbar" id="armbar" hidden></div>
+<div class="floatbar selbar" id="selbar" hidden><span>내보낼 영역을 시간표 위에서 드래그</span><button id="sel-cancel">취소</button></div>
+<div class="floatbar pvbar" id="pvbar" hidden><span id="pv-info"></span><button id="pv-edit">영역 수정</button><button class="pri" id="pv-print">PDF 저장 · 인쇄</button><button id="pv-close">닫기</button></div>
+<div class="trash" id="trash">여기에 놓으면 삭제</div>
+
+<div class="modal" id="pm" data-mode="png" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+    <div class="sh-h"><b id="pm-title">내보내기</b><button class="p-close" id="pm-close" aria-label="닫기">×</button></div>
+    <div class="pm-tabs"><button data-mode="png">카톡 이미지 (PNG)</button><button data-mode="pdf">인쇄 · PDF</button></div>
+    <div class="pm-body">
+      <div class="pm-row only-png"><span class="lab">형태</span><label class="chk"><input type="radio" name="pa-kind" value="grid">시간표형</label><label class="chk"><input type="radio" name="pa-kind" value="list">월별 목록형</label></div>
+      <div class="pm-row"><span class="lab">구분</span><label class="chk"><input type="checkbox" id="pa-wd">평일</label><label class="chk"><input type="checkbox" id="pa-we">주말</label></div>
+      <div class="pm-row"><span class="lab">월 범위</span><select id="pa-m0"></select><span>~</span><select id="pa-m1"></select></div>
+      <div class="quick"><button data-q="all">12개월 전체</button><button data-q="placed">배치된 기간</button><button data-q="view">현재 화면</button><button data-q="first6">앞 6개월</button><button data-q="last6">뒤 6개월</button></div>
+      <div class="pm-row kind-grid"><span class="lab">시간 범위</span><select id="pa-t0"></select><span>~</span><select id="pa-t1"></select></div>
+      <div class="quick kind-grid"><button data-q="tall">전체 시간</button><button data-q="tfit">배치된 시간대</button></div>
+      <div class="pm-row only-pdf"><span class="lab">용지</span><label class="chk"><input type="radio" name="pa-or" value="landscape">A4 가로</label><label class="chk"><input type="radio" name="pa-or" value="portrait">A4 세로</label></div>
+      <div class="pm-row"><span class="lab">포함</span><label class="chk"><input type="checkbox" id="pa-legend">색상 범례</label><label class="chk only-pdf"><input type="checkbox" id="pa-inclist">과목 목록(2쪽)</label></div>
+      <button class="pm-drag kind-grid" id="pa-drag">시간표 위에서 드래그로 영역 선택</button>
+      <div class="pm-note" id="pm-note"></div>
+      <div class="im-wrap only-png" id="im-wrap" hidden>
+        <img id="im-prev" alt="카카오톡 전송용 시간표 이미지 미리보기">
+        <div class="im-acts"><button class="pb" id="im-save">PNG 저장</button><button class="pb kakao" id="im-share">카톡 공유</button><button class="pb" id="im-copy">이미지 복사</button></div>
+        <div class="im-meta" id="im-meta"></div>
+      </div>
+    </div>
+    <div class="sh-f only-pdf"><button class="pb" id="pa-preview">미리보기</button><button class="pb pri" id="pa-print">PDF 저장 · 인쇄</button></div>
+    <div class="sh-f only-png"><button class="pb kakao" id="im-make">이미지 만들기</button></div>
+  </div>
+</div>
+
+<div class="modal" id="more" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="more-title">
+    <div class="sh-h"><b id="more-title">더보기</b><button class="p-close" id="more-close" aria-label="닫기">×</button></div>
+    <div class="pm-body">
+      <label class="pf">수강생 이름<input id="m-name" placeholder="이름 입력" autocomplete="off"></label>
+      <label class="pf">담당<input id="m-mgr" autocomplete="off"></label>
+      <div class="more-grid">
+        <button class="mg" data-act="copy"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg>안내 문구 복사</button>
+        <button class="mg" data-act="export"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-save"/></svg>JSON 저장</button>
+        <button class="mg" data-act="import"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-open"/></svg>JSON 불러오기</button>
+        <button class="mg" data-act="sample"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-file"/></svg>예시: 엑셀 가안</button>
+        <button class="mg" data-act="guide"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-help"/></svg>사용법 보기</button>
+        <button class="mg danger" data-act="reset"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-reset"/></svg>초기화</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pop" id="pop" hidden>
+  <div class="pop-h"><span class="dot" id="p-dot"></span><div><b id="p-title"></b><small id="p-sub"></small></div><button class="p-close" id="p-close" aria-label="닫기">×</button></div>
+  <label class="pf">표시 이름<input id="p-label" autocomplete="off"></label>
+  <div class="pr">
+    <label class="pf">구분<select id="p-sec"><option value="wd">평일</option><option value="we">주말</option></select></label>
+    <label class="pf">요일<select id="p-days"></select></label>
+  </div>
+  <div class="pr">
+    <label class="pf">시작 시간<select id="p-start"></select></label>
+    <label class="pf">수업 시간<select id="p-dur"></select></label>
+  </div>
+  <div class="pr">
+    <label class="pf">개강 월<select id="p-m"></select></label>
+    <label class="pf">개월 수<select id="p-span"></select></label>
+  </div>
+  <label class="pf">메모<input id="p-memo" placeholder="예: 재수강, 금요반" autocomplete="off"></label>
+  <div class="pop-f">
+    <button class="pb danger" id="p-del">삭제</button>
+    <button class="pb" id="p-dup">다음 달로 복제</button>
+    <button class="pb pri" id="p-ok">완료</button>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+'use strict';
+var H0=9, H1=22;
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var pad=function(n){return String(n).padStart(2,'0')};
+var fmt=function(h){return pad(Math.floor(h))+':'+(h%1?'30':'00')};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]})};
+
+/* ---------- 스튜디오 색상 (통합로드맵 V2_3 스튜디오 컬러 기준) ---------- */
+var ST={
+  found:{n:'공통 기초',c:'#0D9488',s:'#E2F3F0'},
+  media:{n:'미디어콘텐츠',c:'#8E7CC3',s:'#EDE7F7'},
+  inter:{n:'인터랙티브',c:'#4FB06A',s:'#E4F4E8'},
+  graphic:{n:'그래픽 & 브랜딩',c:'#D4920A',s:'#FBF0D6'},
+  space:{n:'스페이스',c:'#DB6E93',s:'#FBE4EC'},
+  art:{n:'아트웍 & 웹툰',c:'#E05A47',s:'#FCE6E2'},
+  cg:{n:'버추얼 · CG · VFX',c:'#2AA4E8',s:'#E1F1FB'},
+  cert:{n:'자격증',c:'#6B7280',s:'#EEF0F3'}
+};
+/* 배치 순서: 평일(노란색) 위 → 주말(하늘색) 아래 · 색상은 엑셀 가안 양식 기준 */
+var SEC={
+  we:{n:'주말',sub:'토·일<br>09~18시',fill:'var(--we-fill)',defDays:'토',defDur:3,h1:18},
+  wd:{n:'평일',sub:'월~목',fill:'var(--wd-fill)',defDays:'월~목',defDur:2,h1:22}
+};
+var SEC_ORDER=['wd','we'];
+var DAYS={'월~목':[1,2,3,4],'월/수':[1,3],'화/목':[2,4],'월수금월수':[1,3,5],'화목화목금':[2,4,5],'월~금':[1,2,3,4,5],'금':[5],'토':[6],'일':[7],'토/일':[6,7]};
+var DAY_OPTS={wd:['월~목','월/수','화/목','월수금월수','화목화목금','월~금','금'],we:['토','일','토/일']};
+
+/* ---------- 과목 데이터 ---------- */
+var C={};
+function add(id,st,n,o){
+  var c=Object.assign({id:id,st:st,n:n},o||{});
+  var mm=n.match(/^(.*?)\s*\((\d+)~(\d+)\)$/);
+  if(mm){ if(!c.base) c.base=mm[1]; var a=+mm[2], b=+mm[3]; if(a===1){ c.seq=b; if(!c.m) c.m=b; } else c.range=mm[2]+'~'+mm[3]; }
+  if(!c.days && /\/금/.test(n)) c.days='금';
+  if(!c.m) c.m=1;
+  C[id]=c; return id;
+}
+var PI=['aix-photo','aix-illu'], PM=['cg-maya'];
+var AIC='AI 크리에이터 기존 과정';
+/* AIX 모듈 (AIX로드맵_최종안 260912 + 통합로드맵 V2_3) */
+add('ai-prompt','found','AI프롬프트',{note:'AI 코어 · 개발 중',tags:['개발 중'],desc:'AIX 코어 파운데이션(AI 3대장 책 기반) 개발 중. 개발 전까지 기존 AI프롬프트 엔지니어링 수업으로 대체 운영.'});
+add('ai-agent','found','AI 에이전트',{note:'AI 코어 · 시수 확인 필요',desc:'공통 기초 AI 코어 과정. 시수·운영 방식 [확인 필요].'});
+add('aix-dcore','found','AIX 디자인 코어',{h:24,d:3,op:'3H×8D',m:1,desc:'프로그램 기능보다 디자인 핵심 원리·시각적 판단력을 먼저 익히는 공통 입문. 비주얼아이디어(발상과 표현) · 컬러디자인(색채학) · 기초 핸드드로잉. 구 발상과 표현·색채학.'});
+add('aix-photo','found','AIX 포토',{h:24,d:3,op:'3H×8D',m:1,desc:'포토샵 기반 이미지 편집·합성·보정 툴 기초(포토웍스 포함). 구 포토샵·포토웍스.'});
+add('aix-illu','found','AIX 일러',{h:24,d:3,op:'3H×8D',m:1,desc:'일러스트 기반 벡터 그래픽·아트웍 툴 기초(디테일 일러스트 포함). 구 일러스트·디테일 일러스트.'});
+
+add('aix-mkt','media','AIX 마케팅영상',{h:24,d:3,op:'3H×8D',m:1,desc:'AI로 이미지와 영상을 생성해 웹용 콘텐츠 완성. 촬영 장비 없이 AI 통합만으로 영상 결과물 제작. 구 마케팅영상 방특.'});
+add('yt-all','media','유튜브 올인원 클래스',{h:32,d:2,op:'2H×8D×2M',m:2,desc:'스마트폰 촬영과 CapCut 편집으로 숏폼 콘텐츠를 만들고 유튜브 채널 운영까지. 구 유크리 기초·심화·컨텐츠크리에이터.'});
+add('aix-edit','media','AIX 실전영상편집',{h:24,d:3,op:'3H×8D',m:1,desc:'브이로그·인터뷰·정보 전달형·홍보 영상 등 예제를 완성하며 편집과 촬영 학습(프리미어 + 에펙 기초). 구 프리미어·애프터이펙트 기초.'});
+add('aix-2d','media','AIX 2D영상디자인',{h:48,d:3,op:'3H×8D×2M',m:2,desc:'애프터이펙트 조작부터 타이포그래피·쉐이프·인포그래픽·로고 애니메이션·브랜드 모션까지. 구 에펙·모션에펙.'});
+add('aix-3d','media','AIX 3D영상디자인',{note:'신설 · 시수 미정',tags:['신설'],desc:'시네마4D 기반 3D 영상·모션. 개편 확정 전까지 기존 시네마4D 수업 기준으로 등록 접수.'});
+add('aic-motion','media','AI크리에이터-모션',{legacy:1,d0:AIC});
+add('pj-media','media','프로젝트반(포폴반)',{proj:1,note:'모듈 이수 후',desc:'모듈 이수 후 실전 통합 포트폴리오.'});
+
+add('aix-agent','inter','AIX 에이전트 업무자동화',{h:48,d:2,op:'2H×8D×3M',m:3,desc:'정해진 예제가 아닌, 내가 필요한 업무 자동화 시스템을 직접 완성. 정원 12명 · 플립러닝. 구 클로드코드 기초·심화.'});
+add('aix-figma','inter','AIX 피그마',{h:90,d:3,op:'3H×10D×3M',m:3,desc:'아무것도 몰라도 Figma로 본인 서비스 하나를 프로토타입까지 완성. 정원 15~20명.'});
+add('aix-vibe','inter','AIX 바이브코딩',{h:90,d:3,op:'3H×10D×3M',m:3,desc:'Claude Code로 본인 서비스를 만들고 DB를 붙여 실제 URL로 배포. 정원 12명 소수정예. 구 AI 에이전트웹·AI 바이브코딩.'});
+add('aix-ecom','inter','AIX 이커머스 창업',{h:24,d:3,op:'3H×8D',m:1,tags:['신설'],desc:'AI 툴로 상품기획부터 제작·판매까지, 무재고 1인 창업. 수강 기간 내 첫 매출 목표.'});
+add('pj-inter','inter','AIX 프로젝트반',{proj:1,h:60,mTxt:'모듈 이수 후',desc:'피그마·바이브 등 모듈 이수자 대상. 정원 6~10명. 결과물 고도화·QA·케이스스터디·데모데이. 운영 개월 수 [확인 필요].'});
+
+add('aix-gm','graphic','AIX 그래픽마스터',{h:48,d:3,op:'3H×주2회×2M',m:2,pre:PI,desc:'포토웍스·디일러 심화로 툴 역량을 끌어올리고 그래픽아트웍까지 잇는 실무 강화 모듈. AI는 소스 제작용으로만 활용. 구 일러·포토 심화 + 그래픽아트웍.'});
+add('aix-vm','graphic','AIX 비쥬얼마케팅',{h:48,d:3,op:'3H×8D×2M',m:2,pre:PI,desc:'생성형 AI로 카드뉴스·캐러셀·상세페이지 등 판매 콘텐츠와 인포그래픽 제작. 격일반(2H×16) 또는 금요반(4H×8). 구 AI 비주얼디자인(방과후특강) + 인포그라피.'});
+add('aix-brand','graphic','AIX 브랜딩디자인실무',{h:48,d:3,op:'3H×8D×2M',m:2,pre:PI,desc:'브랜드 로고(BI/CI) 개발부터 가이드라인·응용 애플리케이션까지 브랜드 비주얼 가이드북 제작. 구 브랜딩.'});
+add('aix-pack','graphic','AIX 패키지MD',{h:48,d:3,op:'3H×8D×2M',m:2,pre:PI,desc:'도면(칼선) 설계부터 인쇄공정까지 배워 상품 박스와 브랜드 굿즈를 입체로 구현. 구 패키지 MD.'});
+add('aix-pub','graphic','AIX 디지털출판실무',{h:48,d:3,op:'3H×8D×2M',m:2,pre:['aix-photo'],desc:'인디자인으로 리플렛·브로슈어·매거진을 기획부터 인쇄·전자책까지. AIX 포토 선수 필수. 구 인디자인.'});
+add('aic-visual','graphic','AI크리에이터-시각편집',{legacy:1,d0:AIC});
+add('pj-graphic','graphic','프로젝트반(포폴반)',{proj:1,note:'모듈 이수 후',desc:'실무 모듈 2~3개 이수 후 실전 통합 포트폴리오.'});
+
+add('aix-plan','space','AIX 공간기획&도면',{h:48,d:3,op:'3H×8D×2M',m:2,desc:'소형 공간(원룸·카페·오피스) 기획서, AI 컨셉 이미지, AutoCAD 도면세트(평면·입면·천장). 구 캐드 1·2.'});
+add('aix-3di','space','AIX 3D인테리어',{h:90,d:3,op:'3H×10D×3M',m:3,desc:'SketchUp·3ds Max 모델링과 V-Ray·Enscape·D5 고품질 렌더링. 구 스케치업1·2 · 맥스 1·2·3 · 엔스케이프.'});
+add('aix-bim','space','AIX BIM',{h:48,d:3,op:'3H×8D×2M',m:2,desc:'정식명 BIM 기초 & AIX 활용. Revit 기반 건축 요소 모델링·도면 작성, AI 보조 수량 산출. 구 BIM 레빗 1·2.'});
+add('aix-vr','space','AIX 공간VR시각화',{h:48,d:3,op:'3H×8D×2M',m:2,pre:['aix-3di'],tags:['신설'],desc:'VR 워크스루 영상 + 웹 VR 투어 제작. AIX 3D인테리어 필수 선이수.'});
+add('aic-int','space','AI크리에이터-인테리어',{legacy:1,d0:AIC});
+add('pj-space','space','인테리어 프로젝트반(포폴반)',{proj:1,note:'모듈 이수 후',desc:'모든 과목이 인테리어 프로젝트반으로 수렴, 실전 통합 포트폴리오.'});
+
+add('art-cd','art','컨셉드로잉(핸드)',{note:'시수 확인 필요'});
+add('art-dd','art','디지털드로잉(타블릿)',{note:'시수 확인 필요'});
+add('art-wt','art','웹툰 & AI어시스턴트',{note:'시수 확인 필요'});
+add('art-ani','art','AIX 애니메이션(시덴스)',{note:'시수 확인 필요'});
+add('aic-art','art','AI크리에이터-아트웍',{legacy:1,d0:AIC});
+add('pj-art','art','프로젝트반',{proj:1,note:'모듈 이수 후'});
+
+add('cg-maya','cg','AI 마야 기초',{first:1,h:24,m:1,tags:['선수','확정 예정'],desc:'CG 모듈 공통 선수. 수강료표 AIX 3D 프로덕션 기초(공통 선수) 24H·1개월 기준, 확정 예정.'});
+add('cg-model','cg','모델링',{h:24,m:1,pre:PM,tags:['확정 예정'],desc:'수강료표 AIX 에셋 프로덕션(모델링) 24H·1개월 기준, 확정 예정.'});
+add('cg-comp','cg','합성',{h:48,m:2,pre:PM,tags:['확정 예정'],desc:'수강료표 AIX 통합 컴포지팅(합성) 48H·2개월 기준, 확정 예정.'});
+add('cg-unreal','cg','언리얼',{h:48,m:2,pre:PM,tags:['확정 예정'],desc:'수강료표 AIX 실시간 버추얼 프로덕션(언리얼) 48H·2개월 기준, 확정 예정.'});
+add('cg-anim','cg','AIX 애니메이션',{h:48,m:2,pre:PM,tags:['확정 예정'],desc:'수강료표 AIX 애니메이션 48H·2개월 기준, 확정 예정.'});
+add('cg-houdini','cg','후디니',{pre:PM,note:'시수 미정'});
+add('cg-blender','cg','AI 블렌더',{h:96,m:4,tags:['확정 예정'],desc:'블렌더 별도 트랙. 수강료표 AIX 올인원 블렌더 프로덕션 96H·4개월 기준, 확정 예정.'});
+add('aic-cg','cg','AI크리에이터-CG',{legacy:1,d0:AIC});
+add('pj-cg','cg','프로젝트반',{proj:1,note:'모듈 이수 후'});
+
+/* 기존 커리큘럼 (커리큘럼 로드맵.pdf) */
+var L=function(id,st,n,d0,o){return add(id,st,n,Object.assign({legacy:1,d0:d0},o||{}))};
+L('L-basic','found','베이직아트웍','발상과 표현, 색채학');
+L('L-idea','found','발상과 표현','디자인 전반 기초 이론, 실습');
+L('L-color','found','색채학','색채이론, 실습');
+L('L-senior','found','시니어기초/금','컴퓨터 기본 활용');
+L('L-prompt','found','AI프롬프트 엔지니어링(1~2)','프롬프트, 생성형AI, AI 자격증');
+L('L-bl1','found','블렌더1','기초 모델링');
+L('L-bl2','found','블렌더2','맵핑, 렌더링');
+L('L-ps','found','포토샵','전체 툴 학습');
+L('L-il','found','일러스트','전체 툴 학습');
+L('L-pw','found','포토웍스','포토샵 심화, 디자인 응용 작업');
+L('L-dil','found','디테일일러스트','일러스트 심화, 디자인 응용 작업');
+L('L-flat','found','플랫모션','플랫디자인 창작 GIF애니메이션');
+
+L('L-cd1','art','컨셉드로잉1','기초드로잉',{f2f:1});
+L('L-cd2','art','컨셉드로잉2','인체 드로잉, 캐릭터 드로잉',{f2f:1});
+L('L-cd3','art','컨셉드로잉3','개인별 맞춤 컨셉 심화드로잉',{f2f:1});
+L('L-story','art','디지털 스토리보드','스토리보드 제작');
+L('L-dd1','art','디지털드로잉1','타블렛드로잉, 다양한 브러시 활용',{f2f:1});
+L('L-dd2','art','디지털드로잉2','',{f2f:1});
+L('L-dd3','art','디지털드로잉3','컨셉별 심화 드로잉, 개인 작품 완성',{f2f:1});
+
+L('L-indd','graphic','인디자인','전체 툴 학습, 편집 필수 툴');
+L('L-gart','graphic','그래픽아트웍','스킬업 과정, 아트웍 창작물');
+L('L-info','graphic','인포그래픽','실무PPT 레이아웃, 픽토그램, 포폴 서브');
+L('L-pack1','graphic','패키지MD1','패키지디자인 상품 연출');
+L('L-pack2','graphic','패키지MD2','VMD 디멘션3D');
+L('L-brand','graphic','브랜딩디자인','브랜드 경험 디자인, 브랜딩 기획·제작');
+L('L-enter','graphic','엔터디렉팅','엔터테인먼트 기획, 아이돌브랜딩, 무대연출');
+L('L-editpf','graphic','편집포폴(2~4)','취업 포폴 제작',{f2f:1});
+
+L('L-ux1','inter','UX/UI 1','웹 기획, 웹디자인 기초, Figma Tool');
+L('L-ux2','inter','UX/UI 2','Figma 심화, 반응형 웹/앱 디자인');
+L('L-uxpf','inter','UX/UI포폴(1~2)','UIUX기획, 포폴 제작',{f2f:1});
+L('L-web1','inter','웹1','웹 표준 기초 HTML5+CSS3');
+L('L-web2','inter','웹2','웹 표준 심화 HTML5+CSS3');
+L('L-web3','inter','웹3','웹 표준 고급, 반응형 웹 구현');
+L('L-web4','inter','웹4','자바스크립트, 제이쿼리');
+L('L-webm','inter','웹 모션','SVG 동작 애니메이션 구성');
+L('L-wp1','inter','웹프로젝트1','포폴 기획, 디자인');
+L('L-wp2','inter','웹프로젝트2','포트폴리오 코딩');
+L('L-webpf','inter','웹 포폴(1~3)','취업 포폴 제작',{f2f:1});
+L('aic-web','inter','AI크리에이터-웹','웹학과 AI');
+
+L('L-sk1','space','스케치1','선 연습, 투시도의 이해',{f2f:1});
+L('L-sk2','space','스케치2','컬러링 심화, 투시도법',{f2f:1});
+L('L-sk3','space','스케치3','포트폴리오 기획',{f2f:1});
+L('L-draft','space','제도(3~4)','자격증 취득',{f2f:1});
+L('L-cad1','space','캐드1','전체 툴 학습, 명령어 출력');
+L('L-cad2','space','캐드2','실무 도면 작업');
+L('L-su','space','스케치업(1~2)','모델링, V-Ray');
+L('L-ens','space','엔스케이프/금','렌더링');
+L('L-supf','space','스케치업 포폴(1~2)','취업 포폴 제작',{f2f:1});
+L('L-max1','space','맥스1','기본 툴 습득, 모델링');
+L('L-max2','space','맥스2','모델링 활용');
+L('L-max3','space','맥스3','V-Ray');
+L('L-revit','space','BIM레빗(1~2)','모델링, 도면');
+L('L-intplan','space','인테리어 기획/금','모델링, 도면');
+L('L-intpf','space','인테리어 포폴(2~4)','모델링, 도면',{f2f:1});
+L('L-rhino','space','라이노','모델링, 렌더링');
+L('L-inventor','space','인벤터','3D 기계설계');
+
+L('L-pr','media','프리미어실전','전체 툴 학습');
+L('L-ae','media','에펙','전체 툴 학습');
+L('L-mae','media','모션에펙','실무 예제 학습');
+L('L-aae1','media','어드벤스에펙01','촬영/합성');
+L('L-aae2','media','어드벤스에펙02','인포그래픽 영상');
+L('L-2dpf','media','2D 모션그래픽 포폴(1~2)','취업 포폴 제작',{f2f:1});
+L('L-c4d','media','시포디(1~4)','모델링, 렌더링, 애니메이션, 모그라프');
+L('L-ac4d','media','어드밴스 시포디(1~2)','옥테인, 물성');
+L('L-3dpf','media','3D모션그래픽 포폴(3~4)','취업 포폴 제작',{f2f:1});
+L('L-yc1','media','유크리 기초','유튜브 크리에이터 기초 과정');
+L('L-yc2','media','유크리 심화','유튜브 크리에이터 심화 과정');
+L('L-cc','media','컨텐츠 크리에이터','영상 컨텐츠 제작 과정');
+
+L('L-maya','cg','마야기초(1~3)','기본UI, 모델링, 렌더링, 리깅, 애니');
+L('L-creature','cg','크리쳐아트(1~3)','해부학 기반의 인체 조소 작업',{f2f:1});
+L('L-model','cg','모델링(1~6)','캐릭터 모델링');
+L('L-modelpf','cg','모델링 포폴(6~9)','취업 포폴 제작',{f2f:1});
+L('L-hard','cg','하드섭UV(1~5)','무기체 모델링');
+L('L-look','cg','룩뎁(1~6)','렌더, 라이팅');
+L('L-lookpf','cg','룩뎁 포폴(6~9)','취업 포폴 제작',{f2f:1});
+L('L-houdini','cg','후디니(1~7)','이펙트 제작');
+L('L-houdinipf','cg','후디니 포폴(6~9)','취업 포폴 제작',{f2f:1});
+L('L-comp','cg','합성(1~5)','후보정, 영상 합성');
+L('L-matte','cg','매트페인팅/금(1~2)','배경 매트',{base:'매트페인팅'});
+L('L-comppf','cg','합성 포폴(3~4)','취업 포폴 제작',{f2f:1});
+L('L-anim','cg','애니메이션(1~5)','움직임 표현');
+L('L-animpf','cg','애니포폴(3~4)','취업 포폴 제작',{f2f:1});
+L('L-cgsp','cg','CG 특강/금','심화 및 보충을 위한 금요일 특강 과목');
+
+/* 자격증 */
+var CT='자격증 트랙 · 모듈과 병행';
+['MOS Master','컴퓨터활용능력 2급·1급','전산회계 · 세무','재경관리사'].forEach(function(n,i){add('C-a'+i,'cert',n,{note:CT})});
+['GTQ-AI','ACP','웹디자인기능사','그래픽스운용기능사','실내건축자격증','전산응용건축제도기능사','전산기계제도기능사'].forEach(function(n,i){add('C-d'+i,'cert',n,{note:CT})});
+['Microsoft Certified: AI Business Professional','Google Cloud Certified - Generative AI Leader','AWS Certified AI Practitioner','AI-Pot','AICE 국제자격증'].forEach(function(n,i){add('C-i'+i,'cert',n,{note:CT})});
+L('C-x0','cert','실무엑셀','');
+L('C-x1','cert','CAT2급','');
+L('C-x2','cert','컬러리스트 실기','',{f2f:1});
+
+var TABS={
+  mod:[
+    {t:'공통 기초',note:'추천·권장, 필수 아님',st:'found',ids:['ai-prompt','ai-agent','aix-dcore','aix-photo','aix-illu']},
+    {t:'01 미디어콘텐츠',st:'media',ids:['aix-mkt','yt-all','aix-edit','aix-2d','aix-3d','aic-motion','pj-media']},
+    {t:'02 인터랙티브',st:'inter',ids:['aix-agent','aix-figma','aix-vibe','aix-ecom','pj-inter']},
+    {t:'03 그래픽 & 브랜딩',note:'AIX 포토·일러 선수 필수',st:'graphic',ids:['aix-gm','aix-vm','aix-brand','aix-pack','aix-pub','aic-visual','pj-graphic']},
+    {t:'04 스페이스',note:'AIX 공간VR시각화는 AIX 3D인테리어 선이수',st:'space',ids:['aix-plan','aix-3di','aix-bim','aix-vr','aic-int','pj-space']},
+    {t:'05 아트웍 & 웹툰',st:'art',ids:['art-cd','art-dd','art-wt','art-ani','aic-art','pj-art']},
+    {t:'06 버추얼 · CG · VFX',note:'현재 기존 커리큘럼으로 상담·등록, 개편 확정 후 반영 예정',st:'cg',ids:['cg-maya','cg-model','cg-comp','cg-unreal','cg-anim','cg-houdini','cg-blender','aic-cg','pj-cg']}
+  ],
+  leg:[
+    {t:'공통 · 기초 툴',st:'found',ids:['L-basic','L-idea','L-color','L-ps','L-il','L-pw','L-dil','L-flat','L-senior','L-prompt','L-bl1','L-bl2']},
+    {t:'아트웍(드로잉)',st:'art',ids:['L-cd1','L-cd2','L-cd3','L-story','L-dd1','L-dd2','L-dd3']},
+    {t:'시각 / 편집디자인',st:'graphic',ids:['L-indd','L-gart','L-info','L-pack1','L-pack2','L-brand','L-enter','L-editpf']},
+    {t:'웹',st:'inter',ids:['L-ux1','L-ux2','L-uxpf','L-web1','L-web2','L-web3','L-web4','L-webm','L-wp1','L-wp2','L-webpf']},
+    {t:'인테리어디자인',st:'space',ids:['L-sk1','L-sk2','L-sk3','L-draft','L-cad1','L-cad2','L-su','L-ens','L-supf','L-max1','L-max2','L-max3','L-revit','L-intplan','L-intpf']},
+    {t:'기계 · 제품',note:'스케치1~3 · 포토샵 · 일러스트 · 포토웍스 · 디테일일러스트 · 캐드1 공통',st:'space',ids:['L-rhino','L-inventor']},
+    {t:'모션그래픽(3D) · 유튜브',note:'베이직아트웍 ~ 디테일일러스트는 공통 · 기초 툴',st:'media',ids:['L-pr','L-ae','L-mae','L-aae1','L-aae2','L-2dpf','L-c4d','L-ac4d','L-3dpf','L-yc1','L-yc2','L-cc']},
+    {t:'AI크리에이터',st:'found',ids:['aic-art','aic-visual','aic-web','aic-motion','aic-int','aic-cg']},
+    {t:'CG',note:'범위 표기(1~n)는 월별 연속 배치',st:'cg',ids:['L-maya','L-creature','L-model','L-modelpf','L-hard','L-look','L-lookpf','L-houdini','L-houdinipf','L-comp','L-matte','L-comppf','L-anim','L-animpf','L-cgsp']}
+  ],
+  cert:[
+    {t:'경영 · 회계',st:'cert',ids:['C-a0','C-a1','C-a2','C-a3']},
+    {t:'디자인',st:'cert',ids:['C-d0','C-d1','C-d2','C-d3','C-d4','C-d5','C-d6']},
+    {t:'AI',st:'cert',ids:['C-i0','C-i1','C-i2','C-i3','C-i4']},
+    {t:'기존 로드맵 자격증',st:'cert',ids:['C-x0','C-x1','C-x2']}
+  ]
+};
+/* 직무별 수강 경로 (AIX로드맵 최종안 2면) */
+var PATHS=[
+  {st:'media',job:'영상기획 / 편집자',out:'편집 릴 · 채널 실적',ids:['aix-photo','aix-illu','aix-edit','aix-mkt','yt-all','pj-media']},
+  {st:'media',job:'2D모션 디자이너',out:'2D 모션 릴',ids:['aix-photo','aix-illu','aix-edit','aix-2d','aic-motion','pj-media']},
+  {st:'media',job:'3D모션 디자이너',out:'2D 포함 종합 · 3D 모션 릴',ids:['aix-photo','aix-illu','aix-edit','aix-2d','aix-3d','aic-motion','pj-media']},
+  {st:'graphic',job:'브랜드 / 패키지 디자이너',out:'브랜드 포폴',ids:['aix-photo','aix-illu','aix-gm','aix-brand','aix-pack','aic-visual','pj-graphic']},
+  {st:'graphic',job:'디지털출판 디자이너',out:'편집 포폴',ids:['aix-photo','aix-illu','aix-gm','aix-pub','pj-graphic']},
+  {st:'graphic',job:'엔터 / 그래픽 디자이너',out:'그래픽 전 과정 종합',ids:['aix-photo','aix-illu','aix-gm','aix-vm','aix-brand','aix-pack','aic-visual','pj-graphic']},
+  {st:'inter',job:'UI·웹 디자이너',out:'서비스 화면 · 배포된 웹',ids:['aix-agent','aix-figma','aix-vibe','pj-inter']},
+  {st:'space',job:'공간 / 전시 디자인',out:'도면 · VR 시각화',ids:['aix-plan','aix-3di','aix-vr','aic-int','pj-space']},
+  {st:'space',job:'BIM 설계',out:'BIM 모델 · 시공 연계',ids:['aix-plan','aix-bim','pj-space']},
+  {st:'art',job:'웹툰 / 일러스트 작가',out:'연재 원고 · 일러스트',ids:['aix-photo','art-cd','art-dd','art-wt','art-ani','aic-art','pj-art']},
+  {st:'cg',job:'모델러 · 합성 · 언리얼 · 애니메이터 · 후디니',out:'5갈래 겹쳐 수강 가능',ids:['cg-maya','aix-photo','cg-model','cg-comp','cg-unreal','cg-anim','cg-houdini','aic-cg','pj-cg']},
+  {st:'cg',job:'블렌더 마스터',out:'블렌더 통합 포폴',ids:['aix-photo','ai-agent','cg-blender','aic-cg','pj-cg']}
+];
+/* 선수과목 인정 범위 (구 과정 포함) */
+var EQ={'aix-photo':['aix-photo','L-ps'],'aix-illu':['aix-illu','L-il'],'cg-maya':['cg-maya','L-maya'],'aix-3di':['aix-3di']};
+
+/* 엑셀 가안 월별 개강일 (김수현님시간표가안(2026).xlsx) · 1·10·11·12월은 입력 필요 */
+var DEF_DATES={
+  wd:['01.12~02.04','02.10~03.12','03.16~04.10','04.13~05.12','05.13~06.10','06.11~07.08','07.14~08.10','08.12~09.09','09.14~10.15','10.19~11.11','11.18~12.14','12.16~01.11'],
+  we:['','02.09~03.11','03.16~04.10','04.13~05.12','05.13~06.10','06.11~07.08','07.14~08.10','08.12~09.09','09.14~10.15','','','']
+};
+var DEF_DATES_YEAR=2026; /* DEF_DATES가 가리키는 연도 */
+/* 예시: 스케줄가안 시트 (평일) [과목, 월(0=1월), 시작, 요일, 표시이름, 개월] */
+var SAMPLE=[
+  ['L-il',1,11.5,'월~목'],['L-ps',1,14,'월~목'],['L-prompt',1,14,'금','AI프롬프트1'],
+  ['L-dil',2,11.5,'월~목','디일러'],['L-pw',2,14,'월~목'],['L-prompt',2,14,'금','AI프롬프트2'],
+  ['L-flat',3,11.5,'화/목'],['L-gart',3,14,'월~목'],
+  ['L-indd',4,11.5,'월~목'],['L-info',4,14,'월~목','인포그라피'],
+  ['L-color',5,14,'화/목'],['L-pack1',5,16,'월~목','패키지1'],
+  ['L-color',6,14,'화/목'],['L-pack2',6,16,'월~목','패키지2'],
+  ['L-ae',7,11.5,'월~목'],['L-idea',7,14,'화/목'],['L-brand',7,16,'월~목','브랜딩1'],
+  ['L-mae',8,11.5,'월~목'],['L-idea',8,14,'화/목'],['L-brand',8,16,'월~목','브랜딩2'],
+  ['L-idea',9,11.5,'화/목'],['L-color',9,14,'화/목'],
+  ['L-idea',10,11.5,'화/목'],['L-color',10,14,'화/목'],
+  ['L-editpf',11,11.5,'월~목','편집포폴',3],['aic-visual',11,14,'월~목','AI시각편집']
+];
+
+/* ---------- 월 계산: 절대 월 = 연도*12 + 월(0~11). 화면 열 c(0~11) = 시작 월 + c ---------- */
+var NOW=new Date(), NOWYM=NOW.getFullYear()*12+NOW.getMonth();
+function yOf(a){return Math.floor(a/12)}
+function mOf(a){return ((a%12)+12)%12}
+function ymKey(a){return yOf(a)+'-'+pad(mOf(a)+1)}
+function absOf(c){return S.start+c}
+function colOf(a){return a-S.start}
+function mLab(a){return (yOf(a)!==yOf(S.start)?yOf(a)+'년 ':'')+(mOf(a)+1)+'월'}
+function mLabFull(a){return yOf(a)+'년 '+(mOf(a)+1)+'월'}
+function periodLab(){var a=S.start,b=S.start+11; return yOf(a)+'.'+pad(mOf(a)+1)+' ~ '+yOf(b)+'.'+pad(mOf(b)+1)}
+function dateOf(sec,a){
+  var o=S.dates[sec]||{}, k=ymKey(a);
+  if(Object.prototype.hasOwnProperty.call(o,k)) return o[k];
+  return yOf(a)===DEF_DATES_YEAR?(DEF_DATES[sec][mOf(a)]||''):'';
+}
+
+/* ===== 개설반 연동 (dnd_board_build.py 자동 삽입, 260923) ===== */
+var OPENROWS=[["oc-wd-8-0", "(국6)멀티미디어 콘텐츠제작과정", "wd", 24320, 9.0, "월~금", "06층N · 월~금 09:00 · 2026-09-09~2026-10-08"], ["oc-wd-8-1", "(국7)멀티미디어 콘텐츠제작과정", "wd", 24320, 9.0, "월~금", "06층N · 월~금 09:00 · 2026-10-12~2026-11-11"], ["oc-wd-8-2", "특강", "wd", 24320, 9.5, "수", "05층A · 수 09:30 · 2026-09-23~2026-09-23"], ["oc-wd-8-3", "편집포폴", "wd", 24320, 9.5, "월~목", "05층B · 월~목 09:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-4", "후디니7/A", "wd", 24320, 9.5, "월/수", "05층E · 월/수 09:30 · 2026-09-14~2026-10-12"], ["oc-wd-8-5", "합성3/B", "wd", 24320, 9.5, "화/목", "05층F · 화/목 09:30 · 2026-09-15~2026-10-13"], ["oc-wd-8-6", "스케치업1", "wd", 24320, 9.5, "월~목", "05층I · 월~목 09:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-7", "모션에펙", "wd", 24320, 9.5, "월~목", "06층M · 월~목 09:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-8", "컴활", "wd", 24320, 9.5, "월~목", "06층O · 월~목 09:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-9", "포토웍스", "wd", 24320, 9.5, "월~목", "06층Q · 월~목 09:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-10", "캐드2", "wd", 24320, 9.5, "월~목", "06층R · 월~목 09:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-11", "시포디4", "wd", 24320, 9.5, "월~목", "06층S · 월~목 09:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-12", "어드벤스에펙1/B", "wd", 24320, 9.5, "화/목", "06층T · 화/목 09:30 · 2026-09-15~2026-10-13"], ["oc-wd-8-13", "AI크리에이터-모션", "wd", 24320, 9.5, "금", "12층U · 금 09:30 · 2026-09-18~2026-10-16"], ["oc-wd-8-14", "일러스트", "wd", 24320, 9.5, "월~목", "12층V · 월~목 09:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-15", "새싹사업", "wd", 24320, 10.0, "월~금", "비대면-A · 월~금 10:00 · 2026-06-29~2026-09-28"], ["oc-wd-8-16", "디지털드로잉/포폴/A", "wd", 24320, 11.5, "월/수", "05층A · 월/수 11:30 · 2026-09-14~2026-10-12"], ["oc-wd-8-17", "인디자인", "wd", 24320, 11.5, "월~목", "05층B · 월~목 11:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-18", "후디니2/A", "wd", 24320, 11.5, "월/수", "05층E · 월/수 11:30 · 2026-09-14~2026-10-12"], ["oc-wd-8-19", "후디니포폴/B", "wd", 24320, 11.5, "화/목", "05층E · 화/목 11:30 · 2026-09-15~2026-10-13"], ["oc-wd-8-20", "합성포폴/A", "wd", 24320, 11.5, "월/수", "05층F · 월/수 11:30 · 2026-09-14~2026-10-12"], ["oc-wd-8-21", "AI크리에이터-인테리어", "wd", 24320, 11.5, "화/목", "05층F · 화/목 11:30 · 2026-09-15~2026-10-13"], ["oc-wd-8-22", "어드벤스시포디1/A", "wd", 24320, 11.5, "월/수", "05층G · 월/수 11:30 · 2026-09-14~2026-10-12"], ["oc-wd-8-23", "어드벤스에펙2/B", "wd", 24320, 11.5, "화/목", "05층G · 화/목 11:30 · 2026-09-15~2026-10-13"], ["oc-wd-8-24", "맥스1", "wd", 24320, 11.5, "월~목", "05층I · 월~목 11:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-25", "프리미어실전/A", "wd", 24320, 11.5, "월/수", "05층L · 월/수 11:30 · 2026-09-14~2026-10-12"], ["oc-wd-8-26", "플랫모션/B", "wd", 24320, 11.5, "화/목", "05층L · 화/목 11:30 · 2026-09-15~2026-10-13"], ["oc-wd-8-27", "시포디1", "wd", 24320, 11.5, "월~목", "06층M · 월~목 11:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-28", "모스", "wd", 24320, 11.5, "월~목", "06층O · 월~목 11:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-29", "디일러", "wd", 24320, 11.5, "월~목", "06층Q · 월~목 11:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-30", "캐드1", "wd", 24320, 11.5, "월~목", "06층R · 월~목 11:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-31", "실내건축1/기출", "wd", 24320, 11.5, "월~목", "06층S · 월~목 11:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-32", "마야기초3/A", "wd", 24320, 11.5, "월수금월수", "06층T · 월수금월수 11:30 · 2026-09-14~2026-10-14"], ["oc-wd-8-33", "스케치업포폴/B", "wd", 24320, 11.5, "화목화목금", "06층T · 화목화목금 11:30 · 2026-09-15~2026-10-15"], ["oc-wd-8-34", "에펙", "wd", 24320, 11.5, "월~목", "12층U · 월~목 11:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-35", "포토샵", "wd", 24320, 11.5, "월~목", "12층V · 월~목 11:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-36", "웹1", "wd", 24320, 11.5, "월~목", "비대면-A · 월~목 11:30 · 2026-09-14~2026-10-13"], ["oc-wd-8-37", "디지털드로잉/포폴/A", "wd", 24320, 14.0, "월/수", "05층A · 월/수 14:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-38", "시니어기초", "wd", 24320, 14.0, "금", "05층B · 금 14:00 · 2026-09-18~2026-10-02"], ["oc-wd-8-39", "인포그라피", "wd", 24320, 14.0, "월~목", "05층D · 월~목 14:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-40", "웹포트폴리오", "wd", 24320, 14.0, "월~목", "05층E · 월~목 14:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-41", "어드벤스시포디2/A", "wd", 24320, 14.0, "월/수", "05층F · 월/수 14:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-42", "룩뎁2/B", "wd", 24320, 14.0, "화/목", "05층F · 화/목 14:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-43", "하드섭3/A", "wd", 24320, 14.0, "월수금월수", "05층G · 월수금월수 14:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-44", "AIX 애니메이션(ART)/B", "wd", 24320, 14.0, "화/목", "05층G · 화/목 14:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-45", "컨셉드로잉A", "wd", 24320, 14.0, "월/수", "05층H · 월/수 14:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-46", "유크리 심화/A", "wd", 24320, 14.0, "월/수", "05층I · 월/수 14:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-47", "인테리어포폴(1,2)/B", "wd", 24320, 14.0, "화/목", "05층I · 화/목 14:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-48", "프리미어실전/B", "wd", 24320, 14.0, "화/목", "05층L · 화/목 14:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-49", "AI피그마1", "wd", 24320, 14.0, "월~목", "06층M · 월~목 14:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-50", "(국1)멀티미디어 콘텐츠제작과정", "wd", 24320, 14.0, "월~금", "06층N · 월~금 14:00 · 2026-09-30~2027-04-28"], ["oc-wd-8-51", "포토웍스", "wd", 24320, 14.0, "월~목", "06층Q · 월~목 14:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-52", "시포디3", "wd", 24320, 14.0, "월~목", "06층R · 월~목 14:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-53", "맥스3", "wd", 24320, 14.0, "월~목", "06층S · 월~목 14:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-54", "스케치업1", "wd", 24320, 14.0, "월~목", "06층T · 월~목 14:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-55", "모션에펙", "wd", 24320, 14.0, "월~목", "12층U · 월~목 14:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-56", "AI크리에이터-유튜브", "wd", 24320, 14.0, "금", "12층U · 금 14:00 · 2026-09-18~2026-10-16"], ["oc-wd-8-57", "일러스트", "wd", 24320, 14.0, "월~목", "12층V · 월~목 14:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-58", "AI프롬프트 엔지니어링2/금", "wd", 24320, 14.0, "금", "12층V · 금 14:00 · 2026-09-18~2026-10-16"], ["oc-wd-8-59", "AI디지털스토리보드/A", "wd", 24320, 16.0, "월/수", "05층A · 월/수 16:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-60", "패키지MD2", "wd", 24320, 16.0, "월~목", "05층B · 월~목 16:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-61", "그래픽아트웍", "wd", 24320, 16.0, "월~목", "05층D · 월~목 16:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-62", "AI크리에이터-시각편집", "wd", 24320, 16.0, "월/수", "05층E · 월/수 16:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-63", "애니포폴/B", "wd", 24320, 16.0, "화/목", "05층F · 화/목 16:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-64", "룩뎁+모델링포폴/A", "wd", 24320, 16.0, "월/수", "05층G · 월/수 16:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-65", "룩뎁+모델링포폴/B", "wd", 24320, 16.0, "화/목", "05층G · 화/목 16:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-66", "컨셉드로잉A", "wd", 24320, 16.0, "월/수", "05층H · 월/수 16:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-67", "AI블렌더1/A", "wd", 24320, 16.0, "월수금월수", "05층I · 월수금월수 16:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-68", "인테리어포폴(1,2)/B", "wd", 24320, 16.0, "화/목", "05층I · 화/목 16:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-69", "브랜딩디자인2", "wd", 24320, 16.0, "월~목", "05층L · 월~목 16:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-70", "UXUI포폴/A", "wd", 24320, 16.0, "월수금월수", "06층M · 월수금월수 16:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-71", "AI프롬프트 엔지니어링1/B", "wd", 24320, 16.0, "화/목", "06층O · 화/목 16:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-72", "디일러", "wd", 24320, 16.0, "월~목", "06층Q · 월~목 16:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-73", "마야기초1/A", "wd", 24320, 16.0, "월수금월수", "06층R · 월수금월수 16:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-74", "시포디포폴/A", "wd", 24320, 16.0, "월/수", "06층S · 월/수 16:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-75", "시포디포폴/B", "wd", 24320, 16.0, "화/목", "06층S · 화/목 16:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-76", "모션포폴/B", "wd", 24320, 16.0, "화/목", "06층T · 화/목 16:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-77", "에펙", "wd", 24320, 16.0, "월~목", "12층U · 월~목 16:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-78", "포토샵", "wd", 24320, 16.0, "월~목", "12층V · 월~목 16:00 · 2026-09-14~2026-10-13"], ["oc-wd-8-79", "웹툰&AI어시스트/B", "wd", 24320, 18.0, "화/목", "05층A · 화/목 18:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-80", "애니2/B", "wd", 24320, 18.0, "화/목", "05층D · 화/목 18:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-81", "AI에이전트1/A", "wd", 24320, 18.0, "월/수", "05층E · 월/수 18:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-82", "합성포폴/B", "wd", 24320, 18.0, "화/목", "05층F · 화/목 18:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-83", "모델링6/A", "wd", 24320, 18.0, "월수금월수", "05층G · 월수금월수 18:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-84", "하드섭1/B", "wd", 24320, 18.0, "화목화목금", "05층G · 화목화목금 18:00 · 2026-09-15~2026-10-15"], ["oc-wd-8-85", "컨셉드로잉A", "wd", 24320, 18.0, "월/수", "05층H · 월/수 18:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-86", "AI에이전트2/금", "wd", 24320, 18.0, "금", "12층V · 금 18:00 · 2026-09-18~2026-10-16"], ["oc-wd-8-87", "패키지MD2/A", "wd", 24320, 19.0, "월수금월수", "05층B · 월수금월수 19:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-88", "그래픽아트웍/B", "wd", 24320, 19.0, "화목화목금", "05층B · 화목화목금 19:00 · 2026-09-15~2026-10-15"], ["oc-wd-8-89", "포토웍스/A", "wd", 24320, 19.0, "월수금월수", "05층C · 월수금월수 19:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-90", "컴활/B", "wd", 24320, 19.0, "화목화목금", "05층C · 화목화목금 19:00 · 2026-09-15~2026-10-15"], ["oc-wd-8-91", "AI블렌더1/A", "wd", 24320, 19.0, "월수금월수", "05층D · 월수금월수 19:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-92", "시포디2/B", "wd", 24320, 19.0, "화목화목금", "05층E · 화목화목금 19:00 · 2026-09-15~2026-10-15"], ["oc-wd-8-93", "AIX 실전영상/A", "wd", 24320, 19.0, "월/수", "05층I · 월/수 19:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-94", "AIX 마케팅영상/B", "wd", 24320, 19.0, "화/목", "05층I · 화/목 19:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-95", "실무엑셀(컴활2급)", "wd", 24320, 19.0, "금", "05층I · 금 19:00 · 2026-09-18~2026-10-16"], ["oc-wd-8-96", "회계1급/B", "wd", 24320, 19.0, "화목화목금", "05층K · 화목화목금 19:00 · 2026-08-04~2026-10-01"], ["oc-wd-8-97", "세무2급/A", "wd", 24320, 19.0, "월수금월수", "05층K · 월수금월수 19:00 · 2026-08-07~2026-10-02"], ["oc-wd-8-98", "회계1급/A", "wd", 24320, 19.0, "월수월수금", "05층K · 월수월수금 19:00 · 2026-10-12~2026-12-04"], ["oc-wd-8-99", "세무2급/B", "wd", 24320, 19.0, "화목금화목", "05층K · 화목금화목 19:00 · 2026-10-13~2026-12-03"], ["oc-wd-8-100", "실내건축1/기출/A", "wd", 24320, 19.0, "월수금월수", "05층L · 월수금월수 19:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-101", "AIX 바이브코딩1/B", "wd", 24320, 19.0, "화목화목금", "05층L · 화목화목금 19:00 · 2026-09-15~2026-10-15"], ["oc-wd-8-102", "AI피그마3/A", "wd", 24320, 19.0, "월수금월수", "06층M · 월수금월수 19:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-103", "편집포폴/B", "wd", 24320, 19.0, "화목화목금", "06층M · 화목화목금 19:00 · 2026-09-15~2026-10-15"], ["oc-wd-8-104", "AIX 일러스트/A", "wd", 24320, 19.0, "월/수", "06층N · 월/수 19:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-105", "AIX 포토샵/B", "wd", 24320, 19.0, "화/목", "06층N · 화/목 19:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-106", "AI프롬프트 엔지니어링2/A", "wd", 24320, 19.0, "월/수", "06층O · 월/수 19:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-107", "AI프롬프트 엔지니어링1/B", "wd", 24320, 19.0, "화/목", "06층O · 화/목 19:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-108", "모스/A", "wd", 24320, 19.0, "월수금월수", "06층Q · 월수금월수 19:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-109", "캐드2/A", "wd", 24320, 19.0, "월수금월수", "06층R · 월수금월수 19:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-110", "AIX 공간기획&도면1/B", "wd", 24320, 19.0, "화/목", "06층R · 화/목 19:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-111", "디일러/B", "wd", 24320, 19.0, "화목화목금", "06층S · 화목화목금 19:00 · 2026-09-15~2026-10-15"], ["oc-wd-8-112", "스케치업2/A", "wd", 24320, 19.0, "월수금월수", "06층T · 월수금월수 19:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-113", "실내건축2/기출/B", "wd", 24320, 19.0, "화목화목금", "06층T · 화목화목금 19:00 · 2026-09-15~2026-10-15"], ["oc-wd-8-114", "AIX 2D 모션디자인1/A", "wd", 24320, 19.0, "월/수", "12층U · 월/수 19:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-115", "모션에펙/B", "wd", 24320, 19.0, "화목화목금", "12층U · 화목화목금 19:00 · 2026-09-15~2026-10-15"], ["oc-wd-8-116", "웹2/A", "wd", 24320, 19.0, "월수금월수", "비대면-A · 월수금월수 19:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-117", "유튜브 올인원1/B", "wd", 24320, 20.0, "화/목", "05층D · 화/목 20:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-118", "후디니6/A", "wd", 24320, 20.0, "월/수", "05층E · 월/수 20:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-119", "합성1/B", "wd", 24320, 20.0, "화/목", "05층F · 화/목 20:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-120", "모델링3/A", "wd", 24320, 20.0, "월수금월수", "05층G · 월수금월수 20:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-121", "AI크리에이터-CG", "wd", 24320, 20.0, "화/목", "06층Q · 화/목 20:00 · 2026-09-15~2026-10-13"], ["oc-wd-8-122", "마야기초2/A", "wd", 24320, 20.0, "월수금월수", "06층S · 월수금월수 20:00 · 2026-09-14~2026-10-14"], ["oc-wd-8-123", "AI에이전트1/A", "wd", 24320, 20.0, "월/수", "12층V · 월/수 20:00 · 2026-09-14~2026-10-12"], ["oc-wd-8-124", "AI에이전트2/B", "wd", 24320, 20.0, "화/목", "12층V · 화/목 20:00 · 2026-09-15~2026-10-13"], ["oc-wd-9-125", "(국7)멀티미디어 콘텐츠제작과정", "wd", 24321, 9.0, "월~금", "06층N · 월~금 09:00 · 2026-10-12~2026-11-11"], ["oc-wd-9-126", "후디니1/A", "wd", 24321, 9.5, "월/수", "05층E · 월/수 09:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-127", "후디니포폴/B", "wd", 24321, 9.5, "화/목", "05층E · 화/목 09:30 · 2026-10-20~2026-11-12"], ["oc-wd-9-128", "합성4/B", "wd", 24321, 9.5, "화/목", "05층F · 화/목 09:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-129", "유튜브시니어/A", "wd", 24321, 9.5, "월/수", "05층G · 월/수 09:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-130", "어드벤스에펙2/B", "wd", 24321, 9.5, "화/목", "05층G · 화/목 09:30 · 2026-10-20~2026-11-12"], ["oc-wd-9-131", "스케치업2", "wd", 24321, 9.5, "월~목", "05층I · 월~목 09:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-132", "AIX 공간기획&도면1/A", "wd", 24321, 9.5, "월/수", "05층K · 월/수 09:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-133", "시포디1", "wd", 24321, 9.5, "월~목", "05층L · 월~목 09:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-134", "에펙", "wd", 24321, 9.5, "월~목", "06층M · 월~목 09:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-135", "모스", "wd", 24321, 9.5, "월~목", "06층O · 월~목 09:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-136", "디일러", "wd", 24321, 9.5, "월~목", "06층Q · 월~목 09:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-137", "AI크리에이터-CG", "wd", 24321, 9.5, "월/수", "06층T · 월/수 09:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-138", "AI크리에이터-모션", "wd", 24321, 9.5, "금", "12층U · 금 09:30 · 2026-10-23~2026-11-13"], ["oc-wd-9-139", "AIX 일러스트/A", "wd", 24321, 9.5, "월/수", "12층V · 월/수 09:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-140", "AIX 포토샵/B", "wd", 24321, 9.5, "화/목", "12층V · 화/목 09:30 · 2026-10-20~2026-11-12"], ["oc-wd-9-141", "디지털드로잉/포폴/A", "wd", 24321, 11.5, "월/수", "05층A · 월/수 11:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-142", "편집포폴", "wd", 24321, 11.5, "월~목", "05층B · 월~목 11:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-143", "색채학(1,2)/B", "wd", 24321, 11.5, "화/목", "05층C · 화/목 11:30 · 2026-10-20~2026-11-12"], ["oc-wd-9-144", "후디니3/A", "wd", 24321, 11.5, "월/수", "05층E · 월/수 11:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-145", "후디니포폴/B", "wd", 24321, 11.5, "화/목", "05층E · 화/목 11:30 · 2026-10-20~2026-11-12"], ["oc-wd-9-146", "합성포폴/A", "wd", 24321, 11.5, "월/수", "05층F · 월/수 11:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-147", "AI크리에이터-인테리어", "wd", 24321, 11.5, "화/목", "05층F · 화/목 11:30 · 2026-10-20~2026-11-12"], ["oc-wd-9-148", "어드벤스시포디2/A", "wd", 24321, 11.5, "월/수", "05층G · 월/수 11:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-149", "어드벤스에펙1/B", "wd", 24321, 11.5, "화/목", "05층G · 화/목 11:30 · 2026-10-20~2026-11-12"], ["oc-wd-9-150", "맥스2", "wd", 24321, 11.5, "월~목", "05층I · 월~목 11:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-151", "프리미어실전/A", "wd", 24321, 11.5, "월/수", "05층L · 월/수 11:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-152", "플랫모션/B", "wd", 24321, 11.5, "화/목", "05층L · 화/목 11:30 · 2026-10-20~2026-11-12"], ["oc-wd-9-153", "시포디2", "wd", 24321, 11.5, "월~목", "06층M · 월~목 11:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-154", "컴활", "wd", 24321, 11.5, "월~목", "06층O · 월~목 11:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-155", "포토웍스", "wd", 24321, 11.5, "월~목", "06층Q · 월~목 11:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-156", "캐드2", "wd", 24321, 11.5, "월~목", "06층R · 월~목 11:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-157", "실내건축2/기출", "wd", 24321, 11.5, "월~목", "06층S · 월~목 11:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-158", "마야기초1/A", "wd", 24321, 11.5, "월수금월수", "06층T · 월수금월수 11:30 · 2026-10-19~2026-11-11"], ["oc-wd-9-159", "스케치업포폴/B", "wd", 24321, 11.5, "화목화목금", "06층T · 화목화목금 11:30 · 2026-10-20~2026-11-13"], ["oc-wd-9-160", "모션에펙", "wd", 24321, 11.5, "월~목", "12층U · 월~목 11:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-161", "웹2", "wd", 24321, 11.5, "월~목", "비대면-A · 월~목 11:30 · 2026-10-19~2026-11-12"], ["oc-wd-9-162", "AIX 포토샵/A", "wd", 24321, 13.0, "월/수", "12층V · 월/수 13:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-163", "AIX 일러스트/B", "wd", 24321, 13.0, "화/목", "12층V · 화/목 13:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-164", "디지털드로잉/포폴/A", "wd", 24321, 14.0, "월/수", "05층A · 월/수 14:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-165", "시니어기초", "wd", 24321, 14.0, "금", "05층B · 금 14:00 · 2026-10-23~2026-10-30"], ["oc-wd-9-166", "발상과표현(1,2)/B", "wd", 24321, 14.0, "화/목", "05층C · 화/목 14:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-167", "그래픽아트웍", "wd", 24321, 14.0, "월~목", "05층D · 월~목 14:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-168", "웹포트폴리오", "wd", 24321, 14.0, "월~목", "05층E · 월~목 14:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-169", "어드벤스시포디1/A", "wd", 24321, 14.0, "월/수", "05층F · 월/수 14:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-170", "룩뎁3/B", "wd", 24321, 14.0, "화/목", "05층F · 화/목 14:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-171", "하드섭4/A", "wd", 24321, 14.0, "월수금월수", "05층G · 월수금월수 14:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-172", "AIX 애니메이션(ART)/B", "wd", 24321, 14.0, "화/목", "05층G · 화/목 14:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-173", "컨셉드로잉", "wd", 24321, 14.0, "월/수", "05층H · 월/수 14:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-174", "인테리어포폴(1,2)/B", "wd", 24321, 14.0, "화/목", "05층I · 화/목 14:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-175", "프리미어실전/B", "wd", 24321, 14.0, "화/목", "05층L · 화/목 14:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-176", "AI피그마2", "wd", 24321, 14.0, "월~목", "06층M · 월~목 14:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-177", "(국1)멀티미디어 콘텐츠제작과정", "wd", 24321, 14.0, "월~금", "06층N · 월~금 14:00 · 2026-09-30~2027-04-28"], ["oc-wd-9-178", "디일러", "wd", 24321, 14.0, "월~목", "06층Q · 월~목 14:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-179", "시포디4", "wd", 24321, 14.0, "월~목", "06층R · 월~목 14:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-180", "스케치업2", "wd", 24321, 14.0, "월~목", "06층T · 월~목 14:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-181", "에펙", "wd", 24321, 14.0, "월~목", "12층U · 월~목 14:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-182", "AI크리에이터-유튜브", "wd", 24321, 14.0, "금", "12층U · 금 14:00 · 2026-10-23~2026-11-13"], ["oc-wd-9-183", "AI프롬프트 엔지니어링1/금", "wd", 24321, 14.0, "금", "12층V · 금 14:00 · 2026-10-23~2026-11-13"], ["oc-wd-9-184", "특강", "wd", 24321, 15.0, "금", "05층K · 금 15:00 · 2026-10-30~2026-10-30"], ["oc-wd-9-185", "AI디지털스토리보드/A", "wd", 24321, 16.0, "월/수", "05층A · 월/수 16:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-186", "패키지MD1", "wd", 24321, 16.0, "월~목", "05층B · 월~목 16:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-187", "AIX 바이브코딩1", "wd", 24321, 16.0, "월~목", "05층C · 월~목 16:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-188", "인포그라피", "wd", 24321, 16.0, "월~목", "05층D · 월~목 16:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-189", "스마트AI시니어", "wd", 24321, 16.0, "월/수", "05층E · 월/수 16:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-190", "모션포폴/B", "wd", 24321, 16.0, "화/목", "05층E · 화/목 16:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-191", "AI크리에이터-시각편집", "wd", 24321, 16.0, "월/수", "05층F · 월/수 16:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-192", "애니포폴/B", "wd", 24321, 16.0, "화/목", "05층F · 화/목 16:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-193", "룩뎁+모델링포폴/A", "wd", 24321, 16.0, "월/수", "05층G · 월/수 16:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-194", "룩뎁+모델링포폴/B", "wd", 24321, 16.0, "화/목", "05층G · 화/목 16:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-195", "컨셉드로잉", "wd", 24321, 16.0, "월/수", "05층H · 월/수 16:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-196", "AI블렌더2/A", "wd", 24321, 16.0, "월수금월수", "05층I · 월수금월수 16:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-197", "인테리어포폴(1,2)/B", "wd", 24321, 16.0, "화/목", "05층I · 화/목 16:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-198", "AI에이전트1/B", "wd", 24321, 16.0, "화/목", "05층K · 화/목 16:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-199", "브랜딩디자인1", "wd", 24321, 16.0, "월~목", "05층L · 월~목 16:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-200", "UXUI포폴/A", "wd", 24321, 16.0, "월수금월수", "06층M · 월수금월수 16:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-201", "포토웍스", "wd", 24321, 16.0, "월~목", "06층Q · 월~목 16:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-202", "마야기초2/A", "wd", 24321, 16.0, "월수금월수", "06층R · 월수금월수 16:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-203", "AI프롬프트 엔지니어링2/B", "wd", 24321, 16.0, "화/목", "06층R · 화/목 16:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-204", "시포디포폴/A", "wd", 24321, 16.0, "월/수", "06층S · 월/수 16:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-205", "시포디포폴/B", "wd", 24321, 16.0, "화/목", "06층S · 화/목 16:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-206", "모션에펙", "wd", 24321, 16.0, "월~목", "12층U · 월~목 16:00 · 2026-10-19~2026-11-12"], ["oc-wd-9-207", "웹툰&AI어시스트/B", "wd", 24321, 18.0, "화/목", "05층A · 화/목 18:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-208", "유튜브 올인원1/B", "wd", 24321, 18.0, "화/목", "05층C · 화/목 18:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-209", "애니3/B", "wd", 24321, 18.0, "화/목", "05층D · 화/목 18:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-210", "AI크리에이터-아트웍", "wd", 24321, 18.0, "화/목", "05층E · 화/목 18:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-211", "합성포폴/B", "wd", 24321, 18.0, "화/목", "05층F · 화/목 18:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-212", "모델링1/A", "wd", 24321, 18.0, "월수금월수", "05층G · 월수금월수 18:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-213", "하드섭2/B", "wd", 24321, 18.0, "화목화목금", "05층G · 화목화목금 18:00 · 2026-10-20~2026-11-13"], ["oc-wd-9-214", "컨셉드로잉", "wd", 24321, 18.0, "월/수", "05층H · 월/수 18:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-215", "창업마스터-소상공인/A", "wd", 24321, 18.0, "월/수", "06층S · 월/수 18:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-216", "AIX 에이전트 업무자동화/금", "wd", 24321, 18.0, "금", "12층U · 금 18:00 · 2026-10-23~2026-11-13"], ["oc-wd-9-217", "AI에이전트2/A", "wd", 24321, 18.0, "월/수", "12층V · 월/수 18:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-218", "AI에이전트1/금", "wd", 24321, 18.0, "금", "12층V · 금 18:00 · 2026-10-23~2026-11-13"], ["oc-wd-9-219", "AIX 디지털 출판 실무1/A", "wd", 24321, 19.0, "월/수", "05층B · 월/수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-220", "AIX 비주얼 마케팅1/B", "wd", 24321, 19.0, "화/목", "05층B · 화/목 19:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-221", "AI블렌더2/A", "wd", 24321, 19.0, "월수금월수", "05층D · 월수금월수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-222", "AIX 실전영상/A", "wd", 24321, 19.0, "월/수", "05층I · 월/수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-223", "AIX 마케팅영상/B", "wd", 24321, 19.0, "화/목", "05층I · 화/목 19:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-224", "실무엑셀(컴활2급)", "wd", 24321, 19.0, "금", "05층I · 금 19:00 · 2026-10-23~2026-11-13"], ["oc-wd-9-225", "회계1급/A", "wd", 24321, 19.0, "월수월수금", "05층K · 월수월수금 19:00 · 2026-10-12~2026-12-04"], ["oc-wd-9-226", "세무2급/B", "wd", 24321, 19.0, "화목금화목", "05층K · 화목금화목 19:00 · 2026-10-13~2026-12-03"], ["oc-wd-9-227", "실내건축2/기출/A", "wd", 24321, 19.0, "월수금월수", "05층L · 월수금월수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-228", "AIX 바이브코딩2/B", "wd", 24321, 19.0, "화목화목금", "05층L · 화목화목금 19:00 · 2026-10-20~2026-11-13"], ["oc-wd-9-229", "AIX 피그마1/A", "wd", 24321, 19.0, "월수금월수", "06층M · 월수금월수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-230", "편집포폴/B", "wd", 24321, 19.0, "화목화목금", "06층M · 화목화목금 19:00 · 2026-10-20~2026-11-13"], ["oc-wd-9-231", "모스/B", "wd", 24321, 19.0, "화목화목금", "06층N · 화목화목금 19:00 · 2026-10-20~2026-11-13"], ["oc-wd-9-232", "AI프롬프트 엔지니어링1/A", "wd", 24321, 19.0, "월/수", "06층O · 월/수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-233", "AI프롬프트 엔지니어링2/B", "wd", 24321, 19.0, "화/목", "06층O · 화/목 19:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-234", "AIX 포토샵/A", "wd", 24321, 19.0, "월/수", "06층Q · 월/수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-235", "AIX 일러스트/B", "wd", 24321, 19.0, "화/목", "06층Q · 화/목 19:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-236", "AIX 공간기획&도면1/A", "wd", 24321, 19.0, "월/수", "06층R · 월/수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-237", "AIX 공간기획&도면2/B", "wd", 24321, 19.0, "화/목", "06층R · 화/목 19:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-238", "시포디3/B", "wd", 24321, 19.0, "화목화목금", "06층S · 화목화목금 19:00 · 2026-10-20~2026-11-13"], ["oc-wd-9-239", "AIX 3D 인테리어1/A", "wd", 24321, 19.0, "월수금월수", "06층T · 월수금월수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-240", "실내건축1/기출/B", "wd", 24321, 19.0, "화목화목금", "06층T · 화목화목금 19:00 · 2026-10-20~2026-11-13"], ["oc-wd-9-241", "AIX 2D 모션디자인2/A", "wd", 24321, 19.0, "월/수", "12층U · 월/수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-242", "AIX 2D 모션디자인1/B", "wd", 24321, 19.0, "화/목", "12층U · 화/목 19:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-243", "웹3/A", "wd", 24321, 19.0, "월수금월수", "비대면-A · 월수금월수 19:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-244", "유튜브 올인원2/B", "wd", 24321, 20.0, "화/목", "05층C · 화/목 20:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-245", "후디니7/A", "wd", 24321, 20.0, "월/수", "05층E · 월/수 20:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-246", "합성2/B", "wd", 24321, 20.0, "화/목", "05층F · 화/목 20:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-247", "모델링4/A", "wd", 24321, 20.0, "월수금월수", "05층G · 월수금월수 20:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-248", "마야기초3/A", "wd", 24321, 20.0, "월수금월수", "06층S · 월수금월수 20:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-249", "AI에이전트2/A", "wd", 24321, 20.0, "월/수", "12층V · 월/수 20:00 · 2026-10-19~2026-11-11"], ["oc-wd-9-250", "AI에이전트1/B", "wd", 24321, 20.0, "화/목", "12층V · 화/목 20:00 · 2026-10-20~2026-11-12"], ["oc-wd-9-251", "창업마스터-소상공인(비)/A", "wd", 24321, 20.0, "월/수", "비대면-A · 월/수 20:00 · 2026-10-19~2026-11-11"], ["oc-wd-10-252", "편집포폴/B", "wd", 24322, 9.5, "화/목", "05층B · 화/목 09:30 · 2026-11-17~2026-12-10"], ["oc-wd-10-253", "AIX 디지털 출판 실무1/A", "wd", 24322, 9.5, "월/수", "05층B · 월/수 09:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-254", "후디니포폴/B", "wd", 24322, 9.5, "화/목", "05층E · 화/목 09:30 · 2026-11-17~2026-12-10"], ["oc-wd-10-255", "후디니2/A", "wd", 24322, 9.5, "월/수", "05층E · 월/수 09:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-256", "합성5/B", "wd", 24322, 9.5, "화/목", "05층F · 화/목 09:30 · 2026-11-17~2026-12-10"], ["oc-wd-10-257", "어드벤스에펙1/B", "wd", 24322, 9.5, "화/목", "05층G · 화/목 09:30 · 2026-11-17~2026-12-10"], ["oc-wd-10-258", "유튜브시니어/A", "wd", 24322, 9.5, "월/수", "05층G · 월/수 09:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-259", "시포디2", "wd", 24322, 9.5, "월~목", "05층L · 월~목 09:30 · 2026-11-17~2026-12-14"], ["oc-wd-10-260", "모션에펙", "wd", 24322, 9.5, "월~목", "06층M · 월~목 09:30 · 2026-11-17~2026-12-14"], ["oc-wd-10-261", "모스/B", "wd", 24322, 9.5, "화목화목금", "06층O · 화목화목금 09:30 · 2026-11-17~2026-12-11"], ["oc-wd-10-262", "컴활/A", "wd", 24322, 9.5, "월수금월수", "06층O · 월수금월수 09:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-263", "AIX 디자인 실무 1/A", "wd", 24322, 9.5, "월/수", "06층Q · 월/수 09:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-264", "AIX 공간기획&도면1/B", "wd", 24322, 9.5, "화/목", "06층R · 화/목 09:30 · 2026-11-17~2026-12-10"], ["oc-wd-10-265", "AIX 공간기획&도면2/A", "wd", 24322, 9.5, "월/수", "06층R · 월/수 09:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-266", "실내건축1/기출/A", "wd", 24322, 9.5, "월수금월수", "06층S · 월수금월수 09:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-267", "AI크리에이터-모션", "wd", 24322, 9.5, "금", "12층U · 금 09:30 · 2026-11-20~2026-12-11"], ["oc-wd-10-268", "AIX 일러스트/B", "wd", 24322, 9.5, "화/목", "12층V · 화/목 09:30 · 2026-11-17~2026-12-10"], ["oc-wd-10-269", "AIX 포토샵/A", "wd", 24322, 9.5, "월/수", "12층V · 월/수 09:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-270", "디지털드로잉/포폴/A", "wd", 24322, 11.5, "월/수", "05층A · 월/수 11:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-271", "발상과표현(1,2)/B", "wd", 24322, 11.5, "화/목", "05층C · 화/목 11:30 · 2026-11-17~2026-12-10"], ["oc-wd-10-272", "후디니포폴/B", "wd", 24322, 11.5, "화/목", "05층E · 화/목 11:30 · 2026-11-17~2026-12-10"], ["oc-wd-10-273", "후디니4/A", "wd", 24322, 11.5, "월/수", "05층E · 월/수 11:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-274", "합성포폴/A", "wd", 24322, 11.5, "월/수", "05층F · 월/수 11:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-275", "어드벤스에펙2/B", "wd", 24322, 11.5, "화/목", "05층G · 화/목 11:30 · 2026-11-17~2026-12-10"], ["oc-wd-10-276", "어드벤스시포디1/A", "wd", 24322, 11.5, "월/수", "05층G · 월/수 11:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-277", "맥스3", "wd", 24322, 11.5, "월~목", "05층I · 월~목 11:30 · 2026-11-17~2026-12-14"], ["oc-wd-10-278", "플랫모션/B", "wd", 24322, 11.5, "화/목", "05층L · 화/목 11:30 · 2026-11-17~2026-12-10"], ["oc-wd-10-279", "프리미어실전/A", "wd", 24322, 11.5, "월/수", "05층L · 월/수 11:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-280", "시포디3", "wd", 24322, 11.5, "월~목", "06층M · 월~목 11:30 · 2026-11-17~2026-12-14"], ["oc-wd-10-281", "마야기초2/A", "wd", 24322, 11.5, "월수금월수", "06층T · 월수금월수 11:30 · 2026-11-18~2026-12-14"], ["oc-wd-10-282", "에펙", "wd", 24322, 11.5, "월~목", "12층U · 월~목 11:30 · 2026-11-17~2026-12-14"], ["oc-wd-10-283", "웹3", "wd", 24322, 11.5, "월~목", "비대면-A · 월~목 11:30 · 2026-11-17~2026-12-14"], ["oc-wd-10-284", "AIX 포토샵/B", "wd", 24322, 13.0, "화/목", "06층O · 화/목 13:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-285", "AIX 일러스트/A", "wd", 24322, 13.0, "월/수", "06층O · 월/수 13:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-286", "AIX 비주얼 마케팅1/B", "wd", 24322, 13.0, "화/목", "06층Q · 화/목 13:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-287", "AIX 패키지MD1/A", "wd", 24322, 13.0, "월/수", "06층Q · 월/수 13:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-288", "디지털드로잉/포폴/A", "wd", 24322, 14.0, "월/수", "05층A · 월/수 14:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-289", "시니어기초", "wd", 24322, 14.0, "금", "05층B · 금 14:00 · 2026-11-20~2026-11-27"], ["oc-wd-10-290", "색채학(1,2)/B", "wd", 24322, 14.0, "화/목", "05층C · 화/목 14:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-291", "룩뎁4/B", "wd", 24322, 14.0, "화/목", "05층F · 화/목 14:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-292", "어드벤스시포디2/A", "wd", 24322, 14.0, "월/수", "05층F · 월/수 14:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-293", "AIX 애니메이션(ART)/B", "wd", 24322, 14.0, "화/목", "05층G · 화/목 14:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-294", "하드섭5/A", "wd", 24322, 14.0, "월수금월수", "05층G · 월수금월수 14:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-295", "컨셉드로잉A", "wd", 24322, 14.0, "월/수", "05층H · 월/수 14:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-296", "인테리어포폴(1,2)/B", "wd", 24322, 14.0, "화/목", "05층I · 화/목 14:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-297", "AI크리에이터-인테리어", "wd", 24322, 14.0, "월/수", "05층I · 월/수 14:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-298", "프리미어실전/B", "wd", 24322, 14.0, "화/목", "05층L · 화/목 14:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-299", "AI피그마3", "wd", 24322, 14.0, "월~목", "06층M · 월~목 14:00 · 2026-11-17~2026-12-14"], ["oc-wd-10-300", "(국1)멀티미디어 콘텐츠제작과정", "wd", 24322, 14.0, "월~금", "06층N · 월~금 14:00 · 2026-09-30~2027-04-28"], ["oc-wd-10-301", "시포디1", "wd", 24322, 14.0, "월~목", "06층R · 월~목 14:00 · 2026-11-17~2026-12-14"], ["oc-wd-10-302", "모션에펙", "wd", 24322, 14.0, "월~목", "12층U · 월~목 14:00 · 2026-11-17~2026-12-14"], ["oc-wd-10-303", "AI크리에이터-유튜브", "wd", 24322, 14.0, "금", "12층U · 금 14:00 · 2026-11-20~2026-12-11"], ["oc-wd-10-304", "포토웍스", "wd", 24322, 14.0, "월~목", "12층V · 월~목 14:00 · 2026-11-17~2026-12-14"], ["oc-wd-10-305", "AI프롬프트 엔지니어링2/금", "wd", 24322, 14.0, "금", "12층V · 금 14:00 · 2026-11-20~2026-12-11"], ["oc-wd-10-306", "AI디지털스토리보드/A", "wd", 24322, 16.0, "월/수", "05층A · 월/수 16:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-307", "패키지MD2", "wd", 24322, 16.0, "월~목", "05층B · 월~목 16:00 · 2026-11-17~2026-12-14"], ["oc-wd-10-308", "AIX 바이브코딩2", "wd", 24322, 16.0, "월~목", "05층C · 월~목 16:00 · 2026-11-17~2026-12-14"], ["oc-wd-10-309", "그래픽아트웍", "wd", 24322, 16.0, "월~목", "05층D · 월~목 16:00 · 2026-11-17~2026-12-14"], ["oc-wd-10-310", "모션포폴/B", "wd", 24322, 16.0, "화/목", "05층E · 화/목 16:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-311", "스마트AI시니어", "wd", 24322, 16.0, "월/수", "05층E · 월/수 16:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-312", "애니포폴/B", "wd", 24322, 16.0, "화/목", "05층F · 화/목 16:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-313", "AI크리에이터-시각편집", "wd", 24322, 16.0, "월/수", "05층F · 월/수 16:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-314", "룩뎁+모델링포폴/B", "wd", 24322, 16.0, "화/목", "05층G · 화/목 16:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-315", "룩뎁+모델링포폴/A", "wd", 24322, 16.0, "월/수", "05층G · 월/수 16:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-316", "컨셉드로잉A", "wd", 24322, 16.0, "월/수", "05층H · 월/수 16:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-317", "인테리어포폴(1,2)/B", "wd", 24322, 16.0, "화/목", "05층I · 화/목 16:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-318", "AI블렌더1/A", "wd", 24322, 16.0, "월수금월수", "05층I · 월수금월수 16:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-319", "AI에이전트2/B", "wd", 24322, 16.0, "화/목", "05층K · 화/목 16:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-320", "브랜딩디자인2", "wd", 24322, 16.0, "월~목", "05층L · 월~목 16:00 · 2026-11-17~2026-12-14"], ["oc-wd-10-321", "웹포트폴리오/B", "wd", 24322, 16.0, "화/목", "06층M · 화/목 16:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-322", "UXUI포폴/A", "wd", 24322, 16.0, "월수금월수", "06층M · 월수금월수 16:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-323", "AI프롬프트 엔지니어링1/B", "wd", 24322, 16.0, "화/목", "06층R · 화/목 16:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-324", "마야기초3/A", "wd", 24322, 16.0, "월수금월수", "06층R · 월수금월수 16:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-325", "시포디포폴/B", "wd", 24322, 16.0, "화/목", "06층S · 화/목 16:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-326", "시포디포폴/A", "wd", 24322, 16.0, "월/수", "06층S · 월/수 16:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-327", "스케치업포폴/A", "wd", 24322, 16.0, "월/수", "06층T · 월/수 16:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-328", "에펙", "wd", 24322, 16.0, "월~목", "12층U · 월~목 16:00 · 2026-11-17~2026-12-14"], ["oc-wd-10-329", "디일러", "wd", 24322, 16.0, "월~목", "12층V · 월~목 16:00 · 2026-11-17~2026-12-14"], ["oc-wd-10-330", "웹툰&AI어시스트/B", "wd", 24322, 18.0, "화/목", "05층A · 화/목 18:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-331", "유튜브 올인원2/B", "wd", 24322, 18.0, "화/목", "05층C · 화/목 18:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-332", "애니4/B", "wd", 24322, 18.0, "화/목", "05층D · 화/목 18:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-333", "AI크리에이터-아트웍", "wd", 24322, 18.0, "화/목", "05층E · 화/목 18:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-334", "합성포폴/B", "wd", 24322, 18.0, "화/목", "05층F · 화/목 18:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-335", "언리얼엔진1/A", "wd", 24322, 18.0, "월/수", "05층F · 월/수 18:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-336", "하드섭3/B", "wd", 24322, 18.0, "화목화목금", "05층G · 화목화목금 18:00 · 2026-11-17~2026-12-11"], ["oc-wd-10-337", "모델링2/A", "wd", 24322, 18.0, "월수금월수", "05층G · 월수금월수 18:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-338", "컨셉드로잉A", "wd", 24322, 18.0, "월/수", "05층H · 월/수 18:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-339", "AIX 에이전트 업무자동화/금", "wd", 24322, 18.0, "금", "12층U · 금 18:00 · 2026-11-20~2026-12-11"], ["oc-wd-10-340", "AI에이전트2/금", "wd", 24322, 18.0, "금", "12층V · 금 18:00 · 2026-11-20~2026-12-11"], ["oc-wd-10-341", "AIX 비주얼 마케팅2/B", "wd", 24322, 19.0, "화/목", "05층B · 화/목 19:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-342", "AIX 디지털 출판 실무2/A", "wd", 24322, 19.0, "월/수", "05층B · 월/수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-343", "AIX 마케팅영상/B", "wd", 24322, 19.0, "화/목", "05층I · 화/목 19:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-344", "AIX 실전영상/A", "wd", 24322, 19.0, "월/수", "05층I · 월/수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-345", "실무엑셀(컴활2급)", "wd", 24322, 19.0, "금", "05층I · 금 19:00 · 2026-11-20~2026-12-11"], ["oc-wd-10-346", "회계1급/A", "wd", 24322, 19.0, "월수월수금", "05층K · 월수월수금 19:00 · 2026-10-12~2026-12-04"], ["oc-wd-10-347", "세무2급/B", "wd", 24322, 19.0, "화목금화목", "05층K · 화목금화목 19:00 · 2026-10-13~2026-12-03"], ["oc-wd-10-348", "AIX 바이브코딩3/B", "wd", 24322, 19.0, "화목화목금", "05층L · 화목화목금 19:00 · 2026-11-17~2026-12-11"], ["oc-wd-10-349", "실내건축1/기출/A", "wd", 24322, 19.0, "월수금월수", "05층L · 월수금월수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-350", "편집포폴/B", "wd", 24322, 19.0, "화/목", "06층M · 화/목 19:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-351", "AIX 피그마2/A", "wd", 24322, 19.0, "월수금월수", "06층M · 월수금월수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-352", "컴활/B", "wd", 24322, 19.0, "화목화목금", "06층N · 화목화목금 19:00 · 2026-11-17~2026-12-11"], ["oc-wd-10-353", "AIX 디자인 실무 1/A", "wd", 24322, 19.0, "월/수", "06층N · 월/수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-354", "AI프롬프트 엔지니어링1/B", "wd", 24322, 19.0, "화/목", "06층O · 화/목 19:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-355", "AI프롬프트 엔지니어링2/A", "wd", 24322, 19.0, "월/수", "06층O · 월/수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-356", "AIX 포토샵/B", "wd", 24322, 19.0, "화/목", "06층Q · 화/목 19:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-357", "AIX 일러스트/A", "wd", 24322, 19.0, "월/수", "06층Q · 월/수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-358", "AIX 공간기획&도면1/B", "wd", 24322, 19.0, "화/목", "06층R · 화/목 19:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-359", "AIX 공간기획&도면2/A", "wd", 24322, 19.0, "월/수", "06층R · 월/수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-360", "시포디4/B", "wd", 24322, 19.0, "화목화목금", "06층S · 화목화목금 19:00 · 2026-11-17~2026-12-11"], ["oc-wd-10-361", "실내건축2/기출/B", "wd", 24322, 19.0, "화목화목금", "06층T · 화목화목금 19:00 · 2026-11-17~2026-12-11"], ["oc-wd-10-362", "AIX 3D 인테리어2/A", "wd", 24322, 19.0, "월수금월수", "06층T · 월수금월수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-363", "AIX 2D 모션디자인2/B", "wd", 24322, 19.0, "화/목", "12층U · 화/목 19:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-364", "AIX 2D 모션디자인1/A", "wd", 24322, 19.0, "월/수", "12층U · 월/수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-365", "웹1/A", "wd", 24322, 19.0, "월수금월수", "비대면-A · 월수금월수 19:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-366", "유튜브 올인원1/B", "wd", 24322, 20.0, "화/목", "05층C · 화/목 20:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-367", "AI크리에이터-CG", "wd", 24322, 20.0, "화/목", "05층E · 화/목 20:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-368", "후디니1/A", "wd", 24322, 20.0, "월/수", "05층E · 월/수 20:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-369", "합성3/B", "wd", 24322, 20.0, "화/목", "05층F · 화/목 20:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-370", "모델링5/A", "wd", 24322, 20.0, "월수금월수", "05층G · 월수금월수 20:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-371", "마야기초1/A", "wd", 24322, 20.0, "월수금월수", "06층S · 월수금월수 20:00 · 2026-11-18~2026-12-14"], ["oc-wd-10-372", "AI에이전트2/B", "wd", 24322, 20.0, "화/목", "12층V · 화/목 20:00 · 2026-11-17~2026-12-10"], ["oc-wd-10-373", "AI에이전트1/A", "wd", 24322, 20.0, "월/수", "12층V · 월/수 20:00 · 2026-11-18~2026-12-14"], ["oc-wd-11-374", "편집포폴/B", "wd", 24323, 9.5, "화/목", "05층B · 화/목 09:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-375", "AIX 디지털 출판 실무2/A", "wd", 24323, 9.5, "월/수", "05층B · 월/수 09:30 · 2026-12-16~2027-01-13"], ["oc-wd-11-376", "후디니포폴/B", "wd", 24323, 9.5, "화/목", "05층E · 화/목 09:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-377", "후디니3/A", "wd", 24323, 9.5, "월/수", "05층E · 월/수 09:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-378", "합성1/B", "wd", 24323, 9.5, "화/목", "05층F · 화/목 09:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-379", "AI크리에이터-CG", "wd", 24323, 9.5, "월/수", "05층F · 월/수 09:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-380", "어드벤스에펙2/B", "wd", 24323, 9.5, "화/목", "05층G · 화/목 09:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-381", "유튜브시니어/A", "wd", 24323, 9.5, "월/수", "05층G · 월/수 09:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-382", "시포디3", "wd", 24323, 9.5, "월~목", "05층L · 월~목 09:30 · 2026-12-15~2027-01-11"], ["oc-wd-11-383", "에펙", "wd", 24323, 9.5, "월~목", "06층M · 월~목 09:30 · 2026-12-15~2027-01-11"], ["oc-wd-11-384", "AIX 3D 인테리어1/A", "wd", 24323, 9.5, "월수금월수", "06층N · 월수금월수 09:30 · 2026-12-16~2027-01-13"], ["oc-wd-11-385", "컴활/B", "wd", 24323, 9.5, "화목화목금", "06층O · 화목화목금 09:30 · 2026-12-15~2027-01-12"], ["oc-wd-11-386", "모스/A", "wd", 24323, 9.5, "월수금월수", "06층O · 월수금월수 09:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-387", "Design Core Foundation/B", "wd", 24323, 9.5, "화/목", "06층Q · 화/목 09:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-388", "AIX 디자인 실무 2/A", "wd", 24323, 9.5, "월/수", "06층Q · 월/수 09:30 · 2026-12-16~2027-01-12"], ["oc-wd-11-389", "AIX 공간기획&도면2/B", "wd", 24323, 9.5, "화/목", "06층R · 화/목 09:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-390", "AIX 공간기획&도면1/A", "wd", 24323, 9.5, "월/수", "06층R · 월/수 09:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-391", "실내건축2/기출/A", "wd", 24323, 9.5, "월수금월수", "06층S · 월수금월수 09:30 · 2026-12-16~2027-01-13"], ["oc-wd-11-392", "AI크리에이터-모션", "wd", 24323, 9.5, "금", "12층U · 금 09:30 · 2026-12-18~2027-01-13"], ["oc-wd-11-393", "AIX 일러스트/A", "wd", 24323, 9.5, "화/목", "12층V · 화/목 09:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-394", "AIX 포토샵/B", "wd", 24323, 9.5, "월/수", "12층V · 월/수 09:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-395", "디지털드로잉/포폴/A", "wd", 24323, 11.5, "월/수", "05층A · 월/수 11:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-396", "편집포폴", "wd", 24323, 11.5, "월~목", "05층B · 월~목 11:30 · 2026-12-15~2027-01-11"], ["oc-wd-11-397", "색채학(1,2)/B", "wd", 24323, 11.5, "화/목", "05층C · 화/목 11:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-398", "후디니포폴/B", "wd", 24323, 11.5, "화/목", "05층E · 화/목 11:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-399", "후디니5/A", "wd", 24323, 11.5, "월/수", "05층E · 월/수 11:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-400", "합성포폴/A", "wd", 24323, 11.5, "월/수", "05층F · 월/수 11:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-401", "어드벤스에펙1/B", "wd", 24323, 11.5, "화/목", "05층G · 화/목 11:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-402", "어드벤스시포디2/A", "wd", 24323, 11.5, "월/수", "05층G · 월/수 11:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-403", "플랫모션/B", "wd", 24323, 11.5, "화/목", "05층L · 화/목 11:30 · 2026-12-15~2027-01-07"], ["oc-wd-11-404", "프리미어실전/A", "wd", 24323, 11.5, "월/수", "05층L · 월/수 11:30 · 2026-12-16~2027-01-11"], ["oc-wd-11-405", "시포디4", "wd", 24323, 11.5, "월~목", "06층M · 월~목 11:30 · 2026-12-15~2027-01-11"], ["oc-wd-11-406", "마야기초3/A", "wd", 24323, 11.5, "월수금월수", "06층T · 월수금월수 11:30 · 2026-12-16~2027-01-13"], ["oc-wd-11-407", "모션에펙", "wd", 24323, 11.5, "월~목", "12층U · 월~목 11:30 · 2026-12-15~2027-01-11"], ["oc-wd-11-408", "웹1", "wd", 24323, 11.5, "월~목", "비대면-A · 월~목 11:30 · 2026-12-15~2027-01-11"], ["oc-wd-11-409", "AIX 피그마1/A", "wd", 24323, 13.0, "월수금월수", "05층C · 월수금월수 13:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-410", "AIX 브랜딩1/A", "wd", 24323, 13.0, "화/목", "05층D · 화/목 13:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-411", "AIX 디자인 실무 1/A", "wd", 24323, 13.0, "월/수", "05층D · 월/수 13:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-412", "AIX 비주얼 마케팅2/B", "wd", 24323, 13.0, "화/목", "06층Q · 화/목 13:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-413", "AIX 패키지MD2/A", "wd", 24323, 13.0, "월/수", "06층Q · 월/수 13:00 · 2026-12-16~2027-01-12"], ["oc-wd-11-414", "AIX 공간VR시각화1/B", "wd", 24323, 13.0, "화목화목금", "06층T · 화목화목금 13:00 · 2026-12-15~2027-01-12"], ["oc-wd-11-415", "AIX 일러스트/B", "wd", 24323, 13.0, "화/목", "12층V · 화/목 13:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-416", "AIX 포토샵/A", "wd", 24323, 13.0, "월/수", "12층V · 월/수 13:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-417", "디지털드로잉/포폴/A", "wd", 24323, 14.0, "월/수", "05층A · 월/수 14:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-418", "시니어기초", "wd", 24323, 14.0, "금", "05층B · 금 14:00 · 2026-12-18~2027-01-08"], ["oc-wd-11-419", "발상과표현(1,2)/B", "wd", 24323, 14.0, "화/목", "05층C · 화/목 14:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-420", "어드벤스시포디1/A", "wd", 24323, 14.0, "월/수", "05층F · 월/수 14:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-421", "AIX 애니메이션(ART)/B", "wd", 24323, 14.0, "화/목", "05층G · 화/목 14:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-422", "하드섭1/A", "wd", 24323, 14.0, "월수금월수", "05층G · 월수금월수 14:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-423", "컨셉드로잉A", "wd", 24323, 14.0, "월/수", "05층H · 월/수 14:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-424", "인테리어포폴(1,2)/B", "wd", 24323, 14.0, "화/목", "05층I · 화/목 14:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-425", "AI크리에이터-인테리어", "wd", 24323, 14.0, "월/수", "05층I · 월/수 14:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-426", "프리미어실전/B", "wd", 24323, 14.0, "화/목", "05층L · 화/목 14:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-427", "(국1)멀티미디어 콘텐츠제작과정", "wd", 24323, 14.0, "월~금", "06층N · 월~금 14:00 · 2026-09-30~2027-04-28"], ["oc-wd-11-428", "시포디2", "wd", 24323, 14.0, "월~목", "06층R · 월~목 14:00 · 2026-12-15~2027-01-11"], ["oc-wd-11-429", "에펙", "wd", 24323, 14.0, "월~목", "12층U · 월~목 14:00 · 2026-12-15~2027-01-11"], ["oc-wd-11-430", "AI크리에이터-유튜브", "wd", 24323, 14.0, "금", "12층U · 금 14:00 · 2026-12-18~2027-01-13"], ["oc-wd-11-431", "AI프롬프트 엔지니어링1/금", "wd", 24323, 14.0, "금", "12층V · 금 14:00 · 2026-12-18~2027-01-13"], ["oc-wd-11-432", "AI디지털스토리보드/A", "wd", 24323, 16.0, "월/수", "05층A · 월/수 16:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-433", "AIX 바이브코딩3", "wd", 24323, 16.0, "월~목", "05층C · 월~목 16:00 · 2026-12-15~2027-01-11"], ["oc-wd-11-434", "모션포폴/B", "wd", 24323, 16.0, "화/목", "05층E · 화/목 16:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-435", "스마트AI시니어", "wd", 24323, 16.0, "월/수", "05층E · 월/수 16:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-436", "애니포폴/B", "wd", 24323, 16.0, "화/목", "05층F · 화/목 16:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-437", "AI크리에이터-시각편집", "wd", 24323, 16.0, "월/수", "05층F · 월/수 16:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-438", "룩뎁+모델링포폴/B", "wd", 24323, 16.0, "화/목", "05층G · 화/목 16:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-439", "룩뎁+모델링포폴/A", "wd", 24323, 16.0, "월/수", "05층G · 월/수 16:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-440", "컨셉드로잉A", "wd", 24323, 16.0, "월/수", "05층H · 월/수 16:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-441", "인테리어포폴(1,2)/B", "wd", 24323, 16.0, "화/목", "05층I · 화/목 16:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-442", "AI블렌더2/A", "wd", 24323, 16.0, "월/수", "05층I · 월/수 16:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-443", "웹포트폴리오/B", "wd", 24323, 16.0, "화/목", "06층M · 화/목 16:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-444", "UXUI포폴/A", "wd", 24323, 16.0, "월수금월수", "06층M · 월수금월수 16:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-445", "AI프롬프트 엔지니어링2/B", "wd", 24323, 16.0, "화/목", "06층R · 화/목 16:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-446", "마야기초1/A", "wd", 24323, 16.0, "월수금월수", "06층R · 월수금월수 16:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-447", "시포디포폴/B", "wd", 24323, 16.0, "화/목", "06층S · 화/목 16:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-448", "시포디포폴/A", "wd", 24323, 16.0, "월/수", "06층S · 월/수 16:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-449", "스케치업포폴/A", "wd", 24323, 16.0, "월/수", "06층T · 월/수 16:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-450", "모션에펙", "wd", 24323, 16.0, "월~목", "12층U · 월~목 16:00 · 2026-12-15~2027-01-11"], ["oc-wd-11-451", "웹툰&AI어시스트/B", "wd", 24323, 18.0, "화/목", "05층A · 화/목 18:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-452", "유튜브 올인원1/B", "wd", 24323, 18.0, "화/목", "05층C · 화/목 18:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-453", "애니5/B", "wd", 24323, 18.0, "화/목", "05층D · 화/목 18:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-454", "AI크리에이터-아트웍", "wd", 24323, 18.0, "화/목", "05층E · 화/목 18:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-455", "합성포폴/B", "wd", 24323, 18.0, "화/목", "05층F · 화/목 18:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-456", "언리얼엔진2/A", "wd", 24323, 18.0, "월/수", "05층F · 월/수 18:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-457", "하드섭4/B", "wd", 24323, 18.0, "화목화목금", "05층G · 화목화목금 18:00 · 2026-12-15~2027-01-12"], ["oc-wd-11-458", "모델링3/A", "wd", 24323, 18.0, "월수금월수", "05층G · 월수금월수 18:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-459", "컨셉드로잉A", "wd", 24323, 18.0, "월/수", "05층H · 월/수 18:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-460", "AIX 에이전트 업무자동화/금", "wd", 24323, 18.0, "금", "12층U · 금 18:00 · 2026-12-18~2027-01-13"], ["oc-wd-11-461", "AI에이전트1/금", "wd", 24323, 18.0, "금", "12층V · 금 18:00 · 2026-12-18~2027-01-13"], ["oc-wd-11-462", "AIX 비주얼 마케팅1/B", "wd", 24323, 19.0, "화/목", "05층B · 화/목 19:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-463", "AIX 패키지MD1/A", "wd", 24323, 19.0, "월/수", "05층B · 월/수 19:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-464", "AIX 바이브코딩1/A", "wd", 24323, 19.0, "월수금월수", "05층C · 월수금월수 19:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-465", "AI블렌더1/A", "wd", 24323, 19.0, "월수금월수", "05층D · 월수금월수 19:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-466", "AIX 마케팅영상/B", "wd", 24323, 19.0, "화/목", "05층I · 화/목 19:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-467", "AIX 실전영상/A", "wd", 24323, 19.0, "월/수", "05층I · 월/수 19:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-468", "실무엑셀(컴활2급)", "wd", 24323, 19.0, "금", "05층I · 금 19:00 · 2026-12-18~2027-01-13"], ["oc-wd-11-469", "편집포폴/B", "wd", 24323, 19.0, "화/목", "05층L · 화/목 19:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-470", "실내건축2/기출/A", "wd", 24323, 19.0, "월수금월수", "05층L · 월수금월수 19:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-471", "AIX 피그마3/A", "wd", 24323, 19.0, "월수금월수", "06층M · 월수금월수 19:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-472", "모스/B", "wd", 24323, 19.0, "화목화목금", "06층N · 화목화목금 19:00 · 2026-12-15~2027-01-12"], ["oc-wd-11-473", "AIX 디자인 실무 2/A", "wd", 24323, 19.0, "월/수", "06층N · 월/수 19:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-474", "AI프롬프트 엔지니어링2/B", "wd", 24323, 19.0, "화/목", "06층O · 화/목 19:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-475", "AI프롬프트 엔지니어링1/A", "wd", 24323, 19.0, "월/수", "06층O · 월/수 19:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-476", "AIX 일러스트/B", "wd", 24323, 19.0, "화/목", "06층Q · 화/목 19:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-477", "AIX 포토샵/A", "wd", 24323, 19.0, "월/수", "06층Q · 월/수 19:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-478", "AIX 공간기획&도면2/B", "wd", 24323, 19.0, "화/목", "06층R · 화/목 19:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-479", "AIX 공간기획&도면1/A", "wd", 24323, 19.0, "월/수", "06층R · 월/수 19:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-480", "시포디1/B", "wd", 24323, 19.0, "화목화목금", "06층S · 화목화목금 19:00 · 2026-12-15~2027-01-12"], ["oc-wd-11-481", "실내건축1/기출/B", "wd", 24323, 19.0, "화목화목금", "06층T · 화목화목금 19:00 · 2026-12-15~2027-01-12"], ["oc-wd-11-482", "AIX 3D 인테리어3/A", "wd", 24323, 19.0, "월수금월수", "06층T · 월수금월수 19:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-483", "AIX 2D 모션디자인1/B", "wd", 24323, 19.0, "화/목", "12층U · 화/목 19:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-484", "AIX 2D 모션디자인2/A", "wd", 24323, 19.0, "월/수", "12층U · 월/수 19:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-485", "웹2/A", "wd", 24323, 19.0, "월수금월수", "비대면-A · 월수금월수 19:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-486", "유튜브 올인원2/B", "wd", 24323, 20.0, "화/목", "05층C · 화/목 20:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-487", "후디니2/A", "wd", 24323, 20.0, "월/수", "05층E · 월/수 20:00 · 2026-12-16~2027-01-11"], ["oc-wd-11-488", "합성4/B", "wd", 24323, 20.0, "화/목", "05층F · 화/목 20:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-489", "모델링6/A", "wd", 24323, 20.0, "월수금월수", "05층G · 월수금월수 20:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-490", "마야기초2/A", "wd", 24323, 20.0, "월수금월수", "06층S · 월수금월수 20:00 · 2026-12-16~2027-01-13"], ["oc-wd-11-491", "AI에이전트1/B", "wd", 24323, 20.0, "화/목", "12층V · 화/목 20:00 · 2026-12-15~2027-01-07"], ["oc-wd-11-492", "AI에이전트2/A", "wd", 24323, 20.0, "월/수", "12층V · 월/수 20:00 · 2026-12-16~2027-01-11"], ["oc-we-8-493", "CAT시험", "we", 24320, 9.0, "토", "05층L · 토 09:00 · 2026-09-12~2026-09-12"], ["oc-we-8-494", "모션포폴/주", "we", 24320, 9.0, "토/일", "06층S · 토/일 09:00 · 2026-08-08~2026-09-06"], ["oc-we-8-495", "모션포폴/주", "we", 24320, 9.0, "토/일", "06층S · 토/일 09:00 · 2026-09-19~2026-10-25"], ["oc-we-8-496", "시포디1/6주", "we", 24320, 9.0, "토/일", "06층T · 토/일 09:00 · 2026-08-08~2026-09-20"], ["oc-we-8-497", "전산기계자격증/6주", "we", 24320, 9.0, "토/일", "12층U · 토/일 09:00 · 2026-09-19~2026-11-08"], ["oc-we-8-498", "인벤터/3주", "we", 24320, 9.0, "토/일", "12층V · 토/일 09:00 · 2026-08-29~2026-09-13"], ["oc-we-8-499", "회계1급/주", "we", 24320, 9.5, "토/일", "05층B · 토/일 09:30 · 2026-08-08~2026-09-20"], ["oc-we-8-500", "스케치업2/주", "we", 24320, 9.5, "토/일", "05층I · 토/일 09:30 · 2026-08-29~2026-09-20"], ["oc-we-8-501", "후디니포폴/주", "we", 24320, 10.0, "토", "05층E · 토 10:00 · 2026-08-22~2026-09-12"], ["oc-we-8-502", "특강", "we", 24320, 10.0, "토", "05층E · 토 10:00 · 2026-09-19~2026-09-19"], ["oc-we-8-503", "에펙/6주", "we", 24320, 10.0, "토/일", "05층F · 토/일 10:00 · 2026-09-12~2026-11-01"], ["oc-we-8-504", "스케치/이론/주", "we", 24320, 10.0, "토/일", "05층H · 토/일 10:00 · 2026-08-29~2026-09-20"], ["oc-we-8-505", "캐드/6주", "we", 24320, 10.0, "토/일", "06층M · 토/일 10:00 · 2026-09-05~2026-10-25"], ["oc-we-8-506", "AI프롬프트 엔지니어링2/주", "we", 24320, 10.0, "토", "06층N · 토 10:00 · 2026-08-22~2026-09-12"], ["oc-we-8-507", "AIX 일러스트/6주", "we", 24320, 10.0, "토", "06층O · 토 10:00 · 2026-09-05~2026-10-24"], ["oc-we-8-508", "BIM2/주", "we", 24320, 10.0, "토/일", "06층Q · 토/일 10:00 · 2026-09-12~2026-10-18"], ["oc-we-8-509", "에펙/6주", "we", 24320, 10.0, "토/일", "12층U · 토/일 10:00 · 2026-07-25~2026-09-06"], ["oc-we-8-510", "애니포폴/주", "we", 24320, 10.0, "토", "비대면-A · 토 10:00 · 2026-08-08~2026-09-05"], ["oc-we-8-511", "애니포폴/주", "we", 24320, 10.0, "토", "비대면-A · 토 10:00 · 2026-09-19~2026-10-17"], ["oc-we-8-512", "BIM1/주", "we", 24320, 11.0, "토/일", "06층Q · 토/일 11:00 · 2026-08-08~2026-09-06"], ["oc-we-8-513", "디지털드로잉/포폴/주", "we", 24320, 12.0, "토/일", "05층A · 토/일 12:00 · 2026-09-05~2026-10-11"], ["oc-we-8-514", "재경관리사/주", "we", 24320, 12.0, "토/일", "05층L · 토/일 12:00 · 2026-06-27~2026-09-13"], ["oc-we-8-515", "모션포폴/주", "we", 24320, 12.0, "토/일", "06층S · 토/일 12:00 · 2026-08-08~2026-09-06"], ["oc-we-8-516", "모션포폴/주", "we", 24320, 12.0, "토/일", "06층S · 토/일 12:00 · 2026-09-19~2026-10-25"], ["oc-we-8-517", "AI에이전트1/주", "we", 24320, 14.0, "토", "05층C · 토 14:00 · 2026-08-22~2026-09-12"], ["oc-we-8-518", "컬러실기/6주", "we", 24320, 14.0, "토/일", "05층E · 토/일 14:00 · 2026-08-29~2026-10-18"], ["oc-we-8-519", "실내건축2/기출/주", "we", 24320, 14.0, "토/일", "05층I · 토/일 14:00 · 2026-08-29~2026-09-20"], ["oc-we-8-520", "AI프롬프트 엔지니어링1/주", "we", 24320, 14.0, "토", "06층N · 토 14:00 · 2026-08-08~2026-09-12"], ["oc-we-8-521", "AIX 포토샵/6주", "we", 24320, 14.0, "토", "06층O · 토 14:00 · 2026-09-05~2026-10-24"], ["oc-we-8-522", "라이노/6주", "we", 24320, 14.0, "토/일", "06층T · 토/일 14:00 · 2026-09-05~2026-10-25"], ["oc-we-8-523", "프리미어/주", "we", 24320, 15.0, "토/일", "05층G · 토/일 15:00 · 2026-08-08~2026-09-06"], ["oc-we-8-524", "컨셉드로잉/주", "we", 24320, 15.0, "토/일", "05층H · 토/일 15:00 · 2026-09-05~2026-10-11"], ["oc-we-8-525", "프리미어/주", "we", 24320, 15.0, "토/일", "06층Q · 토/일 15:00 · 2026-09-12~2026-10-18"], ["oc-we-9-526", "GTQ/2주", "we", 24321, 9.0, "토/일", "05층A · 토/일 09:00 · 2026-10-10~2026-10-18"], ["oc-we-9-527", "AI-pot시험", "we", 24321, 9.0, "토", "05층K · 토 09:00 · 2026-10-17~2026-10-17"], ["oc-we-9-528", "CAT시험", "we", 24321, 9.0, "토", "05층L · 토 09:00 · 2026-10-17~2026-10-17"], ["oc-we-9-529", "모션포폴/주", "we", 24321, 9.0, "토/일", "06층S · 토/일 09:00 · 2026-09-19~2026-10-25"], ["oc-we-9-530", "모션포폴/주", "we", 24321, 9.0, "토/일", "06층S · 토/일 09:00 · 2026-10-31~2026-11-22"], ["oc-we-9-531", "전산기계자격증/6주", "we", 24321, 9.0, "토/일", "12층U · 토/일 09:00 · 2026-09-19~2026-11-08"], ["oc-we-9-532", "세무1급/주", "we", 24321, 10.0, "토/일", "05층C · 토/일 10:00 · 2026-10-17~2026-11-29"], ["oc-we-9-533", "후디니포폴/주", "we", 24321, 10.0, "토", "05층E · 토 10:00 · 2026-10-10~2026-10-31"], ["oc-we-9-534", "에펙/6주", "we", 24321, 10.0, "토/일", "05층F · 토/일 10:00 · 2026-09-12~2026-11-01"], ["oc-we-9-535", "컴활/주", "we", 24321, 10.0, "토/일", "05층G · 토/일 10:00 · 2026-10-10~2026-11-01"], ["oc-we-9-536", "스케치/이론/주", "we", 24321, 10.0, "토/일", "05층H · 토/일 10:00 · 2026-10-10~2026-11-01"], ["oc-we-9-537", "스케치업1/주", "we", 24321, 10.0, "토/일", "05층I · 토/일 10:00 · 2026-10-10~2026-11-01"], ["oc-we-9-538", "캐드/6주", "we", 24321, 10.0, "토/일", "06층M · 토/일 10:00 · 2026-09-05~2026-10-25"], ["oc-we-9-539", "캐드/6주", "we", 24321, 10.0, "토/일", "06층M · 토/일 10:00 · 2026-10-31~2026-12-06"], ["oc-we-9-540", "AIX 마케팅영상/6주", "we", 24321, 10.0, "토", "06층N · 토 10:00 · 2026-10-10~2026-11-14"], ["oc-we-9-541", "AIX 일러스트/6주", "we", 24321, 10.0, "토", "06층O · 토 10:00 · 2026-09-05~2026-10-24"], ["oc-we-9-542", "AIX 포토샵/6주", "we", 24321, 10.0, "토", "06층O · 토 10:00 · 2026-10-31~2026-12-05"], ["oc-we-9-543", "BIM2/주", "we", 24321, 10.0, "토/일", "06층Q · 토/일 10:00 · 2026-09-12~2026-10-18"], ["oc-we-9-544", "BIM1/주", "we", 24321, 10.0, "토/일", "06층Q · 토/일 10:00 · 2026-10-24~2026-11-15"], ["oc-we-9-545", "AI프롬프트 엔지니어링1/주", "we", 24321, 10.0, "토", "06층R · 토 10:00 · 2026-10-10~2026-10-31"], ["oc-we-9-546", "시포디2/6주", "we", 24321, 10.0, "토/일", "06층T · 토/일 10:00 · 2026-10-10~2026-11-15"], ["oc-we-9-547", "AI에이전트1/주", "we", 24321, 10.0, "토", "12층V · 토 10:00 · 2026-10-10~2026-10-31"], ["oc-we-9-548", "애니포폴/주", "we", 24321, 10.0, "토", "비대면-A · 토 10:00 · 2026-09-19~2026-10-17"], ["oc-we-9-549", "애니포폴/주", "we", 24321, 10.0, "토", "비대면-A · 토 10:00 · 2026-10-24~2026-11-14"], ["oc-we-9-550", "디지털드로잉/포폴/주", "we", 24321, 12.0, "토/일", "05층A · 토/일 12:00 · 2026-09-05~2026-10-11"], ["oc-we-9-551", "디지털드로잉/포폴/주", "we", 24321, 12.0, "토/일", "05층A · 토/일 12:00 · 2026-10-17~2026-11-08"], ["oc-we-9-552", "모션포폴/주", "we", 24321, 12.0, "토/일", "06층S · 토/일 12:00 · 2026-09-19~2026-10-25"], ["oc-we-9-553", "모션포폴/주", "we", 24321, 12.0, "토/일", "06층S · 토/일 12:00 · 2026-10-31~2026-11-22"], ["oc-we-9-554", "웹디기능사/5주", "we", 24321, 14.0, "토/일", "05층B · 토/일 14:00 · 2026-10-10~2026-11-08"], ["oc-we-9-555", "컬러실기/6주", "we", 24321, 14.0, "토/일", "05층E · 토/일 14:00 · 2026-08-29~2026-10-18"], ["oc-we-9-556", "그래픽기능사/3주", "we", 24321, 14.0, "토/일", "05층F · 토/일 14:00 · 2026-10-24~2026-11-08"], ["oc-we-9-557", "모스/주", "we", 24321, 14.0, "토/일", "05층G · 토/일 14:00 · 2026-10-10~2026-11-01"], ["oc-we-9-558", "실내건축1/기출/주", "we", 24321, 14.0, "토/일", "05층I · 토/일 14:00 · 2026-10-10~2026-11-01"], ["oc-we-9-559", "CAT2급/2주", "we", 24321, 14.0, "토/일", "06층M · 토/일 14:00 · 2026-10-31~2026-11-08"], ["oc-we-9-560", "AIX 포토샵/6주", "we", 24321, 14.0, "토", "06층O · 토 14:00 · 2026-09-05~2026-10-24"], ["oc-we-9-561", "AIX 일러스트/6주", "we", 24321, 14.0, "토", "06층O · 토 14:00 · 2026-10-31~2026-12-05"], ["oc-we-9-562", "AI프롬프트 엔지니어링2/주", "we", 24321, 14.0, "토", "06층R · 토 14:00 · 2026-10-10~2026-10-31"], ["oc-we-9-563", "라이노/6주", "we", 24321, 14.0, "토/일", "06층T · 토/일 14:00 · 2026-09-05~2026-10-25"], ["oc-we-9-564", "라이노/6주", "we", 24321, 14.0, "토/일", "06층T · 토/일 14:00 · 2026-10-31~2026-12-06"], ["oc-we-9-565", "전산제도자격증/5주", "we", 24321, 14.0, "토/일", "12층U · 토/일 14:00 · 2026-10-10~2026-11-08"], ["oc-we-9-566", "AI에이전트2/주", "we", 24321, 14.0, "토", "12층V · 토 14:00 · 2026-10-10~2026-10-31"], ["oc-we-9-567", "컨셉드로잉/주", "we", 24321, 15.0, "토/일", "05층H · 토/일 15:00 · 2026-09-05~2026-10-11"], ["oc-we-9-568", "컨셉드로잉/주", "we", 24321, 15.0, "토/일", "05층H · 토/일 15:00 · 2026-10-17~2026-11-08"], ["oc-we-9-569", "프리미어/주", "we", 24321, 15.0, "토/일", "06층Q · 토/일 15:00 · 2026-09-12~2026-10-18"], ["oc-we-9-570", "프리미어/주", "we", 24321, 15.0, "토/일", "06층Q · 토/일 15:00 · 2026-10-24~2026-11-15"], ["oc-we-10-571", "GTQ/2주", "we", 24322, 9.0, "토/일", "05층A · 토/일 09:00 · 2026-11-14~2026-11-22"], ["oc-we-10-572", "CAT시험", "we", 24322, 9.0, "토", "05층L · 토 09:00 · 2026-11-14~2026-11-14"], ["oc-we-10-573", "모션포폴/주", "we", 24322, 9.0, "토/일", "06층S · 토/일 09:00 · 2026-10-31~2026-11-22"], ["oc-we-10-574", "모션포폴/주", "we", 24322, 9.0, "토/일", "06층S · 토/일 09:00 · 2026-11-28~2026-12-20"], ["oc-we-10-575", "전산기계자격증/6주", "we", 24322, 9.0, "토/일", "12층U · 토/일 09:00 · 2026-09-19~2026-11-08"], ["oc-we-10-576", "세무1급/주", "we", 24322, 10.0, "토/일", "05층C · 토/일 10:00 · 2026-10-17~2026-11-29"], ["oc-we-10-577", "후디니포폴/주", "we", 24322, 10.0, "토", "05층E · 토 10:00 · 2026-11-07~2026-11-28"], ["oc-we-10-578", "모스/주", "we", 24322, 10.0, "토/일", "05층G · 토/일 10:00 · 2026-11-14~2026-12-06"], ["oc-we-10-579", "스케치업2/주", "we", 24322, 10.0, "토/일", "05층I · 토/일 10:00 · 2026-11-07~2026-11-29"], ["oc-we-10-580", "캐드/6주", "we", 24322, 10.0, "토/일", "06층M · 토/일 10:00 · 2026-10-31~2026-12-06"], ["oc-we-10-581", "AIX 마케팅영상/6주", "we", 24322, 10.0, "토", "06층N · 토 10:00 · 2026-10-10~2026-11-14"], ["oc-we-10-582", "AIX 마케팅영상/6주", "we", 24322, 10.0, "토", "06층N · 토 10:00 · 2026-11-21~2026-12-26"], ["oc-we-10-583", "AIX 포토샵/6주", "we", 24322, 10.0, "토", "06층O · 토 10:00 · 2026-10-31~2026-12-05"], ["oc-we-10-584", "BIM1/주", "we", 24322, 10.0, "토/일", "06층Q · 토/일 10:00 · 2026-10-24~2026-11-15"], ["oc-we-10-585", "BIM2/주", "we", 24322, 10.0, "토/일", "06층Q · 토/일 10:00 · 2026-11-21~2026-12-13"], ["oc-we-10-586", "AI프롬프트 엔지니어링2/주", "we", 24322, 10.0, "토", "06층R · 토 10:00 · 2026-11-07~2026-11-28"], ["oc-we-10-587", "시포디2/6주", "we", 24322, 10.0, "토/일", "06층T · 토/일 10:00 · 2026-10-10~2026-11-15"], ["oc-we-10-588", "AI에이전트2/주", "we", 24322, 10.0, "토", "12층V · 토 10:00 · 2026-11-14~2026-12-05"], ["oc-we-10-589", "애니포폴/주", "we", 24322, 10.0, "토", "비대면-A · 토 10:00 · 2026-10-24~2026-11-14"], ["oc-we-10-590", "애니포폴/주", "we", 24322, 10.0, "토", "비대면-A · 토 10:00 · 2026-11-21~2026-12-12"], ["oc-we-10-591", "디지털드로잉/포폴/주", "we", 24322, 12.0, "토/일", "05층A · 토/일 12:00 · 2026-10-17~2026-11-08"], ["oc-we-10-592", "디지털드로잉/포폴/주", "we", 24322, 12.0, "토/일", "05층A · 토/일 12:00 · 2026-11-14~2026-12-06"], ["oc-we-10-593", "모션포폴/주", "we", 24322, 12.0, "토/일", "06층S · 토/일 12:00 · 2026-10-31~2026-11-22"], ["oc-we-10-594", "모션포폴/주", "we", 24322, 12.0, "토/일", "06층S · 토/일 12:00 · 2026-11-28~2026-12-20"], ["oc-we-10-595", "웹디기능사/5주", "we", 24322, 14.0, "토/일", "05층B · 토/일 14:00 · 2026-10-10~2026-11-08"], ["oc-we-10-596", "그래픽기능사/3주", "we", 24322, 14.0, "토/일", "05층F · 토/일 14:00 · 2026-10-24~2026-11-08"], ["oc-we-10-597", "실내건축2/기출/주", "we", 24322, 14.0, "토/일", "05층I · 토/일 14:00 · 2026-11-07~2026-11-29"], ["oc-we-10-598", "CAT2급/2주", "we", 24322, 14.0, "토/일", "06층M · 토/일 14:00 · 2026-10-31~2026-11-08"], ["oc-we-10-599", "CAT2급/2주", "we", 24322, 14.0, "토/일", "06층M · 토/일 14:00 · 2026-11-28~2026-12-06"], ["oc-we-10-600", "AIX 일러스트/6주", "we", 24322, 14.0, "토", "06층O · 토 14:00 · 2026-10-31~2026-12-05"], ["oc-we-10-601", "AI프롬프트 엔지니어링1/주", "we", 24322, 14.0, "일", "06층R · 일 14:00 · 2026-11-08~2026-11-29"], ["oc-we-10-602", "라이노/6주", "we", 24322, 14.0, "토/일", "06층T · 토/일 14:00 · 2026-10-31~2026-12-06"], ["oc-we-10-603", "전산제도자격증/5주", "we", 24322, 14.0, "토/일", "12층U · 토/일 14:00 · 2026-10-10~2026-11-08"], ["oc-we-10-604", "AI에이전트1/주", "we", 24322, 14.0, "토", "12층V · 토 14:00 · 2026-11-14~2026-12-05"], ["oc-we-10-605", "컨셉드로잉/주", "we", 24322, 15.0, "토/일", "05층H · 토/일 15:00 · 2026-10-17~2026-11-08"], ["oc-we-10-606", "컨셉드로잉/주", "we", 24322, 15.0, "토/일", "05층H · 토/일 15:00 · 2026-11-14~2026-12-06"], ["oc-we-10-607", "프리미어/주", "we", 24322, 15.0, "토/일", "06층Q · 토/일 15:00 · 2026-10-24~2026-11-15"], ["oc-we-10-608", "AIX 실전영상편집/주", "we", 24322, 15.0, "토/일", "06층Q · 토/일 15:00 · 2026-11-21~2026-12-13"], ["oc-we-11-609", "GTQ/2주", "we", 24323, 9.0, "토/일", "05층A · 토/일 09:00 · 2026-12-05~2026-12-13"], ["oc-we-11-610", "AI-pot시험", "we", 24323, 9.0, "토", "05층K · 토 09:00 · 2026-12-12~2026-12-12"], ["oc-we-11-611", "CAT시험", "we", 24323, 9.0, "토", "05층L · 토 09:00 · 2026-12-12~2026-12-12"], ["oc-we-11-612", "모션포폴/주", "we", 24323, 9.0, "토/일", "06층S · 토/일 09:00 · 2026-11-28~2026-12-20"], ["oc-we-11-613", "모션포폴/주", "we", 24323, 9.0, "토/일", "06층S · 토/일 09:00 · 2026-12-26~2027-01-17"], ["oc-we-11-614", "후디니포폴/주", "we", 24323, 10.0, "토", "05층E · 토 10:00 · 2026-12-05~2026-12-26"], ["oc-we-11-615", "모스/주", "we", 24323, 10.0, "토/일", "05층G · 토/일 10:00 · 2026-11-14~2026-12-06"], ["oc-we-11-616", "컴활/주", "we", 24323, 10.0, "토/일", "05층G · 토/일 10:00 · 2026-12-19~2027-01-10"], ["oc-we-11-617", "스케치업1/주", "we", 24323, 10.0, "토/일", "05층I · 토/일 10:00 · 2026-12-12~2027-01-03"], ["oc-we-11-618", "캐드/6주", "we", 24323, 10.0, "토/일", "06층M · 토/일 10:00 · 2026-10-31~2026-12-06"], ["oc-we-11-619", "캐드/6주", "we", 24323, 10.0, "토/일", "06층M · 토/일 10:00 · 2026-12-12~2027-01-17"], ["oc-we-11-620", "AIX 마케팅영상/6주", "we", 24323, 10.0, "토", "06층N · 토 10:00 · 2026-11-21~2026-12-26"], ["oc-we-11-621", "AIX 포토샵/6주", "we", 24323, 10.0, "토", "06층O · 토 10:00 · 2026-10-31~2026-12-05"], ["oc-we-11-622", "AIX 일러스트/6주", "we", 24323, 10.0, "토", "06층O · 토 10:00 · 2026-12-12~2027-01-16"], ["oc-we-11-623", "BIM2/주", "we", 24323, 10.0, "토/일", "06층Q · 토/일 10:00 · 2026-11-21~2026-12-13"], ["oc-we-11-624", "BIM1/주", "we", 24323, 10.0, "토/일", "06층Q · 토/일 10:00 · 2026-12-19~2027-01-10"], ["oc-we-11-625", "AI프롬프트 엔지니어링1/주", "we", 24323, 10.0, "토", "06층R · 토 10:00 · 2026-12-05~2026-12-26"], ["oc-we-11-626", "AI에이전트2/주", "we", 24323, 10.0, "토", "12층V · 토 10:00 · 2026-11-14~2026-12-05"], ["oc-we-11-627", "AI에이전트1/주", "we", 24323, 10.0, "토", "12층V · 토 10:00 · 2026-12-19~2027-01-09"], ["oc-we-11-628", "애니포폴/주", "we", 24323, 10.0, "토", "비대면-A · 토 10:00 · 2026-11-21~2026-12-12"], ["oc-we-11-629", "애니포폴/주", "we", 24323, 10.0, "토", "비대면-A · 토 10:00 · 2026-12-19~2027-01-09"], ["oc-we-11-630", "디지털드로잉/포폴/주", "we", 24323, 12.0, "토/일", "05층A · 토/일 12:00 · 2026-11-14~2026-12-06"], ["oc-we-11-631", "디지털드로잉/포폴/주", "we", 24323, 12.0, "토/일", "05층A · 토/일 12:00 · 2026-12-12~2027-01-03"], ["oc-we-11-632", "모션포폴/주", "we", 24323, 12.0, "토/일", "06층S · 토/일 12:00 · 2026-11-28~2026-12-20"], ["oc-we-11-633", "모션포폴/주", "we", 24323, 12.0, "토/일", "06층S · 토/일 12:00 · 2026-12-26~2027-01-17"], ["oc-we-11-634", "실내건축1/기출/주", "we", 24323, 14.0, "토/일", "05층I · 토/일 14:00 · 2026-12-05~2026-12-27"], ["oc-we-11-635", "CAT2급/2주", "we", 24323, 14.0, "토/일", "06층M · 토/일 14:00 · 2026-11-28~2026-12-06"], ["oc-we-11-636", "AIX 일러스트/6주", "we", 24323, 14.0, "토", "06층O · 토 14:00 · 2026-10-31~2026-12-05"], ["oc-we-11-637", "AIX 포토샵/6주", "we", 24323, 14.0, "토", "06층O · 토 14:00 · 2026-12-12~2027-01-16"], ["oc-we-11-638", "AI프롬프트 엔지니어링2/주", "we", 24323, 14.0, "일", "06층R · 일 14:00 · 2026-12-06~2026-12-27"], ["oc-we-11-639", "라이노/6주", "we", 24323, 14.0, "토/일", "06층T · 토/일 14:00 · 2026-10-31~2026-12-06"], ["oc-we-11-640", "라이노/6주", "we", 24323, 14.0, "토/일", "06층T · 토/일 14:00 · 2026-12-12~2027-01-17"], ["oc-we-11-641", "AI에이전트1/주", "we", 24323, 14.0, "토", "12층V · 토 14:00 · 2026-11-14~2026-12-05"], ["oc-we-11-642", "AI에이전트2/주", "we", 24323, 14.0, "토", "12층V · 토 14:00 · 2026-12-19~2027-01-09"], ["oc-we-11-643", "컨셉드로잉/주", "we", 24323, 15.0, "토/일", "05층H · 토/일 15:00 · 2026-11-14~2026-12-06"], ["oc-we-11-644", "컨셉드로잉/주", "we", 24323, 15.0, "토/일", "05층H · 토/일 15:00 · 2026-12-12~2027-01-03"], ["oc-we-11-645", "AIX 실전영상편집/주", "we", 24323, 15.0, "토/일", "06층Q · 토/일 15:00 · 2026-11-21~2026-12-13"], ["oc-we-11-646", "AIX 실전영상편집/주", "we", 24323, 15.0, "토/일", "06층Q · 토/일 15:00 · 2026-12-19~2027-01-10"]];
+var TT_NOTE=["강의시간표 수집 260921 · 정본은 인트라넷"];
+var DEPT=[['cert',/컴활|모스|GTQ|CAT|기능사|자격증|관리사|엑셀|AI-?pot|창업마스터|기출|ACP|컬러리스트|전산/i],
+ ['cg',/마야|모델링|룩뎁|후디니|언리얼|블렌더|크리처|합성|매트|CG|VFX|하드서피스/i],
+ ['art',/드로잉|웹툰|컨셉|캐릭터|채색|스토리|발상|색채|아트웍|애니/],
+ ['space',/인테리어|스케치업|캐드|CAD|맥스|레빗|BIM|공간|건축|라이노|인벤터|엔스케이프/i],
+ ['media',/영상|모션|프리미어|애프터|시네마|C4D|유튜브|미디어|숏폼/i],
+ ['inter',/웹|UX|UI|피그마|바이브|코딩|퍼블리|워드프레스|에이전트|이커머스|쇼핑몰/i],
+ ['graphic',/포토|일러|인디자인|편집|브랜드|브랜딩|패키지|그래픽|비주얼|굿즈|MD|출판|인포|타이포/i]];
+function deptOf(n){for(var i=0;i<DEPT.length;i++) if(DEPT[i][1].test(n)) return DEPT[i][0]; return 'found'}
+function normName(s){return String(s||'').replace(/\s+/g,'').replace(/\/[ABab]$/,'')}
+/* 자석: 그 달 같은 과목 개설 시각(없으면 그 달 개설 시각, 그 달 목록이 없으면 구분 전체)에서 가장 가까운 것 */
+function snapSlot(c,sec,ym,st,dur){
+  var h1=secH1(sec), rows=OPENROWS.filter(function(r){return r[2]===sec&&r[3]===ym});
+  if(!rows.length) rows=OPENROWS.filter(function(r){return r[2]===sec});
+  var key=normName(c.n), named=rows.filter(function(r){var k=normName(r[1]); return key&&k&&(k.indexOf(key)>=0||key.indexOf(k)>=0)});
+  var pool=named.length?named:rows, best=null;
+  pool.forEach(function(r){ if(r[4]+dur>h1) return; if(!best||Math.abs(r[4]-st)<Math.abs(best[4]-st)) best=r; });
+  return best?{start:best[4],days:named.length?best[5]:null}:{start:st,days:null};
+}
+OPENROWS.forEach(function(r){add(r[0],deptOf(r[1]),r[1],{legacy:true,ocSec:r[2],ocYm:r[3],ocStart:r[4],ocDays:r[5],note:r[6]});});
+var ocSelYm=null, ocSelSec='wd';
+function openHTML(){
+  var set={}; OPENROWS.forEach(function(r){set[r[3]]=1});
+  var yms=Object.keys(set).map(Number).sort(function(a,b){return a-b});
+  if(yms.indexOf(ocSelYm)<0) ocSelYm=yms.filter(function(a){return a>=NOWYM})[0]||yms[0];
+  var h='<div class="pctl" style="grid-template-columns:1fr 1fr">'+
+    '<label>월<select id="oc-m">'+yms.map(function(a){return opt(a,mLabFull(a),a===ocSelYm)}).join('')+'</select></label>'+
+    '<label>구분<select id="oc-sec">'+opt('wd','평일',ocSelSec==='wd')+opt('we','주말',ocSelSec==='we')+'</select></label></div>'+
+    '<p class="pnote">그 달 실제 개설 반. 어디에 놓아도 반의 월·시간·요일 칸에 붙는다. 다른 과목도 놓으면 그 달 개설 시각에 붙는다.</p>';
+  var ids=Object.keys(C).filter(function(id){var c=C[id]; return c.ocYm===ocSelYm&&c.ocSec===ocSelSec});
+  h+='<div class="chips">'+(ids.length?ids.map(function(id){return chipHTML(id)}).join(''):'<p class="empty">해당 월·구분 개설반 없음</p>')+'</div>';
+  return h;
+}
+function highlightMatches(c){
+  var key=normName(c.n); if(!key) return;
+  Object.keys(C).forEach(function(id){
+    var o=C[id]; if(o.ocYm==null) return;
+    var ok=normName(o.n);
+    if(ok.indexOf(key)>=0||key.indexOf(ok)>=0){
+      var col=$('.mcol[data-sec="'+o.ocSec+'"][data-c="'+colOf(o.ocYm)+'"]'); if(col) col.classList.add('hl');
+    }
+  });
+}
+
+/* ---------- 상태 ---------- */
+/* PRESET: build.py가 수강생별 사전 배치를 주입하는 자리 (없으면 빈 보드) */
+var PRESET=/*@@PRESET@@*/null;
+var KEY='sbs-timetable-'+((PRESET&&PRESET.key)||'proto-v1');
+function secH1(sec){return (SEC[sec]&&SEC[sec].h1)||H1}
+function blank(){return {v:3,start:NOWYM,student:'',manager:'최준 팀장 · 02-3482-9095',notice:'상담 시 가안으로 조율한 스케줄이므로 추후 변경 가능합니다!',dates:{wd:{},we:{}},items:[],fold:{wd:false,we:false}}}
+function load(){try{var t=localStorage.getItem(KEY); if(!t) return null; return normalize(JSON.parse(t));}catch(e){return null}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function clampItem(it){
+  var h1=secH1(it.sec);
+  it.ym=Math.floor(+it.ym);
+  it.span=Math.max(1,Math.min(12,Math.floor(it.span)||1));
+  it.dur=Math.max(1,Math.min(+it.dur||2,h1-H0));
+  it.start=Math.max(H0,Math.min(h1-it.dur,+it.start||H0));
+  return it;
+}
+function normalize(o){
+  if(!o||!Array.isArray(o.items)) return null;
+  var b=blank(), s=Object.assign(b,o), y=+o.year||DEF_DATES_YEAR;
+  if(!isFinite(o.start)) s.start=y*12;             /* 이전 버전(1월 고정) 저장본 호환 */
+  s.dates={wd:{},we:{}};
+  ['wd','we'].forEach(function(sec){
+    var d=o.dates&&o.dates[sec];
+    if(Array.isArray(d)) d.forEach(function(v,m){ var def=y===DEF_DATES_YEAR?(DEF_DATES[sec][m]||''):''; if((v||'')!==def) s.dates[sec][y+'-'+pad(m+1)]=v||''; });
+    else if(d&&typeof d==='object') Object.keys(d).forEach(function(k){ if(/^\d{4}-\d{2}$/.test(k)) s.dates[sec][k]=String(d[k]); });
+  });
+  delete s.year;
+  s.fold=Object.assign({wd:false,we:false},o.fold||{});
+  s.items=o.items.filter(function(it){return it&&SEC[it.sec]&&(isFinite(it.ym)||isFinite(it.m))&&isFinite(it.start)&&isFinite(it.dur)&&isFinite(it.span)}).map(function(it){
+    var n=Object.assign({id:nid(),memo:'',label:'',days:SEC[it.sec].defDays},it);
+    if(!isFinite(n.ym)) n.ym=y*12+(+n.m||0);
+    delete n.m; return clampItem(n);
+  });
+  return s;
+}
+function nid(){return 'i'+Math.random().toString(36).slice(2,9)}
+var S=load()||(PRESET&&PRESET.state?normalize(Object.assign(blank(),PRESET.state)):null)||blank();
+var hist=[];
+function snap(){hist.push(JSON.stringify(S)); if(hist.length>80) hist.shift()}
+function undo(){
+  if(!hist.length){toast('되돌릴 작업이 없습니다'); return}
+  S=JSON.parse(hist.pop()); hidePop(); syncHead(); buildBoard(); render(); toast('되돌렸습니다');
+}
+function byId(id){for(var i=0;i<S.items.length;i++) if(S.items[i].id===id) return S.items[i]; return null}
+function course(it){return C[it.cid]||{n:it.label||'과목',st:'cert'}}
+function nameOf(it){return it.label||course(it).n}
+function defDur(c,sec){return Math.min(c.d||SEC[sec].defDur,secH1(sec)-H0)}
+function defDays(c,sec){return (c.days&&DAY_OPTS[sec].indexOf(c.days)>-1)?c.days:SEC[sec].defDays}
+function daysOf(d){return DAYS[d]||[1,2,3,4,5,6,7]}
+function segName(it,k){
+  var c=course(it);
+  if(!it.label&&c.seq) return c.base+(k+1);
+  var b=it.label||c.n;
+  return it.span>1? b+' '+(k+1)+'/'+it.span : b;
+}
+function sub(c){
+  if(c.h) return [c.h+'H',c.op,c.mTxt||(c.m+'개월')].filter(Boolean).join(' · ');
+  if(c.note) return c.note;
+  var p=[]; if(c.d0) p.push(c.d0); if(c.seq) p.push(c.seq+'개월 연속'); if(c.range) p.push('기간 '+c.range+' 확인');
+  return p.join(' · ');
+}
+function inWin(it){return it.ym<=absOf(11)&&it.ym+it.span-1>=S.start}
+function hourPx(){return parseFloat(getComputedStyle($('#secs')).getPropertyValue('--hour'))||40}
+function isSheet(){return innerWidth<1024}
+function range(n){var a=[]; for(var i=0;i<n;i++) a.push(i); return a}
+function opt(v,label,sel){return '<option value="'+v+'"'+(sel?' selected':'')+'>'+label+'</option>'}
+function timeOpts(sel,h1){var h=''; for(var t=H0;t<(h1||H1);t+=.5) h+=opt(t,fmt(t),t===sel); return h}
+function colOpts(sel){return range(12).map(function(c){return opt(c,mLab(absOf(c)),c===sel)}).join('')}
+
+/* ---------- 과목 목록 ---------- */
+var tab='mod', picked=null, armed=null;
+var ppC=0, ppSec='wd', ppT=14;
+function chipHTML(id,num){
+  var c=C[id]; if(!c) return ''; var st=ST[c.st];
+  var cls='chip'+(c.legacy?' legacy':'')+(c.first?' first':'')+(c.proj?' proj':'')+(picked===id?' picked':'');
+  var tags=(c.tags||[]).filter(function(t){return t!=='선수'}).map(function(t){return '<i class="tg'+(t==='확정 예정'||t==='개발 중'?' warn':'')+'">'+esc(t)+'</i>'}).join('');
+  if(c.first) tags='<i class="tg">선수</i>'+tags;
+  if(c.f2f) tags+='<i class="tg">대면</i>';
+  return '<div class="'+cls+'" data-cid="'+id+'" style="--c:'+st.c+';--cs:'+st.s+'" title="누르기: 상세·배치 대기 · 끌기: 시간표에 배치">'+
+    (num?'<span class="no num">'+num+'</span>':'')+
+    '<span class="c-txt"><b>'+esc(c.n)+'</b>'+(sub(c)?'<small>'+esc(sub(c))+'</small>':'')+'</span>'+tags+'<span class="cnt"></span></div>';
+}
+function groupHTML(g){
+  var st=ST[g.st]||ST.cert;
+  return '<div class="grp"><div class="grp-h"><span class="dot" style="background:'+st.c+'"></span>'+esc(g.t)+(g.note?'<small>'+esc(g.note)+'</small>':'')+'</div><div class="chips">'+g.ids.map(function(id){return chipHTML(id)}).join('')+'</div></div>';
+}
+function pathHTML(){
+  var h='<div class="pctl">'+
+    '<label>시작 월<select id="pp-m">'+colOpts(ppC)+'</select></label>'+
+    '<label>구분<select id="pp-sec">'+opt('wd','평일',ppSec==='wd')+opt('we','주말',ppSec==='we')+'</select></label>'+
+    '<label>시작 시간<select id="pp-t">'+timeOpts(ppT)+'</select></label></div>'+
+    '<p class="pnote">AIX 로드맵 2면 「나는 무엇이 되는가」 직무별 경로. 과목을 하나씩 끌어 놓거나, 순서대로 배치 후 블록을 옮겨 조율한다.</p>';
+  PATHS.forEach(function(p,i){
+    var st=ST[p.st];
+    h+='<div class="pcard" style="--c:'+st.c+'"><div class="pc-h"><span class="dot" style="background:'+st.c+'"></span><div><b>'+esc(p.job)+'</b><small>'+esc(st.n)+' · '+esc(p.out)+'</small></div></div><div class="chips">'+
+      p.ids.map(function(id,k){return chipHTML(id,k+1)}).join('')+'</div><button class="pbtn" data-path="'+i+'">순서대로 배치</button></div>';
+  });
+  return h;
+}
+function renderPalette(){
+  var q=$('#q').value.trim().toLowerCase(), box=$('#groups');
+  if(q){
+    var ids=Object.keys(C).filter(function(id){var c=C[id]; return (c.n+' '+(c.desc||'')+' '+(c.d0||'')+' '+ST[c.st].n).toLowerCase().indexOf(q)>-1});
+    box.innerHTML=ids.length? '<div class="grp"><div class="grp-h">검색 결과 <small>'+ids.length+'개 · 전체 탭 기준</small></div><div class="chips">'+ids.map(function(id){return chipHTML(id)}).join('')+'</div></div>' : '<p class="empty">검색 결과가 없다. 다른 키워드로 찾거나 기존 과정 탭을 확인.</p>';
+  } else if(tab==='path') box.innerHTML=pathHTML();
+  else if(tab==='open') box.innerHTML=openHTML();
+  else box.innerHTML=TABS[tab].map(groupHTML).join('');
+  markChips();
+}
+function markChips(){
+  var cnt={}; S.items.forEach(function(it){cnt[it.cid]=(cnt[it.cid]||0)+1});
+  $$('.chip').forEach(function(ch){var n=cnt[ch.dataset.cid]||0; ch.querySelector('.cnt').textContent=n?('배치 '+n):''});
+}
+function showInfo(cid){
+  var c=C[cid], box=$('#info');
+  if(!c){box.innerHTML='<b class="t">과목 상세</b><div class="hint">과목을 누르면 시수·운영·선수 조건이 표시되고 배치 대기 상태가 된다. 끌어서 바로 놓아도 된다.</div>'; return}
+  picked=cid; $$('.chip').forEach(function(ch){ch.classList.toggle('picked',ch.dataset.cid===cid)});
+  var st=ST[c.st];
+  var pre=c.pre? '<div class="pre">선수: '+c.pre.map(function(p){return esc(C[p].n)}).join(' + ')+'</div>' : '';
+  var place=c.seq? c.base+'1 ~ '+c.base+c.seq+' ('+c.seq+'개월)' : (c.m+'개월');
+  box.innerHTML='<b class="t"><span class="dot" style="background:'+st.c+'"></span>'+esc(c.n)+'</b>'+
+    '<div class="m">'+esc(st.n)+(c.legacy?' · 기존 과정':'')+(sub(c)?' · '+esc(sub(c)):'')+'</div>'+pre+
+    (c.desc?'<div>'+esc(c.desc)+'</div>':'')+
+    '<div class="hint">배치 기본값: '+place+' 연속 · 평일 '+defDur(c,'wd')+'시간 / 주말 '+defDur(c,'we')+'시간 블록'+(c.days?' · '+esc(c.days)+'요일':'')+'</div>';
+}
+function openSheet(){$('#palette').classList.add('open'); document.body.classList.add('sheet-open')}
+function closeSheet(){$('#palette').classList.remove('open'); document.body.classList.remove('sheet-open')}
+function arm(cid){
+  if(armed===cid){disarm(); return}
+  armed=cid; var c=C[cid];
+  $('#armbar').innerHTML='<span><b>'+esc(c.n)+'</b> · 놓을 칸을 누르세요</span><button id="arm-cancel">취소</button>';
+  $('#armbar').hidden=false; document.body.classList.add('armed');
+  if(isSheet()) closeSheet();
+}
+function disarm(){armed=null; $('#armbar').hidden=true; document.body.classList.remove('armed')}
+
+/* ---------- 시간표 ---------- */
+function startOpts(){
+  var lo=Math.min(NOWYM-12,S.start), hi=Math.max(NOWYM+18,S.start), h='';
+  for(var a=lo;a<=hi;a++) h+=opt(a,mLabFull(a),a===S.start);
+  $('#in-start').innerHTML=h;
+}
+function buildBoard(){
+  var wrap=$('#secs'), h='';
+  SEC_ORDER.forEach(function(sec){
+    var sd=SEC[sec], h1=secH1(sec);
+    h+='<section class="sec'+(S.fold[sec]?' folded':'')+'" data-sec="'+sec+'">';
+    h+='<div class="grid sec-head"><button class="sec-label" data-fold="'+sec+'" style="background:'+sd.fill+'" title="접기/펼치기"><b>'+sd.n+'</b><small>'+sd.sub+'</small><i>'+(S.fold[sec]?'펼치기 ▸':'접기 ▾')+'</i></button>';
+    for(var c=0;c<12;c++){
+      var a=absOf(c), yr=(c===0||mOf(a)===0)?'<i class="yr">'+yOf(a)+'</i>':'';
+      h+='<div class="mh'+(c===0?' first':'')+'" data-c="'+c+'" style="background:'+sd.fill+'">'+yr+'<b class="num">'+(mOf(a)+1)+'월</b><input class="mdate" data-sec="'+sec+'" data-c="'+c+'" value="'+esc(dateOf(sec,a))+'" placeholder="개강일 입력" aria-label="'+sd.n+' '+mLabFull(a)+' 개강~종강"></div>';
+    }
+    h+='</div><div class="grid sec-body"><div class="tcol">';
+    for(var t=H0;t<h1;t++) h+='<span class="num" style="top:calc(('+t+' - var(--t0)) * var(--hour))">'+pad(t)+':00</span>';
+    if(sec==='wd') h+='<span class="lunch-t" style="top:calc((13.5 - var(--t0)) * var(--hour))">점심</span>';
+    h+='</div>';
+    for(var k=0;k<12;k++) h+='<div class="mcol" data-sec="'+sec+'" data-c="'+k+'">'+(sec==='wd'?'<div class="lunch"></div>':'')+'</div>';
+    h+='</div></section>';
+  });
+  wrap.innerHTML=h;
+  startOpts();
+  if(document.body.classList.contains('pa')) applyArea(); else applyView();
+}
+function computeConflicts(){
+  var set={}, list=[], its=S.items;
+  for(var i=0;i<its.length;i++) for(var j=i+1;j<its.length;j++){
+    var a=its[i], b=its[j];
+    if(a.sec!==b.sec) continue;
+    var lo=Math.max(a.ym,b.ym), hi=Math.min(a.ym+a.span-1,b.ym+b.span-1);
+    if(lo>hi||!(a.start<b.start+b.dur&&b.start<a.start+a.dur)) continue;
+    if(!daysOf(a.days).some(function(d){return daysOf(b.days).indexOf(d)>-1})) continue;
+    var ms=[]; for(var m=lo;m<=hi;m++){ set[a.id+'|'+m]=1; set[b.id+'|'+m]=1; ms.push(m); }
+    list.push({sec:a.sec,a:a,b:b,ms:ms});
+  }
+  return {set:set,list:list};
+}
+function layLanes(segs){
+  segs.sort(function(a,b){return a.it.start-b.it.start||b.it.dur-a.it.dur});
+  var clusters=[], cur=[], end=-1;
+  segs.forEach(function(s){
+    if(cur.length&&s.it.start>=end){clusters.push(cur); cur=[]; end=-1}
+    cur.push(s); end=Math.max(end,s.it.start+s.it.dur);
+  });
+  if(cur.length) clusters.push(cur);
+  clusters.forEach(function(cl){
+    var ends=[];
+    cl.forEach(function(s){
+      var idx=-1; for(var i=0;i<ends.length;i++) if(ends[i]<=s.it.start){idx=i;break}
+      if(idx<0){idx=ends.length; ends.push(0)}
+      ends[idx]=s.it.start+s.it.dur; s.lane=idx;
+    });
+    cl.forEach(function(s){s.lanes=ends.length});
+  });
+}
+function segsIn(sec,c){
+  var a=absOf(c), out=[];
+  S.items.forEach(function(it){ if(it.sec===sec&&it.ym<=a&&a<=it.ym+it.span-1) out.push({it:it,k:a-it.ym,c:c}); });
+  return out;
+}
+var sel=null;
+function blkEl(s,isConf){
+  var it=s.it, c=course(it), st=ST[c.st]||ST.cert;
+  var d=document.createElement('div');
+  d.className='blk'+(c.legacy?' legacy':'')+(c.proj?' proj':'')+(isConf?' conflict':'')+(sel===it.id?' sel':'')+(s.lanes>1?' narrow':'');
+  d.dataset.id=it.id; d.dataset.seg=s.k;
+  d.style.cssText='--s:'+it.start+';--d:'+it.dur+';--c:'+st.c+';--cs:'+st.s+';left:calc('+s.lane+' * 100% / '+s.lanes+' + 2px);width:calc(100% / '+s.lanes+' - 4px)';
+  var endA=it.ym+it.span-1, ov=(s.c===11&&endA>absOf(11))?endA-absOf(11):0, pre=(s.c===0&&it.ym<S.start)?S.start-it.ym:0;
+  d.innerHTML='<div class="b-name">'+esc(segName(it,s.k))+(isConf?'<span class="b-warn" title="같은 요일·시간 겹침">겹침</span>':'')+'</div>'+
+    '<div class="b-meta num">'+fmt(it.start)+(s.lanes>1?'~':'~'+fmt(it.start+it.dur))+'</div>'+
+    '<div class="b-meta">'+esc(it.days)+(it.memo?' · '+esc(it.memo):'')+'</div>'+
+    (pre?'<div class="b-ov">← 이전 '+pre+'개월부터</div>':'')+(ov?'<div class="b-ov">→ 이후 '+ov+'개월</div>':'')+
+    '<button class="b-x" title="삭제" aria-label="삭제">×</button><div class="b-rz" title="끌어서 수업 시간 조절"></div>';
+  return d;
+}
+function render(){
+  $$('#secs .blk').forEach(function(b){b.remove()});
+  var conf=computeConflicts();
+  SEC_ORDER.forEach(function(sec){
+    for(var c=0;c<12;c++){
+      var segs=segsIn(sec,c); if(!segs.length) continue;
+      layLanes(segs);
+      var col=$('.mcol[data-sec="'+sec+'"][data-c="'+c+'"]'); if(!col) continue;
+      segs.forEach(function(s){col.appendChild(blkEl(s,!!conf.set[s.it.id+'|'+(s.it.ym+s.k)]))});
+    }
+  });
+  renderSummary(conf); markChips(); save();
+  if(document.body.classList.contains('pa')) buildPaList();
+}
+
+/* ---------- 보기 범위 (3·6·12개월) ---------- */
+var V={span:12,start:0,auto:true};
+function autoSpan(){var w=innerWidth; return w<768?3:(w<1280?6:12)}
+function setCols(a,b){
+  $('#secs').style.setProperty('--mc',b-a+1);
+  $$('#secs .mh[data-c], #secs .mcol[data-c]').forEach(function(el){var c=+el.dataset.c; el.classList.toggle('m-out',c<a||c>b)});
+}
+function applyView(){
+  V.start=Math.max(0,Math.min(12-V.span,V.start));
+  setCols(V.start,V.start+V.span-1);
+  $('#v-label').textContent=mLab(absOf(V.start))+' ~ '+mLab(absOf(V.start+V.span-1));
+  $('#v-prev').disabled=V.start<=0; $('#v-next').disabled=V.start+V.span>=12;
+  $$('#v-span button').forEach(function(b){b.classList.toggle('on',+b.dataset.span===V.span)});
+  updateFit();
+}
+/* 칸이 화면 폭에 들어가면 월 머리글을 스크롤 따라 고정 */
+function updateFit(){
+  var bs=$('#board-scroll'); bs.classList.remove('fit');
+  if(document.body.classList.contains('pa')) return;
+  if(bs.scrollWidth<=bs.clientWidth+1) bs.classList.add('fit');
+  var top=$('#top'), st=getComputedStyle(top).position==='sticky'?top.offsetHeight:0;
+  document.documentElement.style.setProperty('--stickyTop',st+'px');
+}
+function focusFirstPlaced(){
+  if(V.span===12) return;
+  var cols=[]; S.items.forEach(function(it){ for(var k=0;k<it.span;k++){var c=colOf(it.ym+k); if(c>=0&&c<12){cols.push(c); break}} });
+  if(!cols.length){V.start=0; return}
+  V.start=Math.floor(Math.min.apply(null,cols)/V.span)*V.span;
+}
+
+/* ---------- 요약 ---------- */
+function sortItems(list){return list.slice().sort(function(a,b){return a.ym-b.ym||(a.sec===b.sec?0:(a.sec==='wd'?-1:1))||a.start-b.start})}
+function listLi(it){
+  var st=ST[course(it).st]||ST.cert;
+  var mtxt=mLab(it.ym)+(it.span>1?'~'+mLab(it.ym+it.span-1):'');
+  return '<li><span class="dot" style="background:'+st.c+'"></span><span><span class="num">'+mtxt+'</span> '+SEC[it.sec].n+' · <b>'+esc(nameOf(it))+'</b> · <span class="num">'+fmt(it.start)+'~'+fmt(it.start+it.dur)+'</span> · '+esc(it.days)+(it.memo?' · '+esc(it.memo):'')+'</span></li>';
+}
+function renderSummary(conf){
+  var items=sortItems(S.items);
+  var hrs=0, unk=0, W=[], seen={};
+  items.forEach(function(it){var c=course(it); if(c.h) hrs+=c.h; else unk++});
+  conf.list.forEach(function(x){
+    W.push('<li class="w-conf"><b>시간 겹침</b><span>'+SEC[x.sec].n+' '+x.ms.map(mLab).join('·')+' · '+esc(nameOf(x.a))+' ↔ '+esc(nameOf(x.b))+'</span></li>')});
+  items.forEach(function(it){
+    var c=course(it); if(!c.pre) return;
+    c.pre.forEach(function(p){
+      var key=it.cid+'>'+p; if(seen[key]) return; seen[key]=1;
+      var eq=EQ[p]||[p], found=S.items.filter(function(o){return eq.indexOf(o.cid)>-1});
+      if(!found.length) W.push('<li class="w-pre"><b>선수 과목</b><span>'+esc(nameOf(it))+' → '+esc(C[p].n)+' 미배치 (기이수 여부 확인)</span></li>');
+      else if(!found.some(function(o){return o.ym+o.span-1<it.ym})) W.push('<li class="w-pre"><b>선수 순서</b><span>'+esc(nameOf(it))+' → '+esc(C[p].n)+' 배치가 같은 달 또는 이후</span></li>');
+    });
+  });
+  items.filter(function(it){return !inWin(it)}).forEach(function(it){
+    W.push('<li><b>표시 범위 밖</b><span>'+esc(nameOf(it))+' · '+mLabFull(it.ym)+' (시작 월을 바꾸면 보인다)</span></li>')});
+  items.filter(function(it){return inWin(it)&&it.ym+it.span-1>absOf(11)}).forEach(function(it){
+    W.push('<li><b>12개월 이후 이어짐</b><span>'+esc(nameOf(it))+' '+(it.ym+it.span-1-absOf(11))+'개월</span></li>')});
+  var first=items.length? Math.min.apply(null,items.map(function(i){return i.ym})) : 0;
+  var last=items.length? Math.max.apply(null,items.map(function(i){return i.ym+i.span-1})) : 0;
+  var period=items.length? mLab(first)+' ~ '+mLab(last) : '-';
+  $('#summary').innerHTML=
+    '<div class="stats">'+
+      '<div class="stat"><small>배치 과목</small><b class="num">'+items.length+'</b></div>'+
+      '<div class="stat"><small>수강 기간</small><b>'+period+'</b></div>'+
+      '<div class="stat"><small>확정 시수 합계</small><b class="num">'+hrs+'H</b></div>'+
+      '<div class="stat"><small>시수 미정 · 기존 과정</small><b class="num">'+unk+'</b></div>'+
+      '<div class="stat'+(W.length?' alert':'')+'"><small>확인 필요</small><b class="num">'+W.length+'</b></div>'+
+    '</div><div class="sum-cols">'+
+      '<div class="sum-box"><div class="h">확인 필요</div>'+(W.length?'<ul>'+W.join('')+'</ul>':'<div class="ok">겹침·선수 과목 문제 없음</div>')+'</div>'+
+      '<div class="sum-box"><div class="h">배치 과목 목록</div>'+(items.length?'<ol>'+items.map(listLi).join('')+'</ol>':'<div class="ok" style="color:var(--text2)">아직 배치된 과목이 없다.</div>')+'</div>'+
+    '</div>';
+}
+
+/* ---------- 드래그 앤 드롭 (마우스: 바로 끌기 · 터치: 길게 누른 뒤 끌기) ---------- */
+var D=null, SELM=null, raf=0, lx=0, ly=0, lastPT='mouse';
+function modalOpen(){return !$('#pm').hidden||!$('#more').hidden}
+document.addEventListener('pointerdown',function(e){
+  lastPT=e.pointerType||'mouse';
+  if(e.pointerType==='mouse'&&e.button!==0) return;
+  if(D||SELM) return;
+  var t=e.target, body=document.body;
+  if(body.classList.contains('pv')||modalOpen()) return;
+  if(body.classList.contains('selecting')){
+    var sc=t.closest('.mcol'); if(!sc) return;
+    e.preventDefault(); selStart(sc,e); return;
+  }
+  if(popId&&!t.closest('#pop')&&!t.closest('.blk')) closePop();
+  if(t.closest('.b-x')) return;
+  var touch=e.pointerType==='touch';
+  if(armed){
+    var ac=t.closest('.mcol');
+    if(ac){ D={mode:'tap',col:ac,x0:e.clientX,y0:e.clientY,touch:touch,started:false}; if(!touch) e.preventDefault(); return; }
+  }
+  var blk=t.closest('.blk'), chip=t.closest('.chip');
+  if(blk&&!blk.classList.contains('preview')){
+    var it=byId(blk.dataset.id); if(!it) return;
+    var r=blk.getBoundingClientRect();
+    D={mode:t.closest('.b-rz')?'resize':'move',it:it,seg:+blk.dataset.seg,x0:e.clientX,y0:e.clientY,offY:e.clientY-r.top,offX:e.clientX-r.left,w:r.width,started:false,touch:touch,el:blk};
+  } else if(chip){
+    var c=C[chip.dataset.cid]; if(!c) return;
+    D={mode:'new',c:c,x0:e.clientX,y0:e.clientY,offY:10,offX:14,started:false,touch:touch,el:chip};
+  } else return;
+  lx=e.clientX; ly=e.clientY;
+  if(touch&&D.mode!=='resize'){
+    D.timer=setTimeout(function(){
+      if(D&&!D.started){ D.lp=true; D.el.classList.add('lift'); try{ if(navigator.vibrate) navigator.vibrate(12) }catch(err){} }
+    },280);
+  } else e.preventDefault();
+});
+document.addEventListener('pointermove',function(e){
+  if(SELM){ lx=e.clientX; ly=e.clientY; selMove(); return; }
+  if(!D) return;
+  lx=e.clientX; ly=e.clientY;
+  var dist=Math.abs(lx-D.x0)+Math.abs(ly-D.y0);
+  if(D.mode==='tap'){ if(dist>10) D=null; return; }
+  if(!D.started){
+    if(D.touch&&D.mode!=='resize'&&!D.lp){ if(dist>10){ clearTimeout(D.timer); D=null; } return; }
+    if(dist<(D.touch?3:6)) return;
+    begin();
+  }
+  step();
+});
+document.addEventListener('pointerup',function(e){
+  if(SELM){ selEnd(); return; }
+  if(!D) return;
+  var d=D; clearTimeout(d.timer); if(d.el) d.el.classList.remove('lift');
+  if(d.mode==='tap'){ D=null; tapPlace(d.col,e.clientY); return; }
+  if(!d.started){
+    D=null;
+    if(d.mode==='new'){ showInfo(d.c.id); arm(d.c.id); } else openPop(d.it.id,d.seg);
+    return;
+  }
+  lx=e.clientX; ly=e.clientY;
+  if(d.mode==='resize'){ if(JSON.stringify(S)!==d.before) hist.push(d.before); finish(); render(); return; }
+  var tg=hit(lx,ly); finish();
+  if(tg&&tg.del&&d.mode==='move'){
+    hist.push(d.before); S.items=S.items.filter(function(x){return x!==d.it}); if(sel===d.it.id) sel=null;
+    render(); toast(nameOf(d.it)+' 삭제',true); return;
+  }
+  if(!tg||tg.del){ render(); if(d.mode==='new') toast('시간표 칸 위에 놓아야 배치된다'); return; }
+  if(d.mode==='new'){ placeNew(d.c,tg.sec,tg.ym,tg.start,tg.days); }
+  else {
+    hist.push(d.before);
+    var mv=d.it, changed=mv.sec!==tg.sec;
+    mv.sec=tg.sec; mv.ym=tg.ym; mv.start=tg.start; mv.dur=tg.dur;
+    if(changed&&DAY_OPTS[tg.sec].indexOf(mv.days)<0) mv.days=SEC[tg.sec].defDays;
+    if(tg.days) mv.days=tg.days;
+    sel=mv.id; render();
+  }
+});
+document.addEventListener('pointercancel',function(){
+  if(SELM){ selCancel(); return; }
+  if(!D) return;
+  clearTimeout(D.timer); if(D.el) D.el.classList.remove('lift');
+  if(D.started){ finish(); render(); } else D=null;
+});
+/* 길게 누른 뒤에는 화면 스크롤 대신 끌기로 동작 */
+document.addEventListener('touchmove',function(e){
+  if((D&&(D.lp||D.started||D.mode==='resize'))||SELM){ if(e.cancelable) e.preventDefault(); }
+},{passive:false});
+document.addEventListener('contextmenu',function(e){ if(lastPT==='touch'&&e.target.closest('.chip,.blk')) e.preventDefault(); });
+
+function placeNew(c,sec,ym,start,days){
+  snap();
+  var it=clampItem({id:nid(),cid:c.id,sec:sec,ym:ym,span:c.m,start:start,dur:defDur(c,sec),days:days||defDays(c,sec),memo:'',label:''});
+  S.items.push(it); sel=it.id; render(); showInfo(c.id);
+  var over=it.ym+it.span-1-absOf(11);
+  if(over>0) toast('12개월 표시 범위 이후 '+over+'개월 더 이어진다');
+  else if(isSheet()) toast(c.n+' 배치 · '+mLab(ym)+' '+fmt(it.start));
+}
+function tapPlace(col,y){
+  var c=C[armed]; if(!c){disarm(); return}
+  var r=col.getBoundingClientRect();
+  var st=Math.floor((H0+(y-r.top)/hourPx())*2)/2;
+  var sec=col.dataset.sec, ym=absOf(+col.dataset.c);
+  if(c.ocYm!=null) placeNew(c,c.ocSec,c.ocYm,c.ocStart,c.ocDays);
+  else { var sn=snapSlot(c,sec,ym,st,Math.min(defDur(c,sec),secH1(sec)-H0)); placeNew(c,sec,ym,sn.start,sn.days); }
+  disarm();
+}
+function begin(){
+  D.started=true; D.before=JSON.stringify(S); hidePop();
+  if(D.el) D.el.classList.remove('lift');
+  if(D.mode==='resize'){ document.body.classList.add('resizing'); sel=D.it.id; return; }
+  document.body.classList.add('dragging');
+  if(D.mode==='new'){ disarm(); if(isSheet()) closeSheet(); if(D.c.ocYm==null) highlightMatches(D.c); }
+  if(D.mode==='move'){ document.body.classList.add('moving'); $$('.blk[data-id="'+D.it.id+'"]').forEach(function(b){b.classList.add('src')}); }
+  var c=D.mode==='new'?D.c:course(D.it), st=ST[c.st]||ST.cert;
+  var g=document.createElement('div'); g.className='ghost';
+  g.style.setProperty('--c',st.c); g.style.setProperty('--cs',st.s);
+  if(D.mode==='move') g.style.width=Math.max(90,D.w)+'px';
+  g.textContent=D.mode==='new'?c.n:segName(D.it,D.seg);
+  document.body.appendChild(g); D.ghost=g;
+  loop();
+}
+function step(){
+  if(!D||!D.started) return;
+  if(D.mode==='resize'){
+    var it=D.it, col=$('.mcol[data-sec="'+it.sec+'"][data-c="'+Math.max(0,Math.min(11,colOf(it.ym+D.seg)))+'"]'); if(!col) return;
+    var r=col.getBoundingClientRect();
+    var end=Math.round((H0+(ly-r.top)/hourPx())*2)/2;
+    end=Math.min(secH1(it.sec),Math.max(it.start+1,end));
+    if(end-it.start!==it.dur){ it.dur=end-it.start; render(); }
+    return;
+  }
+  D.ghost.style.transform='translate('+(lx-D.offX)+'px,'+(ly-D.offY)+'px)';
+  var tg=hit(lx,ly);
+  preview(tg);
+  var del=!!(tg&&tg.del&&D.mode==='move');
+  document.body.classList.toggle('over-del',del&&tg.where==='palette');
+  document.body.classList.toggle('over-trash',del&&tg.where==='trash');
+}
+function hit(x,y){
+  var el=document.elementFromPoint(x,y); if(!el) return null;
+  if(el.closest('#trash')) return {del:true,where:'trash'};
+  if(el.closest('#palette')) return {del:true,where:'palette'};
+  var col=el.closest('.mcol'); if(!col) return null;
+  var sec=col.dataset.sec, cc=+col.dataset.c, r=col.getBoundingClientRect(), h1=secH1(sec);
+  var dur=Math.min(D.mode==='move'?D.it.dur:defDur(D.c,sec),h1-H0);
+  var span=D.mode==='move'?D.it.span:D.c.m;
+  var st=Math.round((H0+(y-D.offY-r.top)/hourPx())*2)/2;
+  st=Math.max(H0,Math.min(h1-dur,st));
+  var ym=Math.max(S.start,absOf(cc)-(D.mode==='move'?D.seg:0));
+  var c0=D.mode==='new'?D.c:course(D.it);
+  if(D.mode==='new'&&c0.ocYm!=null) return {sec:c0.ocSec,ym:c0.ocYm,start:c0.ocStart,dur:Math.min(defDur(c0,c0.ocSec),secH1(c0.ocSec)-c0.ocStart),span:span,days:c0.ocDays};
+  var sn=snapSlot(c0,sec,ym,st,dur);
+  return {sec:sec,ym:ym,start:sn.start,dur:dur,span:span,days:sn.days};
+}
+function preview(tg){
+  $$('.blk.preview').forEach(function(p){p.remove()});
+  $$('.mcol.hot').forEach(function(c){c.classList.remove('hot')});
+  if(!tg||tg.del) return;
+  var c=D.mode==='new'?D.c:course(D.it), st=ST[c.st]||ST.cert;
+  for(var k=0;k<tg.span;k++){
+    var cc=colOf(tg.ym+k); if(cc>11) break; if(cc<0) continue;
+    var col=$('.mcol[data-sec="'+tg.sec+'"][data-c="'+cc+'"]'); if(!col) continue;
+    col.classList.add('hot');
+    var p=document.createElement('div'); p.className='blk preview';
+    p.style.cssText='--s:'+tg.start+';--d:'+tg.dur+';--c:'+st.c+';--cs:'+st.s+';left:2px;width:calc(100% - 4px)';
+    p.innerHTML='<div class="b-meta num">'+fmt(tg.start)+'~'+fmt(tg.start+tg.dur)+'</div>'+(k===0&&tg.span>1?'<div class="b-meta">'+tg.span+'개월</div>':'');
+    col.appendChild(p);
+  }
+}
+function loop(){
+  cancelAnimationFrame(raf);
+  var bs=$('#board-scroll');
+  (function tick(){
+    if(!((D&&D.started)||SELM)) return;
+    var topB=Math.max(0,$('#top').getBoundingClientRect().bottom), bot=innerHeight-(isSheet()?76:0);
+    var dy=0, dx=0, edgeT=topB+40;
+    if(ly<edgeT) dy=-Math.min(22,(edgeT-ly)/2+4); else if(ly>bot-50) dy=Math.min(22,(ly-bot+50)/2+4);
+    var r=bs.getBoundingClientRect();
+    if(ly>r.top&&ly<r.bottom){ if(lx>r.right-36&&lx<r.right+20) dx=14; else if(lx<r.left+36&&lx>r.left-4) dx=-14; }
+    if(dy) window.scrollBy(0,dy);
+    if(dx) bs.scrollLeft+=dx;
+    if(dy||dx){ if(SELM) selMove(); else step(); }
+    raf=requestAnimationFrame(tick);
+  })();
+}
+function finish(){
+  cancelAnimationFrame(raf);
+  if(D&&D.ghost) D.ghost.remove();
+  $$('.blk.preview').forEach(function(p){p.remove()});
+  $$('.mcol.hot').forEach(function(c){c.classList.remove('hot')});
+  document.body.classList.remove('dragging','resizing','over-del','over-trash','moving'); $$('.mcol.hl').forEach(function(c){c.classList.remove('hl')});
+  D=null;
+}
+
+/* ---------- 편집 팝오버 ---------- */
+var popId=null, popBefore=null, popDirty=false;
+function initPop(){
+  var h=''; for(var d=1;d<=6;d+=.5) h+=opt(d,Math.floor(d)+'시간'+(d%1?' 30분':''),false); $('#p-dur').innerHTML=h;
+  $('#p-span').innerHTML=range(12).map(function(m){return opt(m+1,(m+1)+'개월',false)}).join('');
+}
+function fillPop(it){
+  var c=course(it), st=ST[c.st]||ST.cert;
+  $('#p-dot').style.background=st.c;
+  $('#p-title').textContent=nameOf(it);
+  $('#p-sub').textContent=st.n+(sub(c)?' · '+sub(c):'');
+  $('#p-label').value=it.label||'';
+  $('#p-label').placeholder=c.seq?(c.base+'1, '+c.base+'2 … 자동'):c.n;
+  $('#p-sec').value=it.sec;
+  var opts=DAY_OPTS[it.sec].slice(); if(opts.indexOf(it.days)<0) opts.push(it.days);
+  $('#p-days').innerHTML=opts.map(function(d){return opt(esc(d),esc(d),d===it.days)}).join('');
+  $('#p-start').innerHTML=timeOpts(it.start,secH1(it.sec));
+  var mo=range(12).map(function(c){var a=absOf(c); return opt(a,mLab(a),a===it.ym)}).join('');
+  if(colOf(it.ym)<0||colOf(it.ym)>11) mo=opt(it.ym,mLabFull(it.ym)+' (범위 밖)',true)+mo;
+  $('#p-m').innerHTML=mo;
+  $('#p-start').value=String(it.start); $('#p-dur').value=String(it.dur);
+  $('#p-m').value=String(it.ym); $('#p-span').value=String(it.span);
+  $('#p-memo').value=it.memo||'';
+}
+function openPop(id,seg){
+  var it=byId(id); if(!it) return;
+  disarm();
+  popId=id; sel=id; popBefore=JSON.stringify(S); popDirty=false;
+  render(); fillPop(it);
+  var pop=$('#pop'); pop.hidden=false;
+  if(innerWidth<768){ pop.style.left=''; pop.style.top=''; return; }
+  var el=$('.blk[data-id="'+id+'"][data-seg="'+(seg||0)+'"]')||$('.blk[data-id="'+id+'"]');
+  var pw=pop.offsetWidth, ph=pop.offsetHeight, x=(innerWidth-pw)/2, y=(innerHeight-ph)/2;
+  if(el){
+    var r=el.getBoundingClientRect();
+    x=r.right+10; if(x+pw>innerWidth-8) x=r.left-pw-10; if(x<8) x=Math.max(8,Math.min(innerWidth-pw-8,r.left));
+    y=Math.max(8,Math.min(innerHeight-ph-8-(isSheet()?76:0),r.top));
+  }
+  pop.style.left=(x+scrollX)+'px'; pop.style.top=(y+scrollY)+'px';
+}
+function hidePop(){ $('#pop').hidden=true; popId=null; }
+function closePop(){ if(!popId) return; hidePop(); sel=null; render(); }
+$('#pop').addEventListener('input',function(e){
+  var it=byId(popId); if(!it) return;
+  if(!popDirty){hist.push(popBefore); popDirty=true}
+  var f=e.target.id, v=e.target.value, h1;
+  if(f==='p-label') it.label=v.trim();
+  if(f==='p-sec'){ it.sec=v; if(DAY_OPTS[v].indexOf(it.days)<0) it.days=SEC[v].defDays; }
+  if(f==='p-days') it.days=v;
+  if(f==='p-start') it.start=+v;
+  if(f==='p-dur') it.dur=+v;
+  if(f==='p-m') it.ym=+v;
+  if(f==='p-span') it.span=+v;
+  if(f==='p-memo') it.memo=v.trim();
+  h1=secH1(it.sec);
+  if(it.dur>h1-H0) it.dur=h1-H0;
+  if(it.start+it.dur>h1){ if(f==='p-start') it.dur=Math.max(1,h1-it.start); it.start=h1-it.dur; }
+  if(f==='p-label'||f==='p-memo') $('#p-title').textContent=nameOf(it); else fillPop(it);
+  render();
+});
+$('#p-close').addEventListener('click',closePop);
+$('#p-ok').addEventListener('click',closePop);
+$('#p-del').addEventListener('click',function(){ if(popId) delItem(popId) });
+$('#p-dup').addEventListener('click',function(){
+  var it=byId(popId); if(!it) return;
+  if(colOf(it.ym+it.span)>11){toast('12개월 표시 범위를 넘어 복제할 수 없다'); return}
+  snap();
+  var n=Object.assign({},it,{id:nid(),ym:it.ym+it.span});
+  S.items.push(n); openPop(n.id,0); toast(mLab(n.ym)+'로 복제');
+});
+function delItem(id){
+  var it=byId(id); if(!it) return;
+  snap(); S.items=S.items.filter(function(x){return x.id!==id});
+  if(popId===id) hidePop(); if(sel===id) sel=null;
+  render(); toast(nameOf(it)+' 삭제',true);
+}
+
+/* ---------- 내보내기 영역 (PDF·PNG 공통) ---------- */
+var PA={wd:true,we:false,m0:0,m1:11,t0:9,t1:22,or:'landscape',legend:true,list:false};
+var PM={mode:'png'};
+function paSecs(){return ['wd','we'].filter(function(s){return PA[s]})}
+function placedCols(secs){
+  var cs=[];
+  S.items.forEach(function(it){ if(secs&&secs.indexOf(it.sec)<0) return; for(var k=0;k<it.span;k++){var c=colOf(it.ym+k); if(c>=0&&c<12) cs.push(c)} });
+  return cs.length?[Math.min.apply(null,cs),Math.max.apply(null,cs)]:null;
+}
+function placedHours(){
+  var secs=paSecs(), a0=absOf(PA.m0), a1=absOf(PA.m1);
+  var its=S.items.filter(function(it){return secs.indexOf(it.sec)>-1&&it.ym<=a1&&it.ym+it.span-1>=a0});
+  if(!its.length) return null;
+  return [Math.floor(Math.min.apply(null,its.map(function(i){return i.start}))),Math.ceil(Math.max.apply(null,its.map(function(i){return i.start+i.dur})))];
+}
+function paDefaults(){
+  var has={}; S.items.forEach(function(it){ if(inWin(it)) has[it.sec]=1 });
+  PA.wd=!!has.wd||!has.we; PA.we=!!has.we;
+  var r=placedCols(); PA.m0=r?r[0]:0; PA.m1=r?r[1]:11;
+  PA.t0=H0; PA.t1=H1;
+}
+function secRange(s){var a=Math.max(H0,PA.t0), z=Math.min(secH1(s),PA.t1); if(z-a<1){a=H0; z=secH1(s)} return {a:a,z:z}}
+function fillPM(){
+  $('#pm').dataset.mode=PM.mode; $('#pm').dataset.kind=PNG.kind;
+  $$('.pm-tabs button').forEach(function(b){b.classList.toggle('on',b.dataset.mode===PM.mode)});
+  $$('input[name="pa-kind"]').forEach(function(r){r.checked=r.value===PNG.kind});
+  $('#pa-wd').checked=PA.wd; $('#pa-we').checked=PA.we;
+  $('#pa-m0').innerHTML=colOpts(PA.m0); $('#pa-m1').innerHTML=colOpts(PA.m1);
+  var a='',b=''; for(var t=H0;t<H1;t++) a+=opt(t,pad(t)+':00',t===PA.t0); for(var u=H0+1;u<=H1;u++) b+=opt(u,pad(u)+':00',u===PA.t1);
+  $('#pa-t0').innerHTML=a; $('#pa-t1').innerHTML=b;
+  $$('input[name="pa-or"]').forEach(function(r){r.checked=r.value===PA.or});
+  $('#pa-legend').checked=PA.legend; $('#pa-inclist').checked=PA.list;
+  pmNote();
+}
+function readPM(){
+  PA.wd=$('#pa-wd').checked; PA.we=$('#pa-we').checked;
+  PA.m0=+$('#pa-m0').value; PA.m1=+$('#pa-m1').value; if(PA.m1<PA.m0){var x=PA.m0; PA.m0=PA.m1; PA.m1=x}
+  PA.t0=+$('#pa-t0').value; PA.t1=+$('#pa-t1').value; if(PA.t1<=PA.t0) PA.t1=Math.min(H1,PA.t0+1);
+  var o=$('input[name="pa-or"]:checked'); PA.or=o?o.value:'landscape';
+  var k=$('input[name="pa-kind"]:checked'); PNG.kind=k?k.value:'grid'; $('#pm').dataset.kind=PNG.kind;
+  PA.legend=$('#pa-legend').checked; PA.list=$('#pa-inclist').checked;
+}
+function pmNote(){
+  var secs=paSecs();
+  if(!secs.length){$('#pm-note').textContent='평일·주말 중 하나 이상 선택'; return}
+  var rng=mLab(absOf(PA.m0))+' ~ '+mLab(absOf(PA.m1))+'('+(PA.m1-PA.m0+1)+'칸)';
+  var tx=secs.map(function(s){var r=secRange(s); return SEC[s].n+' '+pad(r.a)+'~'+pad(r.z)+'시'}).join(', ');
+  if(PM.mode==='png') $('#pm-note').textContent=PNG.kind==='list'
+    ? '월별 목록형 · '+rng+' · '+secs.map(function(s){return SEC[s].n}).join('·')+' · 과목·시간·요일을 큰 글씨로 나열해 휴대폰에서 읽기 쉽다. 폭 1080px.'
+    : '시간표형 · '+rng+' · '+tx+' · 폭 1080px 고해상도. 카톡에서 눌러 확대해 보는 용도.';
+  else $('#pm-note').textContent='A4 '+(PA.or==='landscape'?'가로':'세로')+' 1장 · '+rng+' · '+tx+' · 1시간 칸 높이 약 '+areaGeom().ph.toFixed(1)+'mm'+(PA.list?' · 2쪽에 과목 목록':'');
+}
+function areaGeom(){
+  var rows=0, n=0;
+  paSecs().forEach(function(s){var r=secRange(s); rows+=r.z-r.a; n++});
+  var land=PA.or==='landscape', W=land?297:210, Hh=land?210:297;
+  var head=20+(PA.legend?5:0);
+  var ph=Math.max(3.5,Math.min(16,(Hh-16-head-n*11-4)/Math.max(1,rows)));
+  var colW=(W-16-12)/(PA.m1-PA.m0+1);
+  var bn=Math.max(7,Math.min(12,ph*1.3,colW*0.6));
+  return {W:W,ph:ph,bn:bn,bm:Math.max(6.5,bn*0.86)};
+}
+function applyArea(){
+  var b=document.body, g=areaGeom();
+  b.classList.add('pa'); b.classList.toggle('pa-legend',PA.legend); b.classList.toggle('pa-list',PA.list);
+  $$('#secs .sec').forEach(function(el){
+    var s=el.dataset.sec, r=secRange(s);
+    el.classList.toggle('pa-off',!PA[s]);
+    el.style.setProperty('--t0',r.a); el.style.setProperty('--t1',r.z);
+  });
+  setCols(PA.m0,PA.m1); $('#board-scroll').classList.remove('fit');
+  var st=b.style;
+  st.setProperty('--phour',g.ph.toFixed(2)+'mm'); st.setProperty('--pbn',g.bn.toFixed(1)+'px'); st.setProperty('--pbm',g.bm.toFixed(1)+'px');
+  st.setProperty('--pw',g.W+'mm'); st.setProperty('--pz',Math.min(1,(innerWidth-24)/(g.W*3.7795)).toFixed(3));
+  $('#page-style').textContent='@page{size:A4 '+(PA.or==='landscape'?'landscape':'portrait')+';margin:8mm}';
+  buildPaList();
+}
+function clearArea(){
+  var b=document.body; b.classList.remove('pa','pa-legend','pa-list');
+  $$('#secs .sec').forEach(function(el){el.classList.remove('pa-off'); el.style.removeProperty('--t0'); el.style.removeProperty('--t1')});
+  ['--phour','--pbn','--pbm','--pw','--pz'].forEach(function(p){b.style.removeProperty(p)});
+  applyView();
+}
+function buildPaList(){
+  var a0=absOf(PA.m0), a1=absOf(PA.m1);
+  var its=sortItems(S.items.filter(function(it){return PA[it.sec]&&it.ym<=a1&&it.ym+it.span-1>=a0}));
+  $('#pa-list').innerHTML='<div class="pl-h">배치 과목 목록 · '+mLab(a0)+' ~ '+mLab(a1)+'</div>'+(its.length?'<ol>'+its.map(listLi).join('')+'</ol>':'<div class="ok" style="color:var(--text2)">해당 범위에 배치된 과목이 없다.</div>');
+}
+function areaLabel(){
+  return '미리보기 · '+paSecs().map(function(s){return SEC[s].n}).join('·')+' · '+mLab(absOf(PA.m0))+'~'+mLab(absOf(PA.m1))+' · '+pad(PA.t0)+'~'+pad(PA.t1)+'시 · A4 '+(PA.or==='landscape'?'가로':'세로');
+}
+function openPM(mode,keep){
+  closePop(); disarm(); closeSheet(); closeMore();
+  if(mode) PM.mode=mode;
+  if(!keep){ paDefaults(); if(PM.mode==='png'){ var hr=placedHours(); if(hr){PA.t0=hr[0]; PA.t1=hr[1]} } }
+  fillPM(); $('#im-wrap').hidden=true; $('#im-make').textContent='이미지 만들기'; $('#pm').hidden=false;
+}
+function closePM(){ $('#pm').hidden=true; }
+function enterPreview(){
+  document.body.classList.add('pv'); applyArea();
+  $('#pv-info').textContent=areaLabel(); $('#pvbar').hidden=false; window.scrollTo(0,0);
+}
+function exitPreview(){ document.body.classList.remove('pv'); $('#pvbar').hidden=true; clearArea(); }
+function doPrint(){ setTimeout(function(){ window.print(); },120); }
+function startSelect(){
+  closePM(); if(document.body.classList.contains('pv')) exitPreview();
+  document.body.classList.add('selecting'); $('#selbar').hidden=false;
+  toast('시간표에서 내보낼 월·시간을 드래그 (평일·주말 동시 선택 가능)');
+}
+function exitSelect(){ document.body.classList.remove('selecting'); $('#selbar').hidden=true; $$('.selbox').forEach(function(x){x.remove()}); }
+function hourAt(col,y){var r=col.getBoundingClientRect(); return Math.max(H0,Math.min(secH1(col.dataset.sec),H0+(y-r.top)/hourPx()))}
+function selStart(col,e){
+  var h=hourAt(col,e.clientY);
+  SELM={sec0:col.dataset.sec,c0:+col.dataset.c,h0:h,sec1:col.dataset.sec,c1:+col.dataset.c,h1:h};
+  lx=e.clientX; ly=e.clientY; drawSel(); loop();
+}
+function selMove(){
+  var el=document.elementFromPoint(lx,ly), col=el&&el.closest('.mcol'); if(!col) return;
+  SELM.sec1=col.dataset.sec; SELM.c1=+col.dataset.c; SELM.h1=hourAt(col,ly); drawSel();
+}
+function selRange(){
+  var same=SELM.sec0===SELM.sec1;
+  var ta=same?Math.floor(Math.min(SELM.h0,SELM.h1)):H0, tb=same?Math.ceil(Math.max(SELM.h0,SELM.h1)):H1;
+  if(tb-ta<1) tb=Math.min(H1,ta+1);
+  return {secs:same?[SELM.sec0]:['wd','we'],ca:Math.min(SELM.c0,SELM.c1),cb:Math.max(SELM.c0,SELM.c1),ta:ta,tb:tb};
+}
+function drawSel(){
+  $$('.selbox').forEach(function(x){x.remove()});
+  var s=selRange();
+  s.secs.forEach(function(sec){
+    var a=Math.max(H0,s.ta), z=Math.min(secH1(sec),s.tb); if(z-a<1){a=H0; z=secH1(sec)}
+    for(var c=s.ca;c<=s.cb;c++){
+      var col=$('.mcol[data-sec="'+sec+'"][data-c="'+c+'"]'); if(!col) continue;
+      var d=document.createElement('div'); d.className='selbox';
+      d.style.top='calc('+(a-H0)+' * var(--hour))'; d.style.height='calc('+(z-a)+' * var(--hour))';
+      col.appendChild(d);
+    }
+  });
+}
+function selEnd(){
+  var s=selRange(); SELM=null; cancelAnimationFrame(raf); exitSelect();
+  PA.wd=s.secs.indexOf('wd')>-1; PA.we=s.secs.indexOf('we')>-1; PA.m0=s.ca; PA.m1=s.cb; PA.t0=s.ta; PA.t1=s.tb;
+  openPM(null,true);
+}
+function selCancel(){ SELM=null; cancelAnimationFrame(raf); exitSelect(); openPM(null,true); }
+var autoPA=false;
+window.addEventListener('beforeprint',function(){
+  hidePop(); sel=null; render();
+  if(!document.body.classList.contains('pa')){ paDefaults(); applyArea(); autoPA=true; }
+});
+window.addEventListener('afterprint',function(){ if(autoPA){ autoPA=false; clearArea(); } });
+
+/* ---------- 카톡 이미지 (PNG) · 캔버스로 직접 그려 인터넷 없이 동작 ---------- */
+var PNG={kind:'grid',blob:null,url:null,name:''};
+var FF='"Asta Sans", Pretendard, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif';
+function F(w,px){return w+' '+px+'px '+FF}
+function fontsReady(){
+  if(!document.fonts||!document.fonts.load) return Promise.resolve();
+  return Promise.all(['400','500','700','800'].map(function(w){return document.fonts.load(w+' 16px "Asta Sans"')})).catch(function(){});
+}
+function rgba(hex,a){var n=parseInt(hex.slice(1),16); return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+a+')'}
+function rr(ctx,x,y,w,h,r){r=Math.min(r,w/2,h/2); ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath()}
+function fitText(ctx,t,maxW){t=String(t); if(ctx.measureText(t).width<=maxW) return t; while(t&&ctx.measureText(t+'…').width>maxW) t=t.slice(0,-1); return t+'…'}
+function wrapText(ctx,text,maxW,maxLines){
+  var words=String(text).split(/(\s+)/), lines=[], cur='';
+  words.forEach(function(w){
+    if(!w) return;
+    if(ctx.measureText(cur+w).width<=maxW){cur+=w; return}
+    if(cur.trim()){lines.push(cur.trim()); cur=''}
+    if(/^\s+$/.test(w)) return;
+    if(ctx.measureText(w).width>maxW){ var part=''; Array.from(w).forEach(function(ch){ if(ctx.measureText(part+ch).width>maxW&&part){lines.push(part); part=ch} else part+=ch }); cur=part; }
+    else cur=w;
+  });
+  if(cur.trim()) lines.push(cur.trim());
+  if(lines.length>maxLines){ lines=lines.slice(0,maxLines); lines[maxLines-1]=fitText(ctx,lines[maxLines-1]+'…',maxW); }
+  return lines;
+}
+function secHex(sec){return sec==='wd'?'#FFF2CC':'#DCE6F1'}
+function todayStr(){var d=new Date(); return d.getFullYear()+'.'+pad(d.getMonth()+1)+'.'+pad(d.getDate())}
+function drawHead(ctx,W,P,y,dry){
+  var fill=function(t,x,yy){ if(!dry) ctx.fillText(t,x,yy) };
+  ctx.textAlign='left';
+  ctx.font=F(800,17); ctx.fillStyle='#666'; fill('SBS아카데미컴퓨터아트학원 강남본원',P,y); y+=28;
+  ctx.font=F(900,32); ctx.fillStyle='#111'; fill((S.student||'수강생')+'님 스케줄 가안',P,y);
+  ctx.font=F(700,16); ctx.fillStyle='#0D9488'; ctx.textAlign='right'; fill(mLabFull(S.start)+' 시작 · '+periodLab(),W-P,y+12); ctx.textAlign='left';
+  y+=48;
+  if(S.notice){ ctx.font=F(400,16); ctx.fillStyle='#444'; wrapText(ctx,S.notice,W-2*P,2).forEach(function(l){fill(l,P,y); y+=23}); }
+  if(S.manager){ ctx.font=F(400,15); ctx.fillStyle='#444'; fill('담당 : '+S.manager,P,y); y+=23; }
+  if(PA.legend){
+    y+=4; ctx.font=F(500,13); var x=P;
+    Object.keys(ST).forEach(function(k){
+      var w=ctx.measureText(ST[k].n).width+26;
+      if(x+w>W-P){x=P; y+=22}
+      if(!dry){ ctx.fillStyle=ST[k].c; ctx.beginPath(); ctx.arc(x+6,y+8,5,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#444'; ctx.fillText(ST[k].n,x+15,y+1); }
+      x+=w;
+    });
+    y+=22;
+  }
+  if(!dry){ ctx.fillStyle='#111'; ctx.fillRect(P,y+4,W-2*P,2.5); }
+  return y+20;
+}
+function drawFoot(ctx,W,P,y,dry){
+  ctx.font=F(400,13); ctx.textAlign='left';
+  if(!dry){ ctx.fillStyle='#888'; ctx.fillText('SBS아카데미컴퓨터아트학원 강남본원 · '+todayStr()+' 작성',P,y+4); }
+  return y+24+P;
+}
+function drawBlock(ctx,s,cx,by,colW,hh,r,isConf,lastA){
+  var it=s.it, c=course(it), st=ST[c.st]||ST.cert;
+  var s0=Math.max(it.start,r.a), s1=Math.min(it.start+it.dur,r.z); if(s1<=s0) return;
+  var x=cx+s.lane*colW/s.lanes+2, w=colW/s.lanes-4, y=by+(s0-r.a)*hh+1.5, h=(s1-s0)*hh-3;
+  ctx.save();
+  rr(ctx,x,y,w,h,6); ctx.fillStyle=st.s; ctx.fill();
+  ctx.lineWidth=1.2; ctx.strokeStyle=c.proj?'#111':rgba(st.c,.65); if(c.legacy) ctx.setLineDash([4,3]); ctx.stroke(); ctx.setLineDash([]);
+  rr(ctx,x,y,w,h,6); ctx.clip();
+  ctx.fillStyle=st.c; ctx.fillRect(x,y,4.5,h);
+  if(isConf){ ctx.lineWidth=2.5; ctx.strokeStyle='#C62828'; rr(ctx,x+1.2,y+1.2,w-2.4,h-2.4,5); ctx.stroke(); }
+  var narrow=s.lanes>1, tx=x+8, tw=w-11, ty=y+5, bottom=y+h-3;
+  var nf=narrow?11.5:13; ctx.font=F(800,nf); ctx.fillStyle='#111';
+  wrapText(ctx,segName(it,s.k),tw,h>=hh*1.6?2:1).forEach(function(l){ if(ty+nf<=bottom){ ctx.fillText(l,tx,ty); ty+=nf*1.22 } });
+  var mf=narrow?10.5:11.5; ctx.font=F(500,mf); ctx.fillStyle='#444';
+  [fmt(it.start)+'~'+(narrow?'':fmt(it.start+it.dur)), it.days+(it.memo?' · '+it.memo:'')].forEach(function(t){ if(ty+mf<=bottom){ ctx.fillText(fitText(ctx,t,tw),tx,ty); ty+=mf*1.25 } });
+  var endA=it.ym+it.span-1;
+  if(absOf(s.c)===lastA&&endA>lastA&&ty+mf<=bottom){ ctx.font=F(800,mf); ctx.fillStyle=st.c; ctx.fillText(fitText(ctx,'→ 이후 '+(endA-lastA)+'개월',tw),tx,ty); }
+  ctx.restore();
+}
+function drawGrid(ctx,W,dry){
+  var P=28, TW=56, cols=[]; for(var c=PA.m0;c<=PA.m1;c++) cols.push(c);
+  var n=cols.length, colW=(W-2*P-TW)/n, hh=n<=3?50:(n<=6?42:36);
+  var y=drawHead(ctx,W,P,P,dry), conf=computeConflicts(), lastA=absOf(PA.m1);
+  paSecs().forEach(function(sec){
+    var r=secRange(sec), headH=50, bodyH=(r.z-r.a)*hh, top=y, x0=P, fw=W-2*P, by=top+headH;
+    if(!dry){
+      ctx.save(); rr(ctx,x0,top,fw,headH+bodyH,12); ctx.clip();
+      ctx.fillStyle='#fff'; ctx.fillRect(x0,top,fw,headH+bodyH);
+      ctx.fillStyle=secHex(sec); ctx.fillRect(x0,top,fw,headH);
+      ctx.fillStyle='#F7F7F8'; ctx.fillRect(x0,by,TW,bodyH);
+      ctx.textAlign='left'; ctx.fillStyle='#111'; ctx.font=F(900,16); ctx.fillText(SEC[sec].n,x0+9,top+8);
+      ctx.font=F(500,10.5); ctx.fillStyle='#444';
+      SEC[sec].sub.split(/<br\s*\/?>/).forEach(function(l,i){ctx.fillText(l,x0+9,top+28+i*11)});
+      cols.forEach(function(c,i){
+        var cx=x0+TW+i*colW, a=absOf(c), showY=(i===0||mOf(a)===0);
+        ctx.fillStyle='rgba(0,0,0,.08)'; ctx.fillRect(cx,top,1,headH);
+        ctx.textAlign='center';
+        if(showY){ ctx.font=F(700,10.5); ctx.fillStyle=sec==='wd'?'#8A6D00':'#2F5E8C'; ctx.fillText(String(yOf(a)),cx+colW/2,top+5); }
+        ctx.font=F(800,15); ctx.fillStyle='#111'; ctx.fillText((mOf(a)+1)+'월',cx+colW/2,top+(showY?17:12));
+        var dt=dateOf(sec,a); if(dt){ ctx.font=F(500,11); ctx.fillStyle='#444'; ctx.fillText(fitText(ctx,dt,colW-6),cx+colW/2,top+(showY?35:32)); }
+      });
+      ctx.textAlign='left';
+      for(var t=r.a;t<=r.z;t+=.5){ ctx.fillStyle=(t%1)?'#F1F1F4':'#E4E4E9'; ctx.fillRect(x0+TW,by+(t-r.a)*hh,fw-TW,1); }
+      if(sec==='wd'&&r.a<=13.5&&r.z>=14){ var ly=by+(13.5-r.a)*hh; ctx.fillStyle='#FDEDE3'; ctx.fillRect(x0+TW,ly+1,fw-TW,hh/2-1); ctx.font=F(500,10); ctx.fillStyle='#B0643A'; ctx.fillText('점심',x0+6,ly+(hh/2-10)/2); }
+      ctx.font=F(500,11.5); ctx.fillStyle='#666'; ctx.textAlign='right';
+      for(var t2=r.a;t2<r.z;t2++) ctx.fillText(pad(t2)+':00',x0+TW-7,by+(t2-r.a)*hh+4);
+      ctx.textAlign='left';
+      cols.forEach(function(c,i){ ctx.fillStyle='#E6E6EA'; ctx.fillRect(x0+TW+i*colW,by,1,bodyH) });
+      ctx.fillStyle='#D2D2D8'; ctx.fillRect(x0+TW-1,by,1,bodyH); ctx.fillRect(x0,by-1,fw,1);
+      cols.forEach(function(c,i){
+        var segs=segsIn(sec,c); if(!segs.length) return; layLanes(segs);
+        segs.forEach(function(s){ drawBlock(ctx,s,x0+TW+i*colW,by,colW,hh,r,!!conf.set[s.it.id+'|'+absOf(c)],lastA) });
+      });
+      ctx.restore();
+      rr(ctx,x0+.5,top+.5,fw-1,headH+bodyH-1,12); ctx.lineWidth=1; ctx.strokeStyle='#D2D2D8'; ctx.stroke();
+    }
+    y=by+bodyH+18;
+  });
+  return drawFoot(ctx,W,P,y,dry);
+}
+function drawList(ctx,W,dry){
+  var P=40, y=drawHead(ctx,W,P,P,dry), any=false;
+  for(var c=PA.m0;c<=PA.m1;c++){
+    var a=absOf(c);
+    paSecs().forEach(function(sec){
+      var its=S.items.filter(function(it){return it.sec===sec&&it.ym<=a&&a<=it.ym+it.span-1}).sort(function(p,q){return p.start-q.start});
+      if(!its.length) return; any=true;
+      var gh=56;
+      if(!dry){
+        rr(ctx,P,y,W-2*P,gh,14); ctx.fillStyle=secHex(sec); ctx.fill();
+        ctx.textAlign='left'; ctx.fillStyle='#111'; ctx.font=F(900,24); ctx.fillText(mLab(a)+'  '+SEC[sec].n,P+20,y+15);
+        var dt=dateOf(sec,a); if(dt){ ctx.font=F(700,17); ctx.fillStyle='#444'; ctx.textAlign='right'; ctx.fillText('개강 '+dt,W-P-20,y+19); ctx.textAlign='left'; }
+      }
+      y+=gh+4;
+      its.forEach(function(it){
+        var k=a-it.ym, st=ST[course(it).st]||ST.cert, rh=74;
+        if(!dry){
+          rr(ctx,P+8,y+13,6,rh-26,3); ctx.fillStyle=st.c; ctx.fill();
+          ctx.font=F(800,23); ctx.fillStyle='#111'; ctx.fillText(fitText(ctx,segName(it,k),W-2*P-44),P+28,y+12);
+          ctx.font=F(500,18); ctx.fillStyle='#444'; ctx.fillText(fitText(ctx,fmt(it.start)+'~'+fmt(it.start+it.dur)+'   '+it.days+(it.memo?'   '+it.memo:''),W-2*P-44),P+28,y+44);
+          ctx.fillStyle='#EFEFEF'; ctx.fillRect(P+28,y+rh-1,W-2*P-28,1);
+        }
+        y+=rh;
+      });
+      y+=18;
+    });
+  }
+  if(!any){ ctx.font=F(500,20); if(!dry){ctx.fillStyle='#888'; ctx.fillText('선택한 범위에 배치된 과목이 없다.',P,y+10)} y+=50; }
+  return drawFoot(ctx,W,P,y,dry);
+}
+function makePNG(){
+  return fontsReady().then(function(){
+    var W=1080, list=PNG.kind==='list';
+    var mc=document.createElement('canvas').getContext('2d'); mc.textBaseline='top';
+    var Hh=Math.ceil(list?drawList(mc,W,true):drawGrid(mc,W,true));
+    var sc=Math.min(2,Math.sqrt(16e6/(W*Hh)),16000/Hh);
+    var cv=document.createElement('canvas'); cv.width=Math.round(W*sc); cv.height=Math.round(Hh*sc);
+    var ctx=cv.getContext('2d'); ctx.scale(sc,sc); ctx.fillStyle='#fff'; ctx.fillRect(0,0,W,Hh); ctx.textBaseline='top';
+    if(list) drawList(ctx,W,false); else drawGrid(ctx,W,false);
+    return new Promise(function(res,rej){ cv.toBlob(function(b){ b?res({blob:b,w:cv.width,h:cv.height}):rej(new Error('toBlob')) },'image/png'); });
+  });
+}
+function pngName(){return (S.student||'수강생')+'님_시간표_'+(PNG.kind==='list'?'목록':'표')+'_'+ymd()+'.png'}
+var canShareFiles=(function(){try{return !!(navigator.canShare&&navigator.canShare({files:[new File([''],'t.png',{type:'image/png'})]}))}catch(e){return false}})();
+var canCopyImg=!!(navigator.clipboard&&window.ClipboardItem&&window.isSecureContext);
+var pngT=0;
+function buildPNG(){
+  readPM(); if(!paSecs().length){toast('평일·주말 중 하나 이상 선택'); return}
+  var btn=$('#im-make'); btn.disabled=true; btn.textContent='이미지 만드는 중…';
+  makePNG().then(function(r){
+    PNG.blob=r.blob; if(PNG.url) URL.revokeObjectURL(PNG.url); PNG.url=URL.createObjectURL(r.blob); PNG.name=pngName();
+    $('#im-prev').src=PNG.url; $('#im-wrap').hidden=false;
+    $('#im-meta').textContent=r.w+'×'+r.h+'px · '+Math.max(1,Math.round(r.blob.size/1024))+'KB · '+PNG.name;
+    $('#im-share').hidden=!canShareFiles; $('#im-copy').hidden=!canCopyImg;
+    $('.im-acts').style.gridTemplateColumns='repeat('+(1+(canShareFiles?1:0)+(canCopyImg?1:0))+',1fr)';
+    setTimeout(function(){$('#im-wrap').scrollIntoView({behavior:'smooth',block:'nearest'})},50);
+  }).catch(function(){ toast('이미지 만들기 실패 · 범위를 줄여 다시 시도'); })
+  .then(function(){ btn.disabled=false; btn.textContent='이미지 다시 만들기'; });
+}
+function savePNG(){
+  if(!PNG.blob) return;
+  var a=document.createElement('a'); a.href=PNG.url; a.download=PNG.name; document.body.appendChild(a); a.click(); a.remove();
+  toast('PNG 저장 · 카카오톡 채팅방에서 사진으로 첨부');
+}
+function sharePNG(){
+  if(!PNG.blob) return;
+  var f=new File([PNG.blob],PNG.name,{type:'image/png'});
+  navigator.share({files:[f],title:(S.student||'수강생')+'님 시간표 가안'}).catch(function(e){ if(e&&e.name!=='AbortError') toast('공유 실패 · PNG 저장 후 카카오톡에서 첨부'); });
+}
+function copyPNG(){
+  if(!PNG.blob) return;
+  navigator.clipboard.write([new ClipboardItem({'image/png':PNG.blob})]).then(function(){toast('이미지 복사 완료 · 카카오톡 PC 채팅창에 Ctrl+V')},function(){toast('이미지 복사 실패 · PNG 저장 사용')});
+}
+
+/* ---------- 기타 UI ---------- */
+var tt=0;
+function toast(msg,withUndo){
+  var t=$('#toast');
+  t.innerHTML='<span>'+esc(msg)+'</span>'+(withUndo?'<button id="t-undo">되돌리기</button>':'');
+  t.hidden=false; requestAnimationFrame(function(){t.classList.add('on')});
+  clearTimeout(tt); tt=setTimeout(function(){t.classList.remove('on'); setTimeout(function(){t.hidden=true},200)},withUndo?5000:2600);
+}
+function syncHead(){
+  if(document.activeElement!==$('#in-name')) $('#in-name').value=S.student;
+  if(document.activeElement!==$('#in-mgr')) $('#in-mgr').value=S.manager;
+  if(document.activeElement!==$('#m-name')) $('#m-name').value=S.student;
+  if(document.activeElement!==$('#m-mgr')) $('#m-mgr').value=S.manager;
+  if(document.activeElement!==$('#in-notice')) $('#in-notice').textContent=S.notice;
+  $('#dh-name').textContent=S.student||'수강생'; $('#dh-year').textContent=periodLab(); $('#dh-mgr').textContent=S.manager;
+  var w=$('#who'); w.textContent=S.student?S.student+'님':'수강생 입력'; w.classList.toggle('empty',!S.student);
+  document.title=(S.student?S.student+'님 ':'')+'시간표 가안 '+yOf(S.start)+'.'+pad(mOf(S.start)+1)+' v12';
+}
+function ymd(){var d=new Date(); return String(d.getFullYear()).slice(2)+pad(d.getMonth()+1)+pad(d.getDate())}
+function buildText(){
+  var out=[], nm=S.student?S.student+'님':'수강생';
+  out.push('['+nm+' 스케줄 가안 · '+mLabFull(S.start)+' 시작]');
+  if(S.notice) out.push(S.notice);
+  for(var c=0;c<12;c++){
+    var a=absOf(c);
+    SEC_ORDER.forEach(function(sec){
+      var its=S.items.filter(function(it){return it.sec===sec&&it.ym<=a&&a<=it.ym+it.span-1}).sort(function(p,q){return p.start-q.start});
+      if(!its.length) return;
+      var dt=dateOf(sec,a);
+      out.push(''); out.push(mLab(a)+' '+SEC[sec].n+(dt?' ('+dt+')':''));
+      its.forEach(function(it){out.push('- '+segName(it,a-it.ym)+' '+fmt(it.start)+'~'+fmt(it.start+it.dur)+' '+it.days+(it.memo?' · '+it.memo:''))});
+    });
+  }
+  var ov=S.items.filter(function(it){return inWin(it)&&it.ym+it.span-1>absOf(11)});
+  if(ov.length){out.push(''); out.push('이후 이어짐: '+ov.map(function(it){return nameOf(it)+' '+(it.ym+it.span-1-absOf(11))+'개월'}).join(', '))}
+  if(S.manager){out.push(''); out.push('담당 : '+S.manager)}
+  return out.join('\n');
+}
+function copyText(txt){
+  function fallback(){
+    var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy'); toast('안내 문구를 복사했다')}catch(e){toast('복사 실패 · 브라우저 권한 확인')}
+    ta.remove();
+  }
+  if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(txt).then(function(){toast('안내 문구를 복사했다')},fallback); else fallback();
+}
+function loadSample(){
+  if(S.items.length&&!confirm('현재 배치를 지우고 엑셀 가안 예시를 불러올까요?')) return;
+  snap();
+  S.student='김수현'; S.start=DEF_DATES_YEAR*12+1; S.dates={wd:{},we:{}};
+  S.items=SAMPLE.map(function(r){return clampItem({id:nid(),cid:r[0],sec:'wd',ym:DEF_DATES_YEAR*12+r[1],span:r[5]||1,start:r[2],dur:2,days:r[3],memo:'',label:r[4]||''})});
+  sel=null; hidePop(); V.start=0; syncHead(); buildBoard(); focusFirstPlaced(); applyView(); render();
+  toast('엑셀 가안(스케줄가안 시트) 26과목 · 2026년 2월 시작');
+}
+function placePath(i){
+  var p=PATHS[i]; snap();
+  var ym=absOf(ppC), n=0, skip=0;
+  p.ids.forEach(function(id){
+    var c=C[id]; if(colOf(ym)>11){skip++; return}
+    S.items.push(clampItem({id:nid(),cid:id,sec:ppSec,ym:ym,span:c.m,start:ppT,dur:defDur(c,ppSec),days:defDays(c,ppSec),memo:'',label:''}));
+    n++; ym+=c.m;
+  });
+  if(S.fold[ppSec]){S.fold[ppSec]=false; buildBoard()}
+  if(isSheet()) closeSheet();
+  V.start=Math.floor(ppC/V.span)*V.span; applyView();
+  render(); toast(p.job+' 경로 '+n+'과목 배치'+(skip?' · '+skip+'과목은 12개월 범위 밖이라 제외':''));
+}
+function changeStart(v){
+  var ns=+v; if(!isFinite(ns)||ns===S.start) return;
+  var move=false;
+  if(S.items.length) move=confirm('배치된 과목도 새 시작 월에 맞춰 함께 옮길까요?\n\n확인: 함께 이동 (개강을 미루거나 앞당길 때)\n취소: 과목은 원래 달에 그대로 두기');
+  snap();
+  var delta=ns-S.start; S.start=ns;
+  if(move) S.items.forEach(function(it){it.ym+=delta});
+  V.start=0; ppC=0; syncHead(); buildBoard(); render(); if(tab==='path') renderPalette();
+  var out=S.items.filter(function(it){return !inWin(it)}).length;
+  toast(mLabFull(ns)+'부터 12개월 표시'+(move?' · 과목 '+(delta>0?'+':'')+delta+'개월 이동':'')+(out?' · 범위 밖 '+out+'과목':''));
+}
+function exportJSON(){
+  var blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='시간표_'+(S.student||'수강생')+'_'+ymd()+'.json'; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){URL.revokeObjectURL(a.href)},1500);
+}
+function resetAll(){
+  if(!confirm('배치·개강일·수강생 정보를 모두 초기화할까요? (되돌리기 가능)')) return;
+  snap(); S=blank(); sel=null; hidePop(); V.start=0; syncHead(); buildBoard(); render(); toast('초기화했다',true);
+}
+function openMore(){ closePop(); disarm(); closeSheet(); syncHead(); $('#more').hidden=false; }
+function closeMore(){ $('#more').hidden=true; }
+var ACT={
+  sample:loadSample, undo:undo, export:exportJSON, reset:resetAll,
+  copy:function(){ if(!S.items.length){toast('배치된 과목이 없다'); return} copyText(buildText()) },
+  import:function(){$('#file').click()},
+  png:function(){openPM('png')}, print:function(){openPM('pdf')},
+  palette:function(){ $('#palette').classList.contains('open')?closeSheet():openSheet() },
+  more:openMore,
+  guide:function(){ closeMore(); var g=$('#guide-wrap'); g.open=true; g.scrollIntoView({behavior:'smooth',block:'start'}) }
+};
+
+/* 이벤트 연결 */
+$$('.tab').forEach(function(b){b.addEventListener('click',function(){
+  tab=b.dataset.tab; $$('.tab').forEach(function(x){x.classList.toggle('on',x===b)});
+  $('#q').value=''; renderPalette(); $('#groups').scrollTop=0;
+})});
+$('#q').addEventListener('input',renderPalette);
+$('#groups').addEventListener('change',function(e){
+  if(e.target.id==='pp-m') ppC=+e.target.value;
+  if(e.target.id==='pp-sec') ppSec=e.target.value;
+  if(e.target.id==='pp-t') ppT=+e.target.value;
+  if(e.target.id==='oc-m'){ocSelYm=+e.target.value; renderPalette();}
+  if(e.target.id==='oc-sec'){ocSelSec=e.target.value; renderPalette();}
+});
+$('#groups').addEventListener('click',function(e){var b=e.target.closest('.pbtn'); if(b) placePath(+b.dataset.path)});
+$('#secs').addEventListener('input',function(e){
+  var t=e.target; if(!t.classList.contains('mdate')) return;
+  S.dates[t.dataset.sec][ymKey(absOf(+t.dataset.c))]=t.value.trim(); save();
+});
+$('#secs').addEventListener('click',function(e){
+  var f=e.target.closest('[data-fold]'); if(!f||document.body.classList.contains('pa')) return;
+  S.fold[f.dataset.fold]=!S.fold[f.dataset.fold]; buildBoard(); render();
+});
+document.addEventListener('click',function(e){
+  var x=e.target.closest('.b-x'); if(x){ delItem(x.closest('.blk').dataset.id); return; }
+  var ab=e.target.closest('[data-act]'); if(ab&&ACT[ab.dataset.act]){ if(ab.closest('#more')&&ab.dataset.act!=='guide') closeMore(); ACT[ab.dataset.act](); return; }
+  if(e.target.id==='t-undo') undo();
+  if(e.target.id==='arm-cancel') disarm();
+});
+document.addEventListener('keydown',function(e){
+  var ae=document.activeElement||{}, typing=/INPUT|SELECT|TEXTAREA/.test(ae.tagName||'')||!!ae.isContentEditable;
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!typing){e.preventDefault(); undo(); return}
+  if(e.key==='Escape'){
+    if(SELM||document.body.classList.contains('selecting')) selCancel();
+    else if(!$('#more').hidden) closeMore();
+    else if(!$('#pm').hidden) closePM();
+    else if(document.body.classList.contains('pv')) exitPreview();
+    else if(D){finish(); render()}
+    else if(armed) disarm();
+    else if($('#palette').classList.contains('open')) closeSheet();
+    else closePop();
+  }
+  if((e.key==='Delete'||e.key==='Backspace')&&!typing&&popId){e.preventDefault(); delItem(popId)}
+});
+function onName(e){S.student=e.target.value.trim(); syncHead(); save()}
+function onMgr(e){S.manager=e.target.value; syncHead(); save()}
+$('#in-name').addEventListener('input',onName); $('#m-name').addEventListener('input',onName);
+$('#in-mgr').addEventListener('input',onMgr); $('#m-mgr').addEventListener('input',onMgr);
+$('#in-notice').addEventListener('input',function(e){S.notice=e.target.textContent.replace(/\s+/g,' ').trim(); save()});
+$('#in-notice').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault(); e.target.blur()}});
+$('#in-notice').addEventListener('paste',function(e){e.preventDefault(); var t=(e.clipboardData||window.clipboardData).getData('text').replace(/\s+/g,' '); document.execCommand('insertText',false,t)});
+$('#in-start').addEventListener('change',function(e){changeStart(e.target.value)});
+$('#who').addEventListener('click',openMore);
+$('#more-close').addEventListener('click',closeMore);
+$('#more').addEventListener('click',function(e){ if(e.target.id==='more') closeMore(); });
+$('#pal-close').addEventListener('click',closeSheet);
+$('#v-span').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; V.span=+b.dataset.span; V.auto=false; V.start=Math.floor(V.start/V.span)*V.span; applyView()});
+$('#v-prev').addEventListener('click',function(){V.start-=V.span; applyView()});
+$('#v-next').addEventListener('click',function(){V.start+=V.span; applyView()});
+$('#v-pal').addEventListener('click',function(){
+  var c=document.body.classList.toggle('pal-collapsed');
+  this.querySelector('span').textContent=c?'목록 펼치기':'목록 접기'; applyView();
+});
+$('#pm-close').addEventListener('click',closePM);
+$('#pm').addEventListener('click',function(e){ if(e.target.id==='pm') closePM(); });
+$('#pm').addEventListener('change',function(){
+  readPM(); pmNote();
+  if(PM.mode==='png'&&!$('#im-wrap').hidden){ clearTimeout(pngT); pngT=setTimeout(buildPNG,250); }
+});
+$('#pm').addEventListener('click',function(e){
+  var mb=e.target.closest('.pm-tabs button');
+  if(mb){ readPM(); PM.mode=mb.dataset.mode; fillPM(); return; }
+  var q=e.target.closest('[data-q]'); if(!q) return;
+  readPM(); var k=q.dataset.q, r;
+  if(k==='all'){PA.m0=0; PA.m1=11}
+  if(k==='placed'){r=placedCols(paSecs()); if(r){PA.m0=r[0]; PA.m1=r[1]} else toast('배치된 과목이 없다')}
+  if(k==='view'){PA.m0=V.start; PA.m1=V.start+V.span-1}
+  if(k==='first6'){PA.m0=0; PA.m1=5}
+  if(k==='last6'){PA.m0=6; PA.m1=11}
+  if(k==='tall'){PA.t0=H0; PA.t1=H1}
+  if(k==='tfit'){r=placedHours(); if(r){PA.t0=r[0]; PA.t1=r[1]} else toast('해당 범위에 배치된 과목이 없다')}
+  fillPM();
+  if(PM.mode==='png'&&!$('#im-wrap').hidden){ $('#im-wrap').hidden=false; clearTimeout(pngT); pngT=setTimeout(buildPNG,150); }
+});
+$('#pa-drag').addEventListener('click',startSelect);
+$('#sel-cancel').addEventListener('click',selCancel);
+$('#pa-preview').addEventListener('click',function(){ readPM(); if(!paSecs().length){toast('평일·주말 중 하나 이상 선택'); return} closePM(); enterPreview(); });
+$('#pa-print').addEventListener('click',function(){ readPM(); if(!paSecs().length){toast('평일·주말 중 하나 이상 선택'); return} closePM(); enterPreview(); doPrint(); });
+$('#im-make').addEventListener('click',buildPNG);
+$('#im-save').addEventListener('click',savePNG);
+$('#im-share').addEventListener('click',sharePNG);
+$('#im-copy').addEventListener('click',copyPNG);
+$('#pv-edit').addEventListener('click',function(){ PM.mode='pdf'; fillPM(); $('#pm').hidden=false; });
+$('#pv-print').addEventListener('click',doPrint);
+$('#pv-close').addEventListener('click',exitPreview);
+$('#file').addEventListener('change',function(e){
+  var f=e.target.files[0]; if(!f) return;
+  var rd=new FileReader();
+  rd.onload=function(){
+    try{ var o=normalize(JSON.parse(rd.result)); if(!o) throw 0; snap(); S=o; sel=null; hidePop(); V.start=0; syncHead(); buildBoard(); focusFirstPlaced(); applyView(); render(); toast((S.student||'수강생')+' 시간표를 불러왔다'); }
+    catch(err){ toast('불러오기 실패 · 이 도구에서 저장한 JSON인지 확인'); }
+    e.target.value='';
+  };
+  rd.readAsText(f,'utf-8');
+});
+function setTopH(){document.documentElement.style.setProperty('--topH',$('#top').offsetHeight+'px')}
+if(window.ResizeObserver) new ResizeObserver(function(){setTopH(); updateFit()}).observe($('#top'));
+var rT=0;
+window.addEventListener('resize',function(){
+  clearTimeout(rT);
+  rT=setTimeout(function(){
+    setTopH();
+    if(!isSheet()) closeSheet();
+    if(V.auto){ var s=autoSpan(); if(s!==V.span){ V.span=s; V.start=Math.floor(V.start/s)*s; } }
+    if(document.body.classList.contains('pa')) applyArea(); else applyView();
+  },120);
+});
+
+/* 초기화 */
+$('#dh-legend').innerHTML=Object.keys(ST).map(function(k){return '<span><i class="dot" style="background:'+ST[k].c+'"></i>'+esc(ST[k].n)+'</span>'}).join('')+'<span><i class="lg dash"></i>기존 과정</span>';
+V.span=autoSpan();
+if(innerWidth<1024) $('#guide-wrap').open=false;
+initPop(); syncHead(); buildBoard(); focusFirstPlaced(); applyView(); renderPalette(); showInfo(null); render(); setTopH();
+var ttEl=document.getElementById('tt-note'); if(ttEl) ttEl.textContent=TT_NOTE.join(' · ');
+})();
+</script>
+</body>
+</html>

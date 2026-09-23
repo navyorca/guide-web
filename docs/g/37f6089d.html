@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<style>body::after{content:"";position:fixed;inset:0;z-index:2147483647;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22260%22%3E%3Ctext%20x%3D%220%22%20y%3D%22130%22%20font-family%3D%22sans-serif%22%20font-size%3D%2215%22%20fill%3D%22%23F0F8FF%22%20fill-opacity%3D%220.30%22%20transform%3D%22rotate%28-24%20210%20130%29%22%3ESBS%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8%20%EA%B0%95%EB%82%A8%20%C2%B7%20%EC%98%A4%EC%98%81%EC%84%A0%20%EB%A9%98%ED%86%A0%20%EC%A0%9C%EA%B3%B5%3C%2Ftext%3E%3C%2Fsvg%3E") 0 0/420px 260px repeat}</style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- design-system: Asta Sans 400/700/800 (Google Fonts) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<title>BIM 전문가 자격증 완벽 안내 2026</title>
+  <style>
+    :root {
+      --paper:#FFFFFF; --white:#FFFFFF;
+      --ink:#0B1220; --ink-2:#2C3444;
+      --line:#C3CAD8; --line-soft:#F1F3F8;
+      --brand:#2F6BFF; --brand-ink:#1C3E92; --brand-soft:#E8EFFF;
+      --peri:#A7B4F0;
+      --bg: var(--paper); --bg2: var(--white); --text: var(--ink); --text2: var(--ink-2); --accent: var(--ink); --teal: var(--brand-ink);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Asta Sans",sans-serif;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.75rem;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 28px 72px;
+    }
+    /* 260910: 밝은 화면에 어두운 면을 깔지 않는다(260825 지시). 무게는 아래 2px 선으로 준다. */
+    .hero {
+      background: #FFFFFF;
+      color: #0B1220;
+      border-bottom: 2px solid #0B1220;
+      padding: 52px 44px 48px;
+      margin: 0 -28px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: 'BIM';
+      position: absolute;
+      right: -16px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 12.5rem; font-weight: 800;
+      color: rgba(28,62,146,0.06);
+      line-height: 12.5rem; pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      color: var(--teal);
+      font-size: 1rem; font-weight: 700;
+      margin-bottom: 18px; letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: 1.625rem;
+      font-weight: 800; line-height: 2.25rem;
+      margin-bottom: 14px;
+    }
+    .hero p { font-size: 1.125rem; color: #2C3444; max-width: 580px; }
+    .lead-label { color: #1C3E92; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px; }
+    section { margin-bottom: 52px; }
+    h2 {
+      font-size: 1.25rem; font-weight: 800; line-height: 1.75rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .grade-grid { display: block; }
+    .grade-card {
+      border-bottom: 1px solid var(--line); padding: 22px 0;
+    }
+    .grade-card:first-child { padding-top: 0; }
+    .grade-card:last-child { border-bottom: none; }
+    .g-level {
+      font-size: 1rem; font-weight: 500;
+      color: var(--text2); letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .g-title { font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-bottom: 10px; }
+    .g-desc { font-size: 1rem; color: var(--text2); line-height: 1.5rem; }
+    .g-pass {
+      margin-top: 14px;
+      font-size: 1rem; color: var(--text2);
+    }
+    .g-pass strong { color: var(--teal); }
+    table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+    thead th {
+      background: #E8EFFF; color: #1C3E92;
+      padding: 11px 12px; text-align: center; font-weight: 700;
+    }
+    tbody td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: center; color: var(--text2);
+    }
+    tbody tr:hover td { background: var(--brand-soft); }
+    td.bold { font-weight: 700; color: var(--accent); }
+    td.left { text-align: left; }
+    .fee-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .fee-card {
+      border-right: 1px solid var(--line); padding: 0 26px 0 0; text-align: center;
+    }
+    .fee-card:last-child { border-right: none; }
+    .fee-card-title {
+      font-size: 1rem; font-weight: 800;
+      color: var(--accent); margin-bottom: 18px;
+    }
+    .fee-row { margin-bottom: 14px; }
+    .fee-type { font-size: 1rem; color: var(--text2); margin-bottom: 4px; }
+    .fee-amount {
+      font-variant-numeric: tabular-nums;
+      font-size: 1.25rem; font-weight: 700; color: var(--teal);
+    }
+    .fee-amount.na { font-size: 1rem; color: var(--text2); font-family: "Asta Sans",sans-serif; font-weight: 400; }
+    .qual-block {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px; margin-bottom: 20px;
+    }
+    .qual-title { font-size: 1rem; font-weight: 700; color: var(--teal); margin-bottom: 12px; }
+    .qual-list { list-style: none; padding: 0; }
+    .qual-list li {
+      padding: 7px 0 7px 22px;
+      border-bottom: 1px solid var(--line);
+      font-size: 1rem; color: var(--text2);
+      position: relative;
+    }
+    .qual-list li:last-child { border-bottom: none; }
+    .qual-list li .num { position: absolute; left: 0; color: var(--teal); font-size: 1rem; top: 8px; }
+    .qual-free {
+      padding: 6px 0; font-size: 1rem; color: var(--text2);
+    }
+    .qual-free strong { color: var(--accent); }
+    .note {
+      background: var(--brand-soft);
+      border: 1px solid var(--line);
+      padding: 12px 16px;
+      font-size: 1rem; color: var(--text2);
+      margin-top: 12px; line-height: 1.5rem;
+    }
+    .refund-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .refund-card {
+      border-right: 1px solid var(--line); padding: 0 22px 0 0;
+    }
+    .refund-card:last-child { border-right: none; }
+    .refund-card-title { font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 14px; }
+    .refund-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid var(--line);
+      font-size: 1rem;
+    }
+    .refund-row:last-child { border-bottom: none; }
+    .rate-green { font-weight: 700; color: var(--teal); font-variant-numeric: tabular-nums; }
+    .rate-red { font-weight: 700; color: #DC2626; }
+    footer {
+      margin-top: 60px; padding-top: 20px;
+      border-top: 1px solid var(--line);
+      font-size: 1rem; color: var(--text2);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    @media print {
+      body { max-width: 100%; padding: 0 16px 32px; }
+      .hero { margin: 0 -16px 32px; }
+      .grade-grid, .fee-grid { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 660px) {
+      .fee-grid, .refund-grid { grid-template-columns: 1fr; }
+      .fee-card, .refund-card { border-right: none; border-bottom: 1px solid var(--line); padding: 0 0 18px; margin-bottom: 18px; }
+      .fee-card:last-child, .refund-card:last-child { border-bottom: none; margin-bottom: 0; }
+    }
+  </style>
+<!-- design-system: scale+a11y (design-propagate.py 260910) -->
+<style>
+html{font-size:calc(16px * var(--scale,1))}
+body{font-size:1.125rem}
+.ds-fs{display:flex;justify-content:flex-end;align-items:center;gap:10px;min-height:48px;padding:0 20px;max-width:1200px;margin:0 auto;box-sizing:border-box;font-family:"Asta Sans","Pretendard Variable",system-ui,sans-serif}
+.ds-fs .lb,.ds-fs output{font-size:1rem;font-weight:700;color:#1C3E92;white-space:nowrap}
+.ds-fs output{min-width:4.4em}
+.ds-fs input{-webkit-appearance:none;appearance:none;width:120px;height:44px;margin:0;padding:0;background:none;cursor:pointer}
+.ds-fs input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:#DCE6F5}
+.ds-fs input::-moz-range-track{height:6px;border-radius:3px;background:#DCE6F5}
+.ds-fs input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:-6px;border-radius:5px;background:#1C3E92;border:0}
+.ds-fs input::-moz-range-thumb{width:18px;height:18px;border-radius:5px;background:#1C3E92;border:0}
+.ds-fs input:focus-visible{outline:3px solid #1C3E92;outline-offset:2px}
+@media (prefers-color-scheme:dark){.ds-fs .lb,.ds-fs output{color:#99ADFF}.ds-fs input::-webkit-slider-thumb,.ds-fs input::-moz-range-thumb{background:#99ADFF}}
+.ds-skip{position:absolute;left:-999px;top:8px;z-index:9999;padding:10px 16px;background:#1C3E92;color:#fff;font-weight:700;border-radius:8px;text-decoration:none}
+.ds-skip:focus{left:8px}
+:focus-visible{outline:3px solid #1C3E92;outline-offset:2px}
+button,summary,[role=button]{min-height:44px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+<!-- ds-wrap 260910 -->
+<style>body,p,li,td,th,dd,dt,figcaption,blockquote{word-break:keep-all;overflow-wrap:break-word}
+table{max-width:100%}</style>
+</head>
+<body>
+<a class="ds-skip" href="#ds-mainw">본문으로 건너뛰기</a>
+<div class="ds-fs" role="group" aria-label="글씨 크기"><span class="lb" aria-hidden="true">글씨</span><input id="dsFsr" type="range" min="0" max="2" step="1" value="0" aria-label="글씨 크기" aria-valuetext="보통"><output for="dsFsr" id="dsFsv">보통</output></div>
+<main id="ds-mainw" tabindex="-1">
+
+
+
+<div class="hero">
+  <div class="hero-badge">2026 최신 기준</div>
+  <p class="lead-label">시험 일정 · 응시 자격 · 검정 수수료 한눈에</p>
+  <h1>BIM 전문가 자격증<br>완벽 안내</h1>
+  <p>건축·토목 BIM전문가 자격(한국BIM학회 주관) 시험 일정, 응시 자격, 검정 기준을 한눈에 확인하세요.</p>
+</div>
+
+<section>
+  <h2>자격 등급 체계</h2>
+  <div class="grade-grid">
+    <div class="grade-card g1">
+      <div class="g-level">최고 등급</div>
+      <div class="g-title">BIM 전문가 1급</div>
+      <div class="g-desc">BIM 업무 수행 계획 수립 및 단계별·분야별 프로세스 설정, 참여자 간 협업 전반을 조율하고 프로젝트를 관리하는 최고 수준의 역량</div>
+      <div class="g-pass"><strong>합격 기준</strong> 필기 70점 이상 · 면접(구술) 70점 이상</div>
+    </div>
+    <div class="grade-card g2">
+      <div class="g-level">중급</div>
+      <div class="g-title">BIM 전문가 2급</div>
+      <div class="g-desc">BIM Model 구축·활용 실무를 담당하고, 협업 및 커뮤니케이션 등 참여자 간 조율을 지원하는 기본 역량</div>
+      <div class="g-pass"><strong>합격 기준</strong> 필기 60점 이상 · 실기(작업형) 60점 이상</div>
+    </div>
+    <div class="grade-card g3">
+      <div class="g-level">입문 (개발 중)</div>
+      <div class="g-title">BIM 전문가 3급</div>
+      <div class="g-desc">BIM Model 활용·정보 조회 업무 수행, BIM 전문가 지원 및 협업 실무. 응시 자격 제한 없음. 누구나 응시 가능</div>
+      <div class="g-pass"><strong>합격 기준</strong> 필기 60점 이상 · 실기 60점 이상 (통합형)</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>2026년 시험 일정</h2>
+  <table><caption>2026년 시험 일정</caption>
+    <thead>
+      <tr>
+        <th scope="col">등급</th><th scope="col">회차</th>
+        <th scope="col">필기 원서접수</th><th scope="col">필기 시험</th><th scope="col">필기 합격발표</th>
+        <th scope="col">실기 원서접수</th><th scope="col">실기 시험</th><th scope="col">실기 합격발표</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold" rowspan="3">1급</td>
+        <td>48회</td><td>01.20~01.23</td><td>02.07</td><td>02.19</td>
+        <td>03.03~03.06</td><td>03.28</td><td>04.16</td>
+      </tr>
+      <tr>
+        <td>49회</td><td>05.19~05.22</td><td>06.06</td><td>06.18</td>
+        <td>06.23~06.26</td><td>07.18</td><td>08.06</td>
+      </tr>
+      <tr>
+        <td>50회</td><td>08.18~08.21</td><td>09.05</td><td>09.17</td>
+        <td>10.06~10.09</td><td>10.31</td><td>11.19</td>
+      </tr>
+      <tr>
+        <td class="bold" rowspan="3">2급</td>
+        <td>26년 1회</td><td>01.20~01.23</td><td>02.07</td><td>02.19</td>
+        <td>03.03~03.06</td><td>04.04</td><td>05.07</td>
+      </tr>
+      <tr>
+        <td>26년 2회</td><td>05.19~05.22</td><td>06.06</td><td>06.18</td>
+        <td>06.23~06.26</td><td>07.25</td><td>08.27</td>
+      </tr>
+      <tr>
+        <td>26년 3회</td><td>08.18~08.21</td><td>09.05</td><td>09.17</td>
+        <td>10.06~10.09</td><td>11.07</td><td>12.10</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">합격자 발표는 BIM 평가원 홈페이지 합격조회 메뉴에서 확인하세요. 3급 자격은 현재 개발 중으로 추후 별도 공지 예정입니다.</div>
+</section>
+
+<section>
+  <h2>검정 수수료</h2>
+  <div class="fee-grid">
+    <div class="fee-card">
+      <div class="fee-card-title">BIM 전문가 1급</div>
+      <div class="fee-row">
+        <div class="fee-type">1차 필기 시험</div>
+        <div class="fee-amount">50,000원</div>
+      </div>
+      <div class="fee-row">
+        <div class="fee-type">2차 실기(면접) 시험</div>
+        <div class="fee-amount">150,000원</div>
+      </div>
+    </div>
+    <div class="fee-card">
+      <div class="fee-card-title">BIM 전문가 2급</div>
+      <div class="fee-row">
+        <div class="fee-type">1차 필기 시험</div>
+        <div class="fee-amount">25,000원</div>
+      </div>
+      <div class="fee-row">
+        <div class="fee-type">2차 실기 시험</div>
+        <div class="fee-amount">60,000원</div>
+      </div>
+    </div>
+    <div class="fee-card">
+      <div class="fee-card-title">BIM 전문가 3급</div>
+      <div class="fee-row">
+        <div class="fee-type">필기·실기 통합형</div>
+        <div class="fee-amount">60,000원</div>
+      </div>
+      <div class="fee-row">
+        <div class="fee-type">별도 실기 시험</div>
+        <div class="fee-amount na">해당 없음</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>응시 자격</h2>
+  <div class="qual-block">
+    <div class="qual-title">1급 응시 자격 (다음 중 1가지 충족)</div>
+    <ul class="qual-list">
+      <li><span class="num">①</span>BIM전문가 2급 취득 후 동일·유사 직무분야에서 2년 이상 실무 종사</li>
+      <li><span class="num">②</span>BIM전문가 2급 취득 후 "BIM자격위원회" 인증 BIM 1급 수준 교육 이수 또는 자격 보유</li>
+      <li><span class="num">③</span>4년제 이상 대학 관련학과 졸업 후 동일·유사 직무분야에서 2년 이상 실무 종사</li>
+      <li><span class="num">④</span>2년제 이상 전문대학 관련학과 졸업 후 동일·유사 직무분야에서 4년 이상 실무 종사</li>
+      <li><span class="num">⑤</span>동일·유사 직무분야에서 6년 이상 실무 종사</li>
+    </ul>
+  </div>
+  <div class="qual-block">
+    <div class="qual-title">2급 응시 자격 (다음 중 1가지 충족)</div>
+    <ul class="qual-list">
+      <li><span class="num">①</span>2년제 또는 3년제 전문대학 관련학과 졸업자</li>
+      <li><span class="num">②</span>4년제 이상 대학 관련학과 졸업자 및 졸업예정자</li>
+      <li><span class="num">③</span>동일·유사 직무 분야의 2년 이상 실무 종사자</li>
+      <li><span class="num">④</span>외국에서 동일한 종목의 자격을 취득한 자</li>
+      <li><span class="num">⑤</span>"BIM자격위원회" 인증 BIM 2급 수준 교육 이수 또는 자격 보유</li>
+    </ul>
+  </div>
+  <div class="qual-free">
+    <strong>3급</strong> 응시 자격 없음 (누구나 지원 가능)
+  </div>
+  <div class="note">※ '관련학과'란 건축·토목·플랜트·도시계획·실내인테리어 분야 등 BIM 관련 교과목이 운영되는 학과입니다.</div>
+</section>
+
+<section>
+  <h2>검정 방법 및 합격 기준</h2>
+  <table><caption>검정 방법 및 합격 기준</caption>
+    <thead>
+      <tr>
+        <th scope="col">등급</th><th scope="col">구분</th><th scope="col">시험 형태</th><th scope="col">시험 시간</th><th scope="col">문항 수</th><th scope="col">합격 기준</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold" rowspan="2">1급</td>
+        <td>1차 필기</td><td>객관식 + 주관식</td><td>60분</td><td>50문항</td><td>70점 이상</td>
+      </tr>
+      <tr>
+        <td>2차 면접</td><td>면접 구술형</td><td>약 15분</td><td></td><td>70점 이상</td>
+      </tr>
+      <tr>
+        <td class="bold" rowspan="2">2급</td>
+        <td>1차 필기</td><td>객관식</td><td>60분</td><td>50문항</td><td>60점 이상</td>
+      </tr>
+      <tr>
+        <td>2차 실기</td><td>작업형</td><td>120분</td><td></td><td>60점 이상</td>
+      </tr>
+      <tr>
+        <td class="bold" rowspan="2">3급</td>
+        <td>필기</td><td rowspan="2">필기·실기 통합형</td><td rowspan="2">120분</td><td></td><td>60점 이상</td>
+      </tr>
+      <tr>
+        <td>실기</td><td></td><td>60점 이상</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">※ 3급은 필기·실기 통합형 검정으로 필기와 실기를 함께 진행합니다. 모든 단계의 합격 기준을 통과해야 최종 합격입니다.</div>
+</section>
+
+<section>
+  <h2>시험 과목: 건축·토목 공통</h2>
+  <table><caption>시험 과목: 건축·토목 공통</caption>
+    <thead>
+      <tr><th scope="col">등급</th><th scope="col">구분</th><th scope="col">시험 시간</th><th scope="col" class="left">검정 과목</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bold" rowspan="2">1급</td>
+        <td>1차 필기 (50문항)</td><td>60분</td>
+        <td class="left">① BIM 기반 프로젝트 운용 일반사항&nbsp; ② BIM 기반 설계 및 코디네이션 프로세스<br>③ BIM 기반 공정관리 및 코디네이션 프로세스&nbsp; ④ BIM 저작 도구 일반사항</td>
+      </tr>
+      <tr>
+        <td>2차 면접</td><td>약 15분</td>
+        <td class="left">① BIM 프로젝트 운용하기 (BIM 실무 경력 기반 면접)</td>
+      </tr>
+      <tr>
+        <td class="bold" rowspan="2">2급</td>
+        <td>1차 필기 (50문항)</td><td>60분</td>
+        <td class="left">① BIM 일반사항&nbsp; ② BIM 모델링 일반사항<br>③ BIM 모델링 구축 및 활용 일반사항&nbsp; ④ BIM 데이터 납품 일반사항</td>
+      </tr>
+      <tr>
+        <td>2차 실기</td><td>120분</td>
+        <td class="left">① BIM 모델 구축 및 운용</td>
+      </tr>
+      <tr>
+        <td class="bold" rowspan="2">3급</td>
+        <td>필기</td><td rowspan="2">120분</td>
+        <td class="left">① BIM 일반사항&nbsp; ② BIM 모델링 일반사항&nbsp; ③ BIM 성과물 작성&nbsp; ④ BIM 데이터 활용</td>
+      </tr>
+      <tr>
+        <td>실기</td>
+        <td class="left">⑤ BIM 모델 운용</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">※ 1급 면접 시 BIM 실무 경력에 의한 면접이 진행됩니다. 실무경력을 상세히 기술해 두세요.</div>
+</section>
+
+<section>
+  <h2>환불 규정</h2>
+  <div class="refund-grid">
+    <div class="refund-card">
+      <div class="refund-card-title">필기 시험</div>
+      <div class="refund-row">
+        <span>원서접수기간 내</span>
+        <span class="rate-green">100% 환불</span>
+      </div>
+      <div class="refund-row">
+        <span>시험 실시 7일 전까지</span>
+        <span class="rate-green">50% 환불</span>
+      </div>
+      <div class="refund-row">
+        <span>7일 이내</span>
+        <span class="rate-red">환불 불가</span>
+      </div>
+    </div>
+    <div class="refund-card">
+      <div class="refund-card-title">실기 시험</div>
+      <div class="refund-row">
+        <span>원서접수기간 내</span>
+        <span class="rate-green">100% 환불</span>
+      </div>
+      <div class="refund-row">
+        <span>시험 실시 14일 전까지</span>
+        <span class="rate-green">50% 환불</span>
+      </div>
+      <div class="refund-row">
+        <span>14일 이내</span>
+        <span class="rate-red">환불 불가</span>
+      </div>
+    </div>
+  </div>
+  <div class="note">원서접수 및 취소는 BIM 평가원 홈페이지(bimkorea.or.kr)에서 진행합니다.</div>
+</section>
+
+
+</main>
+<footer>
+  <span>자료 출처: 한국BIM학회 BIM평가원 (bimkorea.or.kr) · 2026년 기준</span>
+  <span>OYS · 2026.05.06</span>
+</footer>
+
+<script>
+(function(){
+var S=[{k:'m',l:'보통',s:1},{k:'l',l:'크게',s:1.15},{k:'xl',l:'아주 크게',s:1.3}];
+var r=document.getElementById('dsFsr'),o=document.getElementById('dsFsv'),i=0;
+try{var k=localStorage.getItem('ds-size');if(k){i=Math.max(0,S.map(function(x){return x.k}).indexOf(k));}}catch(e){}
+function ap(){var s=S[i];document.documentElement.style.setProperty('--scale',s.s);if(r){r.value=i;r.setAttribute('aria-valuetext',s.l);}if(o){o.textContent=s.l;}}
+if(r){r.addEventListener('input',function(){i=Math.max(0,Math.min(2,parseInt(r.value,10)||0));try{localStorage.setItem('ds-size',S[i].k);}catch(e){}ap();});}
+ap();
+})();
+</script>
+<!-- ds-tablewrap 260910 -->
+<script>
+(function(){
+[].forEach.call(document.querySelectorAll('table'),function(t){
+ if(t.parentElement&&t.parentElement.getAttribute('data-ds-tw'))return;
+ var w=document.createElement('div');w.setAttribute('data-ds-tw','1');
+ w.style.overflowX='auto';w.style.maxWidth='100%';
+ t.parentNode.insertBefore(w,t);w.appendChild(t);});
+})();
+</script>
+</body>
+</html>
