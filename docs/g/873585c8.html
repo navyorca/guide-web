@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- design-system: Asta Sans 400/700/800 (Google Fonts) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>캐드·스케치업 수강 안내 · 최재훈 님</title>
+<style>
+:root{
+  --paper:#FFFFFF;
+  --ink:#0B1220;--ink-2:#2C3444;
+  --line:#C3CAD8;
+  --brand-ink:#1C3E92;--brand-soft:#E8EFFF;
+  --fs-h1:1.625rem;--lh-h1:2.25rem;
+  --fs-h2:1.375rem;--lh-h2:2rem;
+  --fs-h3:1.25rem;--lh-h3:1.75rem;
+  --fs-p1:1.1875rem;--lh-p1:1.625rem;
+  --fs-p2:1rem;--lh-p2:1.5rem;
+}
+@media(max-width:768px){:root{--fs-h1:1.5rem;--lh-h1:2.125rem;--fs-h2:1.25rem;--lh-h2:1.875rem;--fs-h3:1.125rem;--lh-h3:1.625rem}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Asta Sans",'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:var(--fs-p1);line-height:var(--lh-p1);font-weight:400;word-break:keep-all;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+.container{max-width:700px;margin:0 auto;padding:0 20px}
+@media(min-width:768px){.container{padding:0 32px}}
+.s{padding:48px 0}
+@media(min-width:768px){.s{padding:64px 0}}
+.hero{padding:40px 0 36px;border-bottom:2px solid var(--ink)}
+.hero .org{font-size:var(--fs-p2);line-height:var(--lh-p2);font-weight:700;color:var(--brand-ink);margin-bottom:12px}
+.hero h1{font-size:var(--fs-h1);font-weight:800;line-height:var(--lh-h1);letter-spacing:-.01em;margin-bottom:12px}
+.hero .lede{color:var(--ink-2)}
+.hero .meta{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:var(--fs-p2);line-height:var(--lh-p2);color:var(--ink-2);font-weight:700}
+h2{font-size:var(--fs-h2);font-weight:800;line-height:var(--lh-h2);letter-spacing:-.01em;color:var(--brand-ink);margin-bottom:10px}
+.desc{color:var(--ink-2);margin-bottom:22px}
+p{color:var(--ink-2)}
+strong,b{font-weight:700;color:var(--ink)}
+.facts{border-top:1px solid var(--line)}
+.fact{display:grid;grid-template-columns:1fr;gap:2px;padding:14px 0;border-bottom:1px solid var(--line)}
+@media(min-width:600px){.fact{grid-template-columns:140px 1fr;gap:20px;align-items:baseline}}
+.fact dt{font-size:var(--fs-p2);line-height:var(--lh-p2);font-weight:700;color:var(--brand-ink)}
+.fact dd{color:var(--ink-2)}
+.rows{border-top:1px solid var(--line)}
+.r{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
+.r .num{font-weight:700;color:var(--brand-ink)}
+.r .nm{font-size:var(--fs-h3);font-weight:700;line-height:var(--lh-h3);margin-bottom:2px}
+.r .sub{font-size:var(--fs-p2);line-height:var(--lh-p2);font-weight:700;color:var(--brand-ink);margin-bottom:6px}
+.r .ds{color:var(--ink-2)}
+table{width:100%;border-collapse:collapse;font-size:var(--fs-p2);min-width:320px}
+th,td{padding:12px 6px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.625rem}
+th{font-weight:700;color:var(--ink-2)}
+td{color:var(--ink-2)}
+td:first-child{color:var(--ink);font-weight:700}
+td.n{text-align:right;white-space:nowrap}
+tr.sum td{border-top:2px solid var(--ink);border-bottom:none;padding-top:14px;font-weight:800;color:var(--ink);font-size:var(--fs-h3)}
+.note{color:var(--ink-2);margin-top:20px;padding:14px 16px;background:var(--brand-soft);border-radius:10px}
+.btn{display:inline-block;min-height:44px;line-height:42px;padding:0 18px;border-radius:8px;background:#fff;color:var(--brand-ink);border:1px solid var(--brand-ink);font-weight:700;text-decoration:none;font-size:var(--fs-p2);margin:14px 8px 0 0}
+footer{padding:32px 0;border-top:2px solid var(--ink);font-size:var(--fs-p2);line-height:var(--lh-p2);color:var(--ink-2)}
+footer b{display:block;margin-bottom:6px;font-size:var(--fs-p1);line-height:var(--lh-p1)}
+a{color:var(--brand-ink)}
+</style>
+<!-- design-system: scale+a11y (design-propagate.py 260910) -->
+<style>
+html{font-size:calc(16px * var(--scale,1))}
+body{font-size:1.1875rem}
+.ds-fs{display:flex;justify-content:flex-end;align-items:center;gap:10px;min-height:48px;padding:0 20px;max-width:1200px;margin:0 auto;box-sizing:border-box;font-family:"Asta Sans","Pretendard Variable",system-ui,sans-serif}
+.ds-fs .lb,.ds-fs output{font-size:1rem;font-weight:700;color:#1C3E92;white-space:nowrap}
+.ds-fs output{min-width:4.4em}
+.ds-fs input{-webkit-appearance:none;appearance:none;width:120px;height:44px;margin:0;padding:0;background:none;cursor:pointer}
+.ds-fs input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:#DCE6F5}
+.ds-fs input::-moz-range-track{height:6px;border-radius:3px;background:#DCE6F5}
+.ds-fs input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:-6px;border-radius:5px;background:#1C3E92;border:0}
+.ds-fs input::-moz-range-thumb{width:18px;height:18px;border-radius:5px;background:#1C3E92;border:0}
+.ds-fs input:focus-visible{outline:3px solid #1C3E92;outline-offset:2px}
+.ds-skip{position:absolute;left:-999px;top:8px;z-index:9999;padding:10px 16px;background:#1C3E92;color:#fff;font-weight:700;border-radius:8px;text-decoration:none}
+.ds-skip:focus{left:8px}
+:focus-visible{outline:3px solid #1C3E92;outline-offset:2px}
+body,p,li,td,th,dd,dt{word-break:keep-all;overflow-wrap:break-word}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="ds-skip" href="#ds-main">본문으로 건너뛰기</a>
+<div class="ds-fs" role="group" aria-label="글씨 크기"><span class="lb" aria-hidden="true">글씨</span><input id="dsFsr" type="range" min="0" max="2" step="1" value="0" aria-label="글씨 크기" aria-valuetext="보통"><output for="dsFsr" id="dsFsv">보통</output></div>
+
+<section class="hero">
+  <div class="container">
+    <p class="org">SBS아카데미 AIX학원 강남지점</p>
+    <h1 id="ds-main" tabindex="-1">캐드·스케치업 5개월 수강 안내</h1>
+    <p class="lede">9월 28일 상담에서 안내해 드린 일정과 등록 방법을 정리했습니다. 대표님과 상의하실 때 이 화면을 그대로 보여 드리셔도 됩니다.</p>
+    <p class="meta">최재훈 님 · 캐드 2개월 + 스케치업 3개월 · 담당 멘토 오영선</p>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>한눈에 보기</h2>
+    <dl class="facts">
+      <div class="fact"><dt>배우는 것</dt><dd>캐드 2개월(도면·제안서) 뒤 스케치업 3개월(3D 모델링·렌더링)</dd></div>
+      <div class="fact"><dt>수업 시간</dt><dd>평일 저녁 19:00~22:00, 격일</dd></div>
+      <div class="fact"><dt>첫 수업</dt><dd><b>10월 19일(월) 19:00</b></dd></div>
+      <div class="fact"><dt>수업 방식</dt><dd>학원 강의실 또는 ZOOM 화상 수업 중 그날 편한 쪽</dd></div>
+      <div class="fact"><dt>수강료</dt><dd><b>1,390,000원</b> (5개월, 할인 반영)</dd></div>
+      <div class="fact"><dt>등록 기한</dt><dd><b>9월 30일(수)</b>까지 잔액을 결제하시면 오늘 조건이 그대로 적용됩니다</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>수업 일정</h2>
+    <p class="desc">캐드를 먼저 마치고 스케치업으로 넘어갑니다. 두 과목을 함께 들으면 주 5일을 나오셔야 해서 순서대로 잡았습니다.</p>
+    <table>
+      <thead><tr><th>과정</th><th>요일·시간</th><th>기간</th></tr></thead>
+      <tbody>
+        <tr><td>캐드 1단계<br>AIX 공간기획&amp;도면1</td><td>월·수<br>19:00~22:00</td><td>10.19(월)~<wbr>11.11(수)<br>8회 24시간</td></tr>
+        <tr><td>캐드 2단계<br>AIX 공간기획&amp;도면2</td><td>월·수<br>19:00~22:00</td><td>11.18(수)~<wbr>12.14(월)<br>8회 24시간</td></tr>
+        <tr><td>스케치업 1~3단계<br>AIX 3D인테리어</td><td>평일 저녁 격일<br>19:00~22:00</td><td>캐드 수료 뒤 이어서<br>단계마다 10회 30시간</td></tr>
+      </tbody>
+    </table>
+    <p class="note">캐드 1단계 종강일은 11월 11일(수)입니다. 상담 중 11월 14일로 말씀드린 부분을 바로잡습니다. 스케치업 반은 12월 학사일정이 나오는 대로 잡아서 알려 드립니다.</p>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>배우는 내용</h2>
+    <p class="desc">과정마다 도면, 제안서, 렌더링 이미지 같은 결과물이 남습니다.</p>
+    <div class="rows">
+      <div class="r"><div class="num">1</div><div>
+        <div class="nm">캐드</div>
+        <div class="sub">AIX 공간기획&amp;도면 · 2개월 48시간</div>
+        <div class="ds">AI로 공간 기획과 콘셉트 이미지를 잡고, AutoCAD로 평면도·입면도·천장도를 그립니다. 치수와 출력 관리를 익힌 뒤 인테리어 제안서를 직접 만들어 봅니다.</div>
+      </div></div>
+      <div class="r"><div class="num">2</div><div>
+        <div class="nm">스케치업</div>
+        <div class="sub">AIX 3D인테리어 · 3개월 90시간</div>
+        <div class="ds">SketchUp과 3ds Max로 공간을 모델링하고 V-Ray로 재질과 조명을 입힙니다. Enscape 실시간 렌더링과 D5 렌더링으로 주거·상업 공간 이미지를 완성합니다.</div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>수업 듣는 방법</h2>
+    <dl class="facts">
+      <div class="fact"><dt>강의실 수업</dt><dd>강의실 PC에 캐드·스케치업·3ds Max가 설치되어 있어 바로 실습하실 수 있습니다.</dd></div>
+      <div class="fact"><dt>ZOOM 수업</dt><dd>학원에 오시기 어려운 날은 같은 시간에 ZOOM으로 참여합니다. 채팅이나 음성으로 강사님께 바로 질문하실 수 있습니다.</dd></div>
+      <div class="fact"><dt>온라인 강의</dt><dd>놓친 부분 보충과 예습용으로 계열 학원 온라인 강의를 1개월 이용하실 수 있습니다.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>수강료</h2>
+    <table>
+      <tbody>
+        <tr><td>수강 과목</td><td>캐드 2과목 + 스케치업 3과목, 5개월</td></tr>
+        <tr><td>반영된 혜택</td><td>재직자 장학 지원 · 추석 프로모션 · 당일 등록 할인 · 부서 지원금 · 네이버 리뷰 할인</td></tr>
+        <tr><td>가등록금</td><td class="n">10,000원</td></tr>
+        <tr><td>남은 금액</td><td class="n">1,380,000원</td></tr>
+        <tr class="sum"><td>최종 수강료</td><td class="n">1,390,000원</td></tr>
+      </tbody>
+    </table>
+    <dl class="facts" style="margin-top:22px">
+      <div class="fact"><dt>재수강권</dt><dd>출석률 80% 이상이면 들으신 과목 중 하나를 한 번 더 수강하실 수 있습니다.</dd></div>
+      <div class="fact"><dt>결제 방법</dt><dd>비대면으로 결제하실 수 있습니다.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>다음 순서</h2>
+    <div class="rows">
+      <div class="r"><div class="num">1</div><div><div class="nm">9월 30일(수)까지 잔액 결제</div><div class="ds">담당 멘토에게 "결제 진행할게요"라고 보내 주시면 비대면 결제 방법을 안내해 드립니다. 가등록금과 네이버 포토 리뷰로 오늘 조건을 이날까지 유지해 드립니다.</div></div></div>
+      <div class="r"><div class="num">2</div><div><div class="nm">개강 안내 받기</div><div class="ds">10월 19일(월) 첫 수업 전에 강의실, ZOOM 입장 링크, 준비물을 보내 드립니다. 수업 날짜를 한 화면에 모은 개인 안내 페이지도 함께 드립니다.</div></div></div>
+      <div class="r"><div class="num">3</div><div><div class="nm">스케치업 반 확정</div><div class="ds">12월 학사일정이 나오면 캐드 수료 뒤 이어서 들으실 스케치업 반을 잡아 알려 드립니다.</div></div></div>
+    </div>
+    <p class="note">궁금한 점은 카카오톡으로 편하게 물어봐 주십시오.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <b>SBS아카데미 AIX학원 강남지점 · 담당 멘토 오영선</b>
+    <p>TEL 02-3482-9078 · HP 010-2897-9816</p>
+    <p>이 자료는 2026년 9월 28일 상담 내용을 기준으로 작성했습니다.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+var S=[{k:'m',l:'보통',s:1},{k:'l',l:'크게',s:1.15},{k:'xl',l:'아주 크게',s:1.3}];
+var r=document.getElementById('dsFsr'),o=document.getElementById('dsFsv'),i=0;
+try{var k=localStorage.getItem('ds-size');if(k){i=Math.max(0,S.map(function(x){return x.k}).indexOf(k));}}catch(e){}
+function ap(){var s=S[i];document.documentElement.style.setProperty('--scale',s.s);if(r){r.value=i;r.setAttribute('aria-valuetext',s.l);}if(o){o.textContent=s.l;}}
+if(r){r.addEventListener('input',function(){i=Math.max(0,Math.min(2,parseInt(r.value,10)||0));try{localStorage.setItem('ds-size',S[i].k);}catch(e){}ap();});}
+ap();
+[].forEach.call(document.querySelectorAll('table'),function(t){
+ if(t.parentElement&&t.parentElement.getAttribute('data-ds-tw'))return;
+ var w=document.createElement('div');w.setAttribute('data-ds-tw','1');
+ w.style.overflowX='auto';w.style.maxWidth='100%';
+ t.parentNode.insertBefore(w,t);w.appendChild(t);});
+})();
+</script>
+</body>
+</html>
