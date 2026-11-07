@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<style>body::after{content:"";position:fixed;inset:0;z-index:2147483647;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22260%22%3E%3Ctext%20x%3D%220%22%20y%3D%22130%22%20font-family%3D%22sans-serif%22%20font-size%3D%2215%22%20fill%3D%22%23F0F8FF%22%20fill-opacity%3D%220.30%22%20transform%3D%22rotate%28-24%20210%20130%29%22%3ESBS%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8%20%EA%B0%95%EB%82%A8%20%C2%B7%20%EC%98%A4%EC%98%81%EC%84%A0%20%EB%A9%98%ED%86%A0%20%EC%A0%9C%EA%B3%B5%3C%2Ftext%3E%3C%2Fsvg%3E") 0 0/420px 260px repeat}</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121418" media="(prefers-color-scheme: dark)">
+<title>최아영 님 수강 계획 안내</title>
+<style>
+:root{
+  --bg:#FFFFFF; --surface-2:#F5F6F8; --ink:#1B1D21; --ink-soft:#4A4F57; --mute:#6B7078;
+  --line:#E3E5E8; --accent:#0B4FA8; --brand-soft:#E8EFFF; --focus:#0B4FA8;
+  --fs-h1:1.625rem; --fs-h2:1.375rem; --fs-p1:1.125rem; --fs-p2:1rem;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#121418; --surface-2:#1B1E24; --ink:#ECEEF1; --ink-soft:#B8BDC6; --mute:#9AA0AA;
+    --line:#2C3038; --accent:#8CB4FF; --brand-soft:#1A2640; --focus:#8CB4FF;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Pretendard Variable","Pretendard","Noto Sans KR","Malgun Gothic","맑은 고딕",sans-serif;
+  font-size:var(--fs-p1); line-height:1.6; font-weight:400; word-break:keep-all; overflow-wrap:break-word;
+  font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:720px;margin:0 auto;padding:32px 16px 64px}
+header{border-bottom:2px solid var(--ink);padding-bottom:24px}
+h1{font-size:var(--fs-h1);line-height:1.3;font-weight:800;letter-spacing:-0.03em}
+.sub{margin-top:8px;font-size:var(--fs-p2);line-height:1.5;color:var(--ink-soft)}
+section{margin-top:64px}
+h2{font-size:var(--fs-h2);line-height:1.35;font-weight:800;letter-spacing:-0.02em;margin-bottom:16px}
+h3{font-size:var(--fs-p1);line-height:1.4;font-weight:800;margin-bottom:8px}
+p{max-width:65ch}
+p + p{margin-top:16px}
+.lead{margin-top:24px}
+.key{background:var(--surface-2);border-radius:12px;padding:24px 16px;margin-top:24px}
+.key dl{display:grid;gap:16px}
+.key dt{font-size:var(--fs-p2);color:var(--mute);line-height:1.5}
+.key dd{font-size:var(--fs-p1);font-weight:700;line-height:1.5}
+.flow{font-size:var(--fs-p1);font-weight:700;line-height:1.5}
+.next{margin-top:24px;font-size:var(--fs-p1);font-weight:700;line-height:1.5}
+.next a{color:var(--accent)}
+/* deslop-ignore-next-line 09 */
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+a:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+ol.order{margin:0;padding-left:0;list-style:none;display:grid;gap:0}
+ol.order li{display:grid;grid-template-columns:auto 1fr;column-gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+ol.order li:first-child{border-top:1px solid var(--line)}
+ol.order .n{color:var(--accent);font-weight:700;font-size:var(--fs-p1)}
+ol.order b{font-weight:700}
+ol.order span.d{display:block;color:var(--ink-soft);font-size:var(--fs-p2);line-height:1.5}
+.note{background:var(--brand-soft);color:var(--ink-soft);border-radius:12px;padding:16px;margin-top:24px;font-size:var(--fs-p1);line-height:1.6}
+/* 단계 막대 */
+.strip{display:grid;grid-template-columns:repeat(12,1fr);margin-top:24px}
+.strip .m{font-size:var(--fs-p2);font-weight:700;text-align:center;color:var(--ink-soft);border-bottom:1px solid var(--line);padding-bottom:4px;line-height:1.4}
+.strip .lab{grid-column:1/-1;margin-top:16px;font-size:var(--fs-p2);line-height:1.5;color:var(--ink)}
+.strip .lab b{font-weight:700}
+.strip .bar{height:16px;background:var(--accent);border-radius:6px;margin-top:4px}
+.yr{margin-top:16px;font-size:var(--fs-p2);color:var(--mute);line-height:1.5}
+/* 월별 */
+.month{padding:24px 0;border-top:1px solid var(--line)}
+.month:first-of-type{border-top:2px solid var(--ink)}
+.month h3{margin-bottom:8px}
+.item{padding:8px 0}
+.item b{display:block;font-weight:700;line-height:1.5}
+.item span{display:block;color:var(--ink-soft);font-size:var(--fs-p2);line-height:1.5}
+/* 과목 */
+.course{padding:16px 0;border-bottom:1px solid var(--line)}
+.course:first-of-type{border-top:1px solid var(--line)}
+.course b{display:block;font-weight:700;line-height:1.5}
+.course p{color:var(--ink-soft);font-size:var(--fs-p2);line-height:1.5;margin-top:4px}
+.course a{display:inline-flex;align-items:center;min-height:44px;font-size:var(--fs-p2);margin-top:4px}
+/* 금액 */
+.final{background:var(--surface-2);border-radius:12px;padding:24px 16px;margin-top:24px}
+.final .k{font-size:var(--fs-p2);color:var(--mute);line-height:1.5}
+.final .v{font-size:var(--fs-h1);font-weight:800;letter-spacing:-0.03em;line-height:1.3}
+table{width:100%;border-collapse:collapse;margin-top:24px;font-size:var(--fs-p1)}
+th,td{padding:12px 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.5}
+th{font-weight:400}
+td{text-align:right;font-weight:700;white-space:nowrap;padding-left:16px}
+tr:first-child th,tr:first-child td{border-top:1px solid var(--line)}
+ul.plain{list-style:none;margin-top:16px}
+ul.plain li{padding:12px 0;border-bottom:1px solid var(--line);max-width:65ch}
+ul.plain li:first-child{border-top:1px solid var(--line)}
+footer{margin-top:64px;border-top:2px solid var(--ink);padding-top:24px;font-size:var(--fs-p2);color:var(--ink-soft);line-height:1.5}
+@media (min-width:768px){ .wrap{padding:48px 32px 96px} section{margin-top:96px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>최아영 님 수강 계획 안내</h1>
+  <p class="sub">인테리어 디자인 전문가 과정 · 2026-11-02 상담 · 담당 멘토 오영선</p>
+</header>
+
+<section aria-labelledby="s1" style="margin-top:32px">
+  <h2 id="s1">한눈에 보기</h2>
+  <div class="key">
+    <dl>
+      <div><dt>목표</dt><dd>공간·세트 디자인 분야 취업</dd></div>
+      <div><dt>기간</dt><dd>2026-11 ~ 2027-10 (12개월)</dd></div>
+      <div><dt>흐름</dt><dd class="flow">도면(캐드) → 공간(스케치업·맥스·렌더링) → 자격증 → 포트폴리오</dd></div>
+    </dl>
+  </div>
+  <p class="next">다음 행동: <a href="#reg">등록 안내</a>의 완납일 2026-11-03(화) 확인</p>
+</section>
+
+<section aria-labelledby="s2">
+  <h2 id="s2">이 순서로 진행하는 이유</h2>
+  <p>도면이 튼튼해야 3D 공간이 정확하게 올라가고, 3D 작업물이 있어야 포트폴리오와 자격증 준비가 이어집니다. 그래서 선행 과목을 마친 뒤 다음 과목으로 넘어갑니다.</p>
+  <ol class="order" style="margin-top:24px">
+    <li><span class="n">1</span><div><b>AIX 공간기획&amp;도면 1 → 2</b><span class="d">AutoCAD로 평면도·입면도·천장도를 그리는 기초입니다.</span></div></li>
+    <li><span class="n">2</span><div><b>AIX 3D 인테리어 1 → 2 → 3</b><span class="d">스케치업·맥스 모델링과 렌더링으로 공간 작업물을 만듭니다.</span></div></li>
+    <li><span class="n">3</span><div><b>실내건축 기출 대비 1 → 2</b><span class="d">공간기획·3D 과정을 이수한 뒤 진행합니다.</span></div></li>
+    <li><span class="n">4</span><div><b>AI 에이전트 1 → 2 → 업무자동화</b><span class="d">이 순서로 수강해야 하는 과목입니다.</span></div></li>
+  </ol>
+  <div class="note">
+    회화과 졸업과 마야·브이레이 1년 경험이 있어 렌더링 개념은 이미 갖추고 계십니다. 앞선 수강이 길게 늘어졌던 경험을 고려해 한 번에 길게 잡지 않고 월 단위로 끊어, 매달 과목과 결과물을 확인하며 진행합니다.
+  </div>
+</section>
+
+<section aria-labelledby="s3">
+  <h2 id="s3">12개월 일정 가안</h2>
+  <p>평일반 기준이며 2026-11 ~ 2027-02 시간은 차수 확정 전 예정값입니다. 2027년 3월 이후 과목은 요일·시간을 해당 월 시간표 확정 후 안내드립니다.</p>
+
+  <div class="strip" role="group" aria-label="단계별 진행 월 막대">
+    <div class="m">11</div><div class="m">12</div><div class="m">1</div><div class="m">2</div><div class="m">3</div><div class="m">4</div><div class="m">5</div><div class="m">6</div><div class="m">7</div><div class="m">8</div><div class="m">9</div><div class="m">10</div>
+    <div class="lab"><b>도면</b> 공간기획&amp;도면 1·2 · 11월~12월</div>
+    <div class="bar" style="grid-column:1/3"></div>
+    <div class="lab"><b>공간</b> 3D 인테리어 1~3 · 2월~4월</div>
+    <div class="bar" style="grid-column:4/7"></div>
+    <div class="lab"><b>자격증</b> 실내건축 기출 · 5월~8월</div>
+    <div class="bar" style="grid-column:7/11"></div>
+    <div class="lab"><b>포트폴리오</b> 인테리어포폴(1,2) · 5월~10월</div>
+    <div class="bar" style="grid-column:7/13"></div>
+  </div>
+  <p class="yr">11~12월은 2026년, 1~10월은 2027년입니다.</p>
+
+  <div style="margin-top:32px">
+    <div class="month">
+      <h3>2026년 11월</h3>
+      <div class="item"><b>AIX 공간기획&amp;도면1/B</b><span>화·목 · 09:30~12:30</span></div>
+      <div class="item"><b>AI프롬프트 엔지니어링1/B</b><span>화·목 · 16:00~18:00</span></div>
+      <div class="item"><b>AI에이전트1/A</b><span>월·수 · 20:00~22:00</span></div>
+      <div class="item"><b>AIX 포토샵/A</b><span>월·수 · 09:30~12:30</span></div>
+    </div>
+    <div class="month">
+      <h3>2026년 12월</h3>
+      <div class="item"><b>AIX 공간기획&amp;도면2/B</b><span>화·목 · 09:30~12:30</span></div>
+      <div class="item"><b>AI프롬프트 엔지니어링2/B</b><span>화·목 · 16:00~18:00</span></div>
+      <div class="item"><b>AI에이전트2/A</b><span>월·수 · 20:00~22:00</span></div>
+    </div>
+    <div class="month">
+      <h3>2027년 1월</h3>
+      <div class="item"><b>AI 에이전트 업무자동화</b><span>금 · 18:00~22:00</span></div>
+      <div class="item"><b>AIX 일러스트/A</b><span>월·수 · 13:00~16:00</span></div>
+    </div>
+    <div class="month">
+      <h3>2027년 2월</h3>
+      <div class="item"><b>AIX 3D 인테리어 1/A</b><span>월수금월수 · 13:00~16:00</span></div>
+    </div>
+    <div class="month">
+      <h3>2027년 3월</h3>
+      <div class="item"><b>AIX 3D 인테리어 2/A</b><span>요일·시간은 해당 월 시간표 확정 후 안내</span></div>
+    </div>
+    <div class="month">
+      <h3>2027년 4월</h3>
+      <div class="item"><b>AIX 3D 인테리어 3/A</b><span>요일·시간은 해당 월 시간표 확정 후 안내</span></div>
+    </div>
+    <div class="month">
+      <h3>2027년 5월</h3>
+      <div class="item"><b>인테리어포폴(1,2)/B</b><span>화·목 · 5월부터 10월까지 6개월 · 시간은 시간표 확정 후 안내</span></div>
+      <div class="item"><b>실내건축 기출 1</b><span>요일·시간은 해당 월 시간표 확정 후 안내</span></div>
+    </div>
+    <div class="month">
+      <h3>2027년 6월</h3>
+      <div class="item"><b>인테리어포폴(1,2)/B</b><span>진행 중 · 시간은 시간표 확정 후 안내</span></div>
+      <div class="item"><b>실내건축 기출 2</b><span>요일·시간은 해당 월 시간표 확정 후 안내</span></div>
+    </div>
+    <div class="month">
+      <h3>2027년 7월</h3>
+      <div class="item"><b>인테리어포폴(1,2)/B</b><span>진행 중 · 시간은 시간표 확정 후 안내</span></div>
+      <div class="item"><b>실내건축 기출 1</b><span>요일·시간은 해당 월 시간표 확정 후 안내</span></div>
+    </div>
+    <div class="month">
+      <h3>2027년 8월</h3>
+      <div class="item"><b>인테리어포폴(1,2)/B</b><span>진행 중 · 시간은 시간표 확정 후 안내</span></div>
+      <div class="item"><b>실내건축 기출 2</b><span>요일·시간은 해당 월 시간표 확정 후 안내</span></div>
+    </div>
+    <div class="month">
+      <h3>2027년 9월</h3>
+      <div class="item"><b>인테리어포폴(1,2)/B</b><span>진행 중 · 시간은 시간표 확정 후 안내</span></div>
+    </div>
+    <div class="month">
+      <h3>2027년 10월</h3>
+      <div class="item"><b>인테리어포폴(1,2)/B</b><span>마무리 · 시간은 시간표 확정 후 안내</span></div>
+    </div>
+  </div>
+  <p style="margin-top:16px;color:var(--ink-soft);font-size:var(--fs-p2);line-height:1.5">DDAZUA 이러닝은 기간 내 자율 수강입니다.</p>
+</section>
+
+<section aria-labelledby="s4">
+  <h2 id="s4">과목별 한 줄 안내</h2>
+  <div class="course">
+    <b>AI프롬프트 엔지니어링1</b>
+    <p>ChatGPT·NotebookLM으로 자료 정리와 문서 요약을 익히고 나만의 GPTs와 PPT를 만듭니다.</p>
+    <a href="https://navyorca.github.io/guide-web/g/fe229c0b.html#k-ai-prompt1" aria-label="AI프롬프트 엔지니어링1 과정 자세히">과정 자세히</a>
+  </div>
+  <div class="course">
+    <b>AI프롬프트 엔지니어링2</b>
+    <p>ChatGPT와 미드저니로 캐릭터·스토리와 이미지·영상을 만들어 멀티모달 콘텐츠를 완성합니다.</p>
+    <a href="https://navyorca.github.io/guide-web/g/fe229c0b.html#k-ai-prompt2" aria-label="AI프롬프트 엔지니어링2 과정 자세히">과정 자세히</a>
+  </div>
+  <div class="course">
+    <b>AIX 공간기획&amp;도면 1·2</b>
+    <p>AutoCAD로 평면도·입면도·천장도 3종 도면을 완성하고 AI로 기획서와 제안서까지 만듭니다.</p>
+    <a href="https://navyorca.github.io/guide-web/g/fe229c0b.html#c14" aria-label="AIX 공간기획&amp;도면 과정 자세히">과정 자세히</a>
+  </div>
+  <div class="course">
+    <b>AIX 3D 인테리어 1~3</b>
+    <p>스케치업과 3ds Max로 공간을 모델링하고 V-Ray·Enscape·D5로 렌더링해 포트폴리오 작업물을 만듭니다.</p>
+    <a href="https://navyorca.github.io/guide-web/g/fe229c0b.html#c15" aria-label="AIX 3D 인테리어 과정 자세히">과정 자세히</a>
+  </div>
+  <div class="course">
+    <b>AI 에이전트 1·2 · 업무자동화</b>
+    <p>클로드코드로 AI 에이전트의 기초와 심화를 익히고, 업무자동화에서 내 업무를 자동으로 처리하는 시스템 1식을 만듭니다.</p>
+  </div>
+  <div class="course">
+    <b>실내건축 기출 대비</b>
+    <p>가구·창호 작도부터 주거·상업 공간의 평면도·천장도·입면도·투시도를 기출문제로 훈련해 실기 시험을 대비합니다.</p>
+    <a href="https://navyorca.github.io/guide-web/g/fe229c0b.html#k-interior-license" aria-label="실내건축 기출 대비 과정 자세히">과정 자세히</a>
+  </div>
+  <div class="course">
+    <b>인테리어포폴(1,2)</b>
+    <p>도면에서 공간, 렌더링, 제안서까지 이어 포트폴리오를 완성하며 강사와 1:1 피드백으로 진행합니다.</p>
+    <a href="https://navyorca.github.io/guide-web/g/fe229c0b.html#k-interior-portfolio" aria-label="인테리어포폴 과정 자세히">과정 자세히</a>
+  </div>
+  <div class="course">
+    <b>AIX 포토샵</b>
+    <p>포토샵 기본 도구와 이미지 편집·합성을 익혀 레이어 합성과 보정 작업물을 만듭니다.</p>
+  </div>
+  <div class="course">
+    <b>AIX 일러스트</b>
+    <p>벡터 도구로 도형·패스 드로잉·타이포그래피 편집물을 만듭니다.</p>
+  </div>
+  <div class="course">
+    <b>DDAZUA 이러닝 3년</b>
+    <p>수강 기간 내 자율 수강하는 온라인 학습입니다. 당일등록 시 무료로 지원됩니다.</p>
+  </div>
+</section>
+
+<section id="reg" aria-labelledby="s5">
+  <h2 id="s5">등록 안내</h2>
+  <div class="final">
+    <div class="k">최종 수강료</div>
+    <div class="v">6,910,000원</div>
+  </div>
+  <table>
+    <tbody>
+      <tr><th scope="row">총 정가 (22과목)</th><td>11,600,000원</td></tr>
+      <tr><th scope="row">장학지원혜택(구직자) 10%</th><td>-1,160,000원</td></tr>
+      <tr><th scope="row">취업패키지 20%</th><td>-2,320,000원</td></tr>
+      <tr><th scope="row">당일등록 10%</th><td>-1,160,000원</td></tr>
+      <tr><th scope="row">네이버 포토리뷰</th><td>-50,000원</td></tr>
+    </tbody>
+  </table>
+  <ul class="plain">
+    <li>재수강권 5개월: 들었던 수업에 한해 사용하며 포트폴리오 수업은 제외됩니다.</li>
+    <li>멘토코칭권: 무료로 제공됩니다.</li>
+    <li>DDAZUA 이러닝 3년: 당일등록 시 무료 지원됩니다.</li>
+  </ul>
+  <div class="note">
+    당일등록 할인은 완납 기준이며 완납일은 2026-11-03(화)로 안내드렸습니다.
+  </div>
+</section>
+
+<section aria-labelledby="s6">
+  <h2 id="s6">부모님께</h2>
+  <ul class="plain">
+    <li>인테리어 취업에서는 자격증과 포트폴리오를 함께 준비하는 투트랙이 1순위 평가 요소입니다. 둘 중 하나만으로는 경쟁력이 약합니다.</li>
+    <li>비전공자는 최소 6개월이 필요하며 포트폴리오는 별도로 제작합니다. 이 계획은 12개월 안에 두 가지를 모두 마련하도록 짰습니다.</li>
+    <li>한 번에 길게 결제해 진행하는 방식이 아니라 월별로 단계를 나누어 수강합니다. 매달 적응 상태를 보며 속도를 조절합니다.</li>
+  </ul>
+  <p style="margin-top:24px">문의는 담당 멘토 오영선(강남지점)에게 해 주시기 바랍니다.</p>
+</section>
+
+<footer>SBS아카데미 강남지점 · 담당 멘토 오영선 · 2026-11-02 상담 자료</footer>
+
+</div>
+</body>
+</html>

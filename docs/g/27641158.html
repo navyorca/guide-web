@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- design-system: Asta Sans 400/700/800 (Google Fonts) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Asta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>시각편집디자인 수강 안내 · 추고은 님</title>
+<style>
+:root{
+  --paper:#FFFFFF;
+  --ink:#0B1220;--ink-2:#2C3444;
+  --line:#C3CAD8;
+  --brand-ink:#1C3E92;--brand-soft:#E8EFFF;
+  --fs-h1:1.625rem;--lh-h1:2.25rem;
+  --fs-h2:1.375rem;--lh-h2:2rem;
+  --fs-h3:1.25rem;--lh-h3:1.75rem;
+  --fs-p1:1.1875rem;--lh-p1:1.625rem;
+  --fs-p2:1rem;--lh-p2:1.5rem;
+}
+@media(max-width:768px){:root{--fs-h1:1.5rem;--lh-h1:2.125rem;--fs-h2:1.25rem;--lh-h2:1.875rem;--fs-h3:1.125rem;--lh-h3:1.625rem}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Asta Sans",'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:var(--fs-p1);line-height:var(--lh-p1);font-weight:400;word-break:keep-all;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+.container{max-width:700px;margin:0 auto;padding:0 20px}
+@media(min-width:768px){.container{padding:0 32px}}
+.s{padding:48px 0}
+@media(min-width:768px){.s{padding:64px 0}}
+.hero{padding:40px 0 36px;border-bottom:2px solid var(--ink)}
+.hero .org{font-size:var(--fs-p2);line-height:var(--lh-p2);font-weight:700;color:var(--brand-ink);margin-bottom:12px}
+.hero h1{font-size:var(--fs-h1);font-weight:800;line-height:var(--lh-h1);letter-spacing:-.01em;margin-bottom:12px}
+.hero .lede{color:var(--ink-2)}
+.hero .meta{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:var(--fs-p2);line-height:var(--lh-p2);color:var(--ink-2);font-weight:700}
+h2{font-size:var(--fs-h2);font-weight:800;line-height:var(--lh-h2);letter-spacing:-.01em;color:var(--brand-ink);margin-bottom:10px}
+.desc{color:var(--ink-2);margin-bottom:22px}
+p{color:var(--ink-2)}
+strong,b{font-weight:700;color:var(--ink)}
+.facts{border-top:1px solid var(--line)}
+.fact{display:grid;grid-template-columns:1fr;gap:2px;padding:14px 0;border-bottom:1px solid var(--line)}
+@media(min-width:600px){.fact{grid-template-columns:140px 1fr;gap:20px;align-items:baseline}}
+.fact dt{font-size:var(--fs-p2);line-height:var(--lh-p2);font-weight:700;color:var(--brand-ink)}
+.fact dd{color:var(--ink-2)}
+.rows{border-top:1px solid var(--line)}
+.r{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
+.r .num{font-weight:700;color:var(--brand-ink)}
+.r .nm{font-size:var(--fs-h3);font-weight:700;line-height:var(--lh-h3);margin-bottom:2px}
+.r .sub{font-size:var(--fs-p2);line-height:var(--lh-p2);font-weight:700;color:var(--brand-ink);margin-bottom:6px}
+.r .ds{color:var(--ink-2)}
+table{width:100%;border-collapse:collapse;font-size:var(--fs-p2);min-width:320px}
+th,td{padding:12px 6px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.625rem}
+th{font-weight:700;color:var(--ink-2)}
+td{color:var(--ink-2)}
+td:first-child{color:var(--ink);font-weight:700}
+td.n{text-align:right;white-space:nowrap}
+tr.sum td{border-top:2px solid var(--ink);border-bottom:none;padding-top:14px;font-weight:800;color:var(--ink);font-size:var(--fs-h3)}
+.note{color:var(--ink-2);margin-top:20px;padding:14px 16px;background:var(--brand-soft);border-radius:10px}
+footer{padding:32px 0;border-top:2px solid var(--ink);font-size:var(--fs-p2);line-height:var(--lh-p2);color:var(--ink-2)}
+footer b{display:block;margin-bottom:6px;font-size:var(--fs-p1);line-height:var(--lh-p1)}
+a{color:var(--brand-ink)}
+</style>
+<!-- design-system: scale+a11y (design-propagate.py 260910) -->
+<style>
+html{font-size:calc(16px * var(--scale,1))}
+body{font-size:1.1875rem}
+.ds-fs{display:flex;justify-content:flex-end;align-items:center;gap:10px;min-height:48px;padding:0 20px;max-width:1200px;margin:0 auto;box-sizing:border-box;font-family:"Asta Sans","Pretendard Variable",system-ui,sans-serif}
+.ds-fs .lb,.ds-fs output{font-size:1rem;font-weight:700;color:#1C3E92;white-space:nowrap}
+.ds-fs output{min-width:4.4em}
+.ds-fs input{-webkit-appearance:none;appearance:none;width:120px;height:44px;margin:0;padding:0;background:none;cursor:pointer}
+.ds-fs input::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:#DCE6F5}
+.ds-fs input::-moz-range-track{height:6px;border-radius:3px;background:#DCE6F5}
+.ds-fs input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:-6px;border-radius:5px;background:#1C3E92;border:0}
+.ds-fs input::-moz-range-thumb{width:18px;height:18px;border-radius:5px;background:#1C3E92;border:0}
+.ds-fs input:focus-visible{outline:3px solid #1C3E92;outline-offset:2px}
+.ds-skip{position:absolute;left:-999px;top:8px;z-index:9999;padding:10px 16px;background:#1C3E92;color:#fff;font-weight:700;border-radius:8px;text-decoration:none}
+.ds-skip:focus{left:8px}
+:focus-visible{outline:3px solid #1C3E92;outline-offset:2px}
+body,p,li,td,th,dd,dt{word-break:keep-all;overflow-wrap:break-word}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="ds-skip" href="#ds-main">본문으로 건너뛰기</a>
+<div class="ds-fs" role="group" aria-label="글씨 크기"><span class="lb" aria-hidden="true">글씨</span><input id="dsFsr" type="range" min="0" max="2" step="1" value="0" aria-label="글씨 크기" aria-valuetext="보통"><output for="dsFsr" id="dsFsv">보통</output></div>
+
+<section class="hero">
+  <div class="container">
+    <p class="org">SBS아카데미 AIX학원 강남지점</p>
+    <h1 id="ds-main" tabindex="-1">시각편집디자인 수강 안내</h1>
+    <p class="lede">10월 27일 상담에서 안내해 드린 과정과 일정, 수강료를 정리했습니다. 어머님과 상의하실 때 이 화면을 그대로 보여 드리셔도 됩니다.</p>
+    <p class="meta">추고은 님 · 굿즈·광고 디자인 방향 · 담당 멘토 오영선</p>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>한눈에 보기</h2>
+    <dl class="facts">
+      <div class="fact"><dt>목표</dt><dd>좋아하는 그림·편집으로 먼저 재미를 붙이고, 굿즈·포스터 같은 결과물을 직접 만들어 봅니다</dd></div>
+      <div class="fact"><dt>첫 과목</dt><dd><b>AIX 일러스트/6주</b> · 토요일 14:00~18:00</dd></div>
+      <div class="fact"><dt>첫 수업</dt><dd><b>10월 31일(토) 14:00</b> · 12월 5일(토) 종강</dd></div>
+      <div class="fact"><dt>수강료</dt><dd><b>3,000,000원</b> (1년 과정 10과목, 할인 반영)</dd></div>
+      <div class="fact"><dt>할인 기한</dt><dd><b>10월 28일(수)</b>까지 결제하시면 당일 등록 할인이 그대로 적용됩니다</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>왜 일러스트부터인가요</h2>
+    <p class="desc">굿즈를 업체에 맡길 때 보내는 파일이 일러스트레이터 파일(AI·PDF)입니다. 고은 님이 직접 고른 과목이기도 해서, 토요일 6주 반으로 가볍게 시작합니다.</p>
+    <dl class="facts">
+      <div class="fact"><dt>토요일 수업</dt><dd>평일 수학·영어 학원과 겹치지 않습니다.</dd></div>
+      <div class="fact"><dt>평일 수업</dt><dd>평일반은 11월 17일 전후 개강합니다. 수학 학원 일정이 정리되면 그때 합류를 정하셔도 됩니다.</dd></div>
+      <div class="fact"><dt>AI 활용</dt><dd>툴과 연계한 기초만 다루고, 깊은 내용은 내년 초 이후를 권해 드렸습니다.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>배우는 과목</h2>
+    <p class="desc">일러스트로 시작해 드로잉, 포토샵, 굿즈 실무, 영상 편집 순으로 넓혀 갑니다. 일정은 학사일정이 나오는 대로 맞춰 잡습니다.</p>
+    <div class="rows">
+      <div class="r"><div class="num">1</div><div>
+        <div class="nm">AIX 일러스트/6주</div>
+        <div class="sub">토요일 14:00~18:00 · 10.31~12.05 · 500,000원</div>
+        <div class="ds">일러스트레이터로 벡터 그래픽과 아트웍의 기초를 익힙니다.</div>
+      </div></div>
+      <div class="r"><div class="num">2</div><div>
+        <div class="nm">컨셉드로잉</div>
+        <div class="sub">3과정(6개월) · 학사일정 확정 뒤 조율 · 1,800,000원</div>
+        <div class="ds">손으로 그리는 드로잉 수업이며 강사님께 개별 피드백을 받습니다.</div>
+      </div></div>
+      <div class="r"><div class="num">3</div><div>
+        <div class="nm">디지털드로잉</div>
+        <div class="sub">3과정(6개월) · 학사일정 확정 뒤 조율 · 1,800,000원</div>
+        <div class="ds">태블릿으로 그리는 드로잉 수업이며 개별 피드백을 받습니다.</div>
+      </div></div>
+      <div class="r"><div class="num">4</div><div>
+        <div class="nm">AIX 포토샵/6주</div>
+        <div class="sub">주말 6주반 · 학사일정 확정 뒤 조율 · 500,000원</div>
+        <div class="ds">포토샵으로 이미지 편집, 합성, 보정을 배웁니다.</div>
+      </div></div>
+      <div class="r"><div class="num">5</div><div>
+        <div class="nm">AIX 패키지 &amp; 굿즈 제작 실무</div>
+        <div class="sub">2개월 · 학사일정 확정 뒤 조율 · 1,000,000원</div>
+        <div class="ds">굿즈를 기획하고 직접 만들어 보며 피드백을 받습니다. 필기구 같은 만들고 싶은 물건을 여기서 다룹니다.</div>
+      </div></div>
+      <div class="r"><div class="num">6</div><div>
+        <div class="nm">AIX 실전영상편집</div>
+        <div class="sub">학사일정 확정 뒤 조율 · 500,000원</div>
+        <div class="ds">프리미어로 컷 편집, 자막, 음향을 다룹니다. 캡컷으로 해 본 편집을 한 단계 넓힙니다.</div>
+      </div></div>
+      <div class="r"><div class="num">7</div><div>
+        <div class="nm">따즈아 온라인 강의</div>
+        <div class="sub">1년 · 자율 수강 · 멘토 직권 지원</div>
+        <div class="ds">정규과정 등록 시 실강 오픈, 온라인 강의로 선행·복습을 진행하고 여러 실무자의 강의를 들을 수 있습니다.</div>
+      </div></div>
+    </div>
+    <p class="note">적성이 맞으면 브랜딩, 그래픽아트워크, 인포디자인을 이어서 조율해 드립니다. 자격증은 GTQ·ACP 대비를 함께 안내해 드렸습니다.</p>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>수강료</h2>
+    <table>
+      <tbody>
+        <tr><td>정가 (10과목)</td><td class="n">6,100,000원</td></tr>
+        <tr><td>장학 지원 20%</td><td class="n">-1,220,000원</td></tr>
+        <tr><td>당일 등록 30%</td><td class="n">-1,830,000원</td></tr>
+        <tr><td>네이버 리뷰 작성</td><td class="n">-50,000원</td></tr>
+        <tr class="sum"><td>최종 수강료</td><td class="n">3,000,000원</td></tr>
+      </tbody>
+    </table>
+    <dl class="facts" style="margin-top:22px">
+      <div class="fact"><dt>재수강권</dt><dd>4과목마다 1개씩, 10과목 기준 2개를 드립니다.</dd></div>
+      <div class="fact"><dt>온라인 강의</dt><dd>따즈아 온라인 강의 1년을 멘토 직권으로 지원해 드립니다.</dd></div>
+      <div class="fact"><dt>수업 방식</dt><dd>오프라인 실강과 ZOOM 비대면을 함께 지원합니다.</dd></div>
+      <div class="fact"><dt>일정 변경</dt><dd>수강 연기(홀딩)와 과목 변경을 신청하실 수 있습니다.</dd></div>
+      <div class="fact"><dt>결제 방법</dt><dd>학원에 오시지 않고 비대면으로도 결제하실 수 있습니다.</dd></div>
+      <div class="fact"><dt>학생 관리</dt><dd>미성년자는 팀장이 함께 학사를 챙깁니다.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="s">
+  <div class="container">
+    <h2>다음 순서</h2>
+    <div class="rows">
+      <div class="r"><div class="num">1</div><div><div class="nm">10월 28일(수)까지 결제</div><div class="ds">담당 멘토에게 "결제 진행할게요"라고 보내 주시면 비대면 결제 방법을 안내해 드립니다.</div></div></div>
+      <div class="r"><div class="num">2</div><div><div class="nm">첫 수업 준비</div><div class="ds">10월 31일(토) 첫 수업 전에 강의실과 준비물을 보내 드립니다.</div></div></div>
+      <div class="r"><div class="num">3</div><div><div class="nm">평일반 합류 결정</div><div class="ds">수학 학원 일정이 정해지면 알려 주십시오. 11월 중순 평일반 일정에 맞춰 잡아 드립니다.</div></div></div>
+    </div>
+    <p class="note">궁금한 점은 카카오톡으로 편하게 물어봐 주십시오.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <b>SBS아카데미 AIX학원 강남지점 · 담당 멘토 오영선</b>
+    <p>TEL 02-3482-9078 · HP 010-2897-9816</p>
+    <p>이 자료는 2026년 10월 27일 상담과 10월 28일 견적서를 기준으로 작성했습니다.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+var S=[{k:'m',l:'보통',s:1},{k:'l',l:'크게',s:1.15},{k:'xl',l:'아주 크게',s:1.3}];
+var r=document.getElementById('dsFsr'),o=document.getElementById('dsFsv'),i=0;
+try{var k=localStorage.getItem('ds-size');if(k){i=Math.max(0,S.map(function(x){return x.k}).indexOf(k));}}catch(e){}
+function ap(){var s=S[i];document.documentElement.style.setProperty('--scale',s.s);if(r){r.value=i;r.setAttribute('aria-valuetext',s.l);}if(o){o.textContent=s.l;}}
+if(r){r.addEventListener('input',function(){i=Math.max(0,Math.min(2,parseInt(r.value,10)||0));try{localStorage.setItem('ds-size',S[i].k);}catch(e){}ap();});}
+ap();
+[].forEach.call(document.querySelectorAll('table'),function(t){
+ if(t.parentElement&&t.parentElement.getAttribute('data-ds-tw'))return;
+ var w=document.createElement('div');w.setAttribute('data-ds-tw','1');
+ w.style.overflowX='auto';w.style.maxWidth='100%';
+ t.parentNode.insertBefore(w,t);w.appendChild(t);});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<style>body::after{content:"";position:fixed;inset:0;z-index:2147483647;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22260%22%3E%3Ctext%20x%3D%220%22%20y%3D%22130%22%20font-family%3D%22sans-serif%22%20font-size%3D%2215%22%20fill%3D%22%23F0F8FF%22%20fill-opacity%3D%220.30%22%20transform%3D%22rotate%28-24%20210%20130%29%22%3ESBS%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8%20%EA%B0%95%EB%82%A8%20%C2%B7%20%EC%98%A4%EC%98%81%EC%84%A0%20%EB%A9%98%ED%86%A0%20%EC%A0%9C%EA%B3%B5%3C%2Ftext%3E%3C%2Fsvg%3E") 0 0/420px 260px repeat}</style>
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>261107 AI 프론티어 2026</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;800&display=swap">
+<style>
+/* 레이아웃: 코넬 노트 한 장. 왼쪽 단서 칸, 오른쪽 필기 칸, 아래 요약 묶음. 흰 바탕에 파랑 포인트 한 색 */
+:root{
+  --bg:#ffffff; --surface-2:#f5f6f8; --ink:#1b1d21; --ink-soft:#4a4f57; --mute:#6b7078; --line:#e3e5e8; --accent:#0b4fa8; --warn:#8a4c00;
+  --fs-h1:1.625rem; --fs-h2:1.375rem; --fs-p1:1.1875rem; --fs-p2:1rem;
+  --font:"Noto Sans KR","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17191d; --surface-2:#22252b; --ink:#f2f3f5; --ink-soft:#c9ccd2; --mute:#a3a8b1; --line:#34383f; --accent:#8db8ff; --warn:#ffc46b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17191d; --surface-2:#22252b; --ink:#f2f3f5; --ink-soft:#c9ccd2; --mute:#a3a8b1; --line:#34383f; --accent:#8db8ff; --warn:#ffc46b; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:var(--fs-p1);font-weight:400;line-height:32px;word-break:keep-all;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.wrap{max-width:1040px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:64px}
+header.top{display:grid;gap:8px}
+h1{font-size:var(--fs-h1);font-weight:800;line-height:36px;margin:0;text-wrap:balance}
+.meta{color:var(--mute);font-size:var(--fs-p2);line-height:24px;margin:0}
+.thesis{margin:8px 0 0;font-weight:700;max-width:65ch}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:8px;display:flex;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--ink);margin-bottom:-32px}
+nav a{color:var(--accent);text-decoration:none;font-size:var(--fs-p2);font-weight:700;padding:8px 0;min-height:44px;display:inline-flex;align-items:center}
+nav a:hover{color:var(--ink)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sheet{scroll-margin-top:72px}
+.sheet>h2{font-size:var(--fs-h2);font-weight:800;line-height:36px;margin:0;text-wrap:balance}
+.sheet>.by{margin:0;padding:4px 0 16px;color:var(--ink-soft);font-size:var(--fs-p2);line-height:24px;border-bottom:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:minmax(160px,27%) minmax(0,1fr);border-bottom:1px solid var(--line)}
+.cue{font-weight:700;line-height:28px;padding:16px 16px 16px 0;border-right:1px solid var(--line);color:var(--accent)}
+.cue small{display:block;font-size:var(--fs-p2);font-weight:400;line-height:24px;color:var(--mute);margin-top:4px}
+.note{padding:16px 0 16px 24px;min-width:0}
+.note p{margin:0 0 8px;max-width:65ch}
+.note p:last-child{margin-bottom:0}
+.note ul{margin:0;padding-left:24px;max-width:65ch}
+.note li{margin-bottom:4px}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 8px}
+.steps div{background:var(--surface-2);border-radius:8px;padding:8px 12px;font-size:var(--fs-p2);line-height:24px}
+.steps b{display:block;font-weight:700}
+.summary{margin-top:16px;padding:16px 24px;background:var(--surface-2);border-radius:12px}
+.summary h3{font-size:var(--fs-p1);font-weight:800;line-height:32px;margin:0}
+.summary p{margin:0;max-width:65ch}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:var(--fs-p2);line-height:24px;min-width:640px}
+th,td{text-align:left;vertical-align:top;padding:12px 12px 12px 0;border-bottom:1px solid var(--line)}
+th{font-weight:700;color:var(--ink-soft)}
+td a{color:var(--accent)}
+.tag{display:inline-block;font-size:var(--fs-p2);font-weight:700;line-height:24px;padding:0 8px;border-radius:6px;background:var(--surface-2);color:var(--ink)}
+.tag.warn{color:var(--warn)}
+.foot{color:var(--ink-soft);font-size:var(--fs-p2);line-height:24px}
+
+.sub{font-size:var(--fs-p1);font-weight:800;line-height:32px;margin:32px 0 0;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+.summary.first{margin:16px 0 0}
+.how{margin:16px 0 0;max-width:65ch}
+.pick{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pick button,.done button{font:inherit;font-size:var(--fs-p2);font-weight:700;min-height:44px;padding:8px 16px;border:1px solid var(--mute);border-radius:8px;background:var(--bg);color:var(--ink);cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.done{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:24px}
+.done button{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+#copyMsg{font-size:var(--fs-p2);color:var(--ink-soft)}
+#copyBox{width:100%;min-height:160px;margin-top:16px;font:inherit;font-size:var(--fs-p2);color:var(--ink);background:var(--bg);border:1px solid var(--mute);border-radius:8px;padding:8px}
+@media (max-width:640px){
+  :root{--fs-h1:1.625rem}
+  h1{line-height:36px}
+  .row{grid-template-columns:minmax(0,1fr)}
+  .cue{border-right:0;padding:16px 0 4px}
+  .note{padding:0 0 16px}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
+/* 압축판: 핵심어 왼쪽, 한 줄 오른쪽, 결론은 큰 파랑 글자 */
+.thesis{font-size:var(--fs-h2);font-weight:800;line-height:36px;color:var(--accent);margin-top:16px}
+.wrap{gap:48px}
+.cue{font-weight:800;color:var(--accent);padding:12px 16px 12px 0}
+.note{padding:12px 0 12px 24px}
+.hit{font-size:var(--fs-h2);font-weight:800;line-height:36px;color:var(--accent);margin:24px 0 0;text-wrap:balance}
+.cnt{display:block;font-size:var(--fs-p2);line-height:24px;color:var(--mute)}
+.foot{margin:24px 0 0}
+.note .pick{margin-top:4px}
+@media (max-width:640px){.cue{padding:12px 0 0}.note{padding:0 0 12px}.hit,.thesis{font-size:1.375rem;line-height:32px}}
+
+/* 조사판: 주장 → 쉽게 → 근거 + 각주 */
+.cue .v{display:block;width:max-content;margin-top:4px;font-size:var(--fs-p2);font-weight:700;line-height:24px}
+.v.ok{color:var(--accent)} .v.part,.v.bad{color:var(--warn)} .v.none{color:var(--mute)}
+.note .claim{font-weight:700;margin-bottom:4px}
+.note .easy{color:var(--ink);margin-bottom:4px}
+.note .easy b{color:var(--accent)}
+.note .check{color:var(--ink-soft);font-size:var(--fs-p2);line-height:24px}
+sup{line-height:0;font-size:1rem}
+a.fn{color:var(--accent);font-size:1rem;font-weight:700;text-decoration:none;padding:0 2px}
+.legend{margin:4px 0 0;color:var(--ink-soft);font-size:var(--fs-p2);line-height:24px}
+.stair{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:end;max-width:400px;margin:8px 0}
+.stair div{background:var(--accent);border-radius:4px 4px 0 0;display:flex;align-items:flex-end;justify-content:center}
+.stair span{color:var(--bg);font-size:var(--fs-p2);font-weight:700;line-height:28px}
+.bar{max-width:400px;margin:8px 0}
+.bar-track{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar-fill{width:5%;height:100%;background:var(--accent)}
+.bar p{margin:4px 0 0;font-size:var(--fs-p2);line-height:24px;color:var(--ink-soft)}
+.gloss{display:grid;grid-template-columns:minmax(120px,27%) minmax(0,1fr);gap:4px 24px;margin:16px 0 0}
+.gloss dt{font-weight:800;color:var(--accent)}
+.gloss dd{margin:0}
+.fnlist{margin:16px 0 0;padding-left:32px;font-size:var(--fs-p2);line-height:24px}
+.fnlist li{margin-bottom:8px;scroll-margin-top:72px}
+.fnlist li:target{background:var(--surface-2)}
+.fnlist a{color:var(--accent)}
+.kind{color:var(--mute)}
+@media (max-width:640px){.gloss{grid-template-columns:minmax(0,1fr)}.gloss dd{margin-bottom:8px}.cue .v{display:inline;margin:0 0 0 8px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <h1>261107 AI 프론티어 2026</h1>
+  <p class="meta">AI와 인간의 공존 전략 · 필기 9장 · 녹취 161분</p>
+  <p class="thesis">기록하고, 시키고, 책임진다</p>
+  <p class="legend">주장 32건 대조: 근거 있음 11 · 일부 맞음 8 · 연사 의견 5 · 미대조 2 · 논쟁 중 2 · 어긋남 2 · 검증 전 1 · 확인 필요 1</p>
+</header>
+
+<nav aria-label="쪽 이동">
+  <a href="#part1">1부 빌더 조쉬</a>
+  <a href="#part2">2부 정재승</a>
+  <a href="#facts">사실 확인</a>
+  <a href="#words">낱말 풀이</a>
+  <a href="#notes">각주</a>
+</nav>
+
+<section class="sheet" id="part1">
+  <h2>1부 · AI에게 정복되지 않기</h2>
+  <p class="by">빌더 조쉬 · AI 네이티브로 시작하는 방법</p>
+  <div class="row"><div class="cue">잘 쓰는 사람<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">내 전문성으로 AI의 한계를 매일 시험</p><p class="easy"><b>쉽게</b> 요리사가 새 칼로 무엇을 자르고 무엇을 못 자르는지 몸으로 아는 일.</p><p class="check">같은 AI도 잘하는 일은 품질 40% 상승, 못하는 일은 정답률 19%포인트 하락. 경계를 아는 것이 실력.<sup><a class="fn" id="r1-0-jag" href="#fn1">1</a></sup></p></div></div>
+  <div class="row"><div class="cue">4단계<span class="v none">연사 의견</span></div><div class="note"><p class="claim">대화 → 비서 → 팀원 → 시스템. 대부분 2단계</p><div class="stair" aria-label="AI 활용 4단계 계단"><div style="height:32px"><span>대화</span></div><div style="height:56px"><span>비서</span></div><div style="height:80px"><span>팀원</span></div><div style="height:104px"><span>시스템</span></div></div><p class="easy"><b>쉽게</b> 기준은 하나. 내가 노트북을 덮어도 일이 계속 되는가.</p></div></div>
+  <div class="row"><div class="cue">조직<span class="v part">일부 맞음</span></div><div class="note"><p class="claim">위계는 정보 전달 구조, 이제 AI가 대신</p><p class="easy"><b>쉽게</b> 윗사람 말을 아래로 나르던 전달 역할을 AI가 맡는다는 뜻.</p><p class="check">잭 도시·로엘로프 보타의 글과 같은 주장. 다만 블록도 초기 단계이며 시행착오를 예상한다고 밝힘.<sup><a class="fn" id="r2-0-fortune" href="#fn2">2</a></sup></p></div></div>
+  <div class="row"><div class="cue">위임<span class="v none">연사 의견</span></div><div class="note"><p class="claim">8주 일 나열 → 위임·지속·삭제</p><p class="easy"><b>쉽게</b> 옷장 정리. 다 꺼내 놓고 맡길 것, 남길 것, 버릴 것을 나눈다.</p></div></div>
+  <div class="row"><div class="cue">맥락 허브<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">에이전트보다 기록이 먼저</p><p class="easy"><b>쉽게</b> 새 직원에게 주는 인수인계 노트. 노트가 없으면 AI는 매일 신입이다.</p><p class="check">에이전트는 세션마다 기억이 끊겨 진행 기록 파일이 필요. 카파시도 마크다운 위키 방식을 공개.<sup><a class="fn" id="r3-0-harness" href="#fn3">3</a> <a class="fn" id="r4-1-gist" href="#fn4">4</a></sup></p></div></div>
+  <div class="row"><div class="cue">AI가 먼저 묻기<span class="v none">연사 의견</span></div><div class="note"><p class="claim">하루 10개 제안, 사람은 2~3개 승인</p><p class="easy"><b>쉽게</b> 비서가 "이건 제가 할까요?" 묻고 사람은 고르기만 한다.</p></div></div>
+  <div class="row"><div class="cue">드리밍<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">낮의 기억을 밤에 정리</p><p class="easy"><b>쉽게</b> 자기 전에 일기를 쓰면 다음 날 덜 헤매는 것과 같다.</p><p class="check">Anthropic이 2026년 5월 발표한 실제 기능. 지난 세션을 돌아보며 기억을 고침. 기록된 세션만 볼 수 있음.<sup><a class="fn" id="r5-0-dream" href="#fn5">5</a></sup></p></div></div>
+  <div class="row"><div class="cue">하네스<span class="v part">일부 맞음</span></div><div class="note"><p class="claim">역할을 md 문서로 분리</p><p class="easy"><b>쉽게</b> 말에게 씌우는 마구. 힘센 말이 원하는 길로 가게 하는 장치.</p><p class="check">업계 정의는 더 넓음. 기억·검증·저장까지 모델 바깥의 장치 전체. 역할 문서는 그 일부.<sup><a class="fn" id="r6-0-harness2" href="#fn6">6</a></sup></p></div></div>
+  <div class="row"><div class="cue">통화 → 견적<span class="v none">연사 의견</span></div><div class="note"><p class="claim">전화를 끊자마자 제안서·견적서 완성</p><p class="easy"><b>쉽게</b> 회의가 끝나면 회의록이 저절로 나와 있는 것.</p></div></div>
+  <div class="row"><div class="cue">다스림<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">"어떻게 만들까" → "어떻게 다스릴까"</p><p class="easy"><b>쉽게</b> AI 500개는 직원 500명과 같다. 만들기보다 관리가 어렵다.</p><p class="check">연사가 든 『아메바 경영』은 회사를 작은 단위로 나눠 리더가 손익을 책임지는 방식.<sup><a class="fn" id="r7-0-amoeba" href="#fn7">7</a></sup></p></div></div>
+  <div class="row"><div class="cue">평가<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">"8점 못 넘으면 내게 보여주지도 마라."</p><p class="easy"><b>쉽게</b> AI에게 채점표를 먼저 주고, 통과한 답만 받는다.</p><p class="check">검증 장치가 없으면 AI는 일부만 하고도 끝났다고 보고. 테스트 통과를 완료 기준으로 둠.<sup><a class="fn" id="r6-0-harness2" href="#fn6">6</a></sup></p></div></div>
+  <div class="row"><div class="cue">배치<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">단순한 일에 비싼 모델 금지</p><p class="easy"><b>쉽게</b> 동네 심부름에 대형 트럭을 부르지 않는 것.</p><p class="check">소형 특화 모델은 더 빠르고 운영비가 낮음. 2027년 사용량 3배 전망은 예측값.<sup><a class="fn" id="r8-0-gartner" href="#fn8">8</a></sup></p></div></div>
+  <div class="row"><div class="cue">AI 애착<span class="v part">일부 맞음</span></div><div class="note"><p class="claim">로봇 3원칙으로는 통제 불가, 애착 경계</p><p class="easy"><b>쉽게</b> 소설 속 규칙을 적어 준다고 AI가 늘 지킨다는 보장은 없다.</p><p class="check">981명 실험에서 사용량이 많을수록 외로움·의존이 높게 나타남. 상관관계이고 원인은 미확정. 3원칙 주입 가능성은 미대조.<sup><a class="fn" id="r9-0-mit" href="#fn9">9</a></sup></p></div></div>
+  <p class="hit">기록 → 위임 → 평가</p>
+</section>
+
+<section class="sheet" id="part2">
+  <h2>2부 · 삶의 궤적 또한 데이터</h2>
+  <p class="by">정재승 카이스트 교수 · 인공지능의 시대에 인간에게 남겨진 질문들</p>
+  <div class="row"><div class="cue">왜 AI<span class="v none">미대조</span></div><div class="note"><p class="claim">제2의 아이폰 후보 모두 기대 미달, 유일하게 빠른 분야</p><p class="easy"><b>쉽게</b> 경제를 끌어올릴 다음 스타 상품을 찾다가 AI에 모였다.</p></div></div>
+  <div class="row"><div class="cue">정체<span class="v part">일부 맞음</span></div><div class="note"><p class="claim">알고리즘이 아니라 데이터와 계산의 양</p><p class="easy"><b>쉽게</b> 요리법은 옛것 그대로, 재료와 불이 커졌다.</p><p class="check">AlexNet은 2012년 오류율 15.3%, 2위권과 10%포인트 이상 차이. 구조는 20년 전 LeNet-5와 비슷. 다만 2017년 트랜스포머처럼 새 설계도 중요.<sup><a class="fn" id="r10-0-cvpr" href="#fn10">10</a> <a class="fn" id="r11-1-exxact" href="#fn11">11</a> <a class="fn" id="r12-2-attention" href="#fn12">12</a></sup></p></div></div>
+  <div class="row"><div class="cue">돈 버는 곳<span class="v none">미대조</span></div><div class="note"><p class="claim">GPU·메모리·학습 데이터</p><p class="easy"><b>쉽게</b> 금을 캐는 사람보다 곡괭이 파는 사람.</p></div></div>
+  <div class="row"><div class="cue">이세돌<span class="v part">일부 맞음</span></div><div class="note"><p class="claim">이해 못 해도 따르는 시대, 책임은 서명한 사람</p><p class="easy"><b>쉽게</b> 내비게이션을 따라가다 사고가 나도 책임은 운전자에게 있다.</p><p class="check">2019년 은퇴와 "이길 수 없는 존재" 발언은 사실. 그러나 기풍 소멸과 반대 자료 있음. 수 580만 개 분석에서 AI 등장 뒤 새로운 수가 늘고 판단 품질도 상승.<sup><a class="fn" id="r13-0-lee" href="#fn13">13</a> <a class="fn" id="r14-1-shin" href="#fn14">14</a></sup></p></div></div>
+  <div class="row"><div class="cue">5억 줄<span class="v part">일부 맞음</span></div><div class="note"><p class="claim">코드 2만 줄 → 5억 줄. 만든 회사도 모름</p><p class="easy"><b>쉽게</b> 너무 큰 미로라 만든 사람도 길을 다 모른다.</p><p class="check">Anthropic 대표도 개발사가 내부 작동을 충분히 이해하지 못한다고 인정. 2만·5억 수치는 미대조.<sup><a class="fn" id="r15-0-amodei" href="#fn15">15</a></sup></p></div></div>
+  <div class="row"><div class="cue">로켓으로 파리<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">개인 일에 초거대 AI는 과함. 맞춤 로컬 AI로 이동</p><div class="bar" aria-label="이용자 100명 중 유료 약 5명"><div class="bar-track"><div class="bar-fill"></div></div><p>유료 약 5% · 식당 비유의 120명 중 6명과 같은 비율</p></div><p class="easy"><b>쉽게</b> 손님 대부분이 공짜로 먹는 식당은 적자가 난다.</p><p class="check">2025년 상반기 매출 43억 달러, 순손실 135억 달러 보도. 기업 쪽 소형 특화 모델 확대 전망과 일치.<sup><a class="fn" id="r16-0-reg" href="#fn16">16</a> <a class="fn" id="r8-1-gartner" href="#fn8">8</a></sup></p></div></div>
+  <div class="row"><div class="cue">스몰 데이터<span class="v part">일부 맞음</span></div><div class="note"><p class="claim">데이터 많은 곳부터 인력 감소. 사람은 틈새로</p><p class="easy"><b>쉽게</b> 대형마트가 못 하는 동네 단골 장사로 옮기는 것.</p><p class="check">미국 급여 자료에서 AI 노출 직군 22~25세 고용이 13% 상대 감소. 단 AI가 사람을 돕는 직군은 고용 증가. 업종별 순서는 미대조.<sup><a class="fn" id="r17-0-stan" href="#fn17">17</a></sup></p></div></div>
+  <div class="row"><div class="cue">세탁기의 역설<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">시간은 그대로, 기준만 상승</p><p class="easy"><b>쉽게</b> 빨래가 쉬워지니 더 자주 빨게 되어 일이 줄지 않는다.</p><p class="check">가전이 가사 시간을 줄이지 못했다는 연구서가 있음. AI도 8개월 현장 연구에서 업무가 더 강해짐. 표본은 소규모.<sup><a class="fn" id="r18-0-cowan" href="#fn18">18</a> <a class="fn" id="r19-1-haas" href="#fn19">19</a></sup></p></div></div>
+  <div class="row"><div class="cue">앞으로의 질문<span class="v part">논쟁 중</span></div><div class="note"><p class="claim">"네 생각은 뭔데" "어떤 문제를 풀어 봤어"</p><p class="easy"><b>쉽게</b> 점수표보다 내가 만든 결과물을 보여 주는 시대.</p><p class="check">연사는 격차 확대를 전망. 반면 글쓰기 실험에서는 하위 숙련자가 더 크게 향상. 쓰는 능력 차이는 경계 밖 과제에서 드러남.<sup><a class="fn" id="r20-0-noy" href="#fn20">20</a> <a class="fn" id="r1-1-jag" href="#fn1">1</a></sup></p></div></div>
+  <div class="row"><div class="cue">보편적 고소득<span class="v part">논쟁 중</span></div><div class="note"><p class="claim">데이터 만드는 사람에게 수익이 먼저</p><p class="easy"><b>쉽게</b> AI 재료를 만든 사람에게 저작권료처럼 나누자는 생각.</p><p class="check">재런 러니어·글렌 웨일이 2018년부터 제안. 금액 규모는 의견이 갈림.<sup><a class="fn" id="r21-0-lanier" href="#fn21">21</a></sup></p></div></div>
+  <div class="row"><div class="cue">맞춤형 판별<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">데이터 충분? 문제 명확? 개인차 큼?</p><p class="easy"><b>쉽게</b> 모두 같은 약 대신 내 몸에 맞는 약을 고르는 방식.</p><p class="check">알츠하이머 1,612명 뇌 영상에서 네 갈래 확인, 각 18~33%. 연사 발언과 일치.<sup><a class="fn" id="r22-0-vogel" href="#fn22">22</a></sup></p></div></div>
+  <div class="row"><div class="cue">마지막 조언<span class="v none">연사 의견</span></div><div class="note"><p class="claim">헉헉거리며 따라가는 일 자체가 학습</p><p class="easy"><b>쉽게</b> 새 스마트폰 기능을 다 몰라도 내게 필요한 것만 쓰면 된다.</p></div></div>
+  <p class="hit">AI는 시간이 아니라 기준을 올린다</p>
+</section>
+
+<section class="sheet" id="facts">
+  <h2>사실 확인</h2>
+  <p class="by">강연 수치와 공개 자료 대조. 인용 전 확인</p>
+  <div class="row"><div class="cue">잭 도시 감원<span class="v bad">어긋남</span></div><div class="note"><p class="claim">강연: 1만 5천 명 중 7천 명</p><p class="easy"><b>쉽게</b> 결제 회사 블록의 대표가 AI를 이유로 감원한 사례.</p><p class="check">보도는 4천 명 이상, 1만여 명 → 6천 명 미만.<sup><a class="fn" id="r23-0-invezz" href="#fn23">23</a> <a class="fn" id="r24-1-aol" href="#fn24">24</a></sup></p></div></div>
+  <div class="row"><div class="cue">나비에-스토크스<span class="v part">검증 전</span></div><div class="note"><p class="claim">강연: 88시간, 에이전트 1만 개, 130억 원</p><p class="easy"><b>쉽게</b> 물과 공기의 흐름을 다루는 수학 난제.</p><p class="check">88시간·1만 개는 오픈AI 발표와 일치. 동료 심사 전, 클레이 연구소는 미해결. 비용은 수백만 달러 보도.<sup><a class="fn" id="r25-0-nyu" href="#fn25">25</a> <a class="fn" id="r26-1-techspot" href="#fn26">26</a></sup></p></div></div>
+  <div class="row"><div class="cue">헤르메스<span class="v bad">어긋남</span></div><div class="note"><p class="claim">강연: 세계 1위 코딩 도구, 드리밍</p><p class="easy"><b>쉽게</b> 혼자 도는 개인 AI 도우미 프로그램.</p><p class="check">노스 리서치의 오픈소스 개인 에이전트. 드리밍은 Anthropic 기능 이름.<sup><a class="fn" id="r27-0-hermes" href="#fn27">27</a> <a class="fn" id="r5-1-dream" href="#fn5">5</a></sup></p></div></div>
+  <div class="row"><div class="cue">어사이드<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">강연: 행정 업무를 맡기는 브라우저</p><p class="easy"><b>쉽게</b> 웹사이트 일을 대신 눌러 주는 브라우저.</p><p class="check">2026년 6월 출시. 무료 루틴 3개, Pro 월 20달러. 사이트 변경에 깨질 수 있음.<sup><a class="fn" id="r28-0-eesel" href="#fn28">28</a></sup></p></div></div>
+  <div class="row"><div class="cue">LLM 위키<span class="v ok">근거 있음</span></div><div class="note"><p class="claim">강연: 카파시의 지식 체계화</p><p class="easy"><b>쉽게</b> AI가 스스로 고쳐 쓰는 개인 백과사전.</p><p class="check">2026년 4월 공개한 아이디어 문서. 제품은 아님.<sup><a class="fn" id="r4-0-gist" href="#fn4">4</a></sup></p></div></div>
+  <div class="row"><div class="cue">Orca<span class="v part">일부 맞음</span></div><div class="note"><p class="claim">강연: LLMOps 도구</p><p class="easy"><b>쉽게</b> 코딩 AI 여러 개를 동시에 돌리는 앱.</p><p class="check">LLMOps 도구로 설명한 자료는 못 찾음.<sup><a class="fn" id="r29-0-orca" href="#fn29">29</a></sup></p></div></div>
+  <div class="row"><div class="cue">PRAUDE 노트<span class="v part">확인 필요</span></div><div class="note"><p class="claim">강연: 회의록 녹음 도구</p><p class="easy"><b>쉽게</b> 회의를 녹음해 글로 옮겨 주는 기기.</p><p class="check">플라우드(Plaud) 노트로 짐작. 연사 확인 없음.</p></div></div>
+</section>
+
+<section class="sheet" id="words">
+  <h2>낱말 풀이</h2>
+  <dl class="gloss"><dt>에이전트</dt><dd>지시 하나로 여러 단계 일을 스스로 하는 AI</dd><dt>프롬프트</dt><dd>AI에게 주는 지시문</dd><dt>md(마크다운)</dt><dd>기호로 제목·목록을 적는 단순한 글 형식</dd><dt>맥락</dt><dd>AI가 일할 때 참고하는 배경 자료</dd><dt>LLM</dt><dd>챗GPT 같은 대화형 AI의 엔진</dd><dt>로컬 AI</dt><dd>회사나 내 컴퓨터 안에서 도는 AI</dd><dt>GPU</dt><dd>계산을 한꺼번에 많이 처리하는 칩</dd><dt>LLMOps</dt><dd>AI를 고르고 돌리고 평가하는 운영 고리</dd></dl>
+</section>
+
+<section class="sheet" id="notes">
+  <h2>각주</h2>
+  <p class="by">원문 표시 외에는 검색으로 확인한 보도·요약이다. 인용 전 원문 재검 권장</p>
+  <ol class="fnlist"><li id="fn1"><a href="https://businessdatasolutions.github.io/ai-wiki/sources/2026-04-28-dellacqua-jagged-technological-frontier" rel="noopener">Dell'Acqua 외, 「Navigating the Jagged Technological Frontier」, BCG 컨설턴트 758명 실험</a> <span class="kind">요약 자료</span></li><li id="fn2"><a href="https://fortune.com/2026/04/02/jack-dorsey-roelof-botha-ai-middle-management/" rel="noopener">Fortune, 잭 도시·로엘로프 보타의 중간관리 논의, 2026-04-02</a> <span class="kind">보도</span></li><li id="fn3"><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" rel="noopener">Anthropic, 「Effective harnesses for long-running agents」, 2025-11-26</a> <span class="kind">원문</span></li><li id="fn4"><a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" rel="noopener">Andrej Karpathy, LLM Wiki gist, 2026년 4월</a> <span class="kind">원문</span></li><li id="fn5"><a href="https://siliconangle.com/2026/05/06/anthropic-letting-claude-agents-dream-dont-sleep-job/" rel="noopener">SiliconANGLE, Anthropic의 드리밍 기능 발표, 2026-05-06</a> <span class="kind">보도</span></li><li id="fn6"><a href="https://www.firecrawl.dev/blog/what-is-an-agent-harness" rel="noopener">Firecrawl, 「What is an agent harness」</a> <span class="kind">해설</span></li><li id="fn7"><a href="https://sloanreview.mit.edu/article/amoeba-management-lessons-from-japans-kyocera" rel="noopener">MIT Sloan Management Review, 「Amoeba Management: Lessons From Japan's Kyocera」</a> <span class="kind">해설</span></li><li id="fn8"><a href="https://www.gartner.com/en/newsroom/press-releases/2025-04-09-gartner-predicts-by-2027-organizations-will-use-small-task-specific-ai-models-three-times-more-than-general-purpose-large-language-models" rel="noopener">Gartner 보도자료, 2027년 소형 특화 모델 사용량 전망, 2025-04-09</a> <span class="kind">보도자료</span></li><li id="fn9"><a href="https://www.media.mit.edu/posts/openai-mit-research-collaboration-affective-use-and-emotional-wellbeing-in-chatgpt/" rel="noopener">MIT Media Lab·OpenAI, 감정적 사용과 정서 연구, 2025년 3월</a> <span class="kind">연구 소개</span></li><li id="fn10"><a href="https://arxiv.org/html/2410.09649v1" rel="noopener">Learning the Bitter Lesson: 20 Years of CVPR Proceedings</a> <span class="kind">논문</span></li><li id="fn11"><a href="https://www.exxactcorp.com/blog/Deep-Learning/compute-goes-brrr-revisiting-sutton-s-bitter-lesson-for-artificial-intelligence" rel="noopener">Exxact, 서튼의 「쓴 교훈」 재검토, AlexNet과 LeNet-5 비교</a> <span class="kind">해설</span></li><li id="fn12"><a href="https://arxiv.org/abs/1706.03762" rel="noopener">Vaswani 외, 「Attention Is All You Need」, 2017</a> <span class="kind">논문</span></li><li id="fn13"><a href="https://edition.cnn.com/2019/11/27/tech/go-master-google-intl-hnk-scli/index.html" rel="noopener">CNN, 이세돌 은퇴 보도, 2019-11-27</a> <span class="kind">보도</span></li><li id="fn14"><a href="https://arxiv.org/abs/2303.07462" rel="noopener">Shin 외, 「Superhuman AI Can Improve Human Decision Making by Increasing Novelty」, PNAS 2023</a> <span class="kind">논문</span></li><li id="fn15"><a href="https://www.darioamodei.com/post/the-urgency-of-interpretability" rel="noopener">Dario Amodei, 「The Urgency of Interpretability」, 2025</a> <span class="kind">원문</span></li><li id="fn16"><a href="https://www.theregister.com/2025/10/15/openais_chatgpt_popular_few_pay/" rel="noopener">The Register, 챗GPT 유료 이용자 비율과 손실, 2025-10-15</a> <span class="kind">보도</span></li><li id="fn17"><a href="https://www.itpro.com/technology/artificial-intelligence/this-stanford-study-shows-ai-is-starting-to-take-jobs-and-those-identified-as-highest-risk-are-eerily-similar-to-a-recent-microsoft-study" rel="noopener">ITPro, Stanford 「Canaries in the Coal Mine」 보도</a> <span class="kind">보도</span></li><li id="fn18"><a href="https://www.hbgacademic.com/titles/ruth-schwartz-cowan/more-work-for-mother/9780465047321" rel="noopener">Ruth Schwartz Cowan, 『More Work for Mother』 서평·소개</a> <span class="kind">책 소개</span></li><li id="fn19"><a href="https://newsroom.haas.berkeley.edu/ai-promised-to-free-up-workers-time-uc-berkeley-haas-researchers-found-the-opposite/" rel="noopener">UC Berkeley Haas 뉴스룸, AI와 업무 강도 연구, 2026-02-18</a> <span class="kind">기관 발표</span></li><li id="fn20"><a href="https://news.mit.edu/2023/study-finds-chatgpt-boosts-worker-productivity-writing-0714" rel="noopener">MIT News, Noy·Zhang의 챗GPT 생산성 실험, 2023-07</a> <span class="kind">기관 발표</span></li><li id="fn21"><a href="https://japantimes.co.jp/news/2019/11/14/business/tech/people-paid-sharing-personal-data-online-one-microsoft-employee-says-people-fooled-handing-data-free" rel="noopener">The Japan Times, 글렌 웨일의 데이터 대가 주장, 2019-11-14</a> <span class="kind">보도</span></li><li id="fn22"><a href="https://www.nature.com/articles/s41591-021-01309-6.pdf" rel="noopener">Vogel 외, 「Four distinct trajectories of tau deposition」, Nature Medicine 2021</a> <span class="kind">논문</span></li><li id="fn23"><a href="https://invezz.com/ie/news/2026/02/27/block-to-cut-4000-jobs-as-jack-dorsey-pivots-company-toward-ai/" rel="noopener">Invezz, 블록 4천 명 감원 보도, 2026-02-27</a> <span class="kind">보도</span></li><li id="fn24"><a href="https://www.aol.com/articles/jack-dorsey-roelof-botha-think-165841345.html" rel="noopener">AOL, 도시·보타 공동 글 보도</a> <span class="kind">보도</span></li><li id="fn25"><a href="https://rits.shanghai.nyu.edu/ai/openai-navier-stokes-proof-credit-dispute/" rel="noopener">NYU 상하이, 나비에-스토크스 증명 공로 논쟁</a> <span class="kind">해설</span></li><li id="fn26"><a href="https://techspot.com/news/113785-openai-claims-10000-ai-agents-solved-one-mathematics.html" rel="noopener">TechSpot, 오픈AI 에이전트 1만 개 증명 주장</a> <span class="kind">보도</span></li><li id="fn27"><a href="https://hermes-agent.nousresearch.com/docs" rel="noopener">Nous Research, Hermes Agent 공식 문서</a> <span class="kind">원문</span></li><li id="fn28"><a href="https://eesel.ai/blog/aside-ai-browser" rel="noopener">eesel, Aside AI 브라우저 평가</a> <span class="kind">해설</span></li><li id="fn29"><a href="https://landscape.jimmysong.io/projects/orca/" rel="noopener">Jimmy Song Landscape, Orca 프로젝트 소개</a> <span class="kind">소개</span></li></ol>
+  <p class="foot">필기 9장·녹취 161분 기반 개인 복습용 정리. 판정은 공개 자료 대조 결과이며 미대조는 조사하지 않았다는 뜻이다.</p>
+</section>
+</div>
+
+
+</body>
+</html>
