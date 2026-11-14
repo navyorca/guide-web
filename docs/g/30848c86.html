@@ -1,0 +1,165 @@
+<style>.lim-bar{background:#E8EFFF;border-bottom:2px solid #1C3E92;padding:12px 20px;font:inherit;font-weight:700;color:#1C3E92;text-align:center}.lim-ov{position:fixed;inset:0;z-index:2147483646;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(255,255,255,.35);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.lim-ov div{background:#fff;border:2px solid #1C3E92;border-radius:12px;padding:32px 28px;max-width:360px;text-align:center;font:inherit;font-size:1.125rem;font-weight:700;color:#0B1220;line-height:1.6}</style>
+<meta name="robots" content="noindex,nofollow">
+<style>body::after{content:"";position:fixed;inset:0;z-index:2147483647;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22260%22%3E%3Ctext%20x%3D%220%22%20y%3D%22130%22%20font-family%3D%22sans-serif%22%20font-size%3D%2215%22%20fill%3D%22%23F0F8FF%22%20fill-opacity%3D%220.30%22%20transform%3D%22rotate%28-24%20210%20130%29%22%3ESBS%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8%20%EA%B0%95%EB%82%A8%20%C2%B7%20%EC%98%A4%EC%98%81%EC%84%A0%20%EB%A9%98%ED%86%A0%20%EC%A0%9C%EA%B3%B5%3C%2Ftext%3E%3C%2Fsvg%3E") 0 0/420px 260px repeat}</style>
+<title>에이전트 수강생 세미나 노트</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap">
+<style>
+/* 휴대폰 한 단. 무대 문장 → 수업 연결 → 단계 → 숫자 → 다음 단계 한 줄. 상자 없이 굵기·색으로만 위계 */
+:root{
+  --bg:#ffffff; --ink:#191c21; --soft:#454b55; --mute:#6a717c; --line:#e2e6ec; --accent:#0b4fa8; --accent-soft:#e9f0fa; --warn:#9a4d00;
+  --fs-h1:1.75rem; --fs-h2:1.375rem; --fs-big:1.75rem; --fs-p1:1.1875rem; --fs-p2:1rem;
+  --font:"Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171b;--ink:#eef0f3;--soft:#c6cbd3;--mute:#a1a8b2;--line:#2f343b;--accent:#8db8ff;--accent-soft:#1d2633;--warn:#ffc46b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15171b;--ink:#eef0f3;--soft:#c6cbd3;--mute:#a1a8b2;--line:#2f343b;--accent:#8db8ff;--accent-soft:#1d2633;--warn:#ffc46b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:var(--fs-p1);line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+.wrap{max-width:680px;margin:0 auto;padding-block:36px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:60px}
+.wrap>*{min-width:0}
+p{margin:0}
+h1{font-size:var(--fs-h1);font-weight:900;line-height:1.4;margin:10px 0 16px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+h2{font-size:var(--fs-h2);font-weight:400;line-height:1.45;margin:0 0 14px;text-wrap:balance}
+.lead{color:var(--soft)}
+section{border-top:2px solid var(--ink);padding-top:22px;display:grid;gap:14px}
+.cap{font-size:var(--fs-p2);color:var(--mute)}
+b{font-weight:700}
+
+/* 무대 문장과 수업 연결 */
+.pairs{list-style:none;margin:0;padding:0;display:grid}
+.pairs li{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:4px 20px;padding:14px 0;border-bottom:1px solid var(--line)}
+.pairs .say{font-weight:400}
+.pairs .cls{color:var(--accent);font-size:var(--fs-p2);align-self:center}
+@media (max-width:520px){.pairs li{grid-template-columns:minmax(0,1fr)}}
+
+/* 4단계 계단 */
+.stair{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;align-items:end;margin-top:6px}
+.stair div{border-radius:4px 4px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 2px 6px;font-size:var(--fs-p2);line-height:1.3;text-align:center}
+.stair small{font-size:1rem;opacity:.9}
+.st1{height:56px;background:var(--line);color:var(--soft)}
+.st2{height:84px;background:var(--line);color:var(--soft);box-shadow:0 0 0 3px var(--warn) inset}
+.st3{height:112px;background:var(--accent);color:var(--bg)}
+.st4{height:140px;background:var(--accent);color:var(--bg)}
+.legend{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;font-size:1rem;color:var(--mute);text-align:center;line-height:1.4}
+
+/* 숫자 */
+.ev{display:grid;gap:26px}
+.num{font-size:var(--fs-big);font-weight:700;color:var(--accent);line-height:1.25;font-variant-numeric:tabular-nums}
+.num small{font-size:var(--fs-p2);font-weight:400;color:var(--mute);margin-left:6px}
+.ev p+p{margin-top:4px}
+sup a{color:var(--accent);font-size:1rem;text-decoration:none;padding:0 2px}
+
+/* 과정 단계 */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:18px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:36px minmax(0,1fr);gap:8px}
+.steps li::before{content:counter(s);font-weight:400;font-size:var(--fs-h2);color:var(--mute);line-height:1.35}
+.steps li.goal::before{color:var(--accent)}
+.steps b{display:block;font-weight:400}
+.steps span{color:var(--soft)}
+.steps li.goal b{color:var(--accent)}
+
+.quote{font-size:var(--fs-h2);font-weight:400;line-height:1.55}
+.who{font-size:var(--fs-p2);color:var(--mute);margin-top:2px}
+
+/* 마무리 한 줄 */
+.cta{border-top:0;padding-top:0;gap:10px}
+.cta .ask{font-size:var(--fs-big);font-weight:700;line-height:1.4;color:var(--accent)}
+.sign{font-size:var(--fs-p2);color:var(--mute)}
+
+.notes{font-size:var(--fs-p2);color:var(--soft);line-height:1.6;padding-left:22px;margin:0}
+.notes li{margin-bottom:6px;scroll-margin-top:24px}
+.notes a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="wrap">
+
+<header>
+  <h1>지금 배우시는 그것이<br><em>세미나의 결론</em>이었습니다</h1>
+  <p class="cap">2026년 11월 7일 AI 프론티어 2026 세미나, 담당 멘토가 현장에서 듣고 정리했습니다.</p>
+  <p class="lead" style="margin-top:12px">빌더 조쉬(AI 전환 회사 대표)와 정재승 카이스트 교수가 3시간 동안 같은 말을 했습니다. AI에게 묻는 사람에서 AI에게 일을 맡기는 사람으로 넘어가라는 것입니다.</p>
+</header>
+
+<section>
+  <h2>무대에서 나온 말, 수업에서 배우는 것</h2>
+  <ul class="pairs">
+    <li><p class="say">"기록밖에 답이 없다."</p><p class="cls">기초 · 메모리와 규칙 파일</p></li>
+    <li><p class="say">반복 일은 AI에게, 판단은 사람에게</p><p class="cls">기초 · 스킬</p></li>
+    <li><p class="say">"8점 못 넘으면 내게 보여주지도 마라."</p><p class="cls">기초 · 훅으로 결과 검사</p></li>
+    <li><p class="say">역할마다 문서를 따로 둬라</p><p class="cls">심화 · 하네스 엔지니어링</p></li>
+    <li><p class="say">노트북을 덮어도 일이 돌아가는가</p><p class="cls">자동화 · 내 업무 자동화 1식</p></li>
+  </ul>
+  <p>상담 때 말씀드린 순서 그대로입니다. 프롬프트 몇 줄이 아니라 <b>기록하고, 맡기고, 검사하는 구조</b>가 핵심이었습니다.</p>
+</section>
+
+<section>
+  <h2>대부분은 2단계에서 멈춰 있습니다</h2>
+  <p>강연은 AI 활용을 4단계로 나눴습니다. 챗GPT에게 묻고 답을 받는 것은 1단계입니다.</p>
+  <div class="stair" aria-label="AI 활용 4단계. 2단계에 대부분이 머묾. 3단계부터 에이전트">
+    <div class="st1">대화</div><div class="st2">비서</div><div class="st3">팀원</div><div class="st4">시스템</div>
+  </div>
+  <div class="legend" aria-hidden="true"><span>질문·답</span><span>대부분 여기</span><span>에이전트 1·2</span><span>업무자동화</span></div>
+  <p>수강 중이신 분은 이미 3단계 입구에 계십니다. 기준 질문은 하나였습니다. <b>내가 자리를 비워도 AI가 일을 이어 가는가.</b></p>
+</section>
+
+<section>
+  <h2>늦을수록 차이가 벌어집니다</h2>
+  <div class="ev">
+    <div>
+      <p class="num">+40%<small>AI가 잘하는 일의 품질</small></p>
+      <p class="num">−19%p<small>AI가 못하는 일의 정답률</small></p>
+      <p>컨설턴트 758명에게 같은 AI를 줬는데 결과가 갈렸습니다.<sup><a href="#n1">1</a></sup> AI가 어디까지 되는지 아는 사람만 이득을 봤습니다.</p>
+    </div>
+    <div>
+      <p class="num">8개월<small>AI 도입 뒤 업무가 더 강해진 현장 연구</small></p>
+      <p>세탁기가 생겨도 빨래 시간은 줄지 않았습니다. 더 자주 빨게 됐기 때문입니다.<sup><a href="#n2">2</a></sup> AI를 들인 회사도 일이 더 늘었습니다.<sup><a href="#n3">3</a></sup> 시간이 줄지 않고 기준이 오릅니다.</p>
+    </div>
+    <div>
+      <p class="num">−13%<small>AI 노출 직군 22~25세 고용, 상대 감소</small></p>
+      <p>AI가 사람을 대신하는 직군은 줄고, AI가 사람을 돕는 직군은 늘었습니다.<sup><a href="#n4">4</a></sup> 어느 쪽에 설지는 AI에게 일을 맡길 줄 아는지가 가릅니다.</p>
+    </div>
+    <div>
+      <p class="num">4,000명+<small>블록(Block)의 AI 전환 감원 보도</small></p>
+      <p>회사는 이미 바꾸고 있습니다.<sup><a href="#n5">5</a></sup> 빌더 조쉬의 표현으로는 "내가 없어도 돌아가게 하되 통제는 쥐어라"입니다.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>어디서 멈추면 아쉬운가</h2>
+  <ol class="steps">
+    <li><p><b>AI에이전트1 · 기초</b><span>에이전트를 다룰 줄 아는 상태. 내가 켜야 움직입니다.</span></p></li>
+    <li><p><b>AI에이전트2 · 심화</b><span>내가 설계한 대로 업무가 실행되는 상태.</span></p></li>
+    <li class="goal"><p><b>AIX 에이전트 업무자동화</b><span>내 업무에 실제로 도는 자동화 1식. 강사 1:1 피드백, 금 18:00~22:00, 정원 12명.</span></p></li>
+  </ol>
+  <p>세미나에서 말한 "노트북을 덮어도 일하는 AI"는 마지막 칸입니다. 지금 진도에서 바로 이어 가면 손에 익은 감각이 끊기지 않습니다.</p>
+</section>
+
+<section>
+  <h2>강연 마지막 조언</h2>
+  <p class="quote">"헉헉거리며 따라가는 일 자체가 학습이다."</p>
+  <p class="who">정재승 카이스트 교수</p>
+  <p>새 기능을 다 알 필요는 없습니다. 지금 수업에서 따라가고 계신 그 과정이 곧 실력입니다.</p>
+</section>
+
+<section class="cta">
+  <p class="ask">담당 멘토에게<br>"다음 단계" 한마디만 보내 주세요</p>
+  <p>지금 진도에 맞춰 이어 들을 반과 시작일을 바로 알려 드립니다.</p>
+  <p class="sign">담당 멘토 오영선</p>
+</section>
+
+<section>
+  <h2>출처</h2>
+  <ol class="notes">
+    <li id="n1"><a href="https://businessdatasolutions.github.io/ai-wiki/sources/2026-04-28-dellacqua-jagged-technological-frontier" rel="noopener">Dell'Acqua 외, 「Navigating the Jagged Technological Frontier」, BCG 컨설턴트 758명 실험</a></li>
+    <li id="n2"><a href="https://www.hbgacademic.com/titles/ruth-schwartz-cowan/more-work-for-mother/9780465047321" rel="noopener">Ruth Schwartz Cowan, 『More Work for Mother』</a></li>
+    <li id="n3"><a href="https://newsroom.haas.berkeley.edu/ai-promised-to-free-up-workers-time-uc-berkeley-haas-researchers-found-the-opposite/" rel="noopener">UC Berkeley Haas, AI와 업무 강도 현장 연구, 2026-02-18</a></li>
+    <li id="n4"><a href="https://www.itpro.com/technology/artificial-intelligence/this-stanford-study-shows-ai-is-starting-to-take-jobs-and-those-identified-as-highest-risk-are-eerily-similar-to-a-recent-microsoft-study" rel="noopener">Stanford 「Canaries in the Coal Mine」 보도(ITPro)</a></li>
+    <li id="n5"><a href="https://invezz.com/ie/news/2026/02/27/block-to-cut-4000-jobs-as-jack-dorsey-pivots-company-toward-ai/" rel="noopener">Invezz, 블록 감원 보도, 2026-02-27</a></li>
+  </ol>
+  <p class="cap">강연 녹취·촬영이 제한되어 담당 멘토 필기를 바탕으로 정리했습니다.</p>
+</section>
+
+</div>
+<script>(function(){var S='sbs-gn-neo',s='202611180000';function k(x){var h=5381,t=S+x;for(var i=0;i<t.length;i++)h=(h*33+t.charCodeAt(i))>>>0;return h.toString(36).slice(-4);}var m=/[?&]e=(\d{12})-([0-9a-z]{4})/.exec(location.search);if(m&&k(m[1])===m[2])s=m[1];var t=s?new Date(s.slice(0,4)+'-'+s.slice(4,6)+'-'+s.slice(6,8)+'T'+s.slice(8,10)+':'+s.slice(10)+':00+09:00'):null,b=document.getElementById('limBar')||(function(){var e=document.createElement('div');e.className='lim-bar';e.id='limBar';document.body.insertBefore(e,document.body.firstChild);return e;})();if(t&&b){var mid=s.slice(8)==='0000',d=new Date(t.getTime()-(mid?864e5:0)+9*36e5);b.textContent='열람 기한 '+(d.getUTCMonth()+1)+'월 '+d.getUTCDate()+'일('+'일월화수목금토'[d.getUTCDay()]+') '+(mid?'자정':s.slice(8,10)+':'+s.slice(10))+'까지';}function c(){if((t&&Date.now()<t.getTime())||document.getElementById('limOv'))return;var o=document.createElement('div');o.className='lim-ov';o.id='limOv';o.setAttribute('role','alertdialog');o.setAttribute('aria-modal','true');o.innerHTML='<div>열람기한이 만료되었습니다.<br>담당 멘토에게 문의해주세요.</div>';document.body.appendChild(o);document.documentElement.style.overflow='hidden';if(b)b.textContent='열람 기한 만료';}c();setInterval(c,30000);})();</script>
