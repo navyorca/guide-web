@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<style>body::after{content:"";position:fixed;inset:0;z-index:2147483647;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22420%22%20height%3D%22260%22%3E%3Ctext%20x%3D%220%22%20y%3D%22130%22%20font-family%3D%22sans-serif%22%20font-size%3D%2215%22%20fill%3D%22%23F0F8FF%22%20fill-opacity%3D%220.30%22%20transform%3D%22rotate%28-24%20210%20130%29%22%3ESBS%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8%20%EA%B0%95%EB%82%A8%20%C2%B7%20%EC%98%A4%EC%98%81%EC%84%A0%20%EB%A9%98%ED%86%A0%20%EC%A0%9C%EA%B3%B5%3C%2Ftext%3E%3C%2Fsvg%3E") 0 0/420px 260px repeat}</style>
+
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>노트북을 덮어도 일하는 AI</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;800&display=swap">
+<style>
+/* 재학생 추가등록 안내: 휴대폰 한 단, 근거 숫자를 크게, 끝은 상담 한 줄 */
+:root{
+  --bg:#ffffff; --ink:#1b1e23; --soft:#454c56; --mute:#666d77; --line:#e1e5eb; --accent:#0b4fa8; --tint:#eef3fa; --warn:#9a4d00;
+  --fs-h1:1.625rem; --fs-h2:1.375rem; --fs-big:1.625rem; --fs-p1:1.1875rem; --fs-p2:1rem;
+  --font:"Noto Sans KR","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16181c;--ink:#eef0f3;--soft:#c7ccd3;--mute:#a0a7b1;--line:#30353c;--accent:#8db8ff;--tint:#1f2733;--warn:#ffc46b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#16181c;--ink:#eef0f3;--soft:#c7ccd3;--mute:#a0a7b1;--line:#30353c;--accent:#8db8ff;--tint:#1f2733;--warn:#ffc46b;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:var(--fs-p1);line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+.wrap{max-width:680px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:56px}
+h1{font-size:var(--fs-h1);font-weight:400;line-height:1.4;margin:8px 0 12px;text-wrap:balance}
+h2{font-size:var(--fs-h2);font-weight:400;line-height:1.45;margin:0 0 12px;text-wrap:balance}
+p{margin:0 0 12px}
+.lead{color:var(--soft)}
+.punch{font-size:var(--fs-big);font-weight:400;color:var(--accent);line-height:1.4;margin:16px 0 0}
+section{border-top:2px solid var(--ink);padding-top:20px}
+.stair{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;align-items:end;margin:16px 0 8px}
+.stair div{border-radius:4px 4px 0 0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font-size:var(--fs-p2);font-weight:400}
+.s1{height:48px;background:var(--accent);color:var(--bg)}
+.s2{height:76px;background:var(--accent);color:var(--bg);box-shadow:0 0 0 3px var(--warn) inset}
+.s3{height:104px;background:var(--tint);color:var(--accent)}
+.s4{height:132px;background:var(--tint);color:var(--mute)}
+.cap{font-size:var(--fs-p2);color:var(--mute);margin:0}
+.ev{display:grid;gap:28px;margin-top:8px}
+.ev h3{font-size:var(--fs-p1);font-weight:800;margin:0 0 4px}
+.num{font-size:var(--fs-big);font-weight:800;color:var(--accent);line-height:1.3;font-variant-numeric:tabular-nums;margin:0}
+.num small{font-size:var(--fs-p2);font-weight:700;color:var(--mute);margin-left:6px}
+sup a{color:var(--accent);font-size:var(--fs-p2);font-weight:400;text-decoration:none;padding:0 2px}
+.flow{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:12px;counter-reset:f}
+.flow li{counter-increment:f;display:grid;grid-template-columns:40px minmax(0,1fr);gap:8px}
+.flow li::before{content:counter(f);font-weight:400;color:var(--accent);font-size:var(--fs-h2);line-height:1.3}
+.flow b{display:block}
+.quote{font-size:var(--fs-h2);font-weight:400;line-height:1.5;margin:0 0 4px}
+.who{font-size:var(--fs-p2);color:var(--mute);margin:0 0 20px}
+.locked{background:var(--tint);border-radius:8px;padding:16px;margin-top:16px}
+.locked p:last-child{margin:0}
+.cta{background:var(--accent);color:var(--bg);border-radius:12px;padding:24px 20px}
+.cta h2{color:var(--bg)}
+.cta p{margin:0 0 8px}
+.cta .say{font-size:var(--fs-big);font-weight:800;margin:12px 0 0}
+.check{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}
+.check{list-style:disc;padding-left:22px}
+.notes{font-size:var(--fs-p2);color:var(--soft);line-height:1.6;padding-left:22px;margin:8px 0 0}
+.notes li{margin-bottom:6px;scroll-margin-top:24px}
+.notes a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>노트북을 덮어도 일하는 AI, 지금 있으신가요?</h1>
+  <p class="cap">2026년 11월 7일 AI 프론티어 2026 세미나 현장 정리</p>
+  <p class="lead">빌더 조쉬(AI 전환 회사 대표)와 정재승 카이스트 교수의 강연을 담당 멘토가 직접 듣고 정리했습니다. 지금 배우는 과목에 무엇을 더하면 좋을지 답이 여기 있습니다.</p>
+  <p class="punch">툴을 다루는 사람에서<br>AI에게 일을 맡기는 사람으로</p>
+</header>
+
+<section>
+  <h2>대부분 2단계에서 멈춰 있습니다</h2>
+  <p>강연에서는 AI 활용을 4단계로 나눴습니다. 챗GPT에게 묻고 답을 받는 것은 1단계 대화입니다.</p>
+  <div class="stair" aria-label="AI 활용 4단계, 2단계에 표시">
+    <div class="s1">대화</div><div class="s2">비서</div><div class="s3">팀원</div><div class="s4">시스템</div>
+  </div>
+  <p class="cap">2단계: 대부분이 여기서 멈춤 · 3단계부터 AI에이전트</p>
+  <p>3단계부터는 내가 자리를 비워도 AI가 일을 이어 갑니다. 기준 질문은 하나였습니다. <b>노트북을 덮어도 돌아가는 AI가 있는가.</b></p>
+  <p>4단계는 시스템입니다. 내가 없어도 에이전트들이 돌아가고, 나는 그것을 통제하는 컨트롤 타워를 만드는 단계입니다. 직무마다 그림이 달라 상담에서 함께 그립니다.</p>
+</section>
+
+<section>
+  <h2>왜 지금 AI에이전트인가</h2>
+  <div class="ev">
+    <div>
+      <h3>같은 AI를 줘도 결과가 갈립니다</h3>
+      <p class="num">+40%<small>AI가 잘하는 일의 품질</small></p>
+      <p class="num">−19%p<small>AI가 못하는 일의 정답률</small></p>
+      <p>컨설턴트 758명 실험 결과입니다.<sup><a href="#n1">1</a></sup> AI가 어디까지 되는지 아는 사람만 이득을 봅니다. 강연에서 말한 "잘 쓰는 사람"의 정의도 같았습니다.</p>
+    </div>
+    <div>
+      <h3>일은 줄지 않고 기준이 오릅니다</h3>
+      <p class="num">8개월<small>AI 도입 뒤 업무가 더 강해진 현장 연구</small></p>
+      <p>세탁기가 생겨도 빨래는 줄지 않았습니다. 더 자주 빨게 됐기 때문입니다.<sup><a href="#n2">2</a></sup> AI를 들인 회사도 일이 더 늘었습니다.<sup><a href="#n3">3</a></sup> 시간이 줄지 않고 기준이 오르니, AI와 10배 나은 결과를 내는 사람이 새 기준이 됩니다. <b>뒤처지지 않으려면 지금 배워야 합니다.</b></p>
+    </div>
+    <div>
+      <h3>AI가 대신하는 일, AI가 돕는 일</h3>
+      <p class="num">−13%<small>AI 노출 직군 22~25세 고용, 상대 감소</small></p>
+      <p>미국 급여 자료 분석입니다. AI가 사람을 대신하는 직군은 줄었고, AI가 사람을 돕는 직군은 늘었습니다.<sup><a href="#n4">4</a></sup> 어느 쪽에 설지는 AI를 부리는 법을 아는지가 가릅니다.</p>
+    </div>
+    <div>
+      <h3>회사는 이미 바꾸고 있습니다</h3>
+      <p class="num">4,000명+<small>블록(Block)의 AI 전환 감원 보도</small></p>
+      <p>잭 도시는 중간에서 정보를 나르던 일을 AI가 맡는 조직을 말했습니다.<sup><a href="#n5">5</a></sup> 빌더 조쉬의 표현으로는 "내가 없어도 돌아가게 하되 통제는 쥐어라"입니다.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>지금 배우는 과목, 에이전트와 함께하면 더 좋아집니다</h2>
+  <p>디자인·영상·웹 작업이 에이전트와 함께 더 빨라지고 넓어집니다. 반복 작업은 AI에게 맡기고, 판단과 결과물은 내가 책임지는 구조를 만드는 것이 AI에이전트입니다.</p>
+  <p>에이전트는 세션이 바뀌면 이전 작업을 기억하지 못합니다. 그래서 기록을 남기고 이어 가게 만드는 설계가 필요합니다.<sup><a href="#n6">6</a></sup> 프롬프트 몇 줄로는 여기까지 가지 못합니다.</p>
+  <ol class="flow">
+    <li><span><b>기초</b>설치, 메모리, MCP, 스킬</span></li>
+    <li><span><b>심화</b>오피스·브라우저·Notion 자동화, 멀티 에이전트</span></li>
+    <li><span><b>자동화</b>내 업무를 기획하고 제작, 강사 1:1 피드백</span></li>
+  </ol>
+  <p class="cap" style="margin-top:12px">AIX 에이전트 업무자동화 · 선수과목 없음</p>
+  <p style="margin-top:16px"><b>직접 써 봐서 추천합니다.</b> 이 과정을 듣고 상담 기록, 일정, 반복 문서를 이 순서대로 하나씩 AI에게 넘겼습니다. 어디서 막히는지, 무엇부터 맡기면 되는지 겪은 대로 안내해 드립니다.</p>
+</section>
+
+<section>
+  <h2>강연에서 가장 많이 받아 적은 두 문장</h2>
+  <p class="quote">"기록밖에 답이 없다."</p>
+  <p class="who">빌더 조쉬</p>
+  <p class="quote">"8점 못 넘으면 내게 보여주지도 마라."</p>
+  <p class="who">빌더 조쉬, AI 결과물을 거르는 기준에 대해</p>
+  <div class="locked">
+    <p><b>여기서부터는 사람마다 다릅니다.</b></p>
+    <p>내 일 중 무엇을 맡기고 무엇을 지울지 고르는 순서, 채점 기준에 넣을 항목은 직무와 수강 과목에 따라 달라집니다. 담당 멘토와 내 시간표를 놓고 같이 정합니다.</p>
+  </div>
+</section>
+
+<section style="border-top:0;padding-top:0">
+  <div class="cta">
+    <h2>이런 분께 먼저 권합니다</h2>
+    <ul class="check">
+      <li>챗GPT는 매일 쓰는데 작업 시간은 그대로인 분</li>
+      <li>포트폴리오에 "AI로 이렇게 일한다"를 보여 주고 싶은 분</li>
+      <li>같은 작업을 매주 손으로 반복하는 분</li>
+      <li>코딩을 몰라 에이전트는 남 얘기라고 느낀 분</li>
+    </ul>
+    <p class="say">담당 멘토에게 "에이전트"<br>한 단어만 보내 주세요</p>
+    <p style="margin-top:8px">지금 시간표에 맞는 반과 시작 시점을 바로 알려 드립니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2>출처</h2>
+  <ol class="notes">
+    <li id="n1"><a href="https://businessdatasolutions.github.io/ai-wiki/sources/2026-04-28-dellacqua-jagged-technological-frontier" rel="noopener">Dell'Acqua 외, 「Navigating the Jagged Technological Frontier」, BCG 컨설턴트 758명 실험</a></li>
+    <li id="n2"><a href="https://www.hbgacademic.com/titles/ruth-schwartz-cowan/more-work-for-mother/9780465047321" rel="noopener">Ruth Schwartz Cowan, 『More Work for Mother』</a></li>
+    <li id="n3"><a href="https://newsroom.haas.berkeley.edu/ai-promised-to-free-up-workers-time-uc-berkeley-haas-researchers-found-the-opposite/" rel="noopener">UC Berkeley Haas, AI와 업무 강도 현장 연구, 2026-02-18</a></li>
+    <li id="n4"><a href="https://www.itpro.com/technology/artificial-intelligence/this-stanford-study-shows-ai-is-starting-to-take-jobs-and-those-identified-as-highest-risk-are-eerily-similar-to-a-recent-microsoft-study" rel="noopener">Stanford 「Canaries in the Coal Mine」 보도(ITPro)</a></li>
+    <li id="n5"><a href="https://invezz.com/ie/news/2026/02/27/block-to-cut-4000-jobs-as-jack-dorsey-pivots-company-toward-ai/" rel="noopener">Invezz, 블록 감원 보도, 2026-02-27</a> · <a href="https://fortune.com/2026/04/02/jack-dorsey-roelof-botha-ai-middle-management/" rel="noopener">Fortune, 2026-04-02</a></li>
+    <li id="n6"><a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" rel="noopener">Anthropic, 「Effective harnesses for long-running agents」, 2025-11-26</a></li>
+  </ol>
+</section>
+
+</div>
+</body>
+</html>
